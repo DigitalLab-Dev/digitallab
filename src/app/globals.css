@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
+
 :root {
-  --background: #2B2539; /* Jet black */
+  --background: #0f0e0e; /* Jet black */
   --foreground: #ededed; /* Light gray for readability */
 }
 
@@ -11,11 +12,14 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+/* ::-webkit-scrollbar{
+  display: none;
+} */
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "SF Pro", sans-serif;
+  scroll-behavior: smooth;
 }
 @font-face {
   font-family: "Italican";
@@ -27,10 +31,5 @@ body {
 .italican {
   font-family: "Italican", sans-serif;
 }
-@font-face {
-  font-family: "SF Pro";
-  src: url("/fonts/SF-Pro-Display-Regul.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
+
 

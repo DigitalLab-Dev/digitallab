@@ -1,26 +1,10 @@
 'use client';
+import colorScheme from '@/utils/colors';
 import React, { useState, useRef, useEffect } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 
-const colorScheme = {
-  background: '#2B2539', // Slate
-  heading: '#EBE9E4', // Oatmeal
-  paragraph: '#BED3CC', // Sea
-  border: '#7B6767', // Umber
-  link: '#EEFFC8', // Chartreuse
-  button: {
-    primary: {
-      background: '#EFC8C8', // Coral
-      text: '#2B2539', // Slate
-      hover: '#e8b2b2',
-    },
-    secondary: {
-      background: '#7B6767', // Umber
-      text: '#EBE9E4', // Oatmeal
-      hover: '#6a5959',
-    },
-  },
-};
+
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -84,9 +68,10 @@ const Navbar = () => {
   };
 
   return (
-    <header className="relative w-full" role="banner">
+    <header className=" w-full relative 
+     " role="banner">
       <nav
-        className="w-full px-4 sm:px-6 lg:px-8 py-6 lg:py-8 flex items-center justify-between"
+        className="w-full px-4 sm:px-6 lg:px-8 pt-8   flex items-center justify-between"
         role="navigation"
         aria-label="Main navigation"
       >
@@ -109,19 +94,7 @@ const Navbar = () => {
           {/* CTA Button */}
           <a
             href="/contact"
-            className="group flex items-center justify-between p-2 sm:p-3 rounded-full cursor-pointer overflow-hidden transition-all duration-500 text-xs sm:text-sm w-24 sm:w-32"
-            style={{
-              backgroundColor: colorScheme.button.primary.background,
-              color: colorScheme.button.primary.text,
-            }}
-            onMouseEnter={(e) =>
-              (e.target.style.backgroundColor =
-                colorScheme.button.primary.hover)
-            }
-            onMouseLeave={(e) =>
-              (e.target.style.backgroundColor =
-                colorScheme.button.primary.background)
-            }
+            className="group flex items-center justify-between p-2 bg-[#f48020] hover:bg-[#f0750f] sm:p-3 rounded-full cursor-pointer overflow-hidden transition-all duration-500 text-xs sm:text-sm w-24 sm:w-30"
             aria-label="Contact us"
           >
             <FaArrowRight
@@ -139,19 +112,7 @@ const Navbar = () => {
           {/* Menu Button */}
           <button
             onClick={toggleMenu}
-            className="group flex items-center justify-between cursor-pointer font-medium transition-all duration-500 p-2 sm:p-3 rounded-full text-xs sm:text-sm w-18 sm:w-22"
-            style={{
-              backgroundColor: colorScheme.button.secondary.background,
-              color: colorScheme.button.secondary.text,
-            }}
-            onMouseEnter={(e) =>
-              (e.target.style.backgroundColor =
-                colorScheme.button.secondary.hover)
-            }
-            onMouseLeave={(e) =>
-              (e.target.style.backgroundColor =
-                colorScheme.button.secondary.background)
-            }
+            className="group flex items-center justify-between cursor-pointer hover:bg-neutral-100 bg-neutral-400 text-black font-medium transition-all duration-500 p-2 sm:p-3 rounded-full text-xs sm:text-sm w-18 sm:w-30"
             aria-expanded={isMenuOpen}
             aria-haspopup="true"
             aria-label="Toggle navigation menu"
@@ -162,12 +123,12 @@ const Navbar = () => {
               aria-hidden="true"
             >
               <div
-                className="w-1 h-1 rounded-full transition-transform duration-300"
-                style={{ backgroundColor: colorScheme.button.secondary.text }}
+                className="w-2 h-2 bg-black rounded-full transition-transform duration-300"
+                
               ></div>
               <div
-                className="w-1 h-1 rounded-full transition-transform duration-300"
-                style={{ backgroundColor: colorScheme.button.secondary.text }}
+                className="w-2 h-2 bg-black rounded-full transition-transform duration-300"
+
               ></div>
             </div>
           </button>
@@ -178,11 +139,10 @@ const Navbar = () => {
       {isMenuOpen && (
         <div
           ref={menuRef}
-          className="absolute right-4 sm:right-6 lg:right-8  top-[80%] mt-2 rounded-2xl shadow-xl overflow-hidden z-50 transform transition-all duration-500 ease-out"
+          className="absolute right-4 sm:right-6 bg-neutral-800 lg:right-8  top-[80%] mt-2 rounded-2xl shadow-xl overflow-hidden z-50 transform transition-all duration-500 ease-out"
           style={{
-            backgroundColor: colorScheme.background,
             width: `${menuWidth}px`,
-            minWidth: '280px',
+            minWidth: '250px',
           }}
           role="menu"
           aria-labelledby="menu-button"

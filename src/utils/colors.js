@@ -1,22 +1,36 @@
 const colorScheme = {
-  background: "#2B2539",       // Slate
-  heading: "#EBE9E4",          // Oatmeal
-  paragraph: "#BED3CC",        // Sea
-  border: "#7B6767",           // Umber
-  link: "#EEFFC8",             // Chartreuse
+  background: "#1A1A1A", // Russian Black
+  
+  // A soft, accessible off-white for text
+  paragraph: "#F5F5DC", // Beige 
+  
+  // A clean, pure white for headings and high-impact elements
+  heading: "#FFFFFF", // Pure White
+  
+  // A slightly muted white for subtle borders and dividers
+  border: "#C0C0C0", // Silver
+  
+  // The primary brand color: a vibrant orange
+  brand: {
+    primary: "#f48020", // A vibrant, accessible Orange
+    secondary: "#FF9800", // A slightly lighter orange for secondary highlights
+  },
 
   button: {
     primary: {
-      background: "#EFC8C8",   // Coral
-      text: "#2B2539",         // Slate
-      hover: "#e8b2b2",
+      background: "#f48020", // A vibrant, accessible Orange
+      text: "#1A1A1A", // Russian Black
+      hover: "#E64A19", // A darker orange for hover state
     },
     secondary: {
-      background: "#7B6767",   // Umber
-      text: "#EBE9E4",         // Oatmeal
-      hover: "#6a5959",
+      background: "#C0C0C0", // Silver
+      text: "#1A1A1A", // Russian Black
+      hover: "#A9A9A9", // Dark Gray
     },
   },
+  
+  // An optional accent color for links, to differentiate from buttons
+  link: "#FF9800", // A slightly lighter orange
 };
 
 export default colorScheme;
