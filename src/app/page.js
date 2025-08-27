@@ -5,6 +5,8 @@ import Hero from './home/components/Hero';
 import Services from './home/components/Services';
 import Loader from '@/components/Loader';
 import { useEffect, useState } from 'react';
+import WhyUs from './home/components/WhyUs';
+import Stats from './home/components/Stats';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -43,6 +45,8 @@ export default function Home() {
           <Hero />
           <About />
           <Services />
+          <WhyUs />
+          <Stats />
         </main>
       )}
     </>

@@ -1,5 +1,4 @@
-@import "tailwindcss";
-
+@import 'tailwindcss';
 
 :root {
   --background: #0f0e0e; /* Jet black */
@@ -22,14 +21,12 @@ body {
   scroll-behavior: smooth;
 }
 @font-face {
-  font-family: "Italican";
-  src: url("/fonts/italican.woff") format("woff");
+  font-family: 'Italican';
+  src: url('/fonts/Italican.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 .italican {
-  font-family: "Italican", sans-serif;
+  font-family: 'Italican', sans-serif;
 }
-
-
