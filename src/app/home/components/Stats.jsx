@@ -62,7 +62,7 @@ const Stats = () => {
           <span className="text-[#f0750f] italican">Building</span> brands,
           <span className="text-[#f0750f] italican"> boosting</span> businesses,
           and <span className="text-[#f0750f] italican">redefining</span>{' '}
-          possibilities. Let’s grow your brand together.
+          possibilities.
         </h2>
       </motion.header>
 

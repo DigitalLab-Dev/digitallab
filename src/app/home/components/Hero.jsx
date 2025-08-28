@@ -1,18 +1,24 @@
-"use client"
+'use client';
 import ShinyText from '@/components/ReactBit-Components/ShinyText';
 import TextType from '@/components/ReactBit-Components/TextType';
 import React from 'react';
 import { MdArrowOutward } from 'react-icons/md';
 import { motion } from 'framer-motion';
+import Spline from '@splinetool/react-spline';
 
 const Hero = () => {
   return (
     <motion.section
-      className="w-full h-[70vh]   sm:min-h-screen flex  justify-center items-center flex-col px-5"
-      initial={{ opacity: 0, y: 50 }}   // start state
-      animate={{ opacity: 1, y: 0 }}   // end state
-      transition={{ duration: 0.8, ease: "easeOut" }} // timing
+      className="w-full relative h-[70vh]   sm:min-h-screen flex  justify-center items-center flex-col px-5 overflow-hidden"
+      initial={{ opacity: 0, y: 50 }} // start state
+      animate={{ opacity: 1, y: 0 }} // end state
+      transition={{ duration: 0.8, ease: 'easeOut' }} // timing
     >
+      <div className="absolute inset-0 hidden md:block z-10">
+        <div className="w-full h-full scale-125 -translate-y-10">
+          <Spline scene="https://prod.spline.design/7fTn8KMQWLjD9qLo/scene.splinecode" />
+        </div>
+      </div>
       <motion.header
         className="flex flex-col  items-center justify-center text-center gap-5"
         initial={{ opacity: 0, y: 30 }}
@@ -32,19 +38,18 @@ const Hero = () => {
           transition={{ delay: 0.5, duration: 0.6 }}
         >
           <div className="w-3 h-3 rounded-full bg-[#f48020]"></div>
-          <p className="text-sm sm:text-base tracking-wide text-[#EBE9E4]">
+          <p className="text-sm sm:text-base z-20 tracking-wide text-[#EBE9E4]">
             Pixel-perfect. Performance-driven
           </p>
         </motion.div>
-
         {/* Main title */}
         <motion.h1
-          className="text-[13vw] sm:text-[10vw] tracking-tight leading-18 sm:leading-23 lg:leading-32 capitalize text-[#FFFFFF]"
+          className="text-[13vw] sm:text-[10vw] tracking-tight  leading-18 sm:leading-23 lg:leading-32 capitalize text-[#FFFFFF]"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.8 }}
         >
-          We turn{' '}
+          We <span className="z-5">turn</span>{' '}
           <span className="italican lowercase text-[#BED3CC] rounded-2xl">
             <TextType
               text={['vision', 'ideas', 'aims', 'goals', 'designs']}
@@ -56,7 +61,6 @@ const Hero = () => {
           </span>{' '}
           <br /> into digital realities
         </motion.h1>
-
         {/* Shiny text */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -72,7 +76,6 @@ const Hero = () => {
           />
         </motion.div>
       </motion.header>
-
       {/* Button */}
       <motion.button
         className="w-50 transition-all  duration-500 mt-5 rounded-full font-semibold py-3 hover:gap-3 hover:bg-[#f0750f] cursor-pointer mx-auto bg-[#f48020] text-white flex items-center justify-center"
