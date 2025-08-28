@@ -7,6 +7,8 @@ import Loader from '@/components/Loader';
 import { useEffect, useState } from 'react';
 import WhyUs from './home/components/WhyUs';
 import Stats from './home/components/Stats';
+import Methods from './home/components/Methods';
+import AnimatedCTA from './home/components/AnimatedCTA';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -47,6 +49,8 @@ export default function Home() {
           <Services />
           <WhyUs />
           <Stats />
+          <Methods />
+          <AnimatedCTA/>
         </main>
       )}
     </>

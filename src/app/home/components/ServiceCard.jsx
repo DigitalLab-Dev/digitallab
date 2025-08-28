@@ -156,7 +156,7 @@ const ServiceCard = ({
   return (
     <motion.div
       ref={cardRef}
-      className="relative w-full sm:w-[350px] h-[400px] bg-[#1a1a1a] rounded-xl overflow-hidden border border-orange-500/20 shadow-2xl transition-all duration-300 ease-out"
+      className="relative w-full sm:w-[350px] h-[400px] bg-transparent rounded-xl overflow-hidden border border-orange-500/20 shadow-2xl transition-all duration-300 ease-out"
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
