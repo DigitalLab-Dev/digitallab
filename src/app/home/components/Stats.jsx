@@ -50,7 +50,7 @@ const Stats = () => {
   };
 
   return (
-    <section className="mt-20 mb-10 flex flex-col items-center justify-center px-5">
+    <section className="sm:min-h-[50vh] my-30 flex flex-col items-center justify-center px-5">
       <motion.header
         initial={{ opacity: 0, y: 50, }}
         whileInView={{ opacity: 1, y: 0, }}
