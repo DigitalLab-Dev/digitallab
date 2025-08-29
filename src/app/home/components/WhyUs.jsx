@@ -27,7 +27,7 @@ const WhyUs = () => {
               src="/images/fast-turnaround.jpg"
               width={300}
               height={200}
-              className="absolute bottom-0 right-20 md:left-0 border"
+              className="absolute bottom-0 right-20 md:left-0 "
               alt="fast clock"
             />
           </div>
