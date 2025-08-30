@@ -60,10 +60,10 @@ const Services = () => {
   ];
 
   return (
-    <section className="w-full mt-20 flex flex-col items-center justify-center px-10 mb-10">
+    <section className="w-full mt-10 flex flex-col items-center justify-center px-10 mb-10">
       {/* Animated Heading */}
       <motion.h2
-        className="text-center text-[12vw] sm:text-right sm:text-[8vw] lg:text-[6vw] w-full"
+        className="text-center text-[12vw]  sm:text-[8vw] lg:text-[6vw] w-full"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -75,13 +75,13 @@ const Services = () => {
 
       {/* Subheading + Link */}
       <motion.div
-        className="flex flex-col sm:justify-start justify-center mt-5 lg:mt-0 sm:items-start items-center w-full text-left mb-12"
+        className="flex flex-col  justify-center mt-5  items-center w-full text-left mb-12"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.3 }}
         viewport={{ once: true }}
       >
-        <h3 className="text-5xl text-center sm:text-left">
+        <h3 className="text-5xl text-center ">
           What we can do effectively <br /> and best of all
         </h3>
         <Link
