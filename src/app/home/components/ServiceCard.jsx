@@ -59,14 +59,14 @@ const ServiceCard = ({ service }) => {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="relative flex items-center justify-between overflow-hidden py-15 border-b border-orange-400"
     >
-      <h4 className="text-5xl uppercase text-neutral-500 font-bold transition-colors group-hover:text-orange-400">
+      <h4 className="text-4xl sm:text-5xl uppercase text-neutral-500 font-bold transition-colors group-hover:text-orange-400">
         {service.heading}
       </h4>
 
       {/* Right action button */}
       <Link
         href={service.link}
-        className="w-20 h-20 rounded-full bg-neutral-500 hover:bg-orange-500 flex items-center justify-center transition-colors"
+        className="sm:w-20 sm:h-20 w-10 h-10 rounded-full bg-neutral-500 hover:bg-orange-500 flex items-center justify-center transition-colors"
       >
         <MdArrowForward className="text-3xl text-white" />
       </Link>
