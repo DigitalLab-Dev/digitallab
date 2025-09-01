@@ -9,16 +9,16 @@ import Spline from '@splinetool/react-spline';
 const Hero = () => {
   return (
     <motion.section
-      className="w-full relative h-[70vh]   sm:min-h-screen flex  justify-center items-center flex-col px-5 overflow-hidden"
+      className="w-full relative h-[70vh]   sm:min-h-screen flex  mt-15  justify-center items-center flex-col px-5 overflow-hidden"
       initial={{ opacity: 0, y: 50 }} // start state
       animate={{ opacity: 1, y: 0 }} // end state
       transition={{ duration: 0.8, ease: 'easeOut' }} // timing
     >
-      {/* <div className="absolute inset-0 hidden md:block -z-10">
+      <div className="absolute inset-0 hidden md:block -z-10">
         <div className="w-full h-full scale-125 -translate-y-10">
           <Spline scene="https://prod.spline.design/7fTn8KMQWLjD9qLo/scene.splinecode" />
         </div>
-      </div> */}
+      </div>
       <motion.header
         className="flex flex-col w-fit  items-center justify-center text-center gap-5"
         initial={{ opacity: 0, y: 30 }}
@@ -44,7 +44,7 @@ const Hero = () => {
         </motion.div>
         {/* Main title */}
         <motion.h1
-          className="text-[13vw] sm:text-[10vw] tracking-tight  leading-18 sm:leading-23 lg:leading-32 capitalize text-[#FFFFFF]"
+          className="text-[11vw] sm:text-[9vw] tracking-tight font-bold  leading-18 sm:leading-23 lg:leading-32 capitalize text-[#FFFFFF]"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.8 }}

@@ -61,11 +61,11 @@ const steps = [
 const [currentImage, setCurrentImage] = useState(1)
 const images=[
   
-  '/images/planning.png',
-  '/images/strategy.png',
-  '/images/development.png',
-  '/images/optimization.png',
-  '/images/launch.png',
+  '/images/planning.webp',
+  '/images/strategy.webp',
+  '/images/development.webp',
+  '/images/optimization.webp',
+  '/images/launch.webp',
 ]
   return (
     <section className="w-full  py-20 flex flex-col items-center justify-center">

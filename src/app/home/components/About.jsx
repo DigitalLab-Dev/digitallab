@@ -171,7 +171,7 @@ const About = () => {
                 transition={{ duration: 1.5, ease: 'easeOut' }}
               >
                 <Image
-                  src="/images/collaboration.webp"
+                  src="/images/about.webp"
                   width={600}
                   height={600}
                   alt="Team collaboration"

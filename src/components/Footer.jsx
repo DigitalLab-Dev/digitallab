@@ -114,13 +114,13 @@ const Footer = () => {
           <div className='flex flex-col lg:flex-row gap-8 lg:gap-16 items-start justify-between'>
             
             {/* Address Section */}
-            <div className='flex flex-col space-y-2 text-gray-800'>
-              <h3 className='text-lg font-semibold text-orange-600 mb-3'>Visit Us</h3>
+            <div className='flex flex-col space-y-2 text-gray-500'>
+              <h3 className='text-lg font-semibold text-white mb-3'>Visit Us</h3>
               <div className='text-base md:text-lg space-y-1 uppercase font-medium'>
-                <p className='hover:text-orange-600 transition-colors duration-300'>Street 2</p>
-                <p className='hover:text-orange-600 transition-colors duration-300'>Phase 9, Sector 11</p>
-                <p className='hover:text-orange-600 transition-colors duration-300'>DHA, Lahore</p>
-                <p className='hover:text-orange-600 transition-colors duration-300'>Pakistan</p>
+                <p className='hover:text-orange-500 transition-colors duration-300'>Street 2</p>
+                <p className='hover:text-orange-500 transition-colors duration-300'>Phase 9, Sector 11</p>
+                <p className='hover:text-orange-500 transition-colors duration-300'>DHA, Lahore</p>
+                <p className='hover:text-orange-500 transition-colors duration-300'>Pakistan</p>
               </div>
             </div>
 
@@ -129,17 +129,17 @@ const Footer = () => {
               {/* Social Media */}
               <div className='space-y-6'>
                 <div className='space-y-3'>
-                  <h4 className='text-lg font-semibold text-gray-800'>Follow Us</h4>
+                  <h4 className='text-lg font-semibold text-white'>Follow Us</h4>
                   <div className='flex flex-col space-y-2'>
-                    <a href="#" className='flex items-center gap-3 text-gray-700 hover:text-orange-600 transition-all duration-300 transform hover:translate-x-2 group'>
+                    <a href="#" className='flex items-center gap-3 text-gray-500 hover:text-orange-600 transition-all duration-300 transform hover:translate-x-2 group'>
                       <FaTwitter className='w-5 h-5 group-hover:scale-110 transition-transform duration-300' />
                       <span>Twitter/X</span>
                     </a>
-                    <a href="#" className='flex items-center gap-3 text-gray-700 hover:text-orange-600 transition-all duration-300 transform hover:translate-x-2 group'>
+                    <a href="#" className='flex items-center gap-3 text-gray-500 hover:text-orange-600 transition-all duration-300 transform hover:translate-x-2 group'>
                       <FaInstagram className='w-5 h-5 group-hover:scale-110 transition-transform duration-300' />
                       <span>Instagram</span>
                     </a>
-                    <a href="#" className='flex items-center gap-3 text-gray-700 hover:text-orange-600 transition-all duration-300 transform hover:translate-x-2 group'>
+                    <a href="#" className='flex items-center gap-3 text-gray-500 hover:text-orange-600 transition-all duration-300 transform hover:translate-x-2 group'>
                       <FaLinkedin className='w-5 h-5 group-hover:scale-110 transition-transform duration-300' />
                       <span>LinkedIn</span>
                     </a>
@@ -148,16 +148,16 @@ const Footer = () => {
 
                 {/* Contact Info */}
                 <div className='space-y-4'>
-                  <div className='p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/30'>
-                    <h5 className='font-semibold text-orange-600 mb-2'>General Queries</h5>
-                    <a href="mailto:hello@digitallab.com" className='text-gray-700 hover:text-orange-600 transition-colors duration-300'>
+                  <div className='p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10'>
+                    <h5 className='font-semibold text-orange-500 mb-2'>General Queries</h5>
+                    <a href="mailto:hello@digitallab.com" className='text-gray-500 hover:text-orange-500 transition-colors duration-300'>
                       hello@digitallab.com
                     </a>
                   </div>
                   
-                  <div className='p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/30'>
-                    <h5 className='font-semibold text-orange-600 mb-2'>Business</h5>
-                    <a href="mailto:business@digitallab.com" className='text-gray-700 hover:text-orange-600 transition-colors duration-300'>
+                  <div className='p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10'>
+                    <h5 className='font-semibold text-orange-500 mb-2'>Business</h5>
+                    <a href="mailto:business@digitallab.com" className='text-gray-500 hover:text-orange-500 transition-colors duration-300'>
                       business@digitallab.com
                     </a>
                   </div>
@@ -168,10 +168,10 @@ const Footer = () => {
             {/* Newsletter */}
             <div className='flex flex-col space-y-6 min-w-0 lg:min-w-80'>
               <div className='space-y-2'>
-                <h3 className='text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 leading-tight'>
+                <h3 className='text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight'>
                   Subscribe To
                 </h3>
-                <h4 className='text-2xl md:text-3xl lg:text-4xl font-bold text-orange-600 leading-tight'>
+                <h4 className='text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500 leading-tight'>
                   Our Newsletter
                 </h4>
               </div>

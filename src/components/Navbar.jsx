@@ -2,10 +2,6 @@
 import colorScheme from '@/utils/colors';
 import React, { useState, useRef, useEffect } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
-
-
-
-
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('HOME');
@@ -68,10 +64,10 @@ const Navbar = () => {
   };
 
   return (
-    <header className=" w-full relative 
+    <header className=" w-full fixed top-0 left-0 z-20 rounded-2xl  bg-white/1 backdrop-blur-xs 
      " role="banner">
       <nav
-        className="w-full px-4 sm:px-6 lg:px-8 pt-8   flex items-center justify-between"
+        className="w-full px-4 sm:px-6 lg:px-8 py-4   flex items-center justify-between"
         role="navigation"
         aria-label="Main navigation"
       >
@@ -139,7 +135,7 @@ const Navbar = () => {
       {isMenuOpen && (
         <div
           ref={menuRef}
-          className="absolute right-4 sm:right-6 bg-neutral-800 lg:right-8  top-[80%] mt-2 rounded-2xl shadow-xl overflow-hidden z-50 transform transition-all duration-500 ease-out"
+          className="absolute right-4 sm:right-6 bg-white/20 border border-white/50 backdrop-blur-xl lg:right-8  top-[80%] mt-2 rounded-2xl shadow-xl overflow-hidden z-50 transform transition-all duration-500 ease-out"
           style={{
             width: `${menuWidth}px`,
             minWidth: '250px',

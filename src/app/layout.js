@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar';
 import './globals.css';
 import SplashCursor from '@/components/ReactBit-Components/SplashCursor';
 import Footor from '@/components/Footer';
+import ScrollToTop from '@/components/ScrollToTop';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
       <body className={`${poppins.variable} font-poppins antialiased`}>
         <Navbar />
         {children}
+        <ScrollToTop/>
         <Footor />
         {/* <SplashCursor/> */}
       </body>
