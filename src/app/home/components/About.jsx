@@ -50,7 +50,7 @@ const About = () => {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.3,
+        staggerChildren: 0.08,
       },
     },
   };
@@ -62,7 +62,7 @@ const About = () => {
       opacity: 1,
       rotateX: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.25,
         ease: 'easeOut',
       },
     },

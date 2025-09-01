@@ -9,6 +9,7 @@ import WhyUs from './home/components/WhyUs';
 import Stats from './home/components/Stats';
 import Methods from './home/components/Methods';
 import AnimatedCTA from './home/components/AnimatedCTA';
+import Testimonials from './home/components/Testimonials';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -48,8 +49,9 @@ export default function Home() {
           <About />
           <Services />
           <WhyUs />
-          <Stats />
           <Methods />
+          <Stats />
+          <Testimonials/>
           <AnimatedCTA/>
         </main>
       )}

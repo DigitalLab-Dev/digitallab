@@ -1,24 +1,6 @@
-// import Link from 'next/link';
-// import React from 'react';
-// import { MdArrowForward } from 'react-icons/md';
 
-// const ServiceCard = ({ service }) => {
-//   return (
-//     <div className="flex relative group items-center justify-between py-15 border-b border-orange-400">
-//       <h4 className="text-5xl group-hover:text-orange-400 uppercase text-neutral-500 font-bold">
-//         {service.heading}
-//       </h4>
-//       <p className='text-xl w-[20%] border p-2 text-center rounded-3xl bg-white/10  '>{service.para}</p>
-//       <Link href={service.link} className='w-20 hover:bg-orange-500 cursor-pointer h-20 flex items-center justify-center rounded-full bg-neutral-500'>
-//         <MdArrowForward className='text-3xl'/>
-//       </Link>
-//     </div>
-//   );
-// };
-
-// export default ServiceCard;"use client";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { MdArrowForward } from "react-icons/md";
 import {
   motion,
@@ -27,6 +9,7 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
+import Image from "next/image";
 
 const ServiceCard = ({ service }) => {
   const ref = useRef(null);
@@ -34,6 +17,10 @@ const ServiceCard = ({ service }) => {
 
   // show/hide the floating para
   const [showPara, setShowPara] = useState(false);
+  
+  // State for image animation
+  const [isHovered, setIsHovered] = useState(false);
+  const [visibleImages, setVisibleImages] = useState([]);
 
   // follow-cursor motion values (smoothed with springs)
   const rawX = useMotionValue(0);
@@ -48,25 +35,114 @@ const ServiceCard = ({ service }) => {
     rawY.set(e.clientY - rect.top);
   };
 
+  // Handle hover for images
+  useEffect(() => {
+    if (isHovered) {
+      const showImagesSequentially = () => {
+        service.images.forEach((_, index) => {
+          setTimeout(() => {
+            setVisibleImages(prev => [...prev, index]);
+          }, index * 150); // Show each image 150ms apart
+        });
+      };
+      showImagesSequentially();
+    } else {
+      setVisibleImages([]);
+    }
+  }, [isHovered, service.images]);
+
+  const handleMouseEnter = () => {
+    setShowPara(true);
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowPara(false);
+    setIsHovered(false);
+  };
+
+  // Animation variants for the falling ball effect
+  const imageVariants = {
+    initial: { 
+      opacity: 0, 
+      y: -50, 
+      scale: 0.8,
+      rotate: 0
+    },
+    animate: { 
+      opacity: 1, 
+      y: [0, -20, 0], // Goes up then falls down like a ball
+      scale: 1,
+      rotate: [0, 180, 360], // Rotating while falling
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        times: [0, 0.3, 1], // Timing for the y animation keyframes
+        rotate: {
+          duration: 0.8,
+          ease: "linear"
+        }
+      }
+    },
+    exit: { 
+      opacity: 0, 
+      y: 20,
+      scale: 0.8,
+      transition: { duration: 0.2 }
+    }
+  };
+
   return (
     <motion.div
       ref={ref}
-      onMouseEnter={() => setShowPara(true)}
-      onMouseLeave={() => setShowPara(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onMouseMove={handleMove}
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="relative flex items-center justify-between overflow-hidden py-15 border-b border-orange-400"
+      className="relative flex items-center justify-between overflow-visible py-5 border-b border-orange-400 group"
     >
-      <h4 className="text-4xl sm:text-5xl uppercase text-neutral-500 font-bold transition-colors group-hover:text-orange-400">
-        {service.heading}
-      </h4>
+      <div className="flex flex-col">
+        <h4 className="text-4xl sm:text-5xl uppercase text-neutral-200 group-hover:scale-75 font-bold transition-colors group-hover:text-neutral-500 mb-4">
+          {service.heading}
+        </h4>
+        
+        {/* Images container */}
+        <div className="group-hover:flex hidden flex-wrap gap-2 min-h-[60px] items-center">
+          <AnimatePresence>
+            {visibleImages.map((imageIndex,index) => (
+              <motion.div
+                key={index}
+                variants={imageVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                className="relative"
+                style={{
+                  zIndex: service.images.length - imageIndex // Later images appear on top
+                }}
+              >
+                <div className="w-12 h-12 sm:w-14 sm:h-14 relative bg-white rounded-lg shadow-lg flex items-center justify-center overflow-hidden">
+                  <Image
+                    src={service.images[imageIndex]}
+                    alt={`${service.heading} tool ${imageIndex + 1}`}
+                    fill
+                
+                    className="object-contain p-1"
+                    sizes="(max-width: 640px) 48px, 56px"
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+      </div>
 
       {/* Right action button */}
       <Link
         href={service.link}
-        className="sm:w-20 sm:h-20 w-10 h-10 rounded-full bg-neutral-500 hover:bg-orange-500 flex items-center justify-center transition-colors"
+        className="sm:w-20 sm:h-20 w-10 h-10 rounded-full bg-neutral-500 hover:bg-orange-500 flex items-center justify-center transition-colors flex-shrink-0"
       >
         <MdArrowForward className="text-3xl text-white" />
       </Link>
