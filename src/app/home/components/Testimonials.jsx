@@ -1,42 +1,47 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaPlay, FaPause, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaPlay, FaPause, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Testimonials = () => {
   const videos = [
-    '/videos/testimonial-1.mp4',
-    '/videos/testimonial-2.mp4',
-    '/videos/testimonial-3.mp4',
-    '/videos/testimonial-4.mp4',
+    "/videos/testimonial-1.mp4",
+    "/videos/testimonial-2.mp4",
+    "/videos/testimonial-3.mp4",
+    "/videos/testimonial-4.mp4",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(new Set());
   const [direction, setDirection] = useState(1);
 
-  const videoRefs = useRef([]);
-  const autoPlayRef = useRef();
+  const mainVideoRefs = useRef([]); // main player refs
+  const thumbVideoRefs = useRef([]); // thumbnail refs
+  const containerRef = useRef();
 
-  // Preload adjacent videos for smooth transitions
+  // Preload adjacent videos
   const preloadVideo = useCallback(
     (index) => {
-      if (videoRefs.current[index] && !loadedVideos.has(index)) {
-        const video = videoRefs.current[index];
+      if (mainVideoRefs.current[index] && !loadedVideos.has(index)) {
+        const video = mainVideoRefs.current[index];
         video.load();
-        setLoadedVideos((prev) => {
-          const newSet = new Set(prev);
-          newSet.add(index);
-          return newSet;
-        });
+        setLoadedVideos((prev) => new Set(prev).add(index));
       }
     },
     [loadedVideos]
   );
 
-  // Navigate to next/previous video
+  const stopVideo = () => {
+    const currentVideo = mainVideoRefs.current[currentIndex];
+    if (currentVideo) {
+      currentVideo.pause();
+      currentVideo.currentTime = 0;
+      setIsPlaying(false);
+    }
+  };
+
   const goToNext = useCallback(() => {
+    stopVideo();
     setDirection(1);
     setCurrentIndex((prev) => {
       const nextIndex = (prev + 1) % videos.length;
@@ -46,6 +51,7 @@ const Testimonials = () => {
   }, [videos.length, preloadVideo]);
 
   const goToPrevious = useCallback(() => {
+    stopVideo();
     setDirection(-1);
     setCurrentIndex((prev) => {
       const prevIndex = (prev - 1 + videos.length) % videos.length;
@@ -54,26 +60,16 @@ const Testimonials = () => {
     });
   }, [videos.length, preloadVideo]);
 
-  // Auto-play functionality
-  useEffect(() => {
-    if (isAutoPlay && !isPlaying) {
-      autoPlayRef.current = setInterval(goToNext, 4000);
-    } else {
-      clearInterval(autoPlayRef.current);
-    }
-    return () => clearInterval(autoPlayRef.current);
-  }, [isAutoPlay, isPlaying, goToNext]);
-
-  // Preload current and adjacent videos
   useEffect(() => {
     preloadVideo(currentIndex);
     preloadVideo((currentIndex + 1) % videos.length);
     preloadVideo((currentIndex - 1 + videos.length) % videos.length);
   }, [currentIndex, preloadVideo, videos.length]);
 
-  // Handle video play/pause
+  const handleMouseLeave = () => stopVideo();
+
   const togglePlay = () => {
-    const currentVideo = videoRefs.current[currentIndex];
+    const currentVideo = mainVideoRefs.current[currentIndex];
     if (currentVideo) {
       if (isPlaying) {
         currentVideo.pause();
@@ -85,27 +81,22 @@ const Testimonials = () => {
     }
   };
 
-  // Handle video end
-  const handleVideoEnd = () => {
-    setIsPlaying(false);
-    if (isAutoPlay) {
-      goToNext();
+  const handleVideoEnd = () => setIsPlaying(false);
+
+  const handleThumbnailClick = (index) => {
+    if (index !== currentIndex) {
+      stopVideo();
+      setCurrentIndex(index);
     }
   };
 
-  // Animation variants
   const slideVariants = {
     enter: (direction) => ({
       x: direction > 0 ? 1000 : -1000,
       opacity: 0,
       scale: 0.8,
     }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-      scale: 1,
-    },
+    center: { zIndex: 1, x: 0, opacity: 1, scale: 1 },
     exit: (direction) => ({
       zIndex: 0,
       x: direction < 0 ? 1000 : -1000,
@@ -115,14 +106,8 @@ const Testimonials = () => {
   };
 
   const thumbnailVariants = {
-    inactive: {
-      scale: 0.8,
-      opacity: 0.6,
-    },
-    active: {
-      scale: 1,
-      opacity: 1,
-    },
+    inactive: { scale: 0.8, opacity: 0.6 },
+    active: { scale: 1, opacity: 1 },
   };
 
   return (
@@ -134,10 +119,13 @@ const Testimonials = () => {
         </h3>
       </header>
 
-      {/* Main Carousel Container */}
-      <div className="relative w-full max-w-4xl mx-auto">
-        {/* Video Container */}
-        <div className="relative h-[300px] sm:h-[500px] mb-8 overflow-hidden rounded-2xl shadow-2xl">
+      <div
+        ref={containerRef}
+        onMouseLeave={handleMouseLeave}
+        className="relative w-full max-w-4xl mx-auto"
+      >
+        {/* Main Video Container */}
+        <div className="relative h-[250px] sm:h-[400px] mb-8 overflow-hidden rounded-2xl shadow-2xl flex items-center justify-center bg-black">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={currentIndex}
@@ -147,16 +135,15 @@ const Testimonials = () => {
               animate="center"
               exit="exit"
               transition={{
-                x: { type: 'spring', stiffness: 300, damping: 30 },
+                x: { type: "spring", stiffness: 300, damping: 30 },
                 opacity: { duration: 0.3 },
                 scale: { duration: 0.4 },
               }}
-              className="absolute inset-0 w-full h-full"
+              className="absolute inset-0 flex items-center justify-center"
             >
               <video
-                ref={(el) => (videoRefs.current[currentIndex] = el)}
-                className="w-full h-full object-cover rounded-2xl"
-                muted
+                ref={(el) => (mainVideoRefs.current[currentIndex] = el)}
+                className="max-w-full max-h-full object-contain rounded-2xl"
                 playsInline
                 preload="metadata"
                 onEnded={handleVideoEnd}
@@ -167,13 +154,13 @@ const Testimonials = () => {
                 Your browser does not support the video tag.
               </video>
 
-              {/* Video Overlay with Controls */}
-              <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center group rounded-2xl">
+              {/* Overlay Play/Pause */}
+              <div className="absolute inset-0 bg-opacity-0 hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center group rounded-2xl">
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={togglePlay}
-                  className="w-16 h-16 sm:w-20 sm:h-20 bg-black bg-opacity-20 backdrop-blur-sm rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 border-2 border-white border-opacity-50"
+                  className="w-16 h-16 sm:w-20 sm:h-20 bg-black bg-opacity-50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-opacity-70 transition-all duration-300 border-2 border-white border-opacity-50"
                 >
                   {isPlaying ? (
                     <FaPause className="text-xl sm:text-2xl" />
@@ -185,7 +172,7 @@ const Testimonials = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation Arrows */}
+          {/* Navigation */}
           <button
             onClick={goToPrevious}
             className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-orange-400 bg-opacity-20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-opacity-30 transition-all duration-300 z-10"
@@ -200,20 +187,20 @@ const Testimonials = () => {
           </button>
         </div>
 
-        {/* Thumbnail Navigation */}
+        {/* Thumbnails */}
         <div className="flex justify-center space-x-2 sm:space-x-4 mb-6">
           {videos.map((video, index) => (
             <motion.button
               key={index}
               variants={thumbnailVariants}
-              animate={index === currentIndex ? 'active' : 'inactive'}
+              animate={index === currentIndex ? "active" : "inactive"}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setCurrentIndex(index)}
+              onClick={() => handleThumbnailClick(index)}
               className="relative w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden border-2 border-transparent focus:border-orange-500 transition-all duration-300"
             >
               <video
-                ref={(el) => (videoRefs.current[index] = el)}
+                ref={(el) => (thumbVideoRefs.current[index] = el)}
                 className="w-full h-full object-cover"
                 muted
                 preload="metadata"
@@ -226,55 +213,23 @@ const Testimonials = () => {
                   className="absolute inset-0 border-2 border-orange-500 rounded-lg"
                 />
               )}
-              <div className="absolute inset-0 bg-black bg-opacity-20" />
+              <div className="absolute inset-0 bg-opacity-20" />
             </motion.button>
           ))}
         </div>
 
-        {/* Controls */}
-        <div className="flex items-center justify-center space-x-4">
-          <button
-            onClick={() => setIsAutoPlay(!isAutoPlay)}
-            className={`px-6 py-2 rounded-full border-2 transition-all duration-300 ${
-              isAutoPlay
-                ? 'bg-orange-500 border-orange-500 text-white'
-                : 'bg-transparent border-gray-500 text-gray-300 hover:border-orange-500 hover:text-orange-500'
-            }`}
-          >
-            {isAutoPlay ? 'Auto ON' : 'Auto OFF'}
-          </button>
-
-          {/* Progress Indicators */}
-          <div className="flex space-x-2">
-            {videos.map((_, index) => (
-              <motion.div
-                key={index}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? 'bg-orange-500' : 'bg-gray-600'
-                }`}
-                animate={{
-                  scale: index === currentIndex ? 1.2 : 1,
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Preload hidden videos for performance */}
-      <div className="hidden">
-        {videos.map((video, index) =>
-          index !== currentIndex ? (
-            <video
+        {/* Progress Dots */}
+        <div className="flex items-center justify-center space-x-2">
+          {videos.map((_, index) => (
+            <motion.div
               key={index}
-              ref={(el) => (videoRefs.current[index] = el)}
-              preload="metadata"
-              
-            >
-              <source src={video} type="video/mp4" />
-            </video>
-          ) : null
-        )}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                index === currentIndex ? "bg-orange-500" : "bg-gray-600"
+              }`}
+              animate={{ scale: index === currentIndex ? 1.2 : 1 }}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
