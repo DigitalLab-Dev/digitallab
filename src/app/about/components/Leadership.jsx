@@ -20,7 +20,7 @@ const Leadership = () => {
     {
       name: 'Sayed Tassawar Abbas',
       designation: 'Co-Founder',
-      image: '/images/tassawar.jpg',
+      image: '/images/tassawar.webp',
       socials: {
         instagram: 'https://instagram.com/tassawarabbas',
         linkedin: 'https://linkedin.com/in/tassawarabbas',

@@ -30,8 +30,9 @@ export default function ServicesPage() {
       {/* SEO Meta Tags would go in Head component in actual Next.js */}
       <HeroSection />
       <ServicesGrid />
-      <ProcessSection />
-      <StatsSection />
+
+
+
       <CTASection />
     </main>
   );

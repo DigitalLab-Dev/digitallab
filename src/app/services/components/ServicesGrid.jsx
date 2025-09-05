@@ -11,61 +11,61 @@ import {
   ArrowRight,
   CheckCircle,
 } from 'lucide-react';
-// Services Grid
+
 const ServicesGrid = () => {
   const services = [
     {
+      title: 'Content Writing',
       icon: Pen,
-      title: 'Copywriting',
       description:
         'Compelling content that converts visitors into customers with persuasive storytelling',
       features: ['SEO-Optimized', 'Brand Voice', 'Conversion-Focused'],
     },
     {
+      title: 'Video Production',
       icon: Video,
-      title: 'Video Editing',
       description:
         'Professional video production that captivates your audience and tells your story',
       features: ['Motion Graphics', 'Color Grading', 'Audio Enhancement'],
     },
     {
+      title: 'Design',
       icon: Palette,
-      title: 'Graphic Design',
       description:
         'Stunning visual designs that make your brand memorable and impactful',
       features: ['Brand Identity', 'Print Design', 'Digital Assets'],
     },
     {
+      title: 'Social Media',
       icon: Share2,
-      title: 'Social Media Marketing',
       description:
         'Strategic social presence that builds communities and drives engagement',
       features: ['Content Strategy', 'Community Management', 'Analytics'],
     },
     {
-      icon: Megaphone,
       title: 'Advertising',
+      icon: Megaphone,
       description:
         'Targeted ad campaigns that maximize ROI and reach your ideal customers',
       features: ['PPC Management', 'Creative Assets', 'Performance Tracking'],
     },
     {
+      title: 'E-Commerce',
       icon: ShoppingCart,
-      title: 'E-commerce',
       description:
         'Complete online stores that convert browsers into loyal customers',
       features: ['Store Setup', 'Payment Integration', 'Optimization'],
     },
     {
+      title: 'Web Development',
       icon: Code,
-      title: 'Development',
       description:
         'Custom web applications built with modern technologies and best practices',
       features: ['Full-Stack', 'Mobile-First', 'Performance Optimized'],
     },
     {
-      icon: Search,
       title: 'SEO',
+      icon: Search,
       description:
         'Advanced SEO strategies that boost rankings and drive organic traffic',
       features: ['Technical SEO', 'Content Optimization', 'Link Building'],
@@ -73,7 +73,13 @@ const ServicesGrid = () => {
   ];
 
   return (
-    <section className="py-20 bg-black">
+    <section className="py-20 bg-black relative overflow-hidden">
+      {/* glowing blobs */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-orange-500 rounded-full mix-blend-screen filter blur-3xl opacity-10 animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-white rounded-full mix-blend-screen filter blur-3xl opacity-5 animate-pulse delay-1000"></div>
+      </div>
+
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -82,10 +88,10 @@ const ServicesGrid = () => {
           className="text-center mb-16"
         >
           <h2 className="text-5xl font-bold text-white mb-6">
-            What We <span className="text-orange-500">Offer</span>
+            Our <span className="text-orange-500">Craft</span>
           </h2>
           <p className="text-gray-400 text-xl max-w-2xl mx-auto">
-            Comprehensive digital solutions tailored to your business needs
+            Future-ready digital experiences with radiant minimalism
           </p>
         </motion.div>
 
@@ -96,32 +102,51 @@ const ServicesGrid = () => {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="bg-gray-900 p-8 rounded-2xl border border-gray-800 hover:border-orange-500 transition-all duration-300 group"
+              whileHover={{ y: -12, scale: 1.05 }}
+              className="relative group rounded-2xl p-[1px] bg-white/5 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all"
             >
-              <div className="mb-6">
-                <service.icon className="w-12 h-12 text-orange-500 mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="text-2xl font-bold text-white mb-3">
+              {/* Glassmorphic card */}
+              <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 h-full flex flex-col justify-between relative overflow-hidden">
+                {/* Title reveal on hover */}
+                {/* Title reveal on hover */}
+                <motion.h3
+                  initial={{ opacity: 0, y: 20 }}
+                  whileHover={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className=" top-6 left-6 text-xl font-bold text-white z-20"
+                >
                   {service.title}
-                </h3>
-                <p className="text-gray-400">{service.description}</p>
-              </div>
+                </motion.h3>
 
-              <div className="space-y-2">
-                {service.features.map((feature, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-orange-500" />
-                    <span className="text-gray-300 text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
+                {/* radiant hover glow */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-500/20 to-white/10 opacity-0 group-hover:opacity-100 blur-xl transition duration-500 z-0"></div>
 
-              <motion.button
-                whileHover={{ x: 5 }}
-                className="mt-6 text-orange-500 font-semibold flex items-center gap-2 group-hover:gap-3 transition-all"
-              >
-                Learn More <ArrowRight size={16} />
-              </motion.button>
+                <div className="mb-6">
+                  <service.icon className="w-14 h-14 text-orange-400 mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_18px_rgba(249,115,22,0.9)]" />
+                  <p className="text-gray-300 text-base leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  {service.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <CheckCircle className="w-4 h-4 text-orange-400" />
+                      <span className="text-gray-200 text-sm">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <motion.button
+                  whileHover={{ x: 5 }}
+                  className="mt-6 text-orange-400 font-medium flex items-center gap-2 group-hover:gap-3 transition-all"
+                >
+                  Learn More <ArrowRight size={16} />
+                </motion.button>
+
+                {/* radiant hover glow */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-500/20 to-white/10 opacity-0 group-hover:opacity-100 blur-xl transition duration-500"></div>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -129,4 +154,5 @@ const ServicesGrid = () => {
     </section>
   );
 };
+
 export default ServicesGrid;
