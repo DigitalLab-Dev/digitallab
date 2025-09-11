@@ -1,5 +1,7 @@
 'use client';
 import colorScheme from '@/utils/colors';
+import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 const Navbar = () => {
@@ -73,13 +75,15 @@ const Navbar = () => {
       >
         {/* Logo */}
         <div className="flex-shrink-0">
-          <h1
-            className="text-2xl sm:text-3xl lg:text-4xl font-medium leading-tight"
-            style={{ color: colorScheme.heading }}
-          >
-            <span className="sr-only">Digital Lab - </span>
-            DIGITAL LAB
-          </h1>
+           <Link href="/" aria-label="Digital Lab Home">
+             <Image
+               src="/images/logo.png"
+               alt="Digital Lab Logo"
+               width={150}
+               height={40}
+               className="h-auto w-full"
+             />
+           </Link>
         </div>
 
         {/* Buttons Container */}
