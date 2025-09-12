@@ -111,9 +111,9 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-15 px-4 sm:px-10 flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black">
+    <section className="py-15 px-4 sm:px-10 flex flex-col items-center justify-center bg-gradient-to-br from-orange-500 to-black">
       <header className="text-center mb-12">
-        <h2 className="text-xl text-orange-500 mb-4">TESTIMONIALS</h2>
+        <h2 className="text-xl text-white mb-4">TESTIMONIALS</h2>
         <h3 className="text-3xl sm:text-5xl font-bold text-white mb-8">
           WHAT OUR CLIENTS SAY ABOUT US
         </h3>
@@ -125,7 +125,7 @@ const Testimonials = () => {
         className="relative w-full max-w-4xl mx-auto"
       >
         {/* Main Video Container */}
-        <div className="relative h-[250px] sm:h-[400px] mb-8 overflow-hidden rounded-2xl shadow-2xl flex items-center justify-center bg-black">
+        <div className="relative h-[250px] sm:h-[400px] mb-8 overflow-hidden rounded-2xl flex items-center justify-center ">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={currentIndex}
@@ -188,7 +188,7 @@ const Testimonials = () => {
         </div>
 
         {/* Thumbnails */}
-        <div className="flex justify-center space-x-2 sm:space-x-4 mb-6">
+        {/* <div className="flex justify-center space-x-2 sm:space-x-4 mb-6">
           {videos.map((video, index) => (
             <motion.button
               key={index}
@@ -216,7 +216,7 @@ const Testimonials = () => {
               <div className="absolute inset-0 bg-opacity-20" />
             </motion.button>
           ))}
-        </div>
+        </div> */}
 
         {/* Progress Dots */}
         <div className="flex items-center justify-center space-x-2">
