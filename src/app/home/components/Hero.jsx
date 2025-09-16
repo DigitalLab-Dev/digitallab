@@ -5,9 +5,7 @@ import React from 'react';
 import { MdArrowOutward } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import Spline from '@splinetool/react-spline';
-
-
-
+import  Link  from 'next/link';
 const Hero = () => {
   return (
     <motion.section
@@ -87,7 +85,7 @@ const Hero = () => {
         whileHover={{ scale: 1.05, rotate: 1 }}
         whileTap={{ scale: 0.95 }}
       >
-        <span>VIEW PORTFOLIOS</span>
+        <Link href="/services">VIEW PORTFOLIOS</Link>
         <MdArrowOutward size={25} />
       </motion.button>
     </motion.section>

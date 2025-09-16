@@ -2,223 +2,196 @@
 import colorScheme from '@/utils/colors';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState, useRef, useEffect } from 'react';
-import { FaArrowRight } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import {
+  FaHome,
+  FaUser,
+  FaCogs,
+  FaEnvelope,
+  FaBlog,
+  FaArrowRight,
+  FaBars,
+  FaTimes,
+} from 'react-icons/fa';
+
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('HOME');
-  const menuRef = useRef(null);
-  const buttonsContainerRef = useRef(null);
-  const [menuWidth, setMenuWidth] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const menuLinks = [
-    { name: 'HOME', href: '/' },
-    { name: 'ABOUT', href: '/about' },
-    { name: 'SERVICES', href: '/services' },
-    { name: 'CONTACT', href: '/contact' },
-    { name: 'BLOGS', href: '/blogs' },
+    { name: 'HOME', href: '/', icon: FaHome },
+    { name: 'ABOUT', href: '/about', icon: FaUser },
+    { name: 'SERVICES', href: '/services', icon: FaCogs },
+    { name: 'CONTACT', href: '/contact', icon: FaEnvelope },
+    { name: 'BLOGS', href: '/blogs', icon: FaBlog },
   ];
 
   useEffect(() => {
-    if (buttonsContainerRef.current) {
-      setMenuWidth(buttonsContainerRef.current.offsetWidth);
-    }
-
-    const handleResize = () => {
-      if (buttonsContainerRef.current) {
-        setMenuWidth(buttonsContainerRef.current.offsetWidth);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+      if (window.innerWidth >= 768) {
+        setIsExpanded(false);
       }
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    if (isMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMenuOpen]);
-
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
-
   const handleLinkClick = (linkName) => {
-    if (linkName !== activeLink) {
-      setActiveLink(linkName);
-      setIsMenuOpen(false);
-    }
+    setActiveLink(linkName);
+    if (isMobile) setIsExpanded(false);
   };
 
   return (
-    <header className=" w-full fixed top-0 left-0 z-20 rounded-2xl  bg-white/1 backdrop-blur-xs 
-     " role="banner">
-      <nav
-        className="w-full px-4 sm:px-6 lg:px-8 py-4   flex items-center justify-between"
-        role="navigation"
-        aria-label="Main navigation"
-      >
-        {/* Logo */}
-        <div className="flex-shrink-0">
-           <Link href="/" aria-label="Digital Lab Home">
-             <Image
-               src="/images/logo.png"
-               alt="Digital Lab Logo"
-               width={150}
-               height={40}
-               className="h-auto w-full"
-             />
-           </Link>
-        </div>
+    <>
+      {/* Desktop: Left Side Vertical Navbar */}
+      {/* Desktop: Top Horizontal Navbar */}
+      <nav className="hidden md:flex fixed w-full  px-10  items-center justify-between  top-5 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500">
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/logo.png"
+            alt="Digital Lab Logo"
+            width={200} // adjust size
+            height={200} // adjust size
+            className="object-contain"
+          />
+        </Link>
+        <div className="flex items-center  bg-white/5 backdrop-blur-xl border border-orange-500/20 rounded-2xl px-4 py-3 shadow-xl shadow-orange-500/10 space-x-6">
+          {/* Logo */}
 
-        {/* Buttons Container */}
-        <div
-          ref={buttonsContainerRef}
-          className="flex items-center justify-center gap-3 sm:gap-5"
-        >
+          {/* Navigation Links in Row */}
+          <div className="flex items-center space-x-4">
+            {menuLinks.map((link) => {
+              const Icon = link.icon;
+              const isActive = activeLink === link.name;
+
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => handleLinkClick(link.name)}
+                  className={`group relative flex items-center rounded-xl px-3 py-2 transition-all duration-300 ${
+                    isActive
+                      ? 'bg-gradient-to-r from-orange-500 to-yellow-500 text-white shadow-lg shadow-orange-500/30'
+                      : 'text-orange-300 hover:text-white hover:bg-orange-500/10'
+                  }`}
+                >
+                  <Icon
+                    className={`w-5 h-5 transition-all duration-300 ${
+                      isActive ? 'scale-110' : 'group-hover:scale-110'
+                    } mr-2`}
+                  />
+                  <span
+                    className={`font-medium transition-all duration-300 ${
+                      isActive
+                        ? 'text-white'
+                        : 'text-orange-300 group-hover:text-white'
+                    }`}
+                  >
+                    {link.name}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+
           {/* CTA Button */}
-          <a
-            href="/contact"
-            className="group flex items-center justify-between p-2 bg-[#f48020] hover:bg-[#f0750f] sm:p-3 rounded-full cursor-pointer overflow-hidden transition-all duration-500 text-xs sm:text-sm w-24 sm:w-30"
-            aria-label="Contact us"
-          >
-            <FaArrowRight
-              className="hidden group-hover:flex text-xs sm:text-sm font-extralight text-white"
-              aria-hidden="true"
-            />
-            <span className="uppercase font-semibold">Let's Talk</span>
-            <div
-              className="w-1.5 sm:w-2 transition-all duration-500 h-1.5 sm:h-2 group-hover:hidden rounded-full"
-              style={{ backgroundColor: colorScheme.heading }}
-              aria-hidden="true"
-            ></div>
-          </a>
-
-          {/* Menu Button */}
-          <button
-            onClick={toggleMenu}
-            className="group flex items-center justify-between cursor-pointer hover:bg-neutral-100 bg-neutral-400 text-black font-medium transition-all duration-500 p-2 sm:p-3 rounded-full text-xs sm:text-sm w-18 sm:w-30"
-            aria-expanded={isMenuOpen}
-            aria-haspopup="true"
-            aria-label="Toggle navigation menu"
-          >
-            <span className="font-semibold">{isMenuOpen?"ClOSE":"MENU"}</span>
-            <div
-              className="flex w-fit items-center justify-center gap-1 group-hover:flex-col"
-              aria-hidden="true"
+          <div className="ml-auto">
+            <Link
+              href="/contact"
+              onClick={() => handleLinkClick('CONTACT')}
+              className="group bg-gradient-to-r w-30  from-orange-500  to-yellow-500 text-white rounded-xl px-4 py-2 transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/40 hover:scale-105 flex items-center justify-center space-x-2"
             >
-              <div
-                className="w-2 h-2 bg-black rounded-full transition-transform duration-300"
-                
-              ></div>
-              <div
-                className="w-2 h-2 bg-black rounded-full transition-transform duration-300"
-
-              ></div>
-            </div>
-          </button>
+              <span className="font-semibold flex items-center justify-center w-full">
+                Let's Talk{' '}
+              </span>
+              <FaArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </Link>
+          </div>
         </div>
       </nav>
 
-      {/* Dropdown Menu */}
-      {isMenuOpen && (
-        <div
-          ref={menuRef}
-          className="absolute right-4 sm:right-6 bg-white/20 border border-white/50 backdrop-blur-xl lg:right-8  top-[80%] mt-2 rounded-2xl shadow-xl overflow-hidden z-50 transform transition-all duration-500 ease-out"
-          style={{
-            width: `${menuWidth}px`,
-            minWidth: '250px',
-          }}
-          role="menu"
-          aria-labelledby="menu-button"
-        >
-          <div className="py-6 px-4">
-            {menuLinks.map((link, index) => (
-              <div
-                key={link.name}
-                className={`relative group text-lg sm:text-xl font-semibold transition-all duration-300 py-3 px-4 rounded-lg mb-2 last:mb-0 ${
-                  activeLink === link.name
-                    ? 'pointer-events-none'
-                    : 'cursor-pointer hover:bg-opacity-10'
-                }`}
-                style={{
-                  color:
-                    activeLink === link.name
-                      ? colorScheme.link
-                      : colorScheme.heading,
-                  transitionDelay: `${index * 50}ms`,
-                  backgroundColor:
-                    activeLink === link.name ? 'transparent' : 'transparent',
-                }}
-                onClick={() => handleLinkClick(link.name)}
-                role="menuitem"
-                tabIndex={activeLink === link.name ? -1 : 0}
-              >
-                {/* Active Link Layout */}
-                {activeLink === link.name ? (
-                  <div className="flex items-center justify-between w-full">
-                    <span>{link.name}</span>
-                    <div
-                      className="w-4 h-4 rounded-full flex-shrink-0"
-                      style={{ backgroundColor: colorScheme.link }}
-                      aria-hidden="true"
-                    ></div>
-                  </div>
-                ) : (
-                  /* Animated Text Effect for Non-Active Links */
-                  <div className="relative overflow-hidden flex  w-full  justify-between items-center">
-                    <div>
-                      <div className="group-hover:-translate-y-full transition-transform duration-300 ease-out">
-                        {link.name}
-                      </div>
-                      <div
-                        className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
-                        style={{ color: colorScheme.link }}
-                      >
-                        {link.name}
-                      </div>
-                    </div>
-                    <FaArrowRight className='hidden group-hover:flex transition-all duration-500' />
-                  </div>
-                )}
+      {/* Mobile: Top Horizontal Navbar */}
+      <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-gradient-to-r  to-black/95 backdrop-blur-xl border-b border-orange-500/20">
+        <div className="flex items-center justify-between p-4">
+          {/* Logo */}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/logo.png"
+            alt="Digital Lab Logo"
+            width={150} // adjust size
+            height={150} // adjust size
+            className="object-contain"
+          />
+        </Link>
 
-                {/* Hover Background Effect */}
-                {activeLink !== link.name && (
-                  <div
-                    className="absolute inset-0 -z-10 rounded-lg opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-                    style={{ backgroundColor: colorScheme.link }}
-                    aria-hidden="true"
-                  ></div>
-                )}
-              </div>
-            ))}
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="w-10 h-10 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 border border-orange-500/30 rounded-lg flex items-center justify-center text-orange-300 hover:text-white transition-colors duration-300"
+          >
+            <FaBars
+              className={`w-5 h-5 transition-all duration-300 ${
+                isExpanded ? 'rotate-90' : ''
+              }`}
+            />
+          </button>
+        </div>
+
+        {/* Mobile Dropdown */}
+        <div
+          className={`overflow-hidden transition-all duration-500 ${
+            isExpanded ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="border-t border-orange-500/20 bg-black/50">
+            {menuLinks.map((link, index) => {
+              const Icon = link.icon;
+              const isActive = activeLink === link.name;
+
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => handleLinkClick(link.name)}
+                  className={`flex items-center space-x-3 p-4 border-b border-orange-500/10 transition-all duration-300 ${
+                    isActive
+                      ? 'bg-gradient-to-r from-orange-500 to-yellow-500 text-white'
+                      : 'text-orange-300 hover:text-white hover:bg-orange-500/10'
+                  }`}
+                  style={{
+                    animationDelay: `${index * 0.1}s`,
+                  }}
+                >
+                  <Icon
+                    className={`w-5 h-5 ${
+                      isActive ? 'scale-110' : ''
+                    } transition-transform duration-300`}
+                  />
+                  <span className="font-medium">{link.name}</span>
+                  {!isActive && (
+                    <FaArrowRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  )}
+                </Link>
+              );
+            })}
+
+            {/* Mobile CTA */}
           </div>
         </div>
-      )}
+      </header>
 
-      {/* Screen reader only skip link */}
+      {/* Skip to main content */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white text-black p-2 rounded"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:right-4 bg-orange-500 text-white p-3 rounded-lg z-[60] shadow-lg"
       >
         Skip to main content
       </a>
-    </header>
+    </>
   );
 };
 

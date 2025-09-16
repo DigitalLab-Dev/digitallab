@@ -27,7 +27,7 @@ const Services = () => {
     {
       heading: 'Graphic Designing',
       para: 'Creative graphics, branding, and visuals that stand out.',
-      link: '/services/graphic-designing',
+      link: '/services/graphic-design',
       icon: FaPaintBrush,
       images: [
         '/images/icons/adobe-photoshop.png',

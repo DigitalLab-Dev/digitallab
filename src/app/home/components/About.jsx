@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { MdArrowOutward } from 'react-icons/md';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
+import Link from 'next/link';
 
 const About = () => {
   const containerRef = useRef(null);
@@ -68,8 +69,6 @@ const About = () => {
     },
   };
 
-
-
   return (
     <section
       ref={containerRef}
@@ -99,10 +98,10 @@ const About = () => {
           <motion.div variants={itemVariants} className="overflow-hidden">
             <motion.span
               className="text-sm font-semibold text-[#f48020] uppercase tracking-widest block mb-4"
-              initial={{ width: 0,opacity:0 }}
-               viewport={{ once: true, amount: 0.2 }}
-              whileInView={{ width: 'auto',opacity:1 }}
-              transition={{ duration: .75, delay: 0.5 }}
+              initial={{ width: 0, opacity: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              whileInView={{ width: 'auto', opacity: 1 }}
+              transition={{ duration: 0.75, delay: 0.5 }}
             >
               — WHO WE ARE —
             </motion.span>
@@ -244,23 +243,25 @@ const About = () => {
                   boxShadow: '0 20px 40px rgba(244, 128, 32, 0.3)',
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="group bg-gradient-to-r from-[#f48020] to-[#e67017] text-white font-bold py-4 px-8 rounded-full relative overflow-hidden transition-all duration-300"
+                className="group bg-gradient-to-r from-[#f48020] to-[#e67017] text-white font-bold py-3 px-4 rounded-full relative overflow-hidden transition-all duration-300 cursor-pointer"
               >
-                <motion.span
-                  className="absolute inset-0 bg-white"
-                  initial={{ scale: 0 }}
-                  whileHover={{ scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-                <span className="relative z-10 flex items-center gap-3 group-hover:text-[#713b0f] transition-colors duration-300">
-                  DISCOVER OUR STORY
+                <Link href="/about">
                   <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    <MdArrowOutward className="text-xl" />
-                  </motion.span>
-                </span>
+                    className="absolute inset-0 bg-white"
+                    initial={{ scale: 0 }}
+                    whileHover={{ scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <span className="relative z-10 flex items-center gap-3 group-hover:text-black transition-colors duration-300">
+                    DISCOVER OUR STORY
+                    <motion.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <MdArrowOutward className="text-xl" />
+                    </motion.span>
+                  </span>
+                </Link>
               </motion.button>
             </motion.div>
           </motion.div>
