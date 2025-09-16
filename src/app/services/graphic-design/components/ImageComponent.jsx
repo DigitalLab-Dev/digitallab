@@ -8,22 +8,6 @@ const ImageComponent = ({ imageUrl, isFullWidth = false }) => {
   const isInView = useInView(ref, { once: true, threshold: 0.2 });
   const [isOpen, setIsOpen] = useState(false);
 
-  // Earthquake keyframes
-  const earthquakeVariants = {
-    shake: {
-      x: [0, -2, 2, -2, 2, -1, 1, -1, 1, 0],
-      y: [0, -1, 1, -2, 2, -1, 1, -1, 1, 0],
-      rotate: [0, -0.5, 0.5, -0.5, 0.5, -0.2, 0.2, -0.2, 0.2, 0],
-      transition: {
-        duration: 0.6,
-        ease: 'easeInOut',
-        repeat: Infinity,
-        repeatType: 'loop',
-      },
-    },
-    initial: { x: 0, y: 0, rotate: 0 },
-  };
-
   // Fade-in animation
   const fadeInVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
@@ -41,41 +25,44 @@ const ImageComponent = ({ imageUrl, isFullWidth = false }) => {
       <motion.div
         ref={ref}
         className={`w-full cursor-pointer ${
-          isFullWidth 
-            ? 'max-w-4xl mx-auto' 
+          isFullWidth
+            ? 'max-w-4xl mx-auto'
             : 'h-auto'
         }`}
         variants={fadeInVariants}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
-        whileHover="shake"
-        style={{ transformOrigin: 'center' }}
         onClick={() => setIsOpen(true)}
       >
-        <motion.div
-          variants={earthquakeVariants}
-          className="relative overflow-hidden rounded-lg"
-        >
-          <Image
-            src={imageUrl}
-            alt="Image"
-            layout="responsive"
-            width={isFullWidth ? 1200 : 700}
-            height={isFullWidth ? 600 : 475}
-            className={`w-full object-cover rounded-lg ${
-              isFullWidth 
-                ? 'h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]' 
-                : 'h-[200px] sm:h-[250px] md:h-[300px]'
-            }`}
-          />
-        </motion.div>
+        <div className="relative overflow-hidden rounded-lg shadow-lg group">
+          <div className="transform transition-transform duration-300 ease-out group-hover:scale-105">
+            <Image
+              src={imageUrl}
+              alt="Image"
+              layout="responsive"
+              width={isFullWidth ? 1200 : 700}
+              height={isFullWidth ? 300 : 475}
+              className={`w-full object-cover rounded-lg transition-all duration-300 group-hover:brightness-110 ${
+                isFullWidth
+                  ? 'h-[300px] sm:h-[400px] md:h-[300px] '
+                  : 'h-[200px] sm:h-[250px] md:h-[300px]'
+              }`}
+            />
+          </div>
+          
+          {/* Hover overlay with gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/5 group-hover:to-pink-500/10 transition-all duration-300 rounded-lg"></div>
+          
+          {/* Subtle glow effect */}
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-sm -z-10"></div>
+        </div>
       </motion.div>
 
       {/* Modal */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -93,7 +80,7 @@ const ImageComponent = ({ imageUrl, isFullWidth = false }) => {
 
             {/* Enlarged Image */}
             <motion.div
-              className="relative z-10 w-[90%] md:w-[70%] lg:w-[50%] rounded-lg overflow-hidden shadow-xl"
+              className="relative z-10 w-[90%] md:w-[70%] lg:w-[50%] rounded-lg overflow-hidden shadow-2xl"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}

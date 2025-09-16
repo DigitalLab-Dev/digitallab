@@ -1,4 +1,10 @@
+'use client';
+import Link from 'next/link';
 import ImageComponent from './ImageComponent';
+
+import { motion } from 'framer-motion';
+
+import { MdArrowOutward } from 'react-icons/md';
 
 const Gallery = () => {
   const designs = [
@@ -34,7 +40,6 @@ const Gallery = () => {
 
     while (currentIndex < designs.length) {
       if (isTwoImageRow) {
-        // two images row
         const imagesInRow = designs.slice(currentIndex, currentIndex + 2);
         rows.push(
           <div
@@ -50,10 +55,12 @@ const Gallery = () => {
         );
         currentIndex += 2;
       } else {
-        // one image row
         rows.push(
-          <div key={`row-${currentIndex}`} className="w-full mb-4">
-            <ImageComponent imageUrl={designs[currentIndex]} isFullWidth={true} />
+          <div key={`row-${currentIndex}`} className="w-full   mb-4">
+            <ImageComponent
+              imageUrl={designs[currentIndex]}
+              isFullWidth={true}
+            />
           </div>
         );
         currentIndex += 1;
@@ -67,7 +74,7 @@ const Gallery = () => {
   };
 
   return (
-    <section className="mt-10">
+    <section className="my-10">
       <header className="text-center my-10">
         <h2 className="text-6xl font-semibold">OUR WORK</h2>
         <p>
@@ -76,6 +83,32 @@ const Gallery = () => {
         </p>
       </header>
       <div className="w-full max-w-7xl mx-auto px-4">{renderImages()}</div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        viewport={{ once: true }}
+        className="flex items-center justify-center gap-3 my-10 text-2xl uppercase text-orange-400 cursor-pointer"
+      >
+        <motion.div
+          whileHover={{ scale: 1.1, color: '#f97316' }} // orange hover pop
+          transition={{ type: 'spring', stiffness: 300 }}
+        >
+          <Link
+            href="https://drive.google.com/drive/folders/17MIfvNhB38xVYRVtuXq4uxkDxirunKYF"
+            target="_blank"
+          >
+            See All Designs
+          </Link>
+        </motion.div>
+
+        <motion.div
+          animate={{ x: [0, 5, 0] }} // subtle left-right motion
+          transition={{ repeat: Infinity, duration: 1.2, ease: 'easeInOut' }}
+        >
+          <MdArrowOutward className="w-6 h-6" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

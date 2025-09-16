@@ -1,10 +1,10 @@
-"use client"
+'use client';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const CTASection = () => {
   return (
-    <section className="relative bg-black text-white py-20 px-6 overflow-hidden">
+    <section className="relative  text-white py-20 px-6 overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-10 left-10 w-20 h-20 border border-orange-500 rounded-full opacity-20"></div>
       <div className="absolute bottom-20 left-20 w-12 h-12 bg-orange-500 rounded-full opacity-10"></div>
@@ -22,21 +22,9 @@ const CTASection = () => {
             viewport={{ once: true }}
           >
             <div className="space-y-6">
-              {/* Badge */}
-              <motion.div
-                className="inline-flex items-center gap-2 bg-orange-500 text-black px-4 py-2 rounded-full text-sm font-semibold"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <span className="w-2 h-2 bg-black rounded-full"></span>
-                Ready to Transform Your Brand?
-              </motion.div>
-
               {/* Main Heading */}
-              <motion.h2
-                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+              <motion.h4
+                className="text-4xl md:text-5xl  font-bold leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -45,11 +33,11 @@ const CTASection = () => {
                 Let's Create
                 <span className="block text-orange-500">Something Amazing</span>
                 <span className="block">Together</span>
-              </motion.h2>
+              </motion.h4>
 
               {/* Description */}
               <motion.p
-                className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-lg"
+                className="text-lg md:text-md text-gray-300 leading-relaxed max-w-lg"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -69,7 +57,7 @@ const CTASection = () => {
                 viewport={{ once: true }}
               >
                 <motion.button
-                  className="bg-orange-500 hover:bg-orange-600 text-black font-semibold px-8 py-4 rounded-full transition-all duration-300 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                  className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-3 cursor-pointer rounded-full transition-all duration-300 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -77,36 +65,12 @@ const CTASection = () => {
                 </motion.button>
 
                 <motion.button
-                  className="border-2 border-white hover:bg-white hover:text-black text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 text-lg"
+                  className="border-2 border-white hover:bg-white hover:text-black text-white font-semibold px-4 py-3 cursor-pointer rounded-full transition-all duration-300 text-lg"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   View Our Portfolio
                 </motion.button>
-              </motion.div>
-
-              {/* Stats or Features */}
-              <motion.div
-                className="flex gap-8 pt-8 border-t border-gray-800"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <div>
-                  <div className="text-2xl font-bold text-orange-500">500+</div>
-                  <div className="text-sm text-gray-400">
-                    Projects Completed
-                  </div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-orange-500">48hr</div>
-                  <div className="text-sm text-gray-400">Quick Turnaround</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-orange-500">100%</div>
-                  <div className="text-sm text-gray-400">Satisfaction Rate</div>
-                </div>
               </motion.div>
             </div>
           </motion.div>
