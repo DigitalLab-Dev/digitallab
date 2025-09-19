@@ -84,6 +84,18 @@ const Services = () => {
         '/images/icons/jasper.png',
       ],
     },
+    {
+      heading: 'Web Development',
+      para: 'Powerful websites that sell, engage, and inspire action.',
+      link: '/services/web-development',
+      icon: FaRegCopy,
+      images: [
+        '/images/icons/grammerly.png',
+        '/images/icons/copyAi.png',
+        '/images/icons/click.png',
+        '/images/icons/jasper.png',
+      ],
+    },
   ];
 
   return (

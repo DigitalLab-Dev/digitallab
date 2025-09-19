@@ -168,7 +168,7 @@ const Hero = () => {
                     : 'none',
                 }}
               >
-                Beyond Code:{" "}
+                Beyond Code:{' '}
                 <span
                   className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent relative"
                   style={{
@@ -176,7 +176,7 @@ const Hero = () => {
                     filter: 'drop-shadow(0 0 20px rgba(249, 115, 22, 0.4))',
                   }}
                 >
-                   Digital Solutions
+                  Digital Solutions
                 </span>{' '}
                 That Drive Revenue.
               </h1>
@@ -201,8 +201,10 @@ const Hero = () => {
                     : 'none',
                 }}
               >
-                <CTAButton primary>Start Building</CTAButton>
-                <CTAButton>Learn More</CTAButton>
+                <a href="#portfolio">
+                  <CTAButton primary>Explore Work</CTAButton>
+                </a>
+                {/* <CTAButton>Learn More</CTAButton> */}
               </div>
             </div>
 
