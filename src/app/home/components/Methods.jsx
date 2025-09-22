@@ -61,9 +61,9 @@ const Methods = () => {
   const [currentImage, setCurrentImage] = useState(1);
   const images = [
     '/images/planning.webp',
-    '/images/strategy.webp',
-    '/images/development.webp',
-    '/images/optimization.webp',
+    '/images/concept.webp',
+    '/images/design.webp',
+    '/images/optimize.webp',
     '/images/launch.webp',
   ];
   return (

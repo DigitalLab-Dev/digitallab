@@ -63,7 +63,7 @@ const Services = () => {
     {
       heading: 'Ads Management',
       para: 'Google, Facebook & Instagram Ads that convert.',
-      link: '/services/ads',
+      link: '/services/ads-management',
       icon: FaBullhorn,
       images: [
         '/images/icons/meta.png',
@@ -75,7 +75,7 @@ const Services = () => {
     {
       heading: 'Copywriting',
       para: 'Powerful words that sell, engage, and inspire action.',
-      link: '/services/copywriting',
+      link: '/services/copy-writing',
       icon: FaRegCopy,
       images: [
         '/images/icons/grammerly.png',
