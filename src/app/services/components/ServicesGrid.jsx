@@ -1,86 +1,79 @@
-import { motion } from 'framer-motion';
+"use client";
+import { motion } from "framer-motion";
 import {
   Pen,
   Video,
   Palette,
   Share2,
   Megaphone,
-  ShoppingCart,
   Code,
-  Search,
   ArrowRight,
   CheckCircle,
-} from 'lucide-react';
+} from "lucide-react";
+import Link from "next/link";
 
 const ServicesGrid = () => {
   const services = [
     {
-      title: 'Content Writing',
+      title: "Content Writing",
       icon: Pen,
       description:
-        'Compelling content that converts visitors into customers with persuasive storytelling',
-      features: ['SEO-Optimized', 'Brand Voice', 'Conversion-Focused'],
+        "Compelling content that converts visitors into customers with persuasive storytelling",
+      features: ["SEO-Optimized", "Brand Voice", "Conversion-Focused"],
+      link: "/services/copy-writing",
     },
     {
-      title: 'Video Production',
+      title: "Video Production",
       icon: Video,
       description:
-        'Professional video production that captivates your audience and tells your story',
-      features: ['Motion Graphics', 'Color Grading', 'Audio Enhancement'],
+        "Professional video production that captivates your audience and tells your story",
+      features: ["Motion Graphics", "Color Grading", "Audio Enhancement"],
+      link: "/services/video-editing",
     },
     {
-      title: 'Design',
+      title: "Design",
       icon: Palette,
       description:
-        'Stunning visual designs that make your brand memorable and impactful',
-      features: ['Brand Identity', 'Print Design', 'Digital Assets'],
+        "Stunning visual designs that make your brand memorable and impactful",
+      features: ["Brand Identity", "Print Design", "Digital Assets"],
+      link: "/services/graphic-design",
     },
     {
-      title: 'Social Media',
+      title: "Social Media",
       icon: Share2,
       description:
-        'Strategic social presence that builds communities and drives engagement',
-      features: ['Content Strategy', 'Community Management', 'Analytics'],
+        "Strategic social presence that builds communities and drives engagement",
+      features: ["Content Strategy", "Community Management", "Analytics"],
+      link: "/services/social-media-management",
     },
     {
-      title: 'Advertising',
+      title: "Advertising",
       icon: Megaphone,
       description:
-        'Targeted ad campaigns that maximize ROI and reach your ideal customers',
-      features: ['PPC Management', 'Creative Assets', 'Performance Tracking'],
+        "Targeted ad campaigns that maximize ROI and reach your ideal customers",
+      features: ["PPC Management", "Creative Assets", "Performance Tracking"],
+      link: "/services/ads-management",
     },
     {
-      title: 'E-Commerce',
-      icon: ShoppingCart,
-      description:
-        'Complete online stores that convert browsers into loyal customers',
-      features: ['Store Setup', 'Payment Integration', 'Optimization'],
-    },
-    {
-      title: 'Web Development',
+      title: "Web Development",
       icon: Code,
       description:
-        'Custom web applications built with modern technologies and best practices',
-      features: ['Full-Stack', 'Mobile-First', 'Performance Optimized'],
-    },
-    {
-      title: 'SEO',
-      icon: Search,
-      description:
-        'Advanced SEO strategies that boost rankings and drive organic traffic',
-      features: ['Technical SEO', 'Content Optimization', 'Link Building'],
+        "Custom web applications built with modern technologies and best practices",
+      features: ["Full-Stack", "Mobile-First", "Performance Optimized"],
+      link: "/services/web-development",
     },
   ];
 
   return (
     <section className="py-20 bg-black relative overflow-hidden">
-      {/* glowing blobs */}
+      {/* background glow */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-orange-500 rounded-full mix-blend-screen filter blur-3xl opacity-10 animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-white rounded-full mix-blend-screen filter blur-3xl opacity-5 animate-pulse delay-1000"></div>
+        <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-orange-500 rounded-full blur-3xl opacity-10 animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-amber-400 rounded-full blur-3xl opacity-10 animate-pulse delay-700"></div>
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6">
+        {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -95,40 +88,39 @@ const ServicesGrid = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Cards wrapper - FLEX instead of grid */}
+        <div className="flex flex-wrap justify-center gap-10">
           {services.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -12, scale: 1.05 }}
-              className="relative group rounded-2xl p-[1px] bg-white/5 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all"
+              whileHover={{ y: -10, scale: 1.04 }}
+              className="w-full sm:w-[45%] lg:w-[30%] xl:w-[28%] 
+                         rounded-2xl relative bg-gradient-to-br from-white/10 to-white/5 
+                         border border-white/10 shadow-lg shadow-black/40 hover:shadow-orange-500/40 
+                         transition-all duration-300 overflow-hidden"
             >
-              {/* Glassmorphic card */}
-              <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 h-full flex flex-col justify-between relative overflow-hidden">
-                {/* Title reveal on hover */}
-                {/* Title reveal on hover */}
-                <motion.h3
-                  initial={{ opacity: 0, y: 20 }}
-                  whileHover={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className=" top-6 left-6 text-xl font-bold text-white z-20"
-                >
+              {/* Glow overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-amber-500/20 opacity-0 hover:opacity-100 blur-2xl transition duration-500"></div>
+
+              <div className="relative z-10 p-8 flex flex-col h-full">
+                {/* Icon */}
+                <service.icon className="w-14 h-14 text-orange-400 mb-6 transition-transform duration-300 group-hover:scale-110" />
+
+                {/* Title */}
+                <h3 className="text-2xl font-bold text-white mb-3">
                   {service.title}
-                </motion.h3>
+                </h3>
 
-                {/* radiant hover glow */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-500/20 to-white/10 opacity-0 group-hover:opacity-100 blur-xl transition duration-500 z-0"></div>
+                {/* Description */}
+                <p className="text-gray-300 text-base leading-relaxed mb-6 flex-grow">
+                  {service.description}
+                </p>
 
-                <div className="mb-6">
-                  <service.icon className="w-14 h-14 text-orange-400 mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_18px_rgba(249,115,22,0.9)]" />
-                  <p className="text-gray-300 text-base leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-
-                <div className="space-y-2">
+                {/* Features */}
+                <div className="space-y-2 mb-6">
                   {service.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-orange-400" />
@@ -137,15 +129,13 @@ const ServicesGrid = () => {
                   ))}
                 </div>
 
-                <motion.button
-                  whileHover={{ x: 5 }}
-                  className="mt-6 text-orange-400 font-medium flex items-center gap-2 group-hover:gap-3 transition-all"
+                {/* Learn More */}
+                <Link
+                  href={service.link}
+                  className="mt-auto flex items-center gap-2 text-orange-400 font-medium hover:gap-3 transition-all"
                 >
                   Learn More <ArrowRight size={16} />
-                </motion.button>
-
-                {/* radiant hover glow */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-500/20 to-white/10 opacity-0 group-hover:opacity-100 blur-xl transition duration-500"></div>
+                </Link>
               </div>
             </motion.div>
           ))}

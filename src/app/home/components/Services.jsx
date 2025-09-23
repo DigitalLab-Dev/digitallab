@@ -37,21 +37,9 @@ const Services = () => {
       ],
     },
     {
-      heading: 'Affiliate Marketing',
-      para: 'Grow revenue through targeted affiliate campaigns.',
-      link: '/services/affiliate-marketing',
-      icon: MdAttachMoney,
-      images: [
-        '/images/icons/star.png',
-        '/images/icons/pretty-links.png',
-        '/images/icons/google-analytics.png',
-        '/images/icons/amazon.png',
-      ],
-    },
-    {
       heading: 'Social Media Marketing',
       para: 'Engage your audience with tailored social strategies.',
-      link: '/services/social-media-marketing',
+      link: '/services/social-media-management',
       icon: FaUsers,
       images: [
         '/images/icons/adobe-photoshop.png',
