@@ -1,196 +1,319 @@
 'use client';
-import colorScheme from '@/utils/colors';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import {
-  FaHome,
-  FaUser,
-  FaCogs,
-  FaEnvelope,
-  FaBlog,
-  FaArrowRight,
-  FaBars,
-  FaTimes,
-} from 'react-icons/fa';
+  ArrowRight,
+  ChevronDown,
+  Menu,
+  X,
+  Play,
+  Palette,
+  Code,
+  Share2,
+  Search,
+  PenTool,
+  TrendingUp,
+  Target,
+} from 'lucide-react';
 
 const Navbar = () => {
-  const [activeLink, setActiveLink] = useState('HOME');
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const menuLinks = [
-    { name: 'HOME', href: '/', icon: FaHome },
-    { name: 'ABOUT', href: '/about', icon: FaUser },
-    { name: 'SERVICES', href: '/services', icon: FaCogs },
-    { name: 'CONTACT', href: '/contact', icon: FaEnvelope },
-    { name: 'BLOGS', href: '/blogs', icon: FaBlog },
+  const services = {
+    left: [
+      { name: 'Video Editing', icon: Play, href: '/services/video-editing' },
+      {
+        name: 'Graphic Design',
+        icon: Palette,
+        href: '/services/graphic-design',
+      },
+      {
+        name: 'Web Development',
+        icon: Code,
+        href: '/services/web-development',
+      },
+      {
+        name: 'Social Media Management',
+        icon: Share2,
+        href: '/services/social-media',
+      },
+    ],
+    right: [
+      { name: 'SEO Optimization', icon: Search, href: '/services/seo' },
+      {
+        name: 'Content Writing',
+        icon: PenTool,
+        href: '/services/content-writing',
+      },
+      {
+        name: 'Digital Marketing',
+        icon: TrendingUp,
+        href: '/services/marketing',
+      },
+      {
+        name: 'Brand Strategy',
+        icon: Target,
+        href: '/services/brand-strategy',
+      },
+    ],
+  };
+
+  const navLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Services', href: '/services' },
+    { name: 'Clients', href: '/clients' },
+    { name: 'Blogs', href: '/blogs' },
   ];
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth >= 768) {
-        setIsExpanded(false);
-      }
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleLinkClick = (linkName) => {
-    setActiveLink(linkName);
-    if (isMobile) setIsExpanded(false);
+  const isActive = (href) => {
+    if (href === '/services') {
+      return pathname.startsWith('/services');
+    }
+    return pathname === href;
   };
 
   return (
     <>
-      {/* Desktop: Left Side Vertical Navbar */}
-      {/* Desktop: Top Horizontal Navbar */}
-      <nav className="hidden md:flex fixed w-full  px-10  items-center justify-between  top-5 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500">
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/images/logo.png"
-            alt="Digital Lab Logo"
-            width={200} // adjust size
-            height={200} // adjust size
-            className="object-contain"
-          />
-        </Link>
-        <div className="flex items-center  bg-white/5 backdrop-blur-xl border border-orange-500/20 rounded-2xl px-4 py-3 shadow-xl shadow-orange-500/10 space-x-6">
+      {/* Mobile backdrop */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 
+        ${
+          isScrolled
+            ? ' shadow-lg backdrop-blur-xl'
+            : ' backdrop-blur-md'
+        }`}
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           {/* Logo */}
+          <Link href="/" className="flex-shrink-0 cursor-pointer">
+            <Image
+              src="/images/logo.png"
+              width={120}
+              height={40}
+              alt="Logo"
+              className="h-8 w-auto"
+            />
+          </Link>
 
-          {/* Navigation Links in Row */}
-          <div className="flex items-center space-x-4">
-            {menuLinks.map((link) => {
-              const Icon = link.icon;
-              const isActive = activeLink === link.name;
-
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => handleLinkClick(link.name)}
-                  className={`group relative flex items-center rounded-xl px-3 py-2 transition-all duration-300 ${
-                    isActive
-                      ? 'bg-gradient-to-r from-orange-500 to-yellow-500 text-white shadow-lg shadow-orange-500/30'
-                      : 'text-orange-300 hover:text-white hover:bg-orange-500/10'
-                  }`}
-                >
-                  <Icon
-                    className={`w-5 h-5 transition-all duration-300 ${
-                      isActive ? 'scale-110' : 'group-hover:scale-110'
-                    } mr-2`}
-                  />
-                  <span
-                    className={`font-medium transition-all duration-300 ${
-                      isActive
-                        ? 'text-white'
-                        : 'text-orange-300 group-hover:text-white'
-                    }`}
-                  >
-                    {link.name}
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex">
+            <ul className="flex items-center space-x-8">
+              {navLinks.map((item) => (
+                <li key={item.name} className="relative">
+                  {item.name === 'Services' ? (
+                    <button
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                      className={`flex items-center space-x-1 px-3 py-2 text-sm font-medium uppercase tracking-wide relative
+                        ${
+                          isActive(item.href)
+                            ? 'text-orange-400'
+                            : 'text-gray-300 hover:text-orange-400'
+                        }`}
+                    >
+                      <span>{item.name}</span>
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          isDropdownOpen ? 'rotate-180' : ''
+                        }`}
+                      />
+                      {isActive(item.href) && (
+                        <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-orange-400 shadow-[0_0_8px_2px_rgba(255,165,0,0.7)] rounded-full"></span>
+                      )}
+                    </button>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className={`px-3 py-2 text-sm font-medium uppercase tracking-wide relative
+                        ${
+                          isActive(item.href)
+                            ? 'text-orange-400'
+                            : 'text-gray-300 hover:text-orange-400'
+                        }`}
+                    >
+                      {item.name}
+                      {isActive(item.href) && (
+                        <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-orange-400 shadow-[0_0_8px_2px_rgba(255,165,0,0.7)] rounded-full"></span>
+                      )}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           {/* CTA Button */}
-          <div className="ml-auto">
-            <Link
-              href="/contact"
-              onClick={() => handleLinkClick('CONTACT')}
-              className="group bg-gradient-to-r w-30  from-orange-500  to-yellow-500 text-white rounded-xl px-4 py-2 transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/40 hover:scale-105 flex items-center justify-center space-x-2"
-            >
-              <span className="font-semibold flex items-center justify-center w-full">
-                Let's Talk{' '}
-              </span>
-              <FaArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+          <div className="hidden lg:flex">
+            <Link href="/contact">
+              <button className="flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 font-semibold text-sm uppercase tracking-wide transition-all duration-200 rounded-lg shadow-lg cursor-pointer">
+                <span>Let's Talk</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </Link>
           </div>
-        </div>
-      </nav>
 
-      {/* Mobile: Top Horizontal Navbar */}
-      <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-gradient-to-r  to-black/95 backdrop-blur-xl border-b border-orange-500/20">
-        <div className="flex items-center justify-between p-4">
-          {/* Logo */}
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/images/logo.png"
-            alt="Digital Lab Logo"
-            width={150} // adjust size
-            height={150} // adjust size
-            className="object-contain"
-          />
-        </Link>
-
-          {/* Mobile Menu Button */}
+          {/* Mobile menu button */}
           <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="w-10 h-10 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 border border-orange-500/30 rounded-lg flex items-center justify-center text-orange-300 hover:text-white transition-colors duration-300"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 text-white hover:text-orange-400 transition-colors duration-200"
           >
-            <FaBars
-              className={`w-5 h-5 transition-all duration-300 ${
-                isExpanded ? 'rotate-90' : ''
-              }`}
-            />
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Dropdown */}
+        {/* Services Dropdown - Desktop */}
+        {isDropdownOpen && (
+          <div className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-black backdrop-blur-lg border border-white/10 rounded-xl shadow-xl">
+            <div className="px-8 py-8 grid grid-cols-2 gap-12">
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-6">
+                  Core Services
+                </h3>
+                <div className="space-y-4">
+                  {services.left.map(({ name, icon: Icon, href }) => (
+                    <Link
+                      key={name}
+                      href={href}
+                      className="flex items-center space-x-4 p-3 hover:bg-white/10 rounded-md transition-colors duration-200 group"
+                    >
+                      <div className="p-2 bg-orange-100/20 group-hover:bg-orange-500 rounded-md">
+                        <Icon className="w-5 h-5 text-orange-400 group-hover:text-white" />
+                      </div>
+                      <span className="text-gray-200 font-medium group-hover:text-orange-400">
+                        {name}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-6">
+                  Growth Services
+                </h3>
+                <div className="space-y-4">
+                  {services.right.map(({ name, icon: Icon, href }) => (
+                    <Link
+                      key={name}
+                      href={href}
+                      className="flex items-center space-x-4 p-3 hover:bg-white/10 rounded-md transition-colors duration-200 group"
+                    >
+                      <div className="p-2 bg-orange-100/20 group-hover:bg-orange-500 rounded-md">
+                        <Icon className="w-5 h-5 text-orange-400 group-hover:text-white" />
+                      </div>
+                      <span className="text-gray-200 font-medium group-hover:text-orange-400">
+                        {name}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Mobile Menu */}
         <div
-          className={`overflow-hidden transition-all duration-500 ${
-            isExpanded ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+          className={`lg:hidden absolute top-full left-0 right-0 bg-black/90 backdrop-blur-lg shadow-xl border-t border-gray-800 transition-all duration-300 ${
+            isMobileMenuOpen
+              ? 'max-h-screen opacity-100'
+              : 'max-h-0 opacity-0 overflow-hidden'
           }`}
         >
-          <div className="border-t border-orange-500/20 bg-black/50">
-            {menuLinks.map((link, index) => {
-              const Icon = link.icon;
-              const isActive = activeLink === link.name;
-
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => handleLinkClick(link.name)}
-                  className={`flex items-center space-x-3 p-4 border-b border-orange-500/10 transition-all duration-300 ${
-                    isActive
-                      ? 'bg-gradient-to-r from-orange-500 to-yellow-500 text-white'
-                      : 'text-orange-300 hover:text-white hover:bg-orange-500/10'
-                  }`}
-                  style={{
-                    animationDelay: `${index * 0.1}s`,
-                  }}
-                >
-                  <Icon
-                    className={`w-5 h-5 ${
-                      isActive ? 'scale-110' : ''
-                    } transition-transform duration-300`}
-                  />
-                  <span className="font-medium">{link.name}</span>
-                  {!isActive && (
-                    <FaArrowRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  )}
-                </Link>
-              );
-            })}
+          <div className="px-4 py-6 space-y-4">
+            {navLinks.map(({ name, href }) => (
+              <div key={name}>
+                {name === 'Services' ? (
+                  <>
+                    <button
+                      onClick={() =>
+                        setIsMobileServicesOpen(!isMobileServicesOpen)
+                      }
+                      className={`flex items-center justify-between w-full py-3 px-4 font-medium text-sm uppercase tracking-wide transition-colors duration-200 rounded-md
+                        ${
+                          isActive(href)
+                            ? 'text-orange-400'
+                            : 'text-gray-200 hover:text-orange-400'
+                        }`}
+                    >
+                      {name}
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          isMobileServicesOpen ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                    {/* Mobile Services Dropdown */}
+                    {isMobileServicesOpen && (
+                      <div className="pl-4 space-y-3 mt-2">
+                        {[...services.left, ...services.right].map(
+                          ({ name, icon: Icon, href }) => (
+                            <Link
+                              key={name}
+                              href={href}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="flex items-center space-x-3 p-2 hover:bg-white/10 rounded-md transition-colors duration-200"
+                            >
+                              <div className="p-1.5 bg-orange-100/20 rounded-md">
+                                <Icon className="w-4 h-4 text-orange-400" />
+                              </div>
+                              <span className="text-gray-200 font-medium text-sm">
+                                {name}
+                              </span>
+                            </Link>
+                          )
+                        )}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    href={href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block w-full text-left py-3 px-4 font-medium text-sm uppercase tracking-wide transition-colors duration-200 rounded-md
+                      ${
+                        isActive(href)
+                          ? 'text-orange-400 bg-white/5'
+                          : 'text-gray-200 hover:text-orange-400 hover:bg-white/5'
+                      }`}
+                  >
+                    {name}
+                  </Link>
+                )}
+              </div>
+            ))}
 
             {/* Mobile CTA */}
+            <div className="pt-4">
+              <Link href="/contact">
+                <button className="w-full flex items-center justify-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 font-semibold text-sm uppercase tracking-wide transition-colors duration-200 rounded-lg shadow-md cursor-pointer">
+                  <span>Let's Talk</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </header>
-
-      {/* Skip to main content */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:right-4 bg-orange-500 text-white p-3 rounded-lg z-[60] shadow-lg"
-      >
-        Skip to main content
-      </a>
     </>
   );
 };
