@@ -1,5 +1,102 @@
+// import Link from 'next/link';
+// import React, { useRef, useState, useEffect } from 'react';
+// import { MdArrowForward } from 'react-icons/md';
+// import {
+//   motion,
+//   AnimatePresence,
+//   useInView,
+//   useMotionValue,
+//   useSpring,
+// } from 'framer-motion';
+// import Image from 'next/image';
+
+// const ServiceCard = ({ service }) => {
+//   const ref = useRef(null);
+//   const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+//   // show/hide the floating para
+//   const [showPara, setShowPara] = useState(false);
+
+//   // State for image animation
+//   const [isHovered, setIsHovered] = useState(false);
+
+//   // follow-cursor motion values (smoothed with springs)
+//   const rawX = useMotionValue(0);
+//   const rawY = useMotionValue(0);
+//   const x = useSpring(rawX, { stiffness: 300, damping: 30, mass: 0.25 });
+//   const y = useSpring(rawY, { stiffness: 300, damping: 30, mass: 0.25 });
+
+//   const handleMove = (e) => {
+//     const rect = ref.current?.getBoundingClientRect();
+//     if (!rect) return;
+//     rawX.set(e.clientX - rect.left);
+//     rawY.set(e.clientY - rect.top);
+//   };
+
+//   const handleMouseEnter = () => {
+//     setShowPara(true);
+//     setIsHovered(true);
+//   };
+
+//   const handleMouseLeave = () => {
+//     setShowPara(false);
+//     setIsHovered(false);
+//   };
+
+//   return (
+//     <motion.div
+//       ref={ref}
+//       onMouseEnter={handleMouseEnter}
+//       onMouseLeave={handleMouseLeave}
+//       onMouseMove={handleMove}
+//       initial={{ opacity: 0, y: 40 }}
+//       animate={isInView ? { opacity: 1, y: 0 } : {}}
+//       transition={{ duration: 0.5, ease: 'easeOut' }}
+//       className="relative flex items-center justify-between py-5 border-b border-orange-400 group"
+//     >
+//       <div className="flex flex-col">
+//         <h4 className="text-4xl sm:text-5xl uppercase text-neutral-200 group-hover:scale-75 font-bold transition-colors group-hover:text-neutral-500 mb-4">
+//           {service.heading}
+//         </h4>
+//       </div>
+
+//       {/* Right action button */}
+//       <Link
+//         href={service.link}
+//         className="sm:w-20 sm:h-20 w-10 h-10 rounded-full bg-neutral-500 hover:bg-orange-500 flex items-center justify-center transition-colors flex-shrink-0"
+//       >
+//         <MdArrowForward className="text-3xl text-white" />
+//       </Link>
+
+//       {/* Floating glassmorphic paragraph that follows the cursor */}
+//       <AnimatePresence>
+//         {showPara && (
+//           <motion.div
+//             style={{ x, y }}
+//             initial={{ opacity: 0, scale: 0.9 }}
+//             animate={{ opacity: 1, scale: 1 }}
+//             exit={{ opacity: 0, scale: 0.95 }}
+//             transition={{ type: 'spring', stiffness: 320, damping: 25 }}
+//             className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-1/2"
+//           >
+//             <div className="rounded-3xl border border-white/20 bg-white/10 backdrop-blur-md shadow-xl px-4 py-2">
+//               <p className="text-base md:text-lg text-white/90 whitespace-pre-line max-w-[15rem]">
+//                 {service.para}
+//               </p>
+//             </div>
+//           </motion.div>
+//         )}
+//       </AnimatePresence>
+//     </motion.div>
+//   );
+// };
+
+// export default ServiceCard;
+
+
+'use client';
 import Link from 'next/link';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { MdArrowForward } from 'react-icons/md';
 import {
   motion,
@@ -8,19 +105,14 @@ import {
   useMotionValue,
   useSpring,
 } from 'framer-motion';
-import Image from 'next/image';
 
-const ServiceCard = ({ service }) => {
+const ServiceCard = ({ service, index }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
-  // show/hide the floating para
   const [showPara, setShowPara] = useState(false);
 
-  // State for image animation
-  const [isHovered, setIsHovered] = useState(false);
-
-  // follow-cursor motion values (smoothed with springs)
+  // Smooth cursor-following animation
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
   const x = useSpring(rawX, { stiffness: 300, damping: 30, mass: 0.25 });
@@ -33,62 +125,86 @@ const ServiceCard = ({ service }) => {
     rawY.set(e.clientY - rect.top);
   };
 
-  const handleMouseEnter = () => {
-    setShowPara(true);
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setShowPara(false);
-    setIsHovered(false);
-  };
+  const handleMouseEnter = () => setShowPara(true);
+  const handleMouseLeave = () => setShowPara(false);
 
   return (
-    <motion.div
+    <motion.article
       ref={ref}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMove}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="relative flex items-center justify-between py-5 border-b border-orange-400 group"
+      transition={{ 
+        duration: 0.6, 
+        ease: [0.22, 1, 0.36, 1],
+        delay: index * 0.1 
+      }}
+      className="relative flex items-center justify-between py-6 md:py-8 border-b border-orange-400/30 group hover:border-orange-400 transition-colors duration-500"
+      role="article"
+      aria-labelledby={`service-${index}`}
     >
-      <div className="flex flex-col">
-        <h4 className="text-4xl sm:text-5xl uppercase text-neutral-200 group-hover:scale-75 font-bold transition-colors group-hover:text-neutral-500 mb-4">
+      <div className="flex flex-col flex-1 pr-4">
+        <motion.h3
+          id={`service-${index}`}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase text-neutral-200 font-bold transition-all duration-500 group-hover:text-orange-400"
+          initial={{ x: 0 }}
+          whileHover={{ x: 10 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+        >
           {service.heading}
-        </h4>
+        </motion.h3>
+        
+        {/* Show description on mobile */}
+        <p className="mt-3 text-sm sm:text-base text-neutral-400 md:hidden">
+          {service.para}
+        </p>
       </div>
 
-      {/* Right action button */}
+      {/* CTA Button */}
       <Link
         href={service.link}
-        className="sm:w-20 sm:h-20 w-10 h-10 rounded-full bg-neutral-500 hover:bg-orange-500 flex items-center justify-center transition-colors flex-shrink-0"
+        className="sm:w-20 sm:h-20 w-12 h-12 rounded-full bg-neutral-600 hover:bg-orange-500 flex items-center justify-center transition-all duration-300 flex-shrink-0 group/btn focus:outline-none focus:ring-4 focus:ring-orange-500/50"
+        aria-label={`Learn more about ${service.heading}`}
       >
-        <MdArrowForward className="text-3xl text-white" />
+        <motion.div
+          whileHover={{ scale: 1.1, x: 5 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+        >
+          <MdArrowForward className="text-2xl sm:text-3xl text-white" aria-hidden="true" />
+        </motion.div>
       </Link>
 
-      {/* Floating glassmorphic paragraph that follows the cursor */}
+      {/* Floating glassmorphic tooltip (desktop only) */}
       <AnimatePresence>
         {showPara && (
           <motion.div
             style={{ x, y }}
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 320, damping: 25 }}
-            className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-1/2"
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ 
+              type: 'spring', 
+              stiffness: 350, 
+              damping: 25,
+              opacity: { duration: 0.2 }
+            }}
+            className="pointer-events-none absolute z-20 -translate-x-1/2 -translate-y-1/2 hidden md:block"
+            role="tooltip"
+            aria-hidden="true"
           >
-            <div className="rounded-3xl border border-white/20 bg-white/10 backdrop-blur-md shadow-xl px-4 py-2">
-              <p className="text-base md:text-lg text-white/90 whitespace-pre-line max-w-[15rem]">
+            <div className="rounded-2xl border border-white/20 bg-gradient-to-br from-orange-500/20 to-orange-600/10 backdrop-blur-xl shadow-2xl px-5 py-3 min-w-[200px] max-w-[280px]">
+              <p className="text-sm lg:text-base text-white/95 leading-relaxed">
                 {service.para}
               </p>
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </motion.article>
   );
 };
-
-export default ServiceCard;
+export default ServiceCard

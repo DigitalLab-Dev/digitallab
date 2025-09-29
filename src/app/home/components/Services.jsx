@@ -1,115 +1,174 @@
 'use client';
-import {
-  FaVideo,
-  FaPaintBrush,
-  FaUsers,
-  FaBullhorn,
-  FaRegCopy,
-} from 'react-icons/fa';
-import { MdAttachMoney } from 'react-icons/md';
 import ServiceCard from './ServiceCard';
+import Link from 'next/link';
+import React, { useRef, useState } from 'react';
+import { MdArrowForward } from 'react-icons/md';
+import {
+  motion,
+  useInView,
+} from 'framer-motion';
 
 const Services = () => {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+
   const services = [
     {
       heading: 'Video Editing',
-      para: 'Professional video editing with effects, transitions, and motion graphics.',
+      para: 'Professional video editing with effects, transitions, and motion graphics that captivate your audience.',
       link: '/services/video-editing',
-      icon: FaVideo,
-      images: [
-        '/images/icons/capcut.png',
-        '/images/icons/premier-pro.png',
-        '/images/icons/filmora.png',
-        '/images/icons/blender.png',
-        '/images/icons/after-effect.png',
-      ],
     },
     {
-      heading: 'Graphic Designing',
-      para: 'Creative graphics, branding, and visuals that stand out.',
+      heading: 'Graphic Design',
+      para: 'Creative graphics, branding, and visuals that stand out and elevate your brand identity.',
       link: '/services/graphic-design',
-      icon: FaPaintBrush,
-      images: [
-        '/images/icons/adobe-photoshop.png',
-        '/images/icons/canva.png',
-        '/images/icons/figma.png',
-        '/images/icons/illustrator.png',
-      ],
     },
     {
       heading: 'Social Media Marketing',
-      para: 'Engage your audience with tailored social strategies.',
+      para: 'Engage your audience with tailored social strategies that drive growth and build community.',
       link: '/services/social-media-management',
-      icon: FaUsers,
-      images: [
-        '/images/icons/adobe-photoshop.png',
-        '/images/icons/canva.png',
-        '/images/icons/figma.png',
-        '/images/icons/illustrator.png',
-      ],
     },
     {
       heading: 'Ads Management',
-      para: 'Google, Facebook & Instagram Ads that convert.',
+      para: 'Google, Facebook & Instagram Ads that convert visitors into customers with proven ROI.',
       link: '/services/ads-management',
-      icon: FaBullhorn,
-      images: [
-        '/images/icons/meta.png',
-        '/images/icons/tiktok.png',
-        '/images/icons/X.png',
-        '/images/icons/google-analytics.png',
-      ],
     },
     {
       heading: 'Copywriting',
-      para: 'Powerful words that sell, engage, and inspire action.',
+      para: 'Powerful words that sell, engage, and inspire action with compelling storytelling.',
       link: '/services/copy-writing',
-      icon: FaRegCopy,
-      images: [
-        '/images/icons/grammerly.png',
-        '/images/icons/copyAi.png',
-        '/images/icons/click.png',
-        '/images/icons/jasper.png',
-      ],
+    },
+    {
+      heading: 'SEO',
+      para: 'Search engine optimization strategies that boost rankings and drive organic traffic to your site.',
+      link: '/services/seo',
     },
     {
       heading: 'Web Development',
-      para: 'Powerful websites that sell, engage, and inspire action.',
+      para: 'Powerful websites that sell, engage, and inspire action with modern design and functionality.',
       link: '/services/web-development',
-      icon: FaRegCopy,
-      images: [
-        '/images/icons/grammerly.png',
-        '/images/icons/copyAi.png',
-        '/images/icons/click.png',
-        '/images/icons/jasper.png',
-      ],
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
   return (
-    <section className="w-full mt-10 flex flex-col items-center justify-center px-10 mb-10">
-      <div className="flex  w-full items-center flex-col lg:flex-row gap-5 justify-between">
-        <div className="flex  flex-col w-full  lg:w-1/2 lg:items-start  items-center justify-center lg:justify-start">
-          <h2 className="uppercase text-xl mb-3">Our Services</h2>
-          <h3 className="text-4xl sm:text-6xl font-bold lg:text-left text-center  uppercase">
-            What <span className="text-orange-500">Services</span> We're
-            Offering
-          </h3>
+    <section 
+      ref={sectionRef}
+      className="w-full py-16 md:py-24 lg:py-32 flex flex-col items-center justify-center px-5 sm:px-8 lg:px-10 "
+      aria-labelledby="services-heading"
+    >
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        className="max-w-7xl w-full"
+      >
+        {/* Header Section */}
+        <div className="flex w-full items-center flex-col lg:flex-row gap-8 lg:gap-12 justify-between mb-16 lg:mb-20">
+          <motion.header 
+            variants={itemVariants}
+            className="flex flex-col w-full lg:w-1/2 lg:items-start items-center justify-center lg:justify-start"
+          >
+            <motion.span 
+              className="uppercase text-sm md:text-base font-semibold text-orange-400 tracking-[0.3em] mb-4"
+              variants={itemVariants}
+            >
+              Our Services
+            </motion.span>
+            <motion.h2 
+              id="services-heading"
+              className="text-4xl sm:text-5xl md:text-6xl  font-bold lg:text-left text-center uppercase leading-tight"
+              variants={itemVariants}
+            >
+              Top <span className="text-orange-400">Services</span> We
+              Specialize In
+            </motion.h2>
+          </motion.header>
+          
+          <motion.div 
+            variants={itemVariants}
+            className="w-full lg:w-1/2"
+          >
+            <p className="text-base sm:text-lg lg:text-xl text-neutral-300 lg:text-left text-center leading-relaxed">
+              Backed by proven digital strategies, we help businesses gain visibility, build reputation, expand reach, and grow revenue. Explore the services we've mastered to make that happen:
+            </p>
+          </motion.div>
         </div>
-        <div className=" w-[90%] lg:w-1/2 ">
-          <p className="text-[18px] lg:text-left text-center">
-            we offer services that can help businesses improve their visibility
-            and business reputation online, expand market reach, and increase
-            turnover through effective digital strategies. Following are the
-            services we provide
-          </p>
-        </div>
-      </div>
-      <div className="mt-10 w-full flex flex-col">
-        {services.map((service, index) => (
-          <ServiceCard service={service} key={index} />
-        ))}
-      </div>
+
+        {/* Services List */}
+        <motion.div 
+          className="w-full flex flex-col"
+          role="list"
+          aria-label="Our services list"
+        >
+          {services.map((service, index) => (
+            <ServiceCard 
+              service={service} 
+              key={service.heading} 
+              index={index}
+            />
+          ))}
+        </motion.div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="mt-16 text-center"
+        >
+ 
+        </motion.div>
+      </motion.div>
+
+      {/* Schema.org structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: 'Digital Marketing Services',
+            description: 'Comprehensive digital marketing services including video editing, graphic design, social media marketing, ads management, copywriting, SEO, and web development',
+            itemListElement: services.map((service, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              item: {
+                '@type': 'Service',
+                name: service.heading,
+                description: service.para,
+                url: `https://yourwebsite.com${service.link}`,
+                provider: {
+                  '@type': 'Organization',
+                  name: 'Your Agency Name',
+                },
+              },
+            })),
+          }),
+        }}
+      />
     </section>
   );
 };

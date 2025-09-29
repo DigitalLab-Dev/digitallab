@@ -9,17 +9,17 @@ const Stats = () => {
     {
       stat: 250,
       label: 'Projects Delivered',
-      para: 'We’ve successfully completed over 250 projects—and we’re just getting started!',
+      para: 'You’re joining 250+ businesses who’ve launched successful projects with us, and we’re ready to build yours next.',
     },
     {
       stat: 90,
       label: 'Business Growth',
-      para: 'Our strategies have helped clients achieve up to 70% revenue  in just a year!',
+      para: 'Our strategies help clients like you achieve real growth and success, up to 70% more revenue in just a year.',
     },
     {
       stat: 100,
       label: 'Happy Clients',
-      para: 'More than 500 satisfied clients trust us to bring their ideas to life.',
+      para: 'Over 100 brands trust us to bring ideas to life. You’ll love the results, growth and success just as much as they did.',
     },
   ];
 
@@ -50,7 +50,7 @@ const Stats = () => {
   };
 
   return (
-    <section className="sm:min-h-[50vh] my-30 flex flex-col items-center justify-center px-5">
+    <section className="sm:min-h-[50vh] mb-20 flex flex-col items-center justify-center px-5">
       <motion.header
         initial={{ opacity: 0, y: 50, }}
         whileInView={{ opacity: 1, y: 0, }}
@@ -58,7 +58,7 @@ const Stats = () => {
         viewport={{ once: false }}
         className="text-center md:w-2/3 w-full"
       >
-        <h2 className="text-5xl">
+        <h2 className="text-4xl sm:text-5xl">
           <span className="text-[#f0750f] italican">Building</span> brands,
           <span className="text-[#f0750f] italican"> boosting</span> businesses,
           and <span className="text-[#f0750f] italican">redefining</span>{' '}
