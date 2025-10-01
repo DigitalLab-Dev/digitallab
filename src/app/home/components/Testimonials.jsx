@@ -1,236 +1,396 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaPlay, FaPause, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+'use client';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { 
+  FaChevronLeft, 
+  FaChevronRight, 
+  FaQuoteLeft,
+  FaStar,
+  FaYoutube
+} from 'react-icons/fa';
 
 const Testimonials = () => {
-  const videos = [
-    "/videos/testimonial-1.mp4",
-    "/videos/testimonial-2.mp4",
-    "/videos/testimonial-3.mp4",
-    "/videos/testimonial-4.mp4",
+  const testimonials = [
+    {
+      youtubeId: 'dQw4w9WgXcQ', // Replace with your actual YouTube Shorts ID
+      clientName: 'John Smith',
+      company: 'Tech Startup Inc.',
+      rating: 5,
+      quote: 'Transformed our digital presence completely!',
+    },
+    {
+      youtubeId: 'dQw4w9WgXcQ', // Replace with your actual YouTube Shorts ID
+      clientName: 'Sarah Johnson',
+      company: 'E-Commerce Pro',
+      rating: 5,
+      quote: 'Best marketing agency we\'ve ever worked with.',
+    },
+    {
+      youtubeId: 'dQw4w9WgXcQ', // Replace with your actual YouTube Shorts ID
+      clientName: 'Michael Chen',
+      company: 'Global Solutions Ltd.',
+      rating: 5,
+      quote: 'ROI increased by 300% in just 3 months!',
+    },
+    {
+      youtubeId: 'dQw4w9WgXcQ', // Replace with your actual YouTube Shorts ID
+      clientName: 'Emily Davis',
+      company: 'Creative Agency',
+      rating: 5,
+      quote: 'Professional, creative, and results-driven team.',
+    },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [loadedVideos, setLoadedVideos] = useState(new Set());
   const [direction, setDirection] = useState(1);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [hoveredCard, setHoveredCard] = useState(null);
+  
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.3 });
+  const autoPlayRef = useRef(null);
 
-  const mainVideoRefs = useRef([]); // main player refs
-  const thumbVideoRefs = useRef([]); // thumbnail refs
-  const containerRef = useRef();
-
-  // Preload adjacent videos
-  const preloadVideo = useCallback(
-    (index) => {
-      if (mainVideoRefs.current[index] && !loadedVideos.has(index)) {
-        const video = mainVideoRefs.current[index];
-        video.load();
-        setLoadedVideos((prev) => new Set(prev).add(index));
-      }
-    },
-    [loadedVideos]
-  );
-
-  const stopVideo = () => {
-    const currentVideo = mainVideoRefs.current[currentIndex];
-    if (currentVideo) {
-      currentVideo.pause();
-      currentVideo.currentTime = 0;
-      setIsPlaying(false);
+  // Auto-play functionality
+  useEffect(() => {
+    if (isAutoPlaying) {
+      autoPlayRef.current = setInterval(() => {
+        goToNext();
+      }, 5000);
     }
-  };
+    return () => {
+      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    };
+  }, [isAutoPlaying, currentIndex]);
 
   const goToNext = useCallback(() => {
-    stopVideo();
     setDirection(1);
-    setCurrentIndex((prev) => {
-      const nextIndex = (prev + 1) % videos.length;
-      preloadVideo(nextIndex);
-      return nextIndex;
-    });
-  }, [videos.length, preloadVideo]);
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  }, [testimonials.length]);
 
   const goToPrevious = useCallback(() => {
-    stopVideo();
     setDirection(-1);
-    setCurrentIndex((prev) => {
-      const prevIndex = (prev - 1 + videos.length) % videos.length;
-      preloadVideo(prevIndex);
-      return prevIndex;
-    });
-  }, [videos.length, preloadVideo]);
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  }, [testimonials.length]);
 
-  useEffect(() => {
-    preloadVideo(currentIndex);
-    preloadVideo((currentIndex + 1) % videos.length);
-    preloadVideo((currentIndex - 1 + videos.length) % videos.length);
-  }, [currentIndex, preloadVideo, videos.length]);
-
-  const handleMouseLeave = () => stopVideo();
-
-  const togglePlay = () => {
-    const currentVideo = mainVideoRefs.current[currentIndex];
-    if (currentVideo) {
-      if (isPlaying) {
-        currentVideo.pause();
-        setIsPlaying(false);
-      } else {
-        currentVideo.play();
-        setIsPlaying(true);
-      }
-    }
+  const handleDotClick = (index) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
+    setIsAutoPlaying(false);
   };
 
-  const handleVideoEnd = () => setIsPlaying(false);
-
-  const handleThumbnailClick = (index) => {
-    if (index !== currentIndex) {
-      stopVideo();
-      setCurrentIndex(index);
-    }
-  };
+  const handleMouseEnter = () => setIsAutoPlaying(false);
+  const handleMouseLeave = () => setIsAutoPlaying(true);
 
   const slideVariants = {
     enter: (direction) => ({
       x: direction > 0 ? 1000 : -1000,
       opacity: 0,
-      scale: 0.8,
+      scale: 0.9,
+      rotateY: direction > 0 ? 45 : -45,
     }),
-    center: { zIndex: 1, x: 0, opacity: 1, scale: 1 },
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      rotateY: 0,
+    },
     exit: (direction) => ({
       zIndex: 0,
       x: direction < 0 ? 1000 : -1000,
       opacity: 0,
-      scale: 0.8,
+      scale: 0.9,
+      rotateY: direction < 0 ? 45 : -45,
     }),
   };
 
-  const thumbnailVariants = {
-    inactive: { scale: 0.8, opacity: 0.6 },
-    active: { scale: 1, opacity: 1 },
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+    },
   };
 
   return (
-    <section className="py-15 px-4 sm:px-10 flex flex-col items-center justify-center bg-gradient-to-br from-orange-500 to-black">
-      <header className="text-center mb-12">
-        <h2 className="text-xl text-white mb-4">TESTIMONIALS</h2>
-        <h3 className="text-3xl sm:text-5xl font-bold text-white mb-8">
-          WHAT OUR CLIENTS SAY ABOUT US
-        </h3>
-      </header>
-
-      <div
-        ref={containerRef}
-        onMouseLeave={handleMouseLeave}
-        className="relative w-full max-w-4xl mx-auto"
-      >
-        {/* Main Video Container */}
-        <div className="relative h-[250px] sm:h-[400px] mb-8 overflow-hidden rounded-2xl flex items-center justify-center ">
-          <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
-              key={currentIndex}
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.3 },
-                scale: { duration: 0.4 },
-              }}
-              className="absolute inset-0 flex items-center justify-center"
-            >
-              <video
-                ref={(el) => (mainVideoRefs.current[currentIndex] = el)}
-                className="max-w-full max-h-full object-contain rounded-2xl"
-                playsInline
-                preload="metadata"
-                onEnded={handleVideoEnd}
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-              >
-                <source src={videos[currentIndex]} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-
-              {/* Overlay Play/Pause */}
-              <div className="absolute inset-0 bg-opacity-0 hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center group rounded-2xl">
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={togglePlay}
-                  className="w-16 h-16 sm:w-20 sm:h-20 bg-black bg-opacity-50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-opacity-70 transition-all duration-300 border-2 border-white border-opacity-50"
-                >
-                  {isPlaying ? (
-                    <FaPause className="text-xl sm:text-2xl" />
-                  ) : (
-                    <FaPlay className="text-xl sm:text-2xl ml-1" />
-                  )}
-                </motion.button>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation */}
-          <button
-            onClick={goToPrevious}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-orange-400 bg-opacity-20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-opacity-30 transition-all duration-300 z-10"
-          >
-            <FaChevronLeft />
-          </button>
-          <button
-            onClick={goToNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-orange-400 bg-opacity-20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-opacity-30 transition-all duration-300 z-10"
-          >
-            <FaChevronRight />
-          </button>
-        </div>
-
-        {/* Thumbnails */}
-        {/* <div className="flex justify-center space-x-2 sm:space-x-4 mb-6">
-          {videos.map((video, index) => (
-            <motion.button
-              key={index}
-              variants={thumbnailVariants}
-              animate={index === currentIndex ? "active" : "inactive"}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handleThumbnailClick(index)}
-              className="relative w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden border-2 border-transparent focus:border-orange-500 transition-all duration-300"
-            >
-              <video
-                ref={(el) => (thumbVideoRefs.current[index] = el)}
-                className="w-full h-full object-cover"
-                muted
-                preload="metadata"
-              >
-                <source src={video} type="video/mp4" />
-              </video>
-              {index === currentIndex && (
-                <motion.div
-                  layoutId="activeThumbnail"
-                  className="absolute inset-0 border-2 border-orange-500 rounded-lg"
-                />
-              )}
-              <div className="absolute inset-0 bg-opacity-20" />
-            </motion.button>
-          ))}
-        </div> */}
-
-        {/* Progress Dots */}
-        <div className="flex items-center justify-center space-x-2">
-          {videos.map((_, index) => (
-            <motion.div
-              key={index}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex ? "bg-orange-500" : "bg-gray-600"
-              }`}
-              animate={{ scale: index === currentIndex ? 1.2 : 1 }}
-            />
-          ))}
-        </div>
+    <section
+      ref={containerRef}
+      className="py-16 md:py-24 lg:py-32 px-4 sm:px-8 lg:px-10 flex flex-col items-center justify-center bg-gradient-to-b from-neutral-900 to-black relative overflow-hidden"
+      aria-labelledby="testimonials-heading"
+    >
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.03, 0.08, 0.03],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-20 left-10 w-96 h-96 bg-orange-500 rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.02, 0.06, 0.02],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          className="absolute bottom-20 right-10 w-80 h-80 bg-orange-400 rounded-full blur-3xl"
+        />
       </div>
+
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
+        className="max-w-7xl w-full relative z-10"
+      >
+        {/* Header */}
+        <motion.header variants={itemVariants} className="text-center mb-12 lg:mb-16">
+          <motion.span
+            className="text-xs md:text-sm font-semibold text-orange-400 uppercase tracking-[0.3em] block mb-4"
+            variants={itemVariants}
+          >
+            Testimonials
+          </motion.span>
+          <motion.h2
+            id="testimonials-heading"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase font-bold text-white mb-4 leading-tight"
+            variants={itemVariants}
+          >
+            The Way Clients{' '}
+            <span className="text-orange-400 block mt-2">Value Our Work</span>
+          </motion.h2>
+          <motion.p
+            variants={itemVariants}
+            className="text-base sm:text-lg text-neutral-400 max-w-2xl mx-auto"
+          >
+            Real stories from real clients who achieved extraordinary results
+          </motion.p>
+        </motion.header>
+
+        {/* Main Testimonial Slider */}
+        <motion.div
+          variants={itemVariants}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className="relative w-full max-w-6xl mx-auto"
+        >
+          {/* Video and Info Grid */}
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-8">
+            {/* Video Container */}
+            <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={currentIndex}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    x: { type: 'spring', stiffness: 300, damping: 30 },
+                    opacity: { duration: 0.4 },
+                    scale: { duration: 0.4 },
+                    rotateY: { duration: 0.6 },
+                  }}
+                  className="absolute inset-0"
+                  style={{ perspective: 1000 }}
+                >
+                  {/* YouTube Shorts Iframe */}
+                  <iframe
+                    src={`https://www.youtube.com/embed/${testimonials[currentIndex].youtubeId}?autoplay=0&mute=0&controls=1&loop=1&playlist=${testimonials[currentIndex].youtubeId}`}
+                    title={`Testimonial from ${testimonials[currentIndex].clientName}`}
+                    className="w-full h-full rounded-2xl"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                  />
+                  
+                  {/* YouTube Badge */}
+                  <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-2 rounded-lg flex items-center gap-2 shadow-lg">
+                    <FaYoutube className="text-xl" />
+                    <span className="text-sm font-semibold">Watch on YouTube</span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Navigation Buttons */}
+              <button
+                onClick={goToPrevious}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-orange-500/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-orange-500/40 transition-all duration-300 z-20 focus:outline-none focus:ring-4 focus:ring-orange-500/50 group"
+                aria-label="Previous testimonial"
+              >
+                <FaChevronLeft className="group-hover:-translate-x-1 transition-transform duration-300" />
+              </button>
+              <button
+                onClick={goToNext}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-orange-500/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-orange-500/40 transition-all duration-300 z-20 focus:outline-none focus:ring-4 focus:ring-orange-500/50 group"
+                aria-label="Next testimonial"
+              >
+                <FaChevronRight className="group-hover:translate-x-1 transition-transform duration-300" />
+              </button>
+            </div>
+
+            {/* Client Info Card */}
+            <AnimatePresence mode="wait">
+              <motion.article
+                key={currentIndex}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="relative p-8 lg:p-10 rounded-2xl bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 backdrop-blur-xl border border-white/10 shadow-2xl"
+              >
+                {/* Quote Icon */}
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
+                  className="absolute -top-6 -left-6 w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center shadow-lg"
+                  aria-hidden="true"
+                >
+                  <FaQuoteLeft className="text-2xl text-white" />
+                </motion.div>
+
+                {/* Rating Stars */}
+                <div className="flex gap-1 mb-6" aria-label={`Rating: ${testimonials[currentIndex].rating} out of 5 stars`}>
+                  {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.1 * i, type: 'spring', stiffness: 300 }}
+                    >
+                      <FaStar className="text-orange-400 text-xl" />
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <blockquote className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-8 leading-relaxed">
+                  "{testimonials[currentIndex].quote}"
+                </blockquote>
+
+                {/* Client Info */}
+                <div className="border-t border-white/20 pt-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    {testimonials[currentIndex].clientName}
+                  </h3>
+                  <p className="text-lg text-orange-400 font-semibold">
+                    {testimonials[currentIndex].company}
+                  </p>
+                </div>
+
+                {/* Decorative Elements */}
+                <div className="absolute bottom-4 right-4 w-24 h-24 bg-orange-500/10 rounded-full blur-2xl" aria-hidden="true" />
+              </motion.article>
+            </AnimatePresence>
+          </div>
+
+          {/* Thumbnail Navigation */}
+          <div className="flex flex-wrap justify-center gap-3 mb-6">
+            {testimonials.map((testimonial, index) => (
+              <motion.button
+                key={index}
+                onClick={() => handleDotClick(index)}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className={`relative px-6 py-3 rounded-full font-semibold transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-orange-500/50 ${
+                  index === currentIndex
+                    ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/50'
+                    : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-white'
+                }`}
+                aria-label={`View testimonial from ${testimonial.clientName}`}
+                aria-current={index === currentIndex ? 'true' : 'false'}
+              >
+                {testimonial.clientName.split(' ')[0]}
+                
+                {/* Hover Tooltip */}
+                <AnimatePresence>
+                  {hoveredCard === index && index !== currentIndex && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute -top-12 left-1/2 -translate-x-1/2 bg-neutral-900 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg border border-white/10"
+                    >
+                      {testimonial.company}
+                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-neutral-900 rotate-45" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.button>
+            ))}
+          </div>
+
+          {/* Progress Dots */}
+          <div className="flex items-center justify-center gap-3" role="tablist" aria-label="Testimonial navigation">
+            {testimonials.map((_, index) => (
+              <motion.button
+                key={index}
+                onClick={() => handleDotClick(index)}
+                className={`relative h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+                  index === currentIndex ? 'w-12 bg-orange-500' : 'w-2 bg-neutral-600'
+                }`}
+                animate={{ scale: index === currentIndex ? 1.2 : 1 }}
+                whileHover={{ scale: 1.3 }}
+                aria-label={`Go to testimonial ${index + 1}`}
+                role="tab"
+                aria-selected={index === currentIndex}
+              />
+            ))}
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Schema.org structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: 'Client Testimonials',
+            description: 'Video testimonials from satisfied clients',
+            itemListElement: testimonials.map((testimonial, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              item: {
+                '@type': 'Review',
+                reviewRating: {
+                  '@type': 'Rating',
+                  ratingValue: testimonial.rating,
+                  bestRating: 5,
+                },
+                author: {
+                  '@type': 'Person',
+                  name: testimonial.clientName,
+                },
+                reviewBody: testimonial.quote,
+                itemReviewed: {
+                  '@type': 'Organization',
+                  name: 'Your Agency Name',
+                },
+              },
+            })),
+          }),
+        }}
+      />
     </section>
   );
 };

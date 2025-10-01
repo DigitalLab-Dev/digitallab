@@ -1,169 +1,340 @@
-
-"use client"
-import React, { useState } from 'react'
-import { FaArrowRight, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa'
+'use client';
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import {
+  FaArrowRight,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedin,
+  FaFacebook,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaCheckCircle,
+} from 'react-icons/fa';
 
 const Footer = () => {
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = () => {
+    if (email) {
+      setSubscribed(true);
+      setTimeout(() => {
+        setSubscribed(false);
+        setEmail('');
+      }, 3000);
+    }
+  };
+
+  const quickLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Services', href: '/services' },
+    { name: 'Clients', href: '/clients' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Contact', href: '/contact' },
+  ];
+
+  const services = [
+    { name: 'Video Editing', href: '/services/video-editing' },
+    { name: 'Graphic Design', href: '/services/graphic-design' },
+    {
+      name: 'Social Media Marketing',
+      href: '/services/social-media-management',
+    },
+    { name: 'Ads Management', href: '/services/ads-management' },
+    { name: 'SEO Services', href: '/services/seo' },
+    { name: 'Web Development', href: '/services/web-development' },
+  ];
+
+  const socialLinks = [
+    {
+      icon: FaFacebook,
+      href: 'https://facebook.com',
+      label: 'Facebook',
+      color: 'hover:text-blue-500',
+    },
+    {
+      icon: FaTwitter,
+      href: 'https://twitter.com',
+      label: 'Twitter/X',
+      color: 'hover:text-sky-400',
+    },
+    {
+      icon: FaInstagram,
+      href: 'https://instagram.com',
+      label: 'Instagram',
+      color: 'hover:text-pink-500',
+    },
+    {
+      icon: FaLinkedin,
+      href: 'https://linkedin.com',
+      label: 'LinkedIn',
+      color: 'hover:text-blue-600',
+    },
+  ];
 
   return (
-    <footer className='relative mt-20 overflow-hidden'>
-      {/* Animated SVG Background */}
-      <div className='absolute inset-0 opacity-20'>
-        <svg className='absolute top-10 left-10 w-32 h-32 text-orange-300 animate-pulse' viewBox="0 0 100 100" fill="currentColor">
-          <circle cx="20" cy="20" r="3">
-            <animate attributeName="r" values="3;8;3" dur="3s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="50" cy="15" r="4">
-            <animate attributeName="r" values="4;9;4" dur="2.5s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="80" cy="25" r="2">
-            <animate attributeName="r" values="2;7;2" dur="4s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="15" cy="60" r="5">
-            <animate attributeName="r" values="5;10;5" dur="3.5s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="70" cy="70" r="3">
-            <animate attributeName="r" values="3;8;3" dur="2s" repeatCount="indefinite"/>
-          </circle>
-        </svg>
+    <footer className="relative overflow-hidden bg-gradient-to-b from-neutral-900 via-black to-black">
+      {/* Animated Background */}
+      <div
+        className="absolute inset-0 overflow-hidden pointer-events-none"
+        aria-hidden="true"
+      >
+        {/* Gradient Orbs */}
+        <motion.div
+          className="absolute -top-40 -left-40 w-80 h-80 bg-orange-500 rounded-full blur-3xl opacity-20"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.3, 0.2],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute -bottom-40 -right-40 w-96 h-96 bg-orange-600 rounded-full blur-3xl opacity-15"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.15, 0.25, 0.15],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 2,
+          }}
+        />
 
-        <svg className='absolute bottom-10 right-10 w-40 h-40 text-blue-300 animate-spin' style={{animationDuration: '20s'}} viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5">
-          <polygon points="50,10 90,90 10,90" className="animate-pulse">
-            <animateTransform 
-              attributeName="transform" 
-              type="rotate" 
-              values="0 50 50;360 50 50" 
-              dur="15s" 
-              repeatCount="indefinite"
-            />
-          </polygon>
-          <circle cx="50" cy="50" r="20" className="animate-pulse"/>
-          <circle cx="50" cy="50" r="35" className="animate-pulse"/>
-        </svg>
-
-        <svg className='absolute top-1/2 left-1/4 w-24 h-24 text-purple-300' viewBox="0 0 100 100" fill="currentColor">
-          <path d="M50,10 L90,50 L50,90 L10,50 Z">
-            <animateTransform 
-              attributeName="transform" 
-              type="rotate" 
-              values="0 50 50;360 50 50" 
-              dur="8s" 
-              repeatCount="indefinite"
-            />
-          </path>
-        </svg>
-
-        <svg className='absolute bottom-1/4 left-1/2 w-36 h-36 text-green-300' viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1">
-          <rect x="25" y="25" width="50" height="50" rx="10">
-            <animate attributeName="rx" values="10;25;10" dur="4s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
-          </rect>
-        </svg>
+        {/* Floating Shapes */}
+        <motion.div
+          className="absolute top-20 left-20 w-20 h-20 border-2 border-orange-500/20 rounded-lg"
+          animate={{
+            rotate: [0, 360],
+            y: [0, -20, 0],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.div
+          className="absolute bottom-40 right-40 w-16 h-16 border-2 border-white/10 rounded-full"
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.1, 0.3, 0.1],
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        />
       </div>
 
-      {/* Glassy Footer Content */}
-      <div className='relative backdrop-blur-lg bg-transparent border-t border-white/20 shadow-2xl'>
-        <div className='p-6 md:p-10'>
-          <div className='flex flex-col lg:flex-row gap-8 lg:gap-16 items-start justify-between'>
-            
-            {/* Address Section */}
-            <div className='flex flex-col space-y-2 text-gray-500'>
-              <h3 className='text-lg font-semibold text-white mb-3'>Visit Us</h3>
-              <div className='text-base md:text-lg space-y-1 uppercase font-medium'>
-                <p className='hover:text-orange-500 transition-colors duration-300'>Ali Hussain Abad</p>
-                <p className='hover:text-orange-500 transition-colors duration-300'>Bata factory Multan Road Lahore</p>
-                <p className='hover:text-orange-500 transition-colors duration-300'>Pakistan</p>
-                <p className='hover:text-orange-500 text-gray-300 transition-colors duration-300'>Contact Us: 03265929677</p>
-              </div>
-            </div>
-
-            {/* Social Links & Contact */}
-            <div className='flex flex-col md:flex-row gap-8 md:gap-12'>
-              {/* Social Media */}
-              <div className='space-y-6'>
-                <div className='space-y-3'>
-                  <h4 className='text-lg font-semibold text-white'>Follow Us</h4>
-                  <div className='flex flex-col space-y-2'>
-                    <a href="#" className='flex items-center gap-3 text-gray-500 hover:text-orange-600 transition-all duration-300 transform hover:translate-x-2 group'>
-                      <FaTwitter className='w-5 h-5 group-hover:scale-110 transition-transform duration-300' />
-                      <span>Twitter/X</span>
-                    </a>
-                    <a href="#" className='flex items-center gap-3 text-gray-500 hover:text-orange-600 transition-all duration-300 transform hover:translate-x-2 group'>
-                      <FaInstagram className='w-5 h-5 group-hover:scale-110 transition-transform duration-300' />
-                      <span>Instagram</span>
-                    </a>
-                    <a href="#" className='flex items-center gap-3 text-gray-500 hover:text-orange-600 transition-all duration-300 transform hover:translate-x-2 group'>
-                      <FaLinkedin className='w-5 h-5 group-hover:scale-110 transition-transform duration-300' />
-                      <span>LinkedIn</span>
-                    </a>
-                  </div>
-                </div>
+      {/* Main Footer Content */}
+      <div className="relative backdrop-blur-sm border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+            {/* Company Info - Spans 4 columns */}
+            <div className="lg:col-span-4 space-y-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <h3 className="text-3xl font-bold text-white mb-4">
+                  Digital <span className="text-orange-500">Lab</span>
+                </h3>
+                <p className="text-gray-400 leading-relaxed mb-6">
+                  Transforming ideas into digital realities. We craft
+                  experiences that elevate brands and captivate audiences.
+                </p>
 
                 {/* Contact Info */}
-                <div className='space-y-4'>
-                  <div className='p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10'>
-                    <h5 className='font-semibold text-orange-500 mb-2'>General Queries</h5>
-                    <a href="mailto:hello@digitallab.com" className='text-gray-500 hover:text-orange-500 transition-colors duration-300'>
-                      info@digitallabservices.com
-                    </a>
-                  </div>
-                  
-                  {/* <div className='p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10'>
-                    <h5 className='font-semibold text-orange-500 mb-2'>Business</h5>
-                    <a href="mailto:business@digitallab.com" className='text-gray-500 hover:text-orange-500 transition-colors duration-300'>
-                      business@digitallab.com
-                    </a>
-                  </div> */}
-                </div>
-              </div>
+                <address className="space-y-3 not-italic">
+                  <a
+                    href="https://maps.google.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-3 text-gray-400 hover:text-orange-500 transition-colors duration-300 group"
+                  >
+                    <FaMapMarkerAlt className="mt-1 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-sm">
+                      Ali Hussain Abad, Bata Factory
+                      <br />
+                      Multan Road, Lahore, Pakistan
+                    </span>
+                  </a>
+
+                  <a
+                    href="tel:+923265929677"
+                    className="flex items-center gap-3 text-gray-400 hover:text-orange-500 transition-colors duration-300 group"
+                  >
+                    <FaPhoneAlt className="flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-sm">+92 326 5929677</span>
+                  </a>
+
+                  <a
+                    href="mailto:info@digitallabservices.com"
+                    className="flex items-center gap-3 text-gray-400 hover:text-orange-500 transition-colors duration-300 group"
+                  >
+                    <FaEnvelope className="flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-sm">info@digitallabservices.com</span>
+                  </a>
+                </address>
+              </motion.div>
             </div>
 
-            {/* Newsletter */}
-            <div className='flex flex-col space-y-6 min-w-0 lg:min-w-80'>
-              <div className='space-y-2'>
-                <h3 className='text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight'>
-                  Subscribe To
-                </h3>
-                <h4 className='text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500 leading-tight'>
-                  Our Newsletter
-                </h4>
-              </div>
-              
-              <div className='relative group'>
-                <div className='flex items-center bg-white/5 backdrop-blur-sm rounded-full border border-white/40 overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:bg-white/10'>
-                  <input 
-                    type="email" 
+            {/* Quick Links - Spans 2 columns */}
+            <motion.div
+              className="lg:col-span-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <h4 className="text-lg font-bold text-white mb-6">Quick Links</h4>
+              <nav className="space-y-3" aria-label="Quick navigation links">
+                {quickLinks.map((link, index) => (
+                  <Link
+                    key={index}
+                    href={link.href}
+                    className="block text-gray-400 hover:text-orange-500 hover:translate-x-2 transition-all duration-300 text-sm"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </nav>
+            </motion.div>
+
+            {/* Services - Spans 2 columns */}
+            <motion.div
+              className="lg:col-span-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <h4 className="text-lg font-bold text-white mb-6">Services</h4>
+              <nav className="space-y-3" aria-label="Services navigation">
+                {services.map((service, index) => (
+                  <Link
+                    key={index}
+                    href={service.href}
+                    className="block text-gray-400 hover:text-orange-500 hover:translate-x-2 transition-all duration-300 text-sm"
+                  >
+                    {service.name}
+                  </Link>
+                ))}
+              </nav>
+            </motion.div>
+
+            {/* Newsletter - Spans 4 columns */}
+            <motion.div
+              className="lg:col-span-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <h4 className="text-lg font-bold text-white mb-2">
+                Stay Updated
+              </h4>
+              <p className="text-gray-400 text-sm mb-6">
+                Subscribe to our newsletter for the latest updates, tips, and
+                exclusive offers.
+              </p>
+
+              <div className="relative group">
+                <div className="flex items-center bg-white/5 backdrop-blur-md rounded-full border border-white/20 overflow-hidden shadow-lg transition-all duration-300 group-hover:border-orange-500/50 group-hover:shadow-xl">
+                  <input
+                    type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className='flex-1 px-4 md:px-6 py-3 md:py-4 bg-transparent text-gray-800 placeholder-gray-600 outline-none text-sm md:text-base'
+                    className="flex-1 px-6 py-3 bg-transparent text-white placeholder-gray-500 outline-none text-sm"
+                    aria-label="Email for newsletter"
                   />
-                  <button className='p-3 md:p-4  text-white rounded-full hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl'>
-                    <FaArrowRight className='w-5 h-5 md:w-6 md:h-6 transform group-hover:translate-x-1 transition-transform duration-300' />
+                  <button
+                    onClick={handleSubscribe}
+                    className="p-3 m-1 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg focus:outline-none focus:ring-4 focus:ring-orange-500/50"
+                    aria-label="Subscribe to newsletter"
+                  >
+                    <FaArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
                   </button>
                 </div>
-                
-                {/* Animated border */}
-                <div className='absolute inset-0 rounded-full border-2 border-orange-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse'></div>
+
+                {/* Success Message */}
+                {subscribed && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute -bottom-10 left-0 flex items-center gap-2 text-green-400 text-sm"
+                  >
+                    <FaCheckCircle />
+                    <span>Successfully subscribed!</span>
+                  </motion.div>
+                )}
               </div>
-            </div>
+
+              {/* Social Links */}
+              <div className="mt-8">
+                <h5 className="text-sm font-semibold text-white mb-4">
+                  Follow Us
+                </h5>
+                <div className="flex gap-4">
+                  {socialLinks.map((social, index) => (
+                    <motion.a
+                      key={index}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-10 h-10 flex items-center justify-center rounded-full bg-white/5 backdrop-blur-sm border border-white/20 text-gray-400 ${social.color} transition-all duration-300 hover:scale-110 hover:border-orange-500/50 hover:shadow-lg`}
+                      whileHover={{ y: -5 }}
+                      whileTap={{ scale: 0.95 }}
+                      aria-label={social.label}
+                    >
+                      <social.icon className="w-5 h-5" />
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           </div>
 
-          {/* Bottom Border */}
-          <div className='mt-8 pt-6 border-t border-white/20'>
-            <div className='flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-600'>
-              <p>&copy; 2025 Digital Lab. All rights reserved.</p>
-              <div className='flex gap-6'>
-                <a href="#" className='hover:text-orange-600 transition-colors duration-300'>Privacy Policy</a>
-                <a href="#" className='hover:text-orange-600 transition-colors duration-300'>Terms of Service</a>
-              </div>
+          {/* Bottom Bar */}
+          <motion.div
+            className="mt-16 pt-8 border-t border-white/10"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+              <p>
+                &copy; {new Date().getFullYear()} Digital Lab. All rights
+                reserved.
+              </p>
+              <nav className="flex gap-6" aria-label="Legal links">
+                <Link
+                  href="/privacy"
+                  className="hover:text-orange-500 transition-colors duration-300"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  href="/terms"
+                  className="hover:text-orange-500 transition-colors duration-300"
+                >
+                  Terms of Service
+                </Link>
+                <Link
+                  href="/sitemap"
+                  className="hover:text-orange-500 transition-colors duration-300"
+                >
+                  Sitemap
+                </Link>
+              </nav>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </footer>
-  )
-}
-
-export default Footer
+  );
+};
+export default Footer;

@@ -76,7 +76,7 @@ const Services = () => {
   return (
     <section 
       ref={sectionRef}
-      className="w-full py-16 md:py-24 lg:py-32 flex flex-col items-center justify-center px-5 sm:px-8 lg:px-10 "
+      className="w-full py-16 md:py-20 flex flex-col items-center justify-center px-5 sm:px-8 lg:px-10 "
       aria-labelledby="services-heading"
     >
       <motion.div
@@ -143,33 +143,7 @@ const Services = () => {
         </motion.div>
       </motion.div>
 
-      {/* Schema.org structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'ItemList',
-            name: 'Digital Marketing Services',
-            description: 'Comprehensive digital marketing services including video editing, graphic design, social media marketing, ads management, copywriting, SEO, and web development',
-            itemListElement: services.map((service, index) => ({
-              '@type': 'ListItem',
-              position: index + 1,
-              item: {
-                '@type': 'Service',
-                name: service.heading,
-                description: service.para,
-                url: `https://yourwebsite.com${service.link}`,
-                provider: {
-                  '@type': 'Organization',
-                  name: 'Your Agency Name',
-                },
-              },
-            })),
-          }),
-        }}
-      />
-    </section>
+   </section>
   );
 };
 
