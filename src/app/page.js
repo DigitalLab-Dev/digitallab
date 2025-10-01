@@ -109,8 +109,8 @@ export default function Home() {
           aria-label="Loading content"
           role="status"
         >
-          {/* <Loader /> */}
-          <div className='w-8 h-8 rounded-full border-l-2 animate-spin border-orange-400'></div>
+          <Loader />
+
         </div>
       )}
 
