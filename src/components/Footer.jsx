@@ -52,25 +52,19 @@ const Footer = () => {
   const socialLinks = [
     {
       icon: FaFacebook,
-      href: 'https://facebook.com',
+      href: 'https://www.facebook.com/home.of.professionals',
       label: 'Facebook',
       color: 'hover:text-blue-500',
     },
     {
-      icon: FaTwitter,
-      href: 'https://twitter.com',
-      label: 'Twitter/X',
-      color: 'hover:text-sky-400',
-    },
-    {
       icon: FaInstagram,
-      href: 'https://instagram.com',
+      href: 'https://www.instagram.com/digitallabservices?igsh=cjNlcXJyYWxybnZq',
       label: 'Instagram',
       color: 'hover:text-pink-500',
     },
     {
       icon: FaLinkedin,
-      href: 'https://linkedin.com',
+      href: 'https://www.linkedin.com/company/digtal-lab/',
       label: 'LinkedIn',
       color: 'hover:text-blue-600',
     },
@@ -127,7 +121,7 @@ const Footer = () => {
 
       {/* Main Footer Content */}
       <div className="relative backdrop-blur-sm border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20">
+        <div className="max-w-7xl  mx-auto px-6 pt-16 pb-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
             {/* Company Info - Spans 4 columns */}
             <div className="lg:col-span-4 space-y-6">
@@ -299,7 +293,7 @@ const Footer = () => {
 
           {/* Bottom Bar */}
           <motion.div
-            className="mt-16 pt-8 border-t border-white/10"
+            className="mt-5 pt-8 border-t border-white/10"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

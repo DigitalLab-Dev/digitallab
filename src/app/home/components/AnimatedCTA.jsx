@@ -126,7 +126,7 @@ const AnimatedCTA = () => {
 
       <section
         ref={sectionRef}
-        className="relative min-h-screen bg-gradient-to-b from-black via-neutral-900 to-black flex items-center justify-center overflow-hidden py-20 px-4"
+        className="relative  bg-gradient-to-b from-black via-neutral-900 to-black flex items-center justify-center overflow-hidden py-10 px-4"
         aria-labelledby="cta-heading"
       >
         {/* Animated Background Elements */}
@@ -262,7 +262,7 @@ const AnimatedCTA = () => {
           animate={isInView ? 'visible' : 'hidden'}
           className="container mx-auto px-6 text-center relative z-10 max-w-6xl"
         >
-          <article className="space-y-8">
+          <article className="space-y-4">
             {/* Subtitle */}
             <motion.div variants={itemVariants}>
               <span className="inline-block text-orange-500 text-xs md:text-sm font-bold tracking-[0.3em] uppercase px-4 py-2 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-sm">
@@ -274,7 +274,7 @@ const AnimatedCTA = () => {
             <motion.h2
               id="cta-heading"
               variants={itemVariants}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl  font-black text-white leading-tight"
             >
               Work Hand in Hand with{' '}
               <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 animate-gradient">
@@ -285,7 +285,7 @@ const AnimatedCTA = () => {
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="text-gray-300 text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed"
+              className="text-gray-300 text-lg md:text-xl  max-w-3xl mx-auto leading-relaxed"
             >
               You focus on your business, we'll handle the digital magic, design,
               marketing, and results that matter.
@@ -294,7 +294,7 @@ const AnimatedCTA = () => {
             {/* CTA Buttons */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mt-12"
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mt-5"
             >
               <Link
                 href="/contact"
@@ -321,32 +321,7 @@ const AnimatedCTA = () => {
               </Link>
             </motion.div>
 
-            {/* Trust Indicators */}
-            <motion.aside
-              variants={itemVariants}
-              className="mt-16 pt-8 border-t border-white/10"
-              aria-label="Trust indicators"
-            >
-              <p className="text-gray-400 text-sm md:text-base mb-8 flex items-center justify-center gap-2">
-                <FaCheckCircle className="text-orange-500" />
-                Trusted by 500+ companies worldwide
-              </p>
-              
-              {/* Brand Logos Placeholder */}
-              <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 lg:gap-12 opacity-40">
-                {['BRAND', 'COMPANY', 'STARTUP', 'AGENCY'].map((name, index) => (
-                  <motion.div
-                    key={name}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 0.4, y: 0 } : {}}
-                    transition={{ delay: 2 + index * 0.1, duration: 0.5 }}
-                    className="text-white font-bold text-base md:text-lg tracking-wider hover:opacity-100 hover:text-orange-500 transition-all duration-300"
-                  >
-                    {name}
-                  </motion.div>
-                ))}
-              </div>
-            </motion.aside>
+
           </article>
         </motion.div>
       </section>
