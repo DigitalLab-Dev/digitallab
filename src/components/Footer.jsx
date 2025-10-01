@@ -1,50 +1,4 @@
-// import React from 'react'
-// import { FaArrowRight } from 'react-icons/fa'
 
-// const Footor = () => {
-//   return (
-//     <footer className='flex p-5 px-10 mt-10 border items-start justify-evenly text-[22px]'>
-//        <div className='flex flex-col uppercase'>
-//            <p>Street 2</p>
-//            <p>Phase 9,Sector 11</p>
-//            <p>DHA, Lahore</p>
-//            <p>Pakistan</p>
-//        </div>
-//        <div className='flex flex-col gap-10'>
-//           <div className=''>
-//              <p>Twitter/X</p>
-//              <p>Instagram</p>
-//              <p>Linkedin</p>
-//           </div>
-//           <div className=''>
-//              <h5 className='font-semibold text-orange-500'>General Queries</h5>
-//              <p>hello@digitallab.com</p>
-//           </div>
-//           <div className=''>
-//              <h5 className='font-semibold text-orange-500'>Business</h5>
-//              <p>business@digitallab.com</p>
-//           </div>
-//        </div>
-//        <div className='flex flex-col '>
-//         <div>
-//          <h5 className='text-4xl font-bold'>
-//            Subscribe To
-//          </h5>
-//          <h4 className='text-4xl font-bold'>
-//             Our Newsletter
-//          </h4>
-//         </div>
-//        <div>
-//          <input type="text" />
-//          <FaArrowRight/>
-//        </div>
-
-//        </div>
-//     </footer>
-//   )
-// }
-
-// export default Footor
 "use client"
 import React, { useState } from 'react'
 import { FaArrowRight, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa'
@@ -117,10 +71,10 @@ const Footer = () => {
             <div className='flex flex-col space-y-2 text-gray-500'>
               <h3 className='text-lg font-semibold text-white mb-3'>Visit Us</h3>
               <div className='text-base md:text-lg space-y-1 uppercase font-medium'>
-                <p className='hover:text-orange-500 transition-colors duration-300'>Street 2</p>
-                <p className='hover:text-orange-500 transition-colors duration-300'>Phase 9, Sector 11</p>
-                <p className='hover:text-orange-500 transition-colors duration-300'>DHA, Lahore</p>
+                <p className='hover:text-orange-500 transition-colors duration-300'>Ali Hussain Abad</p>
+                <p className='hover:text-orange-500 transition-colors duration-300'>Bata factory Multan Road Lahore</p>
                 <p className='hover:text-orange-500 transition-colors duration-300'>Pakistan</p>
+                <p className='hover:text-orange-500 text-gray-300 transition-colors duration-300'>Contact Us: 03265929677</p>
               </div>
             </div>
 
@@ -151,16 +105,16 @@ const Footer = () => {
                   <div className='p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10'>
                     <h5 className='font-semibold text-orange-500 mb-2'>General Queries</h5>
                     <a href="mailto:hello@digitallab.com" className='text-gray-500 hover:text-orange-500 transition-colors duration-300'>
-                      hello@digitallab.com
+                      info@digitallabservices.com
                     </a>
                   </div>
                   
-                  <div className='p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10'>
+                  {/* <div className='p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10'>
                     <h5 className='font-semibold text-orange-500 mb-2'>Business</h5>
                     <a href="mailto:business@digitallab.com" className='text-gray-500 hover:text-orange-500 transition-colors duration-300'>
                       business@digitallab.com
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
