@@ -1,10 +1,17 @@
 import React from 'react'
+import VideoAgencyHero from './sections/Hero'
+import VideoServicesSection from './sections/VideoServicesSection'
+import ShowcasePortfolio from './sections/ShortForm'
+import LongFormShowcase from './sections/LongFormShowcase'
 
 const page = () => {
   return (
-    <div className='min-h-screen flex items-center justify-center w-full'>
-       <h1 className='text-5xl font-bold text-center'>Coming Soon</h1>
-    </div>
+   <main>
+    <VideoAgencyHero/>
+    <VideoServicesSection/>
+    <ShowcasePortfolio/>
+    <LongFormShowcase/>
+   </main>
   )
 }
 

@@ -157,7 +157,7 @@ const Leadership = () => {
   return (
     <section 
       ref={sectionRef}
-      className="mt-30 px-10 flex items-center justify-center flex-col  min-h-screen py-20"
+      className=" mt-20 border px-10 flex items-center justify-center flex-col  min-h-screen py-20"
     >
       <h4
         className={`text-6xl font-semibold text-white mb-4 transition-all duration-900 transform ${
@@ -179,12 +179,12 @@ const Leadership = () => {
       </h4>
 
       {/* Decorative line */}
-      <div
-        className={`w-24 h-0.5 bg-orange-500 mb-16 transition-all duration-800 ${
+      {/* <div
+        className={`w-24 h-0.5 bg-orange-500  transition-all duration-800 ${
           isVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
         }`}
         style={{ transitionDelay: '300ms' }}
-      />
+      /> */}
 
       <div className="flex items-center justify-center gap-8 flex-wrap max-w-6xl">
         {leaders.map((leader, index) => (
