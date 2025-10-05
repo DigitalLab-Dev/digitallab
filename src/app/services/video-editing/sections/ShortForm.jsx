@@ -1,5 +1,5 @@
-"use client"
-import { useState, useEffect, useRef } from 'react';
+'use client';
+import { useState, useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { Play, Sparkles, TrendingUp } from 'lucide-react';
 
@@ -7,73 +7,42 @@ export default function ShowcasePortfolio() {
   const [hoveredVideo, setHoveredVideo] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"]
+    offset: ['start end', 'end start'],
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.8]);
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.8, 1],
+    [0.8, 1, 1, 0.8]
+  );
 
-  // Video portfolio items - using placeholder videos
   const videos = [
-    {
-      id: 1,
-      thumbnail: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&q=80",
-      category: "Instagram Reel",
-      views: "2.5M"
-    },
-    {
-      id: 2,
-      thumbnail: "https://images.unsplash.com/photo-1533158326339-7f3cf2404354?w=600&q=80",
-      category: "TikTok",
-      views: "1.8M"
-    },
-    {
-      id: 3,
-      thumbnail: "https://images.unsplash.com/photo-1579762715118-a6f1d4b934f1?w=600&q=80",
-      category: "YouTube Short",
-      views: "3.2M"
-    },
-    {
-      id: 4,
-      thumbnail: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80",
-      category: "Instagram Reel",
-      views: "4.1M"
-    },
-    {
-      id: 5,
-      thumbnail: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=600&q=80",
-      category: "TikTok",
-      views: "2.9M"
-    },
-    {
-      id: 6,
-      thumbnail: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=80",
-      category: "YouTube Short",
-      views: "5.3M"
-    },
-    {
-      id: 7,
-      thumbnail: "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=600&q=80",
-      category: "Instagram Reel",
-      views: "1.5M"
-    },
-    {
-      id: 8,
-      thumbnail: "https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=600&q=80",
-      category: "TikTok",
-      views: "3.7M"
-    }
+    { id: 1, ytId: 'E4MN690kGYk' },
+    { id: 2, ytId: 'X3ZONuspih8' },
+    { id: 3, ytId: 'Mm9WRmFAqFU' },
+    { id: 4, ytId: 'lw4u3imx_QI' },
+    { id: 5, ytId: 'S4_g9Kvt_og' },
+    { id: 6, ytId: 'XQFYN8rc_JI' },
+    { id: 7, ytId: 'vrZEqsHbHpE' },
+    { id: 8, ytId: 'g9NdYpAmzmk' },
+    { id: 9, ytId: 'wvQ2HmeJaqA' },
+    { id: 10, ytId: 'UFaQ-GGw4Rc' },
   ];
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen bg-black py-12 px-6 overflow-hidden">
-      {/* SEO */}
-      <div className="sr-only">
-        <h2>Short Form Video Content Portfolio - Viral Instagram Reels, TikTok & YouTube Shorts</h2>
-      </div>
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen bg-black py-12 px-6 overflow-hidden"
+    >
+      {/* Hidden heading for accessibility */}
+      <h3 className="sr-only">
+        Short Form Video Content Portfolio - Viral Instagram Reels, TikTok &
+        YouTube Shorts
+      </h3>
 
       {/* Animated background */}
       <div className="absolute inset-0">
@@ -88,7 +57,7 @@ export default function ShowcasePortfolio() {
           transition={{
             duration: 15,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
         />
         <motion.div
@@ -101,7 +70,7 @@ export default function ShowcasePortfolio() {
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
         />
 
@@ -123,93 +92,102 @@ export default function ShowcasePortfolio() {
               duration: 5 + Math.random() * 3,
               repeat: Infinity,
               delay: Math.random() * 5,
-              ease: "easeInOut"
+              ease: 'easeInOut',
             }}
           />
         ))}
       </div>
 
-      <motion.div 
+      <motion.div
         className="relative z-10 max-w-7xl mx-auto"
         style={{ opacity, scale }}
       >
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, ease: [0.6, 0.05, 0.01, 0.9] }}
-          className="text-center mb-20"
-        >
-          {/* Badge */}
+        <header className="text-center mb-20">
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.2, duration: 0.6, type: "spring" }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-orange-500/10 border border-orange-500/30 mb-8 backdrop-blur-sm"
-          >
-            <motion.div
-              animate={{ 
-                rotate: [0, 360],
-                scale: [1, 1.2, 1]
-              }}
-              transition={{ 
-                duration: 3, 
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <Sparkles className="w-4 h-4 text-orange-500" />
-            </motion.div>
-            <span className="text-orange-500 font-semibold text-sm tracking-wider uppercase">
-              Viral Content
-            </span>
-            <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <TrendingUp className="w-4 h-4 text-orange-500" />
-            </motion.div>
-          </motion.div>
-
-          {/* Main heading with reveal animation */}
-          <div className="overflow-hidden mb-6">
-            <motion.h2
-              initial={{ y: 100, opacity: 0 }}
-              animate={isInView ? { y: 0, opacity: 1 } : {}}
-              transition={{ delay: 0.4, duration: 1, ease: [0.6, 0.05, 0.01, 0.9] }}
-              className="text-6xl sm:text-7xl lg:text-8xl font-black text-white leading-none"
-            >
-              SHORT FORM
-            </motion.h2>
-          </div>
-          <div className="overflow-hidden mb-8">
-            <motion.h3
-              initial={{ y: 100, opacity: 0 }}
-              animate={isInView ? { y: 0, opacity: 1 } : {}}
-              transition={{ delay: 0.6, duration: 1, ease: [0.6, 0.05, 0.01, 0.9] }}
-              className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none"
-            >
-              <span className="relative inline-block">
-                <span className="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400 blur-lg">
-                  DOMINATION
-                </span>
-                <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400">
-                  DOMINATION
-                </span>
-              </span>
-            </motion.h3>
-          </div>
-
-          {/* Subheading */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto"
+            transition={{ duration: 1, ease: [0.6, 0.05, 0.01, 0.9] }}
           >
-            Scroll-stopping content that racks up millions of views
-          </motion.p>
-        </motion.div>
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.2, duration: 0.6, type: 'spring' }}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-orange-500/10 border border-orange-500/30 mb-8 backdrop-blur-sm"
+            >
+              <motion.div
+                animate={{
+                  rotate: [0, 360],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <Sparkles className="w-4 h-4 text-orange-500" />
+              </motion.div>
+              <span className="text-orange-500 font-semibold text-sm tracking-wider uppercase">
+                Viral Content
+              </span>
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <TrendingUp className="w-4 h-4 text-orange-500" />
+              </motion.div>
+            </motion.div>
+
+            {/* Main heading with reveal animation */}
+            <div className="overflow-hidden mb-6">
+              <motion.h4
+                initial={{ y: 100, opacity: 0 }}
+                animate={isInView ? { y: 0, opacity: 1 } : {}}
+                transition={{
+                  delay: 0.4,
+                  duration: 1,
+                  ease: [0.6, 0.05, 0.01, 0.9],
+                }}
+                className="text-6xl sm:text-7xl lg:text-8xl font-black text-white leading-none"
+              >
+                SHORT FORM
+              </motion.h4>
+            </div>
+            <div className="overflow-hidden mb-8">
+              <motion.h5
+                initial={{ y: 100, opacity: 0 }}
+                animate={isInView ? { y: 0, opacity: 1 } : {}}
+                transition={{
+                  delay: 0.6,
+                  duration: 1,
+                  ease: [0.6, 0.05, 0.01, 0.9],
+                }}
+                className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none"
+              >
+                <span className="relative inline-block">
+                  <span className="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400 blur-lg">
+                    DOMINATION
+                  </span>
+                  <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400">
+                    DOMINATION
+                  </span>
+                </span>
+              </motion.h5>
+            </div>
+
+            {/* Subheading */}
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto"
+            >
+              Scroll-stopping content that racks up millions of views
+            </motion.p>
+          </motion.div>
+        </header>
 
         {/* Video Grid */}
         <motion.div
@@ -223,10 +201,10 @@ export default function ShowcasePortfolio() {
               key={video.id}
               initial={{ opacity: 0, y: 50, scale: 0.8 }}
               animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ 
+              transition={{
                 delay: 1.2 + index * 0.1,
                 duration: 0.6,
-                ease: [0.6, 0.05, 0.01, 0.9]
+                ease: [0.6, 0.05, 0.01, 0.9],
               }}
               onMouseEnter={() => setHoveredVideo(video.id)}
               onMouseLeave={() => setHoveredVideo(null)}
@@ -236,7 +214,9 @@ export default function ShowcasePortfolio() {
               {/* Glow effect */}
               <motion.div
                 className="absolute -inset-1 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl opacity-0 blur-lg"
-                animate={hoveredVideo === video.id ? { opacity: 0.6 } : { opacity: 0 }}
+                animate={
+                  hoveredVideo === video.id ? { opacity: 0.6 } : { opacity: 0 }
+                }
                 transition={{ duration: 0.3 }}
               />
 
@@ -244,63 +224,41 @@ export default function ShowcasePortfolio() {
               <motion.div
                 className="relative w-full h-full rounded-2xl overflow-hidden bg-zinc-900"
                 whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
               >
-                {/* Thumbnail */}
-                <img 
-                  src={video.thumbnail} 
-                  alt={`${video.category} video showcase`}
-                  className="w-full h-full object-cover"
+                {/* YouTube iframe */}
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.ytId}?autoplay=${hoveredVideo === video.id ? 1 : 0}&mute=1&controls=0&loop=1&playlist=${video.ytId}&modestbranding=1&rel=0`}
+                  title={`Short video ${index + 1}`}
+                  allow="autoplay; encrypted-media"
+                  className="w-full h-full object-cover pointer-events-none"
+                  loading="lazy"
                 />
 
                 {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
 
-                {/* Play button */}
+                {/* Play button overlay when not hovering */}
                 <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  animate={hoveredVideo === video.id ? { opacity: 1 } : { opacity: 0 }}
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                  initial={{ opacity: 1 }}
+                  animate={
+                    hoveredVideo === video.id ? { opacity: 0 } : { opacity: 1 }
+                  }
                   transition={{ duration: 0.2 }}
                 >
-                  <motion.div
-                    className="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center"
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
+                  <div className="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/50">
                     <Play className="w-6 h-6 text-white fill-white ml-1" />
-                  </motion.div>
-                </motion.div>
-
-                {/* Info overlay */}
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 p-4"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={hoveredVideo === video.id ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-white bg-orange-500 px-3 py-1 rounded-full">
-                      {video.category}
-                    </span>
-                    <div className="flex items-center gap-1 text-white text-sm font-bold">
-                      <TrendingUp className="w-4 h-4" />
-                      {video.views}
-                    </div>
                   </div>
                 </motion.div>
 
-                {/* Scan line effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-b from-orange-500/0 via-orange-500/20 to-orange-500/0"
-                  animate={hoveredVideo === video.id ? { y: ['0%', '100%'] } : {}}
-                  transition={{ duration: 1, repeat: hoveredVideo === video.id ? Infinity : 0 }}
-                />
-
                 {/* Corner accents */}
                 <motion.div
+                  className="pointer-events-none"
                   initial={{ opacity: 0 }}
-                  animate={hoveredVideo === video.id ? { opacity: 1 } : { opacity: 0 }}
+                  animate={
+                    hoveredVideo === video.id ? { opacity: 1 } : { opacity: 0 }
+                  }
                   transition={{ duration: 0.3 }}
                 >
                   <div className="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-orange-500" />
@@ -315,10 +273,10 @@ export default function ShowcasePortfolio() {
                 className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-orange-500/50"
                 initial={{ scale: 0, rotate: -180 }}
                 animate={isInView ? { scale: 1, rotate: 0 } : {}}
-                transition={{ 
+                transition={{
                   delay: 1.2 + index * 0.1 + 0.3,
-                  type: "spring",
-                  stiffness: 200
+                  type: 'spring',
+                  stiffness: 200,
                 }}
               >
                 {index + 1}
@@ -364,26 +322,35 @@ export default function ShowcasePortfolio() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 sm:p-6"
           onClick={() => setSelectedVideo(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Video player modal"
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
-            className="relative max-w-md w-full aspect-[9/16] rounded-2xl overflow-hidden"
+            className="relative w-full max-w-md aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl shadow-orange-500/20"
             onClick={(e) => e.stopPropagation()}
           >
-            <img 
-              src={selectedVideo.thumbnail} 
-              alt="Video preview"
-              className="w-full h-full object-cover"
+            {/* Full screen YouTube player with controls */}
+            <iframe
+              src={`https://www.youtube.com/embed/${selectedVideo.ytId}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1`}
+              title="Video player"
+              allow="autoplay; encrypted-media; fullscreen"
+              allowFullScreen
+              className="w-full h-full"
             />
+            
+            {/* Close button */}
             <button
               onClick={() => setSelectedVideo(null)}
-              className="absolute top-4 right-4 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-orange-500 transition-colors"
+              className="absolute top-4 right-4 w-10 h-10 bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-orange-500 transition-colors z-10"
+              aria-label="Close video player"
             >
-              ✕
+              <span className="text-xl leading-none">✕</span>
             </button>
           </motion.div>
         </motion.div>
