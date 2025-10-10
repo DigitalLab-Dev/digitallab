@@ -1,10 +1,16 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 
-// UHeading Component
-const UHeading = ({ text1, text2 }) => {
+// UHeading Component with semantic HTML
+const UHeading = ({ text1, text2, level = 2, id }) => {
+  const HeadingTag = `h${level}`;
+  
   return (
-    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold uppercase">
+    <HeadingTag 
+      id={id}
+      className="text-4xl md:text-5xl lg:text-6xl font-bold uppercase"
+    >
       <span className="text-white mr-4">{text1}</span>
       <span
         className="text-orange-500"
@@ -15,14 +21,11 @@ const UHeading = ({ text1, text2 }) => {
       >
         {text2}
       </span>
-    </h2>
+    </HeadingTag>
   );
 };
 
 const Mission = () => {
-  const [visibleSections, setVisibleSections] = useState({});
-  const sectionRefs = useRef([]);
-
   const missions = [
     {
       id: 'vision',
@@ -30,6 +33,7 @@ const Mission = () => {
       text2: 'vision',
       content:
         'We envision a world where innovative technology seamlessly integrates with human creativity to solve complex challenges. Our vision is to be the leading catalyst for digital transformation, empowering businesses and individuals to achieve extraordinary results through cutting-edge solutions and sustainable practices.',
+      ariaLabel: 'Our vision for the future',
     },
     {
       id: 'mission',
@@ -37,6 +41,7 @@ const Mission = () => {
       text2: 'mission',
       content:
         "Our mission is to deliver exceptional digital experiences that drive meaningful impact. We are committed to creating solutions that not only meet our clients' needs but exceed their expectations. Through collaboration, innovation, and relentless pursuit of excellence, we transform ideas into reality.",
+      ariaLabel: 'Our mission statement',
     },
     {
       id: 'journey',
@@ -44,78 +49,203 @@ const Mission = () => {
       text2: 'journey',
       content:
         'Founded on the principles of innovation and integrity, our journey began with a simple belief: that technology should serve humanity. Over the years, we have grown from a small team of passionate individuals to a trusted partner for businesses worldwide, always staying true to our core values and commitment to excellence.',
+      ariaLabel: 'Our journey and history',
     },
   ];
 
-  // Intersection Observer for scroll animations
-  useEffect(() => {
-    const observers = [];
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
 
-    sectionRefs.current.forEach((ref, index) => {
-      if (ref) {
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              setVisibleSections((prev) => ({
-                ...prev,
-                [index]: true,
-              }));
-            }
-          },
-          {
-            threshold: 0.2,
-            rootMargin: '-50px 0px',
-          }
-        );
+  const textContainerVariants = (isEven) => ({
+    hidden: {
+      opacity: 0,
+      x: isEven ? -50 : 50,
+      y: 50,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: {
+        duration: 1,
+        ease: 'easeOut',
+      },
+    },
+  });
 
-        observer.observe(ref);
-        observers.push(observer);
-      }
-    });
+  const headingVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 1,
+        delay: 0.3,
+        ease: 'easeOut',
+      },
+    },
+  };
 
-    return () => {
-      observers.forEach((observer) => observer.disconnect());
-    };
-  }, []);
+  const underlineVariants = {
+    hidden: { scaleX: 0, opacity: 0 },
+    visible: {
+      scaleX: 1,
+      opacity: 1,
+      transition: {
+        duration: 1,
+        delay: 0.6,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  const paragraphVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        delay: 0.9,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  const circleVariants = (isEven) => ({
+    hidden: {
+      opacity: 0,
+      scale: 0.75,
+      rotate: isEven ? 12 : -12,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 1.2,
+        delay: 0.4,
+        ease: 'easeOut',
+      },
+    },
+  });
+
+  const dividerVariants = {
+    hidden: { opacity: 0, scaleX: 0 },
+    visible: {
+      opacity: 0.3,
+      scaleX: 1,
+      transition: {
+        duration: 1,
+        delay: 1.2,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  const floatingDotVariants = (delay) => ({
+    animate: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 2,
+        delay,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      },
+    },
+  });
+
+  const rotatingRingVariants = {
+    animate: {
+      rotate: 360,
+      transition: {
+        duration: 15,
+        repeat: Infinity,
+        ease: 'linear',
+      },
+    },
+  };
+
+  const particleVariants = (delay, duration) => ({
+    animate: {
+      opacity: [0.5, 1, 0.5],
+      scale: [1, 1.2, 1],
+      transition: {
+        duration,
+        delay,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      },
+    },
+  });
+
+  const orbVariants = (duration, delay) => ({
+    animate: {
+      scale: [1, 1.1, 1],
+      opacity: [0.05, 0.08, 0.05],
+      transition: {
+        duration,
+        delay,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      },
+    },
+  });
 
   return (
-    <section className="w-full mt-10 md:mt-20 mb-10 flex flex-col gap-16 md:gap-20 lg:gap-24 items-center justify-center px-4 md:px-10 bg-black relative overflow-hidden">
-      {/* Background Decorative Elements */}
-      <div className="absolute inset-0 opacity-5">
+    <section 
+      className="w-full mt-10 md:mt-20  flex flex-col gap-16 md:gap-20 lg:gap-24 items-center justify-center px-4 md:px-10 bg-black relative overflow-hidden"
+      aria-label="Our Vision, Mission, and Journey"
+    >
+      {/* Decorative background - hidden from screen readers */}
+      <div className="absolute inset-0 opacity-5" aria-hidden="true">
         {/* Floating Particles */}
         {[...Array(15)].map((_, i) => (
-          <div
+          <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-orange-500 rounded-full animate-pulse"
+            className="absolute w-1 h-1 bg-orange-500 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
             }}
+            variants={particleVariants(Math.random() * 3, 2 + Math.random() * 2)}
+            animate="animate"
           />
         ))}
 
         {/* Gradient Orbs */}
-        <div
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl animate-pulse"
-          style={{ animationDuration: '6s' }}
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl"
+          variants={orbVariants(6, 0)}
+          animate="animate"
         />
-        <div
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/3 rounded-full blur-3xl animate-pulse"
-          style={{ animationDuration: '8s', animationDelay: '3s' }}
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/3 rounded-full blur-3xl"
+          variants={orbVariants(8, 3)}
+          animate="animate"
         />
       </div>
 
       {missions.map((mission, index) => {
-        const isVisible = visibleSections[index];
         const isEven = index % 2 === 0;
 
         return (
-          <div
+          <motion.article
             key={mission.id}
-            ref={(el) => (sectionRefs.current[index] = el)}
             className="w-full flex flex-col items-center justify-center relative"
+            aria-labelledby={`${mission.id}-heading`}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2, margin: '-50px 0px' }}
+            variants={containerVariants}
           >
             {/* Mission Content */}
             <div
@@ -124,59 +254,41 @@ const Mission = () => {
               }`}
             >
               {/* Text Content */}
-              <div
-                className={`flex-1 flex flex-col items-center lg:items-start justify-center gap-6 text-center lg:text-left transition-all duration-1000 ease-out ${
-                  isVisible
-                    ? 'opacity-100 translate-y-0 translate-x-0'
-                    : `opacity-0 translate-y-12 ${
-                        isEven ? 'lg:-translate-x-12' : 'lg:translate-x-12'
-                      }`
-                }`}
-                style={{ transitionDelay: `${index * 0.2}s` }}
+              <motion.div
+                className="flex-1 flex flex-col items-center lg:items-start justify-center gap-6 text-center lg:text-left"
+                variants={textContainerVariants(isEven)}
               >
                 {/* Animated Heading */}
-                <div
-                  className={`transition-all duration-1000 ease-out ${
-                    isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-                  }`}
-                  style={{ transitionDelay: `${index * 0.2 + 0.3}s` }}
-                >
-                  <UHeading text1={mission.text1} text2={mission.text2} />
-                </div>
+                <motion.div variants={headingVariants}>
+                  <UHeading 
+                    text1={mission.text1} 
+                    text2={mission.text2}
+                    level={2}
+                    id={`${mission.id}-heading`}
+                  />
+                </motion.div>
 
-                {/* Animated Underline */}
-                <div
-                  className={`h-1 w-24 bg-gradient-to-r from-orange-500 to-white origin-center transition-all duration-1000 ease-out ${
-                    isVisible
-                      ? 'scale-x-100 opacity-100'
-                      : 'scale-x-0 opacity-0'
-                  }`}
-                  style={{ transitionDelay: `${index * 0.2 + 0.6}s` }}
+                {/* Animated Underline - decorative only */}
+                <motion.div
+                  className="h-1 w-24 bg-gradient-to-r from-orange-500 to-white origin-center"
+                  variants={underlineVariants}
+                  aria-hidden="true"
                 />
 
                 {/* Animated Paragraph */}
-                <p
-                  className={`text-lg md:text-xl text-neutral-300 leading-relaxed max-w-2xl transition-all duration-1000 ease-out ${
-                    isVisible
-                      ? 'opacity-100 translate-y-0'
-                      : 'opacity-0 translate-y-8'
-                  }`}
-                  style={{ transitionDelay: `${index * 0.2 + 0.9}s` }}
+                <motion.p
+                  className="text-lg md:text-xl text-neutral-300 leading-relaxed max-w-2xl"
+                  variants={paragraphVariants}
                 >
                   {mission.content}
-                </p>
-              </div>
+                </motion.p>
+              </motion.div>
 
               {/* Decorative Visual Element */}
-              <div
-                className={`flex-shrink-0 transition-all duration-1200 ease-out ${
-                  isVisible
-                    ? 'opacity-100 scale-100 rotate-0'
-                    : `opacity-0 scale-75 ${
-                        isEven ? 'rotate-12' : '-rotate-12'
-                      }`
-                }`}
-                style={{ transitionDelay: `${index * 0.2 + 0.4}s` }}
+              <motion.figure
+                className="flex-shrink-0"
+                variants={circleVariants(isEven)}
+                aria-hidden="true"
               >
                 <div className="relative">
                   {/* Main Circle */}
@@ -190,68 +302,81 @@ const Mission = () => {
                   </div>
 
                   {/* Floating Elements */}
-                  <div
-                    className="absolute -top-2 -right-2 w-4 h-4 bg-orange-500 rounded-full animate-bounce"
-                    style={{
-                      animationDelay: `${index * 0.5}s`,
-                      animationDuration: '2s',
-                    }}
+                  <motion.div
+                    className="absolute -top-2 -right-2 w-4 h-4 bg-orange-500 rounded-full"
+                    variants={floatingDotVariants(index * 0.5)}
+                    animate="animate"
                   />
-                  <div
-                    className="absolute -bottom-2 -left-2 w-3 h-3 bg-white rounded-full animate-bounce"
-                    style={{
-                      animationDelay: `${index * 0.5 + 1}s`,
-                      animationDuration: '2.5s',
-                    }}
+                  <motion.div
+                    className="absolute -bottom-2 -left-2 w-3 h-3 bg-white rounded-full"
+                    variants={floatingDotVariants(index * 0.5 + 1)}
+                    animate="animate"
                   />
 
                   {/* Rotating Ring */}
-                  <div
-                    className={`absolute inset-0 rounded-full border-2 border-dashed border-orange-500/40 transition-all duration-1000 ${
-                      isVisible ? 'animate-spin' : ''
-                    }`}
-                    style={{
-                      animationDuration: '15s',
-                      animationDelay: `${index * 0.2 + 1}s`,
-                    }}
+                  <motion.div
+                    className="absolute inset-0 rounded-full border-2 border-dashed border-orange-500/40"
+                    variants={rotatingRingVariants}
+                    animate="animate"
                   />
                 </div>
-              </div>
+              </motion.figure>
             </div>
 
-            {/* Section Divider (except last) */}
+            {/* Section Divider (except last) - decorative only */}
             {index < missions.length - 1 && (
-              <div
-                className={`mt-16 md:mt-20 lg:mt-24 transition-all duration-1000 ease-out ${
-                  isVisible ? 'opacity-30 scale-x-100' : 'opacity-0 scale-x-0'
-                }`}
-                style={{ transitionDelay: `${index * 0.2 + 1.2}s` }}
+              <motion.div
+                className="mt-16 md:mt-20 lg:mt-24"
+                variants={dividerVariants}
+                aria-hidden="true"
               >
                 <div className="w-32 md:w-48 h-px bg-gradient-to-r from-transparent via-orange-500/50 to-transparent" />
                 <div className="flex justify-center mt-2">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
+                  <motion.div 
+                    className="w-2 h-2 bg-orange-500 rounded-full"
+                    animate={{
+                      opacity: [0.5, 1, 0.5],
+                      scale: [1, 1.2, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                  />
                 </div>
-              </div>
+              </motion.div>
             )}
-          </div>
+          </motion.article>
         );
       })}
 
-      {/* Bottom Decorative Element */}
-      <div
-        className={`mt-10 transition-all duration-1000 ease-out ${
-          visibleSections[2]
-            ? 'opacity-100 translate-y-0'
-            : 'opacity-0 translate-y-8'
-        }`}
-        style={{ transitionDelay: '2.5s' }}
+      {/* Bottom Decorative Element - hidden from screen readers */}
+      <motion.div
+        className="mt-10"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, delay: 0.5 }}
+        aria-hidden="true"
       >
         <div className="flex items-center justify-center gap-4">
           <div className="w-8 h-px bg-gradient-to-r from-transparent to-orange-500" />
-          <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse" />
+          <motion.div 
+            className="w-3 h-3 bg-orange-500 rounded-full"
+            animate={{
+              opacity: [0.5, 1, 0.5],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
           <div className="w-8 h-px bg-gradient-to-l from-transparent to-orange-500" />
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

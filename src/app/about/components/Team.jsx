@@ -1,113 +1,50 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Team = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [teamMembers, setTeamMembers] = useState([]);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [debugInfo, setDebugInfo] = useState({});
-  const sectionRef = useRef(null);
-  
-  // Simple intersection observer instead of framer-motion's useInView
-  const [isInView, setIsInView] = useState(false);
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting);
-      },
-      { threshold: 0.3, rootMargin: '-100px' }
-    );
+  const [direction, setDirection] = useState(0);
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Mock data fallback for testing
-  const mockTeamMembers = [
-    {
-      id: 1,
-      name: "John Smith",
-      designation: "CEO & Founder",
-      description: "Visionary leader with over 15 years of experience in technology and innovation. Passionate about building products that make a difference.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces"
-    },
-    {
-      id: 2,
-      name: "Sarah Johnson",
-      designation: "CTO",
-      description: "Technical expert specializing in scalable architecture and modern web technologies. Leads our engineering team with expertise and vision.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616c2a0aa8f?w=400&h=400&fit=crop&crop=faces"
-    },
-    {
-      id: 3,
-      name: "Michael Chen",
-      designation: "Lead Designer",
-      description: "Creative professional focused on user experience and interface design. Transforms complex ideas into intuitive, beautiful solutions.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=faces"
-    }
-  ];
-
-  // Fetch team members with detailed debugging
+  // Fetch team members from backend
   useEffect(() => {
     const fetchTeam = async () => {
       try {
         setLoading(true);
         setError(null);
         
-        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || '';
+        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://digitallab-server.vercel.app';
+        // const backendUrl='http://localhost:4000'
         const apiUrl = `${backendUrl}/api/team`;
         
-        setDebugInfo(prev => ({
-          ...prev,
-          backendUrl,
-          apiUrl,
-          fetchAttempted: true,
-          fetchTime: new Date().toISOString()
-        }));
-
-        console.log('Attempting to fetch from:', apiUrl);
+        console.log('Fetching team from:', apiUrl);
         
-        // Add timeout to prevent hanging
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
         
         const res = await fetch(apiUrl, {
           signal: controller.signal,
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-          }
+            'Accept': 'application/json',
+          },
+          mode: 'cors',
         });
         
         clearTimeout(timeoutId);
-        
-        setDebugInfo(prev => ({
-          ...prev,
-          responseStatus: res.status,
-          responseOk: res.ok,
-          responseHeaders: Object.fromEntries(res.headers.entries())
-        }));
 
         if (!res.ok) {
-          throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+          throw new Error(`Failed to fetch team members: ${res.status} ${res.statusText}`);
         }
 
         const data = await res.json();
-        console.log('API Response:', data);
+        console.log('Team data received:', data);
         
-        setDebugInfo(prev => ({
-          ...prev,
-          rawApiResponse: data,
-          dataType: typeof data,
-          isArray: Array.isArray(data)
-        }));
-
         // Handle different response structures
         let members = [];
         if (Array.isArray(data)) {
@@ -117,37 +54,27 @@ const Team = () => {
         } else if (data && Array.isArray(data.members)) {
           members = data.members;
         } else if (data && typeof data === 'object') {
+          // If single object, wrap in array
           members = [data];
         }
 
-        setDebugInfo(prev => ({
-          ...prev,
-          processedMembers: members,
-          membersCount: members.length
-        }));
-
         if (members.length === 0) {
-          console.log('No members found in API response, using mock data');
-          members = mockTeamMembers;
-          setDebugInfo(prev => ({
-            ...prev,
-            usingMockData: true
-          }));
+          throw new Error('No team members found in the response');
         }
 
         setTeamMembers(members);
       } catch (err) {
         console.error('Error fetching team:', err);
-        setError(err.message);
         
-        // Use mock data on error
-        console.log('Using mock data due to fetch error');
-        setTeamMembers(mockTeamMembers);
-        setDebugInfo(prev => ({
-          ...prev,
-          fetchError: err.message,
-          usingMockDataDueToError: true
-        }));
+        // Provide more helpful error messages
+        let errorMessage = err.message;
+        if (err.name === 'AbortError') {
+          errorMessage = 'Request timeout - Please check your internet connection';
+        } else if (err.message.includes('Failed to fetch')) {
+          errorMessage = 'CORS Error: Unable to connect to the server. Please ensure the backend allows requests from your domain.';
+        }
+        
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -156,101 +83,165 @@ const Team = () => {
     fetchTeam();
   }, []);
 
-  // Reset index when new data arrives
-  useEffect(() => {
-    if (teamMembers.length > 0) {
-      setCurrentIndex(0);
-    }
-  }, [teamMembers]);
-
   // Auto-play carousel
   useEffect(() => {
+    if (teamMembers.length <= 1) return;
+
     const interval = setInterval(() => {
-      if (isInView && !isTransitioning && teamMembers.length > 1) {
-        handleNext();
-      }
+      handleNext();
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [currentIndex, isInView, isTransitioning, teamMembers.length]);
+  }, [currentIndex, teamMembers.length]);
 
   const handleNext = () => {
-    if (isTransitioning || teamMembers.length <= 1) return;
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % teamMembers.length);
-      setIsTransitioning(false);
-    }, 150);
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % teamMembers.length);
   };
 
   const handlePrev = () => {
-    if (isTransitioning || teamMembers.length <= 1) return;
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentIndex(
-        (prev) => (prev - 1 + teamMembers.length) % teamMembers.length
-      );
-      setIsTransitioning(false);
-    }, 150);
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + teamMembers.length) % teamMembers.length);
   };
+
+  const handleDotClick = (index) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
+  };
+
+  // Animation variants
+  const slideVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+    }),
+  };
+
+  const particleVariants = (delay, duration) => ({
+    animate: {
+      y: [0, -20, 0],
+      opacity: [0.3, 0.8, 0.3],
+      scale: [1, 1.2, 1],
+      transition: {
+        duration,
+        delay,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      },
+    },
+  });
+
+  const circleVariants = (duration, delay) => ({
+    animate: {
+      scale: [1, 1.2, 1],
+      opacity: [0.1, 0.2, 0.1],
+      transition: {
+        duration,
+        delay,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      },
+    },
+  });
 
   // Loading state
   if (loading) {
     return (
-      <section className="min-h-screen flex items-center justify-center bg-gray-900">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
+      <section 
+        className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden"
+        aria-live="polite"
+        aria-busy="true"
+      >
+        {/* Background Effects */}
+        <div className="absolute inset-0" aria-hidden="true">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-orange-500 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              variants={particleVariants(Math.random() * 2, 2 + Math.random() * 2)}
+              animate="animate"
+            />
+          ))}
+        </div>
+
+        <div className="text-center relative z-10">
+          <motion.div
+            className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full mx-auto mb-4"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+          />
           <p className="text-gray-400 text-lg">Loading team members...</p>
-          <div className="mt-4 text-xs text-gray-500 max-w-md">
-            <p>Debug Info:</p>
-            <pre className="text-left bg-gray-800 p-2 rounded mt-2">
-              {JSON.stringify(debugInfo, null, 2)}
-            </pre>
-          </div>
         </div>
       </section>
     );
   }
 
-  // Error state with debug info
-  if (error && teamMembers.length === 0) {
+  // Error state
+  if (error) {
     return (
-      <section className="min-h-screen flex items-center justify-center bg-gray-900">
-        <div className="text-center max-w-2xl">
-          <div className="bg-red-900/50 border border-red-700 rounded-lg p-6">
-            <h3 className="text-red-400 text-lg font-semibold mb-2">Error Loading Team</h3>
-            <p className="text-gray-300 text-sm mb-4">{error}</p>
-            <div className="text-xs text-gray-400">
-              <p className="mb-2">Debug Information:</p>
-              <pre className="text-left bg-gray-800 p-3 rounded overflow-auto max-h-40">
-                {JSON.stringify(debugInfo, null, 2)}
-              </pre>
-            </div>
-            <button 
+      <section 
+        className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden"
+        role="alert"
+        aria-live="assertive"
+      >
+        {/* Background Effects */}
+        <div className="absolute inset-0" aria-hidden="true">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-orange-500 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              variants={particleVariants(Math.random() * 2, 2 + Math.random() * 2)}
+              animate="animate"
+            />
+          ))}
+        </div>
+
+        <motion.div 
+          className="text-center max-w-2xl px-4 relative z-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="bg-black/80 border-2 border-orange-500 rounded-2xl p-8 backdrop-blur-sm">
+            <h2 className="text-orange-500 text-2xl font-bold mb-4">Unable to Load Team</h2>
+            <p className="text-gray-300 mb-6">{error}</p>
+            <motion.button 
               onClick={() => window.location.reload()} 
-              className="mt-4 px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors"
+              className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Try Again
-            </button>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
       </section>
     );
   }
 
-  // No team members (shouldn't happen due to fallback)
+  // No team members
   if (teamMembers.length === 0) {
     return (
-      <section className="min-h-screen flex items-center justify-center bg-gray-900">
-        <div className="text-center">
-          <p className="text-gray-400 text-lg">No team members found.</p>
-          <div className="mt-4 text-xs text-gray-500">
-            <p>Debug Info:</p>
-            <pre className="text-left bg-gray-800 p-2 rounded mt-2">
-              {JSON.stringify(debugInfo, null, 2)}
-            </pre>
-          </div>
-        </div>
+      <section className="min-h-screen flex items-center justify-center bg-black">
+        <p className="text-gray-400 text-xl">No team members available.</p>
       </section>
     );
   }
@@ -259,141 +250,239 @@ const Team = () => {
 
   return (
     <section
-      ref={sectionRef}
-      className="min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden"
+      className="min-h-screen flex items-center justify-center py-20 px-4 bg-black relative overflow-hidden"
+      aria-labelledby="team-heading"
     >
-      <div className="max-w-6xl mx-auto w-full">
-        {/* Debug Panel - Remove in production */}
-        {/* <div className="mb-8 bg-gray-800 border border-gray-700 rounded-lg p-4">
-          <h4 className="text-orange-500 font-semibold mb-2">Debug Information:</h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-300">
-            <div>
-              <p><strong>Members Count:</strong> {teamMembers.length}</p>
-              <p><strong>Current Index:</strong> {currentIndex}</p>
-              <p><strong>Is In View:</strong> {isInView.toString()}</p>
-              <p><strong>Is Transitioning:</strong> {isTransitioning.toString()}</p>
-            </div>
-            <div>
-              <p><strong>API URL:</strong> {debugInfo.apiUrl || 'Not set'}</p>
-              <p><strong>Response Status:</strong> {debugInfo.responseStatus || 'N/A'}</p>
-              <p><strong>Using Mock Data:</strong> {(debugInfo.usingMockData || debugInfo.usingMockDataDueToError) ? 'Yes' : 'No'}</p>
-            </div>
-            <div>
-              <p><strong>Current Member:</strong> {currentMember?.name || 'None'}</p>
-              <p><strong>Member Role:</strong> {currentMember?.designation || 'None'}</p>
-              <p><strong>Has Image:</strong> {currentMember?.image ? 'Yes' : 'No'}</p>
-            </div>
-          </div>
-        </div> */}
+      {/* Interactive Background */}
+      <div className="absolute inset-0" aria-hidden="true">
+        {/* Floating Particles */}
+        {[...Array(30)].map((_, i) => (
+          <motion.div
+            key={`particle-${i}`}
+            className="absolute w-1 h-1 bg-orange-500 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            variants={particleVariants(Math.random() * 3, 3 + Math.random() * 3)}
+            animate="animate"
+          />
+        ))}
 
+        {/* Gradient Orbs */}
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl"
+          variants={circleVariants(8, 0)}
+          animate="animate"
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl"
+          variants={circleVariants(10, 2)}
+          animate="animate"
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 w-64 h-64 bg-orange-500/5 rounded-full blur-2xl"
+          variants={circleVariants(12, 4)}
+          animate="animate"
+        />
+
+        {/* Animated Lines */}
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={`line-${i}`}
+            className="absolute h-px bg-gradient-to-r from-transparent via-orange-500/20 to-transparent"
+            style={{
+              width: '40%',
+              left: `${Math.random() * 60}%`,
+              top: `${20 + i * 15}%`,
+            }}
+            animate={{
+              x: ['-100%', '100%'],
+              opacity: [0, 0.5, 0],
+            }}
+            transition={{
+              duration: 8 + i * 2,
+              repeat: Infinity,
+              ease: 'linear',
+              delay: i * 1.5,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-6xl mx-auto w-full relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 id="team-heading" className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
             Meet Our <span className="text-orange-500">Team</span>
           </h2>
-          <div className="w-24 h-1 bg-orange-500 mx-auto rounded-full"></div>
-        </div>
+          <motion.div 
+            className="w-24 h-1 bg-orange-500 mx-auto rounded-full"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          />
+        </motion.div>
 
         {/* Team Member Card */}
         <div className="relative">
-          <div className="bg-gray-800/80 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-gray-700 shadow-2xl">
-            <div className="flex flex-col lg:flex-row items-center gap-12">
-              {/* Image Section */}
-              <div className="relative flex-shrink-0">
-                <div className="relative">
-                  <div className="w-80 h-80 rounded-2xl overflow-hidden shadow-2xl ring-4 ring-orange-500/30">
-                    <img
-                      src={currentMember.image}
-                      alt={currentMember.name}
-                      className="w-full h-full  object-cover transition-transform duration-300 hover:scale-105"
-                      onError={(e) => {
-                        console.log('Image failed to load:', currentMember.image);
-                        e.target.src = `https://via.placeholder.com/400x400/1f2937/ffffff?text=${encodeURIComponent(currentMember.name
-                          .split(' ')
-                          .map((n) => n[0])
-                          .join(''))}`;
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.article
+              key={currentIndex}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { type: 'spring', stiffness: 300, damping: 30 },
+                opacity: { duration: 0.2 },
+              }}
+              className="bg-black/60 backdrop-blur-md rounded-3xl p-6 md:p-12 border-2 border-orange-500/30 shadow-2xl"
+            >
+              <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                {/* Image Section */}
+                <motion.figure 
+                  className="relative flex-shrink-0"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <div className="relative">
+                    <div className="w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-2xl ring-4 ring-orange-500/50">
+                      <motion.img
+                        src={currentMember.image}
+                        alt={`Portrait of ${currentMember.name}`}
+                        className="w-full h-full object-cover"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.3 }}
+                        onError={(e) => {
+                          e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(currentMember.name)}&size=400&background=ff6600&color=fff&bold=true`;
+                        }}
+                      />
+                    </div>
+                    
+                    {/* Floating accents */}
+                    <motion.div 
+                      className="absolute -top-4 -right-4 w-8 h-8 bg-orange-500 rounded-full"
+                      animate={{ 
+                        y: [0, -10, 0],
+                        scale: [1, 1.2, 1],
                       }}
-                      onLoad={() => console.log('Image loaded successfully:', currentMember.image)}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }}
+                      aria-hidden="true"
+                    />
+                    <motion.div 
+                      className="absolute -bottom-4 -left-4 w-6 h-6 bg-white rounded-full"
+                      animate={{ 
+                        y: [0, 10, 0],
+                        scale: [1, 1.1, 1],
+                      }}
+                      transition={{ 
+                        duration: 2.5, 
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                        delay: 0.5,
+                      }}
+                      aria-hidden="true"
                     />
                   </div>
-                  {/* Floating accents */}
-                  <div className="absolute -top-4 -right-4 w-8 h-8 bg-orange-500 rounded-full animate-pulse"></div>
-                  <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-white rounded-full animate-bounce"></div>
+                </motion.figure>
+
+                {/* Content Section */}
+                <div className="flex-1 text-center lg:text-left">
+                  <motion.h3 
+                    className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                  >
+                    {currentMember.name}
+                  </motion.h3>
+                  
+                  <motion.p 
+                    className="text-orange-500 text-xl md:text-2xl font-semibold mb-6 uppercase tracking-wide"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                  >
+                    {currentMember.designation}
+                  </motion.p>
+                  
+                  <motion.p 
+                    className="text-gray-300 text-base md:text-lg leading-relaxed max-w-2xl"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                  >
+                    {currentMember.description}
+                  </motion.p>
                 </div>
               </div>
+            </motion.article>
+          </AnimatePresence>
 
-              {/* Content Section */}
-              <div className="flex-1 text-center lg:text-left">
-                <h3 className="text-4xl md:text-5xl font-bold text-white mb-3">
-                  {currentMember.name}
-                </h3>
-                <p className="text-orange-500 text-xl md:text-2xl font-semibold mb-6 uppercase tracking-wide">
-                  {currentMember.designation}
-                </p>
-                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl">
-                  {currentMember.description}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Navigation Buttons - Only show if more than 1 member */}
+          {/* Navigation Buttons */}
           {teamMembers.length > 1 && (
-            <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-4 pointer-events-none">
-              <button
+            <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-2 md:px-4 pointer-events-none">
+              <motion.button
                 onClick={handlePrev}
-                disabled={isTransitioning}
-                className="pointer-events-auto bg-gray-900/90 backdrop-blur-sm text-white p-4 rounded-full border border-gray-700 hover:bg-orange-500 hover:border-orange-500 transition-all duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="pointer-events-auto bg-black/80 backdrop-blur-sm text-white p-3 md:p-4 rounded-full border-2 border-orange-500/50 hover:border-orange-500 hover:bg-orange-500 transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-black"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                aria-label="Previous team member"
               >
-                <ChevronLeft size={24} />
-              </button>
+                <ChevronLeft size={24} aria-hidden="true" />
+              </motion.button>
 
-              <button
+              <motion.button
                 onClick={handleNext}
-                disabled={isTransitioning}
-                className="pointer-events-auto bg-gray-900/90 backdrop-blur-sm text-white p-4 rounded-full border border-gray-700 hover:bg-orange-500 hover:border-orange-500 transition-all duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="pointer-events-auto bg-black/80 backdrop-blur-sm text-white p-3 md:p-4 rounded-full border-2 border-orange-500/50 hover:border-orange-500 hover:bg-orange-500 transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-black"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                aria-label="Next team member"
               >
-                <ChevronRight size={24} />
-              </button>
+                <ChevronRight size={24} aria-hidden="true" />
+              </motion.button>
             </div>
           )}
         </div>
 
-        {/* Indicators - Only show if more than 1 member */}
-        {/* {teamMembers.length > 1 && (
-          <div className="flex justify-center mt-8 space-x-3">
-            {teamMembers.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  if (!isTransitioning) {
-                    setIsTransitioning(true);
-                    setTimeout(() => {
-                      setCurrentIndex(index);
-                      setIsTransitioning(false);
-                    }, 150);
-                  }
-                }}
-                className={`h-3 rounded-full transition-all duration-300 hover:scale-110 ${
+        {/* Indicators */}
+        {teamMembers.length > 1 && (
+          <motion.nav 
+            className="flex justify-center mt-8 gap-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            aria-label="Team member navigation"
+          >
+            {teamMembers.map((member, index) => (
+              <motion.button
+                key={member.id || index}
+                onClick={() => handleDotClick(index)}
+                className={`h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-black ${
                   index === currentIndex
                     ? 'bg-orange-500 w-8'
                     : 'bg-gray-600 hover:bg-gray-500 w-3'
                 }`}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                aria-label={`View ${member.name}`}
+                aria-current={index === currentIndex ? 'true' : 'false'}
               />
             ))}
-          </div>
-        )} */}
-
-        {/* Member Counter */}
-        {/* {teamMembers.length > 1 && (
-          <div className="text-center mt-6">
-            <p className="text-gray-400 text-lg">
-              <span className="text-orange-500 font-bold">{currentIndex + 1}</span>
-              <span className="mx-2">/</span>
-              <span>{teamMembers.length}</span>
-            </p>
-          </div>
-        )} */}
+          </motion.nav>
+        )}
       </div>
     </section>
   );
