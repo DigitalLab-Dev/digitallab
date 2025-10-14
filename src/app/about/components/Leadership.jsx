@@ -9,7 +9,7 @@ const Leadership = () => {
   const leaders = [
     {
       name: 'Sayed Ali Turab',
-      designation: 'CEO & Founder',
+      designation: 'CEO & Co-Founder',
       image: '/images/ali.jpg',
       socials: {
         instagram: 'https://instagram.com/aliturabi',
@@ -18,8 +18,8 @@ const Leadership = () => {
       }
     },
     {
-      name: 'Sayed Tassawar Abbas',
-      designation: 'Co-Founder',
+      name: 'Syed Tassawar Abbas',
+      designation: 'Co-Founder & COO',
       image: '/images/tassawar.webp',
       socials: {
         instagram: 'https://instagram.com/tassawarabbas',
@@ -29,7 +29,7 @@ const Leadership = () => {
     },
     {
       name: 'Sadaqat Mehmood',
-      designation: 'COO',
+      designation: 'CTO',
       image: '/images/sadaqat.jpg',
       socials: {
         instagram: 'https://instagram.com/sadaqatmehmood',
@@ -60,7 +60,7 @@ const Leadership = () => {
     };
   }, []);
 
-  const LeaderCard = ({ leader, index }) => {
+const LeaderCard = ({ leader, index }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -157,7 +157,7 @@ const Leadership = () => {
   return (
     <section 
       ref={sectionRef}
-      className=" mt-20  px-10 flex items-center justify-center flex-col  min-h-screen "
+      className="px-10 flex items-center justify-center flex-col  min-h-screen "
     >
       <h4
         className={`text-6xl font-semibold text-white mb-4 transition-all duration-900 transform ${

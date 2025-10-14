@@ -96,7 +96,7 @@ const Para = () => {
 
   return (
     <section 
-      className="py-10 sm:py-15 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12"
+      className="py-10  px-4 sm:px-6 md:px-8 lg:px-12"
       aria-labelledby="brand-statement"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-center">
@@ -106,10 +106,10 @@ const Para = () => {
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl  w-full sm:w-11/12 md:w-10/12 lg:w-9/12 xl:w-3/4 font-light text-white leading-relaxed sm:leading-relaxed md:leading-snug text-center"
         >
           <strong className="font-semibold">We are a Brand Evolution Studio.</strong>{' '}
-          <strong className="font-semibold">We partner with our clients</strong> to
-          bring about their vision through brand experiences,{' '}
+          <strong className="font-semibold">We partner with ambitious clients</strong>
+         to create brand experiences ,{' '}
           <strong className="font-semibold">
-            that connect, transform and empower their businesses.
+           that connect, inspire, and deliver real results.
           </strong>
         </h2>
       </div>

@@ -1,356 +1,395 @@
 "use client"
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { TrendingUp, Zap, DollarSign, Star, Users, Eye, ThumbsUp, Award, X, CheckCircle } from 'lucide-react';
 
 const CaseStudiesSection = () => {
-  const [visibleItems, setVisibleItems] = useState(new Set());
-  const itemRefs = useRef([]);
+  const [hoveredMetric, setHoveredMetric] = useState(null);
 
-  // Dummy case studies data
+  // Dummy case studies data with lucide icons
   const caseStudies = [
     {
       id: 1,
-      clientName: "TechFlow Solutions",
+      clientName: "Mrs Akthar",
       clientLogo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=150&h=80&fit=crop",
       projectImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-      industry: "Technology",
-      projectTitle: "AI-Powered Dashboard Redesign",
-      problem: "TechFlow's existing analytics platform had a 68% user abandonment rate due to complex navigation and overwhelming data visualization. Users couldn't quickly access critical insights.",
-      solution: "We redesigned the entire UX with AI-powered personalized dashboards, implementing smart data filtering, intuitive navigation patterns, and real-time collaborative features.",
-      result: "Achieved 85% reduction in user abandonment rate, 3.2x increase in daily active users, and 45% improvement in task completion time. Revenue increased by 127% within 6 months.",
+      industry: "E-commerce",
+      projectTitle: "Delujo – From Struggling Store to Growing Brand",
+      problem: "Delujo had the vision and quality products but lacked direction. Despite effort and consistency, their social media wasn't driving sales. The brand didn't have a defined identity, and their online store wasn't converting visitors into loyal customers.",
+      solution: "We stepped in to rebuild Delujo's story — not just its visuals. Our team shaped a brand identity that spoke to its audience, redesigned the Shopify experience for smoother conversions, and turned social media into a source of trust and engagement. Every post, every campaign, every caption was crafted to connect, not just sell.",
+      result: "Within just 3 months, Delujo went from invisible to influential — earning over 100K views in a single month, growing from 0 to 1,000 followers, and achieving 5X faster sales growth. What started as a struggling store is now a thriving brand with a loyal audience and clear identity.",
       metrics: [
-        { label: "User Retention", value: "+85%", icon: "↗" },
-        { label: "Revenue Growth", value: "+127%", icon: "💰" },
-        { label: "Task Completion", value: "+45%", icon: "⚡" }
+        { label: "Monthly Views", value: "100k+", icon: Eye, color: "text-blue-400" },
+        { label: "Growth Acceleration", value: "5X", icon: TrendingUp, color: "text-green-400" },
+        { label: "Followers in 3 Months", value: "1,000+", icon: Users, color: "text-purple-400" }
       ],
-      tags: ["UX/UI Design", "AI Integration", "Dashboard", "Analytics"]
+      tags: ["Branding", "Social Media Management", "Store Optimization", "Shopify"]
     },
     {
       id: 2,
-      clientName: "FinanceMax",
+      clientName: "Treble Health",
       clientLogo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=150&h=80&fit=crop",
       projectImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
-      industry: "Financial Services",
-      projectTitle: "Mobile Banking App Revolution",
-      problem: "Legacy mobile banking app with 2.1 star rating, high customer churn, and outdated security measures. Customers were switching to competitor apps at an alarming rate.",
-      solution: "Complete mobile app rebuild with biometric authentication, AI-powered expense tracking, seamless money transfers, and personalized financial insights with gamification elements.",
-      result: "App rating jumped to 4.8 stars, customer churn reduced by 73%, and mobile transaction volume increased by 245%. Won 'Best Banking App' industry award.",
+      industry: "Personal Branding",
+      projectTitle: "Treble Health – Reigniting Reach and Relevance",
+      problem: "Treble Health had valuable content, but the numbers told another story. Despite consistent uploads, their videos were stuck at the same view count, struggling to break through to new audiences. Engagement had plateaued, and their message wasn't reaching the people who needed it most.",
+      solution: "We analyzed audience behavior and reshaped their content strategy with an emotion-first, audience-centric editing approach. By reworking pacing, adding visual storytelling, and optimizing for retention, every video became more engaging, more human, and more watchable. The focus shifted from 'just content' to 'content that connects'.",
+      result: "The results came fast — and stayed strong. Treble Health saw an instant 3X boost in views, with higher audience retention and engagement across their videos. Beyond numbers, their content started doing what it was meant to do — inspire, educate, and impact lives.",
       metrics: [
-        { label: "App Rating", value: "4.8★", icon: "⭐" },
-        { label: "Churn Reduction", value: "-73%", icon: "📉" },
-        { label: "Transactions", value: "+245%", icon: "📱" }
+        { label: "Increase in Views", value: "3X", icon: Star, color: "text-yellow-400" },
+        { label: "Audience Retention", value: "70%", icon: ThumbsUp, color: "text-pink-400" },
+        { label: "Monthly Views", value: "500k+", icon: Eye, color: "text-cyan-400" }
       ],
-      tags: ["Mobile App", "Fintech", "Security", "UX Design"]
+      tags: ["Video Editing", "Content Strategy", "YouTube Channel Management"]
     },
     {
       id: 3,
-      clientName: "EcoGreen Energy",
+      clientName: "Naqvix",
       clientLogo: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=150&h=80&fit=crop",
       projectImage: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&h=400&fit=crop",
-      industry: "Renewable Energy",
-      projectTitle: "Smart Energy Management Platform",
-      problem: "Clients couldn't effectively monitor their solar energy systems, leading to 30% efficiency losses and poor ROI visibility. Manual reporting was time-consuming and error-prone.",
-      solution: "Developed an IoT-integrated platform with real-time energy monitoring, predictive maintenance alerts, automated reporting, and AR visualization for system diagnostics.",
-      result: "Energy efficiency improved by 35%, maintenance costs reduced by 60%, and customer satisfaction scores increased to 94%. Platform now serves 10,000+ installations.",
+      industry: "Food & Hospitality",
+      projectTitle: "Foodie – A Fresh Look for a Fresh Brand",
+      problem: "Foodie — a promising social media app for restaurants — was stuck behind an outdated, lifeless design and an unresponsive website. The layout didn't reflect their dynamic concept, the user experience felt dull, and the platform wasn't built to perform on modern devices.",
+      solution: "We rebuilt Foodie's digital presence from scratch — starting with a modern, engaging, and visually rich design that captured the energy of food and community. Our team developed a fully responsive website, optimized for speed, SEO, and mobile performance, ensuring every visitor experienced Foodie at its best.",
+      result: "The transformation was instant. Foodie saw a 10X boost in engagement, glowing 5-star client feedback, and a complete 100% redesign that finally aligned their brand's personality with its purpose — deliciously digital and impossible to ignore.",
       metrics: [
-        { label: "Efficiency Gain", value: "+35%", icon: "⚡" },
-        { label: "Cost Reduction", value: "-60%", icon: "💡" },
-        { label: "Satisfaction", value: "94%", icon: "😊" }
+        { label: "Website Redesign", value: "100%", icon: Zap, color: "text-orange-400" },
+        { label: "Engagement Growth", value: "10X", icon: TrendingUp, color: "text-green-400" },
+        { label: "Client Feedback", value: "5★", icon: Award, color: "text-amber-400" }
       ],
-      tags: ["IoT Platform", "Energy Management", "AR/VR", "Analytics"]
+      tags: ["Web Design", "Web Development", "SEO Optimization"]
     },
-    {
-      id: 4,
-      clientName: "MediCare Plus",
-      clientLogo: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=150&h=80&fit=crop",
-      projectImage: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop",
-      industry: "Healthcare",
-      projectTitle: "Telemedicine Platform Development",
-      problem: "Healthcare provider struggled with patient engagement and appointment no-shows (42% rate). Existing systems couldn't handle the surge in telemedicine demand during the pandemic.",
-      solution: "Built a comprehensive telemedicine platform with AI-powered symptom checker, virtual waiting rooms, automated appointment reminders, and integrated prescription management.",
-      result: "No-show rates dropped to 8%, patient satisfaction increased by 78%, and the platform handled 500% increase in consultations. Reduced operational costs by 40%.",
-      metrics: [
-        { label: "No-Show Rate", value: "-42%→8%", icon: "📅" },
-        { label: "Satisfaction", value: "+78%", icon: "❤️" },
-        { label: "Capacity", value: "+500%", icon: "🏥" }
-      ],
-      tags: ["Healthcare", "Telemedicine", "AI Integration", "Patient Portal"]
-    }
   ];
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = parseInt(entry.target.dataset.index);
-            setVisibleItems(prev => new Set([...prev, index]));
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
+  const CaseStudyCard = ({ study, index }) => {
+    const ref = React.useRef(null);
+    const isInView = useInView(ref, { once: false, amount: 0.2 });
+    const isEven = index % 2 === 0;
 
-    itemRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
+    const containerVariants = {
+      hidden: { opacity: 0, y: 50 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: 0.6,
+          ease: [0.25, 0.46, 0.45, 0.94],
+          staggerChildren: 0.1
+        }
+      }
+    };
 
-    return () => observer.disconnect();
-  }, []);
+    const itemVariants = {
+      hidden: { opacity: 0, y: 20 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.4 }
+      }
+    };
 
-  return (
-    <>
-      <style jsx>{`
-        @keyframes slideInLeft {
-          from { opacity: 0; transform: translateX(-100px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes slideInRight {
-          from { opacity: 0; transform: translateX(100px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes scaleIn {
-          from { opacity: 0; transform: scale(0.8); }
-          to { opacity: 1; transform: scale(1); }
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes shimmer {
-          0% { background-position: -200% 0; }
-          100% { background-position: 200% 0; }
-        }
-        
-        .animate-slide-left {
-          animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        }
-        
-        .animate-slide-right {
-          animation: slideInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        }
-        
-        .animate-scale-in {
-          animation: scaleIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        }
-        
-        .float-element {
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        .shimmer-effect {
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-          background-size: 200% 100%;
-          animation: shimmer 2s infinite;
-        }
-        
-        .glass-morphism {
-          background: rgba(255, 255, 255, 0.05);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .metric-card {
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .metric-card:hover {
-          transform: translateY(-5px) scale(1.05);
-          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        .problem-solution-result {
-          position: relative;
-        }
-        
-        .problem-solution-result::before {
-          content: '';
-          position: absolute;
-          left: -20px;
-          top: 0;
-          bottom: 0;
-          width: 4px;
-          background: linear-gradient(to bottom, #f97316, #f59e0b, #eab308);
-          border-radius: 2px;
-        }
-      `}</style>
-      
-      <section className="relative py-24 bg-black overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-32 left-20 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl float-element"></div>
-          <div className="absolute bottom-32 right-20 w-80 h-80 bg-amber-500/10 rounded-full blur-2xl float-element" style={{animationDelay: '2s'}}></div>
-          
-          {/* Grid Pattern */}
-          <div className="absolute inset-0 opacity-5" style={{
-            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(249,115,22,0.5) 1px, transparent 0)',
-            backgroundSize: '50px 50px'
-          }}></div>
-        </div>
+    return (
+      <motion.div
+        ref={ref}
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        className={`grid lg:grid-cols-2 gap-12 items-center`}
+      >
+        {/* Image Section */}
+        <motion.div 
+          className={`${isEven ? 'lg:order-1' : 'lg:order-2'} relative group`}
+          variants={itemVariants}
+        >
+          <div className="relative overflow-hidden rounded-2xl">
+            {/* Main project image */}
+            <motion.img
+              src={study.projectImage}
+              alt={study.projectTitle}
+              className="w-full h-80 object-cover"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              onError={(e) => {
+                e.target.src = `https://via.placeholder.com/600x400/1a1a1a/ffffff?text=${study.projectTitle}`;
+              }}
+            />
+            
+            {/* Shimmer effect on hover */}
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+              initial={{ x: '-100%' }}
+              whileHover={{ x: '100%' }}
+              transition={{ duration: 0.8 }}
+            />
+            
+            {/* Overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            
+            {/* Floating client logo */}
+            <motion.div 
+              className="absolute top-6 right-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-3"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <img
+                src={study.clientLogo}
+                alt={study.clientName}
+                className="w-16 h-8 object-contain"
+                onError={(e) => {
+                  e.target.src = `https://via.placeholder.com/150x80/333/fff?text=${study.clientName}`;
+                }}
+              />
+            </motion.div>
+            
+            {/* Industry tag */}
+            <motion.div 
+              className="absolute bottom-6 left-6"
+              whileHover={{ scale: 1.05 }}
+            >
+              <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                {study.industry}
+              </span>
+            </motion.div>
+          </div>
+        </motion.div>
 
-        <div className="container mx-auto px-6 relative z-10">
-          {/* Section Header */}
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              Case <span className="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">Studies</span>
-            </h2>
-            <p className="text-white/70 text-xl max-w-3xl mx-auto">
-              Real projects, real results. Discover how we've transformed businesses across industries with innovative solutions.
-            </p>
-            <div className="w-32 h-1 bg-gradient-to-r from-orange-500 to-amber-500 mx-auto mt-8 rounded-full"></div>
+        {/* Content Section */}
+        <motion.div 
+          className={`${isEven ? 'lg:order-2' : 'lg:order-1'} space-y-8`}
+          variants={itemVariants}
+        >
+          {/* Header */}
+          <div className="space-y-4">
+            <motion.h3 
+              className="text-3xl md:text-4xl font-bold text-white"
+              variants={itemVariants}
+            >
+              {study.projectTitle}
+            </motion.h3>
+            <motion.p 
+              className="text-orange-400 text-lg font-medium"
+              variants={itemVariants}
+            >
+              {study.clientName}
+            </motion.p>
+            
+            {/* Tags */}
+            <motion.div 
+              className="flex flex-wrap gap-2"
+              variants={itemVariants}
+            >
+              {study.tags.map((tag, tagIndex) => (
+                <motion.span
+                  key={tagIndex}
+                  className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-white/70 text-sm"
+                  whileHover={{ 
+                    scale: 1.05,
+                    backgroundColor: "rgba(249, 115, 22, 0.1)",
+                    borderColor: "rgba(249, 115, 22, 0.3)"
+                  }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {tag}
+                </motion.span>
+              ))}
+            </motion.div>
           </div>
 
-          {/* Case Studies */}
-          <div className="space-y-32">
-            {caseStudies.map((study, index) => {
-              const isEven = index % 2 === 0;
-              const isVisible = visibleItems.has(index);
-              
-              return (
-                <div
-                  key={study.id}
-                  ref={el => itemRefs.current[index] = el}
-                  data-index={index}
-                  className={`grid lg:grid-cols-2 gap-12 items-center ${
-                    isVisible ? (isEven ? 'animate-slide-left' : 'animate-slide-right') : 'opacity-0'
-                  }`}
+          {/* Problem → Solution → Result */}
+          <motion.div className="space-y-6" variants={itemVariants}>
+            {/* Problem */}
+            <motion.div 
+              className="relative pl-8"
+              initial={{ x: -20, opacity: 0 }}
+              animate={isInView ? { x: 0, opacity: 1 } : { x: -20, opacity: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 to-red-600 rounded-full"></div>
+              <h4 className="text-red-400 font-bold text-lg mb-3 flex items-center">
+                <motion.span 
+                  className="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center mr-3"
+                  whileHover={{ rotate: 180, scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  {/* Image Section */}
-                  <div className={`${isEven ? 'lg:order-1' : 'lg:order-2'} relative group`}>
-                    <div className="relative overflow-hidden rounded-2xl">
-                      {/* Shimmer overlay */}
-                      <div className="absolute inset-0 shimmer-effect opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
-                      
-                      {/* Main project image */}
-                      <img
-                        src={study.projectImage}
-                        alt={study.projectTitle}
-                        className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110"
-                        onError={(e) => {
-                          e.target.src = `https://via.placeholder.com/600x400/1a1a1a/ffffff?text=${study.projectTitle}`;
-                        }}
-                      />
-                      
-                      {/* Overlay gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                      
-                      {/* Floating client logo */}
-                      <div className="absolute top-6 right-6 glass-morphism rounded-xl p-3 float-element">
-                        <img
-                          src={study.clientLogo}
-                          alt={study.clientName}
-                          className="w-16 h-8 object-contain"
-                          onError={(e) => {
-                            e.target.src = `https://via.placeholder.com/150x80/333/fff?text=${study.clientName}`;
-                          }}
-                        />
-                      </div>
-                      
-                      {/* Industry tag */}
-                      <div className="absolute bottom-6 left-6">
-                        <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                          {study.industry}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+                  <X size={16} />
+                </motion.span>
+                Problem
+              </h4>
+              <p className="text-white/80 leading-relaxed">{study.problem}</p>
+            </motion.div>
 
-                  {/* Content Section */}
-                  <div className={`${isEven ? 'lg:order-2' : 'lg:order-1'} space-y-8`}>
-                    {/* Header */}
-                    <div className="space-y-4">
-                      <h3 className="text-3xl md:text-4xl font-bold text-white">
-                        {study.projectTitle}
-                      </h3>
-                      <p className="text-orange-400 text-lg font-medium">{study.clientName}</p>
-                      
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2">
-                        {study.tags.map((tag, tagIndex) => (
-                          <span
-                            key={tagIndex}
-                            className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-white/70 text-sm"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+            {/* Solution */}
+            <motion.div 
+              className="relative pl-8"
+              initial={{ x: -20, opacity: 0 }}
+              animate={isInView ? { x: 0, opacity: 1 } : { x: -20, opacity: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full"></div>
+              <h4 className="text-blue-400 font-bold text-lg mb-3 flex items-center">
+                <motion.span 
+                  className="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center mr-3"
+                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Zap size={16} />
+                </motion.span>
+                Solution
+              </h4>
+              <p className="text-white/80 leading-relaxed">{study.solution}</p>
+            </motion.div>
 
-                    {/* Problem → Solution → Result */}
-                    <div className="space-y-6">
-                      {/* Problem */}
-                      <div className="problem-solution-result pl-8">
-                        <h4 className="text-red-400 font-bold text-lg mb-3 flex items-center">
-                          <span className="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center mr-3 text-sm">❌</span>
-                          Problem
-                        </h4>
-                        <p className="text-white/80 leading-relaxed">{study.problem}</p>
-                      </div>
+            {/* Result */}
+            <motion.div 
+              className="relative pl-8"
+              initial={{ x: -20, opacity: 0 }}
+              animate={isInView ? { x: 0, opacity: 1 } : { x: -20, opacity: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-green-500 to-green-600 rounded-full"></div>
+              <h4 className="text-green-400 font-bold text-lg mb-3 flex items-center">
+                <motion.span 
+                  className="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center mr-3"
+                  whileHover={{ scale: 1.2 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <CheckCircle size={16} />
+                </motion.span>
+                Result
+              </h4>
+              <p className="text-white/80 leading-relaxed mb-6">{study.result}</p>
+            </motion.div>
+          </motion.div>
 
-                      {/* Solution */}
-                      <div className="problem-solution-result pl-8">
-                        <h4 className="text-blue-400 font-bold text-lg mb-3 flex items-center">
-                          <span className="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center mr-3 text-sm">⚡</span>
-                          Solution
-                        </h4>
-                        <p className="text-white/80 leading-relaxed">{study.solution}</p>
-                      </div>
-
-                      {/* Result */}
-                      <div className="problem-solution-result pl-8">
-                        <h4 className="text-green-400 font-bold text-lg mb-3 flex items-center">
-                          <span className="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center mr-3 text-sm">✅</span>
-                          Result
-                        </h4>
-                        <p className="text-white/80 leading-relaxed mb-6">{study.result}</p>
-                      </div>
-                    </div>
-
-                    {/* Metrics Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      {study.metrics.map((metric, metricIndex) => (
-                        <div
-                          key={metricIndex}
-                          className={`metric-card glass-morphism rounded-xl p-4 text-center ${
-                            isVisible ? 'animate-scale-in' : ''
-                          }`}
-                          style={{animationDelay: `${metricIndex * 0.1}s`}}
-                        >
-                          <div className="text-2xl mb-2">{metric.icon}</div>
-                          <div className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">
-                            {metric.value}
-                          </div>
-                          <div className="text-white/70 text-sm">{metric.label}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+          {/* Metrics Cards */}
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-4"
+            variants={itemVariants}
+          >
+            {study.metrics.map((metric, metricIndex) => {
+              const IconComponent = metric.icon;
+              return (
+                <motion.div
+                  key={metricIndex}
+                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 text-center cursor-pointer"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                  transition={{ delay: 0.5 + metricIndex * 0.1 }}
+                  whileHover={{ 
+                    y: -8, 
+                    scale: 1.05,
+                    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3)"
+                  }}
+                  onHoverStart={() => setHoveredMetric(`${study.id}-${metricIndex}`)}
+                  onHoverEnd={() => setHoveredMetric(null)}
+                >
+                  <motion.div 
+                    className={`${metric.color} mb-2 flex justify-center`}
+                    animate={hoveredMetric === `${study.id}-${metricIndex}` ? { 
+                      rotate: [0, -10, 10, -10, 10, 0],
+                      scale: [1, 1.2, 1.2, 1.2, 1.2, 1]
+                    } : {}}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <IconComponent size={32} strokeWidth={2} />
+                  </motion.div>
+                  <motion.div 
+                    className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent"
+                    animate={hoveredMetric === `${study.id}-${metricIndex}` ? { scale: 1.1 } : { scale: 1 }}
+                  >
+                    {metric.value}
+                  </motion.div>
+                  <div className="text-white/70 text-sm mt-1">{metric.label}</div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    );
+  };
 
-          {/* Bottom CTA */}
-          <div className="text-center mt-24">
-            <div className="glass-morphism rounded-2xl p-8 max-w-2xl mx-auto">
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Ready to be our next success story?
-              </h3>
-              <p className="text-white/70 mb-6">
-                Let's discuss how we can transform your business with innovative solutions.
-              </p>
-              <button className="bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold px-8 py-3 rounded-full hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 hover:scale-105">
-                Start Your Project
-              </button>
-            </div>
-          </div>
+  return (
+    <section className="relative py-24 bg-black overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <motion.div 
+          className="absolute top-32 left-20 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl"
+          animate={{
+            y: [0, -20, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-32 right-20 w-80 h-80 bg-amber-500/10 rounded-full blur-2xl"
+          animate={{
+            y: [0, 20, 0],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
+        
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 opacity-5" style={{
+          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(249,115,22,0.5) 1px, transparent 0)',
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Section Header */}
+        <motion.div 
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.h2 
+            className="text-5xl md:text-7xl font-bold text-white mb-6"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5 }}
+          >
+            Case <span className="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">Studies</span>
+          </motion.h2>
+          <motion.p 
+            className="text-white/70 text-xl max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Real projects, real results. Discover how we've transformed businesses across industries with innovative solutions.
+          </motion.p>
+          <motion.div 
+            className="w-32 h-1 bg-gradient-to-r from-orange-500 to-amber-500 mx-auto mt-8 rounded-full"
+            initial={{ width: 0 }}
+            whileInView={{ width: 128 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          />
+        </motion.div>
+
+        {/* Case Studies */}
+        <div className="space-y-32">
+          {caseStudies.map((study, index) => (
+            <CaseStudyCard key={study.id} study={study} index={index} />
+          ))}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

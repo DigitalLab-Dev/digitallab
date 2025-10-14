@@ -202,7 +202,7 @@ const Mission = () => {
 
   return (
     <section 
-      className="w-full mt-10 md:mt-20  flex flex-col gap-16 md:gap-20 lg:gap-24 items-center justify-center px-4 md:px-10 bg-black relative overflow-hidden"
+      className="w-full pt-10   flex flex-col gap-16  items-center justify-center px-4 md:px-10 bg-black relative overflow-hidden"
       aria-label="Our Vision, Mission, and Journey"
     >
       {/* Decorative background - hidden from screen readers */}
@@ -240,7 +240,7 @@ const Mission = () => {
         return (
           <motion.article
             key={mission.id}
-            className="w-full flex flex-col items-center justify-center relative"
+            className="w-full flex flex-col  items-center justify-center relative"
             aria-labelledby={`${mission.id}-heading`}
             initial="hidden"
             whileInView="visible"
@@ -249,7 +249,7 @@ const Mission = () => {
           >
             {/* Mission Content */}
             <div
-              className={`w-full max-w-4xl flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 ${
+              className={`w-full max-w-4xl flex flex-col lg:flex-row items-center  justify-center gap-8 lg:gap-16 ${
                 isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
               }`}
             >
