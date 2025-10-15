@@ -35,8 +35,9 @@ export default function ShowcasePortfolio() {
 
   return (
     <section
+      id="short-form"
       ref={sectionRef}
-      className="relative min-h-screen bg-black py-12 px-6 overflow-hidden"
+      className="relative min-h-screen bg-black  px-6 overflow-hidden"
     >
       {/* Hidden heading for accessibility */}
       <h3 className="sr-only">
@@ -194,7 +195,7 @@ export default function ShowcasePortfolio() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 1, duration: 1 }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 md:grid-cols-3  gap-6"
         >
           {videos.map((video, index) => (
             <motion.article
@@ -228,7 +229,11 @@ export default function ShowcasePortfolio() {
               >
                 {/* YouTube iframe */}
                 <iframe
-                  src={`https://www.youtube.com/embed/${video.ytId}?autoplay=${hoveredVideo === video.id ? 1 : 0}&mute=1&controls=0&loop=1&playlist=${video.ytId}&modestbranding=1&rel=0`}
+                  src={`https://www.youtube.com/embed/${video.ytId}?autoplay=${
+                    hoveredVideo === video.id ? 1 : 0
+                  }&mute=1&controls=0&loop=1&playlist=${
+                    video.ytId
+                  }&modestbranding=1&rel=0`}
                   title={`Short video ${index + 1}`}
                   allow="autoplay; encrypted-media"
                   className="w-full h-full object-cover pointer-events-none"
@@ -343,7 +348,7 @@ export default function ShowcasePortfolio() {
               allowFullScreen
               className="w-full h-full"
             />
-            
+
             {/* Close button */}
             <button
               onClick={() => setSelectedVideo(null)}

@@ -8,56 +8,56 @@ export default function VideoServicesSection() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  const services = [
-    {
-      id: 1,
-      title: "YouTube & Podcasts",
-      description: "Transform long-form content into engaging stories that keep your audience hooked from start to finish. We handle everything from jump cuts to color grading, ensuring your content stands out in a crowded space.",
-      tools: ["Premiere Pro", "DaVinci Resolve", "Audition", "After Effects"],
-      image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80",
-      imageAlt: "Professional video editing workspace"
-    },
-    {
-      id: 2,
-      title: "Instagram/TikTok Shorts",
-      description: "Viral-ready vertical content optimized for maximum engagement. Fast-paced edits, trending effects, and perfect timing to capture attention in the first 3 seconds and keep viewers watching until the end.",
-      tools: ["Premiere Pro", "After Effects", "CapCut", "Filmora"],
-      image: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=800&q=80",
-      imageAlt: "Social media content creation"
-    },
-    {
-      id: 3,
-      title: "Commercials & Ads",
-      description: "High-converting promotional content that drives results. We craft compelling narratives with strategic pacing, professional color grading, and attention-grabbing visuals that turn viewers into customers.",
-      tools: ["Premiere Pro", "After Effects", "Cinema 4D", "DaVinci Resolve"],
-      image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80",
-      imageAlt: "Commercial production set"
-    },
-    {
-      id: 4,
-      title: "Cinematic Edits & Montages",
-      description: "Film-grade storytelling with Hollywood-level production value. Dramatic pacing, cinematic color grading, and seamless transitions that create an emotional connection with your audience.",
-      tools: ["DaVinci Resolve", "Premiere Pro", "Final Cut Pro", "After Effects"],
-      image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
-      imageAlt: "Cinematic filmmaking"
-    },
-    {
-      id: 5,
-      title: "Motion Graphics",
-      description: "Eye-catching animated graphics that bring your brand to life. From logo reveals to complex infographics, we create motion design that communicates your message with style and clarity.",
-      tools: ["After Effects", "Cinema 4D", "Illustrator", "Blender"],
-      image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80",
-      imageAlt: "Motion graphics design"
-    },
-    {
-      id: 6,
-      title: "After Effects VFX",
-      description: "Advanced visual effects and compositing that push creative boundaries. Green screen keying, particle systems, advanced tracking, and seamless compositing for stunning, professional results.",
-      tools: ["After Effects", "Mocha Pro", "Element 3D", "Red Giant Suite"],
-      image: "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&q=80",
-      imageAlt: "Visual effects production"
-    }
-  ];
+const services = [
+  {
+    id: 1,
+    title: "Short-Form Content (Reels/Shorts/TikToks)",
+    description: "Viral-ready vertical content optimized for maximum engagement. We create fast-paced edits with trending effects and perfect timing to capture attention in the first 3 seconds.",
+    tools: ["Premiere Pro", "After Effects", "CapCut", "DaVinci Resolve"],
+    image: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=800&q=80",
+    imageAlt: "A person creating vertical video content on a smartphone"
+  },
+  {
+    id: 2,
+    title: "Long-Form Content (YouTube & Podcasts)",
+    description: "Transforming raw footage into engaging stories that boost audience retention. We handle everything from multi-cam editing and color grading to professional sound design.",
+    tools: ["Premiere Pro", "DaVinci Resolve", "Adobe Audition", "Final Cut Pro"],
+    image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80",
+    imageAlt: "A professional video editing setup displaying a timeline"
+  },
+  {
+    id: 3,
+    title: "Documentary-Style Editing",
+    description: "Crafting compelling narratives by weaving together interviews, B-roll, and archival footage. Our focus is on authentic storytelling that creates a deep emotional impact.",
+    tools: ["DaVinci Resolve", "Premiere Pro", "Avid Media Composer", "Adobe Audition"],
+    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80",
+    imageAlt: "A professional film camera on a production set"
+  },
+  {
+    id: 4,
+    title: "Motion Graphics",
+    description: "Bringing your brand and data to life with eye-catching animations. We specialize in logo reveals, explainer videos, animated infographics, and stylish lower thirds.",
+    tools: ["After Effects", "Cinema 4D", "Adobe Illustrator", "Blender"],
+    image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80",
+    imageAlt: "A designer working on motion graphics on a computer"
+  },
+  {
+    id: 5,
+    title: "2D & 3D Animation",
+    description: "From concept to final render, we create stunning animations that tell your story. Services include character animation, product visualizations, and building entire animated worlds.",
+    tools: ["Blender", "Autodesk Maya", "Cinema 4D", "Toon Boom Harmony"],
+    image: "https://images.unsplash.com/photo-1593312241592-28e44b9a18d2?w=800&q=80",
+    imageAlt: "A 3D character model being animated in software"
+  },
+  {
+    id: 6,
+    title: "Cinematic Editing",
+    description: "Achieving a Hollywood-level aesthetic with dramatic pacing, advanced color grading, and immersive sound design. We turn your footage into a cinematic experience.",
+    tools: ["DaVinci Resolve", "Premiere Pro", "Final Cut Pro", "After Effects"],
+    image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
+    imageAlt: "A dramatic, cinematic shot of a person against a scenic background"
+  }
+];
 
   const ServiceRow = ({ service, index }) => {
     const rowRef = useRef(null);
@@ -70,7 +70,7 @@ export default function VideoServicesSection() {
         initial={{ opacity: 0, y: 60 }}
         animate={rowInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, ease: [0.6, 0.05, 0.01, 0.9] }}
-        className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-32 last:mb-0 ${
+        className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20 last:mb-0 ${
           !isImageLeft ? 'lg:grid-flow-dense' : ''
         }`}
       >
@@ -170,7 +170,7 @@ export default function VideoServicesSection() {
   };
 
   return (
-    <section ref={sectionRef} className="relative bg-black py-32 px-6 overflow-hidden">
+    <section  ref={sectionRef} className="relative bg-black py-10 px-6 overflow-hidden">
       {/* SEO */}
       <div className="sr-only">
         <h2>Professional Video Editing Services - YouTube, Social Media, Commercials, Motion Graphics & VFX</h2>
@@ -210,7 +210,7 @@ export default function VideoServicesSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-orange-500/10 border border-orange-500/30 mb-8 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-orange-500/10 border border-orange-500/30 mb-4 backdrop-blur-sm"
           >
             <Sparkles className="w-4 h-4 text-orange-500" />
             <span className="text-orange-500 font-semibold text-sm tracking-wider uppercase">

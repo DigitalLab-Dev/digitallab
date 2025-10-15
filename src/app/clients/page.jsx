@@ -1,7 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import Head from 'next/head';
 import Loader from '@/components/Loader';
 
 // Dynamic imports for better code splitting
@@ -24,6 +23,9 @@ const InfluencerShowcase = dynamic(
   }
 );
 const TestimonialCarousel = dynamic(() => import('./sections/Testimonial'), {
+  loading: () => null,
+});
+const CtaSectionAnimated = dynamic(() => import('./sections/ClientCta'), {
   loading: () => null,
 });
 
@@ -82,6 +84,9 @@ export default function Clients() {
 
         {/* Testimonials - Client Reviews */}
         <TestimonialCarousel />
+        {/* Call to Action - Contact/Consultation */}
+        <CtaSectionAnimated />
+        
       </main>
     </>
   );
