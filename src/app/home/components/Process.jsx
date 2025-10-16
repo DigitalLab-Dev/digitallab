@@ -24,7 +24,7 @@ const Process = ({
   return (
     <article
       ref={ref}
-      className="min-h-[50vh] md:h-[70vh] border-b border-orange-500 flex flex-col items-start justify-center py-8 md:py-0"
+      className="min-h-[50vh]   md:h-[70vh] border-b border-orange-500 flex flex-col items-start justify-center py-4 md:py-0"
       role="listitem"
       itemScope
       itemType="https://schema.org/HowToStep"
@@ -33,7 +33,7 @@ const Process = ({
       <meta itemProp="position" content={String(index)} />
 
       {/* Top section - Index and Icon */}
-      <div className="flex items-start justify-between w-full mb-4 md:mb-0">
+      <div className="flex items-start justify-between w-full mb-4  md:mb-0">
         <span
           className="text-lg md:text-xl text-orange-500 font-bold"
           aria-label={`Step ${index} of ${totalSteps}`}

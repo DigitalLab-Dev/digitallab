@@ -105,7 +105,7 @@ const ServicesSection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="min-h-screen mt-10 py-20 px-4 overflow-hidden relative">
+    <section ref={sectionRef} className="min-h-screen mt-10 pt-20 py-10 px-4 overflow-hidden relative">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse"></div>

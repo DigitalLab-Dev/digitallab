@@ -163,7 +163,7 @@ const Methods = () => {
 
         {/* Right Column (scrollable content) */}
         <div
-          className="w-full lg:w-1/2 p-5 md:p-10 space-y-10 md:space-y-20"
+          className="w-full lg:w-1/2 p-5 md:p-10 space-y-5 "
           role="list"
           aria-label="Process steps"
         >

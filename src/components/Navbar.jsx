@@ -12,9 +12,7 @@ import {
   Palette,
   Code,
   Share2,
-  Search,
   PenTool,
-  TrendingUp,
   Target,
 } from 'lucide-react';
 
@@ -24,45 +22,36 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [dropdownTimeout, setDropdownTimeout] = useState(null);
 
-  const services = {
-    left: [
-      { name: 'Video Editing', icon: Play, href: '/services/video-editing' },
-      {
-        name: 'Graphic Design',
-        icon: Palette,
-        href: '/services/graphic-design',
-      },
-      {
-        name: 'Web Development',
-        icon: Code,
-        href: '/services/web-development',
-      },
-      {
-        name: 'Social Media Management',
-        icon: Share2,
-        href: '/services/social-media',
-      },
-    ],
-    right: [
-      { name: 'SEO Optimization', icon: Search, href: '/services/seo' },
-      {
-        name: 'Content Writing',
-        icon: PenTool,
-        href: '/services/content-writing',
-      },
-      {
-        name: 'Digital Marketing',
-        icon: TrendingUp,
-        href: '/services/marketing',
-      },
-      {
-        name: 'Brand Strategy',
-        icon: Target,
-        href: '/services/brand-strategy',
-      },
-    ],
-  };
+  const services = [
+    { name: 'Video Editing', icon: Play, href: '/services/video-editing' },
+    {
+      name: 'Web Development',
+      icon: Code,
+      href: '/services/web-development',
+    },
+    {
+      name: 'Graphic Designing',
+      icon: Palette,
+      href: '/services/graphic-designing',
+    },
+    {
+      name: 'Copywriting',
+      icon: PenTool,
+      href: '/services/copywriting',
+    },
+    {
+      name: 'Social Media Management',
+      icon: Share2,
+      href: '/services/social-media-management',
+    },
+    {
+      name: 'Ads Management',
+      icon: Target,
+      href: '/services/ads-management',
+    },
+  ];
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -83,6 +72,21 @@ const Navbar = () => {
       return pathname.startsWith('/services');
     }
     return pathname === href;
+  };
+
+  const handleMouseEnter = () => {
+    if (dropdownTimeout) {
+      clearTimeout(dropdownTimeout);
+      setDropdownTimeout(null);
+    }
+    setIsDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setIsDropdownOpen(false);
+    }, 300);
+    setDropdownTimeout(timeout);
   };
 
   return (
@@ -121,25 +125,30 @@ const Navbar = () => {
               {navLinks.map((item) => (
                 <li key={item.name} className="relative">
                   {item.name === 'Services' ? (
-                    <button
-                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                      className={`flex items-center space-x-1 px-3 py-2 text-sm font-medium uppercase tracking-wide relative
-                        ${
-                          isActive(item.href)
-                            ? 'text-orange-400'
-                            : 'text-gray-300 hover:text-orange-400'
-                        }`}
+                    <div
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
                     >
-                      <span>{item.name}</span>
-                      <ChevronDown
-                        className={`w-4 h-4 transition-transform duration-200 ${
-                          isDropdownOpen ? 'rotate-180' : ''
-                        }`}
-                      />
-                      {isActive(item.href) && (
-                        <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-orange-400 shadow-[0_0_8px_2px_rgba(255,165,0,0.7)] rounded-full"></span>
-                      )}
-                    </button>
+                      <Link
+                        href={item.href}
+                        className={`flex items-center space-x-1 px-3 py-2 text-sm font-medium uppercase tracking-wide relative
+                          ${
+                            isActive(item.href)
+                              ? 'text-orange-400'
+                              : 'text-gray-300 hover:text-orange-400'
+                          }`}
+                      >
+                        <span>{item.name}</span>
+                        <ChevronDown
+                          className={`w-4 h-4 transition-transform duration-200 ${
+                            isDropdownOpen ? 'rotate-180' : ''
+                          }`}
+                        />
+                        {isActive(item.href) && (
+                          <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-orange-400 shadow-[0_0_8px_2px_rgba(255,165,0,0.7)] rounded-full"></span>
+                        )}
+                      </Link>
+                    </div>
                   ) : (
                     <Link
                       href={item.href}
@@ -181,55 +190,37 @@ const Navbar = () => {
         </div>
 
         {/* Services Dropdown - Desktop */}
-        {isDropdownOpen && (
-          <div className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 w-[800px] bg-black backdrop-blur-lg border border-white/10 rounded-xl shadow-xl">
-            <div className="px-8 py-8 grid grid-cols-2 gap-12">
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-6">
-                  Core Services
-                </h3>
-                <div className="space-y-4">
-                  {services.left.map(({ name, icon: Icon, href }) => (
-                    <Link
-                      key={name}
-                      href={href}
-                      className="flex items-center space-x-4 p-3 hover:bg-white/10 rounded-md transition-colors duration-200 group"
-                    >
-                      <div className="p-2 bg-orange-100/20 group-hover:bg-orange-500 rounded-md">
-                        <Icon className="w-5 h-5 text-orange-400 group-hover:text-white" />
-                      </div>
-                      <span className="text-gray-200 font-medium group-hover:text-orange-400">
-                        {name}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-6">
-                  Growth Services
-                </h3>
-                <div className="space-y-4">
-                  {services.right.map(({ name, icon: Icon, href }) => (
-                    <Link
-                      key={name}
-                      href={href}
-                      className="flex items-center space-x-4 p-3 hover:bg-white/10 rounded-md transition-colors duration-200 group"
-                    >
-                      <div className="p-2 bg-orange-100/20 group-hover:bg-orange-500 rounded-md">
-                        <Icon className="w-5 h-5 text-orange-400 group-hover:text-white" />
-                      </div>
-                      <span className="text-gray-200 font-medium group-hover:text-orange-400">
-                        {name}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
+        <div
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={`hidden lg:block absolute top-full left-1/2 -translate-x-1/2 w-[700px] bg-black backdrop-blur-lg border border-white/10 rounded-xl shadow-xl transition-all duration-300 ${
+            isDropdownOpen
+              ? 'opacity-100 translate-y-0 pointer-events-auto'
+              : 'opacity-0 -translate-y-2 pointer-events-none'
+          }`}
+        >
+          <div className="px-8 py-8">
+            <h3 className="text-lg font-semibold text-white mb-6">
+              Our Services
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {services.map(({ name, icon: Icon, href }) => (
+                <Link
+                  key={name}
+                  href={href}
+                  className="flex items-center space-x-4 p-3 hover:bg-white/10 rounded-md transition-colors duration-200 group"
+                >
+                  <div className="p-2 bg-orange-100/20 group-hover:bg-orange-500 rounded-md transition-colors duration-200">
+                    <Icon className="w-5 h-5 text-orange-400 group-hover:text-white transition-colors duration-200" />
+                  </div>
+                  <span className="text-gray-200 font-medium group-hover:text-orange-400 transition-colors duration-200">
+                    {name}
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
-        )}
+        </div>
 
         {/* Mobile Menu */}
         <div
@@ -265,23 +256,21 @@ const Navbar = () => {
                     {/* Mobile Services Dropdown */}
                     {isMobileServicesOpen && (
                       <div className="pl-4 space-y-3 mt-2">
-                        {[...services.left, ...services.right].map(
-                          ({ name, icon: Icon, href }) => (
-                            <Link
-                              key={name}
-                              href={href}
-                              onClick={() => setIsMobileMenuOpen(false)}
-                              className="flex items-center space-x-3 p-2 hover:bg-white/10 rounded-md transition-colors duration-200"
-                            >
-                              <div className="p-1.5 bg-orange-100/20 rounded-md">
-                                <Icon className="w-4 h-4 text-orange-400" />
-                              </div>
-                              <span className="text-gray-200 font-medium text-sm">
-                                {name}
-                              </span>
-                            </Link>
-                          )
-                        )}
+                        {services.map(({ name, icon: Icon, href }) => (
+                          <Link
+                            key={name}
+                            href={href}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="flex items-center space-x-3 p-2 hover:bg-white/10 rounded-md transition-colors duration-200"
+                          >
+                            <div className="p-1.5 bg-orange-100/20 rounded-md">
+                              <Icon className="w-4 h-4 text-orange-400" />
+                            </div>
+                            <span className="text-gray-200 font-medium text-sm">
+                              {name}
+                            </span>
+                          </Link>
+                        ))}
                       </div>
                     )}
                   </>

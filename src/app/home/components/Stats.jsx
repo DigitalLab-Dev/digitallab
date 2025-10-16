@@ -50,7 +50,7 @@ const Stats = () => {
   };
 
   return (
-    <section className="sm:min-h-[50vh] mb-20 flex flex-col items-center justify-center px-5">
+    <section className="sm:min-h-[50vh] py-20 flex flex-col items-center justify-center px-5">
       <motion.header
         initial={{ opacity: 0, y: 50, }}
         whileInView={{ opacity: 1, y: 0, }}
@@ -59,9 +59,9 @@ const Stats = () => {
         className="text-center md:w-2/3 w-full"
       >
         <h2 className="text-4xl sm:text-5xl">
-          <span className="text-[#f0750f] italican">Building</span> brands,
-          <span className="text-[#f0750f] italican"> boosting</span> businesses,
-          and <span className="text-[#f0750f] italican">redefining</span>{' '}
+          <span className="text-[#f0750f] ">Building</span> brands,
+          <span className="text-[#f0750f] "> boosting</span> businesses,
+          and <span className="text-[#f0750f] ">redefining</span>{' '}
           possibilities.
         </h2>
       </motion.header>

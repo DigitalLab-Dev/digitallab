@@ -95,19 +95,19 @@ const VideoSection = () => {
 
   return (
     <section 
-      className="z-50"
+      className="z-[9999] "
       aria-labelledby="video-section-heading"
     >
-      <div className="w-full  z-50 h-[80vh] md:h-screen mx-auto">
+      <div className="w-full  z-[9999] h-[80vh] md:h-screen mx-auto">
         <div
           ref={videoContainerRef}
-          className="relative h-full w-full rounded-2xl overflow-hidden shadow-2xl bg-black"
+          className="relative h-full z-[9999]  w-full rounded-2xl overflow-hidden shadow-2xl"
           
         >
           {/* YouTube Player */}
           <div
             ref={playerRef}
-            className="absolute inset-0 w-full h-full"
+            className="absolute  inset-0 w-full h-full"
             title="About Digital Lab - Company Story Video"
           />
 

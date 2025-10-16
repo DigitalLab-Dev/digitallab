@@ -12,28 +12,28 @@ import {
 const Testimonials = () => {
   const testimonials = [
     {
-      youtubeId: 'dQw4w9WgXcQ', // Replace with your actual YouTube Shorts ID
+      youtubeId: 'ChJAhQe-kew', // Replace with your actual YouTube Shorts ID
       clientName: 'John Smith',
       company: 'Tech Startup Inc.',
       rating: 5,
       quote: 'Transformed our digital presence completely!',
     },
     {
-      youtubeId: 'dQw4w9WgXcQ', // Replace with your actual YouTube Shorts ID
+      youtubeId: 'XUAJM5ZxO0E', // Replace with your actual YouTube Shorts ID
       clientName: 'Sarah Johnson',
       company: 'E-Commerce Pro',
       rating: 5,
       quote: 'Best marketing agency we\'ve ever worked with.',
     },
     {
-      youtubeId: 'dQw4w9WgXcQ', // Replace with your actual YouTube Shorts ID
+      youtubeId: 'd1UdWkDMWpw', // Replace with your actual YouTube Shorts ID
       clientName: 'Michael Chen',
       company: 'Global Solutions Ltd.',
       rating: 5,
       quote: 'ROI increased by 300% in just 3 months!',
     },
     {
-      youtubeId: 'dQw4w9WgXcQ', // Replace with your actual YouTube Shorts ID
+      youtubeId: '4vHPK-HxrfA', // Replace with your actual YouTube Shorts ID
       clientName: 'Emily Davis',
       company: 'Creative Agency',
       rating: 5,
@@ -128,7 +128,7 @@ const Testimonials = () => {
   return (
     <section
       ref={containerRef}
-      className="py-16 md:py-24 lg:py-32 px-4 sm:px-8 lg:px-10 flex flex-col items-center justify-center bg-gradient-to-b from-neutral-900 to-black relative overflow-hidden"
+      className="py-16  px-4 sm:px-8 lg:px-10 flex flex-col items-center justify-center bg-gradient-to-b from-neutral-900 to-black relative overflow-hidden"
       aria-labelledby="testimonials-heading"
     >
       {/* Animated Background Elements */}
@@ -191,7 +191,7 @@ const Testimonials = () => {
           {/* Video and Info Grid */}
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-8">
             {/* Video Container */}
-            <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative h-[450px]  rounded-2xl overflow-hidden shadow-2xl">
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={currentIndex}
@@ -301,96 +301,11 @@ const Testimonials = () => {
           </div>
 
           {/* Thumbnail Navigation */}
-          <div className="flex flex-wrap justify-center gap-3 mb-6">
-            {testimonials.map((testimonial, index) => (
-              <motion.button
-                key={index}
-                onClick={() => handleDotClick(index)}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className={`relative px-6 py-3 rounded-full font-semibold transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-orange-500/50 ${
-                  index === currentIndex
-                    ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/50'
-                    : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-white'
-                }`}
-                aria-label={`View testimonial from ${testimonial.clientName}`}
-                aria-current={index === currentIndex ? 'true' : 'false'}
-              >
-                {testimonial.clientName.split(' ')[0]}
-                
-                {/* Hover Tooltip */}
-                <AnimatePresence>
-                  {hoveredCard === index && index !== currentIndex && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      className="absolute -top-12 left-1/2 -translate-x-1/2 bg-neutral-900 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg border border-white/10"
-                    >
-                      {testimonial.company}
-                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-neutral-900 rotate-45" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.button>
-            ))}
-          </div>
-
-          {/* Progress Dots */}
-          <div className="flex items-center justify-center gap-3" role="tablist" aria-label="Testimonial navigation">
-            {testimonials.map((_, index) => (
-              <motion.button
-                key={index}
-                onClick={() => handleDotClick(index)}
-                className={`relative h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
-                  index === currentIndex ? 'w-12 bg-orange-500' : 'w-2 bg-neutral-600'
-                }`}
-                animate={{ scale: index === currentIndex ? 1.2 : 1 }}
-                whileHover={{ scale: 1.3 }}
-                aria-label={`Go to testimonial ${index + 1}`}
-                role="tab"
-                aria-selected={index === currentIndex}
-              />
-            ))}
-          </div>
+   
         </motion.div>
       </motion.div>
 
-      {/* Schema.org structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'ItemList',
-            name: 'Client Testimonials',
-            description: 'Video testimonials from satisfied clients',
-            itemListElement: testimonials.map((testimonial, index) => ({
-              '@type': 'ListItem',
-              position: index + 1,
-              item: {
-                '@type': 'Review',
-                reviewRating: {
-                  '@type': 'Rating',
-                  ratingValue: testimonial.rating,
-                  bestRating: 5,
-                },
-                author: {
-                  '@type': 'Person',
-                  name: testimonial.clientName,
-                },
-                reviewBody: testimonial.quote,
-                itemReviewed: {
-                  '@type': 'Organization',
-                  name: 'Your Agency Name',
-                },
-              },
-            })),
-          }),
-        }}
-      />
+
     </section>
   );
 };

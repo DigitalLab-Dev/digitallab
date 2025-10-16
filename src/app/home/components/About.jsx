@@ -94,7 +94,7 @@ const About = () => {
   return (
     <section
       ref={containerRef}
-      className="w-full min-h-screen h-fit px-5 py-20  relative overflow-hidden bg-black"
+      className="w-full min-h-screen h-fit px-5 py-10  relative overflow-hidden bg-black"
       aria-labelledby="about-heading"
     >
       <motion.div

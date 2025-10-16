@@ -76,7 +76,7 @@ const Services = () => {
   return (
     <section 
       ref={sectionRef}
-      className="w-full py-16 md:py-20 flex flex-col items-center justify-center px-5 sm:px-8 lg:px-10 "
+      className="w-full py-10 flex flex-col items-center justify-center px-5 sm:px-8 lg:px-10 "
       aria-labelledby="services-heading"
     >
       <motion.div

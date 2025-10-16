@@ -36,7 +36,7 @@ const Portfolio = () => {
     },
   ];
   return (
-    <section id='portfolio' className="py-20 relative">
+    <section id='portfolio' className="py-10 relative">
       <div className="flex flex-col items-center justify-center">
         <span className="px-3 py-2 rounded-full text-orange-500 ">
           PORTFOLIO
@@ -55,3 +55,4 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
+
