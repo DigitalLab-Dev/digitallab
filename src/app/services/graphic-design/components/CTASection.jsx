@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const CTASection = () => {
   return (
@@ -61,15 +62,10 @@ const CTASection = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Start Your Project
-                </motion.button>
-
-                <motion.button
-                  className="border-2 border-white hover:bg-white hover:text-black text-white font-semibold px-4 py-3 cursor-pointer rounded-full transition-all duration-300 text-lg"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  View Our Portfolio
+                  <Link href="/contact">
+                    Start Your Project
+                  </Link>
+    
                 </motion.button>
               </motion.div>
             </div>

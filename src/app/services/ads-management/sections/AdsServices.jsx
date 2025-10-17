@@ -15,6 +15,7 @@ import {
   Star,
   Zap,
 } from 'lucide-react';
+import Link from 'next/link';
 
 const ServicesSection = () => {
   const [hoveredService, setHoveredService] = useState(null);
@@ -284,7 +285,7 @@ const ServicesSection = () => {
               onClick={() => setSelectedService(service)}
             >
               {/* Card Background with Gradient Border */}
-              <div className="relative h-full p-6 lg:p-8 bg-gradient-to-br from-gray-900/80 to-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden group-hover:border-orange-400/50 transition-all duration-500">
+              <div className="relative h-full p-6 lg:p-8 bg-gradient-to-br from-neutral-900/80 to-neutral-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden group-hover:border-orange-400/50 transition-all duration-500">
                 {/* Gradient Background Effect */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${service.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
@@ -339,7 +340,7 @@ const ServicesSection = () => {
                     {service.platforms.slice(0, 2).map((platform) => (
                       <span
                         key={platform}
-                        className="px-2 py-1 bg-gray-800/50 border border-gray-600/30 rounded-md text-xs text-gray-300"
+                        className="px-2 py-1 bg-neutral-800/50 border border-neutral-600/30 rounded-md text-xs text-neutral-300"
                       >
                         {platform}
                       </span>
@@ -374,7 +375,9 @@ const ServicesSection = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Start Your Multi-Platform Campaign
+            <Link href="/contact">
+             Start Your Multi-Platform Campaign
+            </Link>
             <motion.div
               className="ml-3"
               animate={{ x: [0, 5, 0] }}
@@ -402,7 +405,7 @@ const ServicesSection = () => {
             {/* Modal */}
             <div className="fixed inset-0 flex  items-center justify-center z-50 p-4">
               <motion.div
-                className="relative max-w-2xl h-[95%] w-full bg-gradient-to-br from-gray-900 to-gray-800 border border-orange-400/30 rounded-3xl p-8 shadow-2xl"
+                className="relative max-w-2xl h-[95%] w-full bg-gradient-to-br from-neutral-900 to-neutral-800 border border-orange-400/30 rounded-3xl p-8 shadow-2xl"
                 variants={modalVariants}
                 initial="hidden"
                 animate="visible"

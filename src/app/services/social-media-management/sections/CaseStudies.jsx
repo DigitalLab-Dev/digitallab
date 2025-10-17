@@ -141,7 +141,7 @@ const CaseStudies = () => {
   };
 
   return (
-    <section className="min-h-screen py-20 relative overflow-hidden">
+    <section className="min-h-screen py-10 relative overflow-hidden">
       {/* Custom cursor */}
       {hoveredCase !== null && (
         <motion.div
@@ -196,7 +196,7 @@ const CaseStudies = () => {
 
         {/* Case Studies Grid */}
         <motion.div
-          className="space-y-32"
+          className="space-y-20"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -227,8 +227,6 @@ const CaseStudies = () => {
                   {/* Glowing background */}
                   <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/30 to-amber-500/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
 
-                  {/* Static glow behind image */}
-                  <div className="absolute -inset-2 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-xl blur-lg"></div>
 
                   {/* Image */}
                   <div className="relative overflow-hidden rounded-xl">
@@ -316,17 +314,6 @@ const CaseStudies = () => {
                         </div>
                       ))}
                   </div>
-
-                  {/* CTA Button */}
-                  <motion.a
-                    href={caseStudy.link}
-                    className="group inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-amber-500 text-black font-bold px-6 py-3 rounded-full hover:from-amber-500 hover:to-orange-600 transition-all duration-300 shadow-lg hover:shadow-orange-500/25"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    View Full Case Study
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </motion.a>
                 </motion.div>
               </motion.div>
             );

@@ -178,7 +178,7 @@ const CopywritingHero = () => {
         }}
       />
 
-      <section className="relative min-h-screen bg-gradient-to-br from-black via-zinc-800 to-black text-white overflow-hidden">
+      <section className="relative  md:min-h-screen  text-white overflow-hidden">
         {/* Animated Background Grid */}
         <div className="absolute inset-0" aria-hidden="true">
           {[...Array(50)].map((_, i) => (
@@ -242,7 +242,7 @@ const CopywritingHero = () => {
         />
 
         {/* Main Content */}
-        <div className="relative pt-20 z-10 flex items-center justify-center min-h-screen px-6">
+        <div className="relative pt-20 pb-10 z-10 flex items-center justify-center  px-6">
           <div className="text-center max-w-5xl mx-auto space-y-2">
             {/* Pre-title */}
             <div className={`${isVisible ? 'slide-down' : 'opacity-0'}`}>
@@ -255,7 +255,7 @@ const CopywritingHero = () => {
             <div
               className={`space-y-4 ${isVisible ? 'slide-up' : 'opacity-0'}`}
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-8xl font-black leading-tighter">
                 <span className="block gradient-text">Words That</span>
                 <span className="flex flex-col items-center justify-center mt-2 ">
                   <span className="text-white">Make Your Brand </span>
@@ -283,7 +283,7 @@ const CopywritingHero = () => {
 
             {/* CTA */}
             <div className={`fade-in-2 ${!isVisible && 'opacity-0'}`}>
-              <div className="flex justify-center pt-6">
+              <div className="flex justify-center ">
                 <button className="group relative bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold px-4 py-3 rounded-full text-md button-glow transform transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden">
                   <span className="relative z-10 flex items-center gap-3">
                     <Zap className="w-5 h-5" />

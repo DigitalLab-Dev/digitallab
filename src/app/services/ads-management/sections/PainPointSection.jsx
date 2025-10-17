@@ -86,7 +86,7 @@ const PainPointSection = () => {
   return (
     <motion.section 
       id="pain-point-section"
-      className="relative min-h-screen bg-black py-20 lg:py-22 overflow-x-hidden"
+      className="relative min-h-screen bg-black py-10 overflow-x-hidden"
       aria-label="Ads Problems and Solutions"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}

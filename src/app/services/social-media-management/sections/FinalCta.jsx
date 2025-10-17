@@ -126,28 +126,7 @@ const FinalCTA = () => {
   };
 
   return (
-    <section className="relative min-h-screen mt-20 bg-black overflow-hidden flex items-center justify-center">
-      {/* Animated gradient background */}
-      {/* <motion.div
-        className="absolute inset-0"
-        style={{
-          background: `
-            radial-gradient(circle at 30% 20%, #f97316 0%, transparent 50%),
-            radial-gradient(circle at 70% 80%, #fb923c 0%, transparent 50%),
-            radial-gradient(circle at 20% 80%, #fdba74 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, #fed7aa 0%, transparent 50%)
-          `
-        }}
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      /> */}
+    <section className="relative min-h-screen  bg-black overflow-hidden flex items-center justify-center">
       {/* Blurred feed mockup background */}
       <div className="absolute inset-0">
         {feedPosts.map((post, index) => (
@@ -263,7 +242,7 @@ const FinalCTA = () => {
         </AnimatePresence>
       </div>
       {/* Main content */}
-      <div className="relative z-20 max-w-6xl mx-auto px-6 text-center">
+      <div className="relative z-20 py-10 max-w-6xl mx-auto px-6 text-center">
         <motion.div
           variants={containerVariants}
           initial="hidden"

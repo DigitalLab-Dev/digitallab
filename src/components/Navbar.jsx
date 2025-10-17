@@ -34,12 +34,12 @@ const Navbar = () => {
     {
       name: 'Graphic Designing',
       icon: Palette,
-      href: '/services/graphic-designing',
+      href: '/services/graphic-design',
     },
     {
       name: 'Copywriting',
       icon: PenTool,
-      href: '/services/copywriting',
+      href: '/services/copy-writing',
     },
     {
       name: 'Social Media Management',

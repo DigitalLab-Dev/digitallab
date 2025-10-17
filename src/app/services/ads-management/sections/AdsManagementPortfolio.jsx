@@ -124,7 +124,7 @@ const AdsManagementPortfolio = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white py-20 px-4">
+    <div className="min-h-screen bg-black text-white py-10 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div 
@@ -157,10 +157,10 @@ const AdsManagementPortfolio = () => {
               key={study.id}
               variants={cardVariants}
               whileHover={{ scale: 1.02 }}
-              className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-orange-500 transition-all duration-300 cursor-pointer"
+              className="bg-neutral-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-orange-500 transition-all duration-300 cursor-pointer"
               onClick={() => setSelectedCase(study)}
             >
-              <div className="aspect-video bg-gray-800 relative overflow-hidden">
+              <div className="aspect-video bg-neutral-800 relative overflow-hidden">
                 <img 
                   src={study.image} 
                   alt={study.title}
@@ -203,7 +203,7 @@ const AdsManagementPortfolio = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 border border-gray-700"
+          className="bg-gradient-to-r from-neutral-900 to-neutral-800 rounded-2xl p-8 border border-neutral-700"
         >
           <div className="flex items-center justify-center mb-8">
             <Award className="w-8 h-8 text-orange-500 mr-3" />
@@ -243,7 +243,7 @@ const AdsManagementPortfolio = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-gray-700"
+              className="bg-neutral-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-neutral-700"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="p-8">
@@ -275,7 +275,7 @@ const AdsManagementPortfolio = () => {
                       <h3 className="text-xl font-semibold mb-3 text-orange-500">Key Metrics</h3>
                       <div className="grid grid-cols-2 gap-4">
                         {selectedCase.metrics.map((metric, index) => (
-                          <div key={index} className="flex items-center gap-3 p-3 bg-gray-800 rounded-lg">
+                          <div key={index} className="flex items-center gap-3 p-3 bg-neutral-800 rounded-lg">
                             <metric.icon className="w-6 h-6 text-orange-500" />
                             <div>
                               <div className="font-bold">{metric.value}</div>

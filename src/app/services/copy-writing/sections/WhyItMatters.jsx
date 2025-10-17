@@ -261,7 +261,7 @@ const WhyCopyMatters = () => {
 
       <section 
         id="copy-matters-section"
-        className="relative py-24 bg-gradient-to-b from-black via-zinc-800 to-black text-white overflow-hidden"
+        className="relative py-10  text-white overflow-hidden"
       >
         {/* Background Elements */}
         <div className="absolute inset-0" aria-hidden="true">
@@ -273,7 +273,7 @@ const WhyCopyMatters = () => {
           {/* Section Header */}
           <div className="text-center mb-16">
             <div className={`${isVisible ? 'animate-fade-up' : 'opacity-0'}`}>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <h2 className="text-5xl md:text-6xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-white to-orange-400 bg-clip-text text-transparent">
                   Why Copy Matters
                 </span>

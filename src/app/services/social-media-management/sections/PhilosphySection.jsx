@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Target, Zap, TrendingUp, Heart, MessageCircle, Play, Eye, Share2, Bookmark } from 'lucide-react';
+import Link from 'next/link';
 
 const PhilosophySection = () => {
   // Mock social media content for the collage
@@ -271,7 +272,7 @@ const PhilosophySection = () => {
       {/* Background gradient */}
       {/* <div className="absolute inset-0 bg-gradient-to-br from-orange-900/20 via-black to-amber-900/20"></div> */}
       
-      <div className="container mx-auto px-6 py-20">
+      <div className="container mx-auto px-6 py-10">
         {/* Centered heading section */}
         <motion.div
           className="text-center mb-20"
@@ -363,7 +364,10 @@ const PhilosophySection = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.8 }}
             >
+              <Link href="/contact">
+              
               <span className="relative z-10">See Our Strategy in Action</span>
+              </Link>
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600"
                 initial={{ x: '100%' }}
@@ -375,7 +379,7 @@ const PhilosophySection = () => {
 
           {/* Right Side - Animated Collage */}
           <motion.div
-            className="relative h-[800px]"
+            className=" hidden md:relative h-[800px]"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"

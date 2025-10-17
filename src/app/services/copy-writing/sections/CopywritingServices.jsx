@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { Pen, Target, Mail, MousePointer, MessageCircle, ShoppingBag, Search } from 'lucide-react';
+import Link from 'next/link';
 
 const CopywritingServices = () => {
   const [particles, setParticles] = useState([]);
@@ -70,7 +71,7 @@ const CopywritingServices = () => {
   ];
 
   return (
-    <section className="relative min-h-screen bg-black overflow-hidden py-20 px-4">
+    <section className="relative min-h-screen overflow-hidden py-10 px-4">
       {/* Animated Background Particles */}
       <div className="absolute inset-0 overflow-hidden">
         {particles.map(particle => (
@@ -142,7 +143,10 @@ const CopywritingServices = () => {
         {/* Bottom CTA Section */}
         <div className="text-center mt-20">
           <div className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-full hover:from-orange-600 hover:to-orange-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-orange-500/50 cursor-pointer">
+          <Link href="/contact">
+          
             <span className="mr-2">Ready to Transform Your Copy?</span>
+          </Link>
             <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react';
 import { Search, Edit3, BarChart3, CheckCircle } from 'lucide-react';
+import Link from 'next/link';
 
 // Mock useInView hook since Framer Motion is not available
 const useInView = (options = {}) => {
@@ -164,7 +165,7 @@ const ProcessTimeline = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-black py-12 md:py-20 px-4 overflow-hidden">
+    <section className="relative min-h-screen bg-black py-10 px-4 overflow-hidden">
       {/* Background Glows */}
       <div className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"></div>
       <div className="absolute bottom-1/4 right-1/4 w-64 md:w-96 h-64 md:h-96 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" style={{animationDelay: '2s'}}></div>
@@ -172,7 +173,7 @@ const ProcessTimeline = () => {
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 md:mb-20">
-          <h2 className="text-3xl md:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-white via-yellow-200 to-orange-500 bg-clip-text text-transparent mb-4 md:mb-6 leading-tight">
+          <h2 className="text-3xl md:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-white via-orange-400 to-orange-500 bg-clip-text text-transparent mb-4 md:mb-6 leading-tight">
             How We Work
           </h2>
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4">
@@ -196,8 +197,11 @@ const ProcessTimeline = () => {
 
         {/* Bottom CTA */}
         <div className="text-center mt-12 md:mt-20">
-          <div className="inline-flex items-center justify-center px-6 md:px-4 py-3 md:py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-black font-bold rounded-full hover:from-orange-600 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-orange-500/50 cursor-pointer text-sm md:text-base">
+          <div className="inline-flex items-center justify-center px-6 md:px-4 py-4 bg-gradient-to-r from-orange-500 to-yellow-500 text-black font-bold rounded-full hover:from-orange-600 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-orange-500/50 cursor-pointer text-sm md:text-base">
+          <Link href="/contact">
+          
             <span>Ready to Start Your Project?</span>
+          </Link>
           </div>
         </div>
       </div>

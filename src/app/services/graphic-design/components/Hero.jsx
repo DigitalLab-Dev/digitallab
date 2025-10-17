@@ -1,5 +1,8 @@
+
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -7,48 +10,99 @@ const Hero = () => {
 
   useEffect(() => {
     setIsVisible(true);
-
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  const handleMouseMove = useCallback((e) => {
+    // Throttle mouse movement updates for better performance
+    requestAnimationFrame(() => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    });
+  }, []);
+
+  useEffect(() => {
+    // Use passive event listener for better scroll performance
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [handleMouseMove]);
+
+  // Memoize transform calculation
+  const gridTransform = useMemo(
+    () => `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px)`,
+    [mousePosition.x, mousePosition.y]
+  );
+
+  const geometricShapes = useMemo(
+    () => [
+      {
+        className: 'top-1/4 left-1/6 w-20 h-20 border-2 border-orange-500/30 rotate-45',
+        animation: 'animate-float-slow',
+      },
+      {
+        className: 'top-3/4 right-1/4 w-16 h-16 bg-orange-500/10 rotate-12',
+        animation: 'animate-float-medium',
+      },
+      {
+        className: 'top-1/2 right-1/6 w-12 h-12 border border-orange-400/20 rounded-full',
+        animation: 'animate-float-fast',
+      },
+      {
+        className: 'bottom-1/4 left-1/3 w-8 h-20 bg-gradient-to-b from-orange-500/20 to-transparent',
+        animation: 'animate-float-slow',
+      },
+    ],
+    []
+  );
+
   return (
-    <section className="relative min-h-screen w-full pt-20 overflow-hidden flex items-center justify-center bg-gradient-to-br from-slate-900 via-gray-900 to-black">
+    <header className="relative  h-[70vh] pb-5 md:min-h-screen w-full pt-20 overflow-hidden flex items-center justify-center bg-gradient-to-br from-slate-900 via-gray-900 to-black">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        <div className="relative w-full h-full">
+          <Image
+            src="/portfolios/graphic-design/6.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover opacity-20"
+            priority
+            quality={75}
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA3AAAAAA//2Q=="
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/40" />
+        </div>
+      </div>
+
       {/* Dynamic Background Grid */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-20 pointer-events-none" aria-hidden="true">
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 will-change-transform"
           style={{
             backgroundImage: `
-                 linear-gradient(rgba(251, 146, 60, 0.1) 1px, transparent 1px),
-                 linear-gradient(90deg, rgba(251, 146, 60, 0.1) 1px, transparent 1px)
-               `,
+              linear-gradient(rgba(251, 146, 60, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(251, 146, 60, 0.1) 1px, transparent 1px)
+            `,
             backgroundSize: '50px 50px',
-            transform: `translate(${mousePosition.x * 0.01}px, ${
-              mousePosition.y * 0.01
-            }px)`,
+            transform: gridTransform,
           }}
-        ></div>
+        />
       </div>
 
       {/* Floating Geometric Shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="geometric-shape absolute top-1/4 left-1/6 w-20 h-20 border-2 border-orange-500/30 rotate-45 animate-float-slow"></div>
-        <div className="geometric-shape absolute top-3/4 right-1/4 w-16 h-16 bg-orange-500/10 rotate-12 animate-float-medium"></div>
-        <div className="geometric-shape absolute top-1/2 right-1/6 w-12 h-12 border border-orange-400/20 rounded-full animate-float-fast"></div>
-        <div className="geometric-shape absolute bottom-1/4 left-1/3 w-8 h-20 bg-gradient-to-b from-orange-500/20 to-transparent animate-float-slow"></div>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        {geometricShapes.map((shape, index) => (
+          <div
+            key={`shape-${index}`}
+            className={`geometric-shape absolute backdrop-blur-sm ${shape.className} ${shape.animation}`}
+          />
+        ))}
       </div>
 
       {/* Main Content */}
-      <div className="relative z-20 max-w-6xl mx-auto px-6 text-center">
-        {/* Badge */}
-
+      <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 text-center">
         {/* Main Heading with Staggered Animation */}
-        <h1 className="text-5xl md:text-7xl xl:text-8xl font-bold text-white leading-tighter mb-8">
+        <h1 className="text-5xl sm:text-6xl  md:text-7xl xl:text-8xl font-bold text-white leading-tighter mb-6 " aria-label="Graphic Design Services">
           <div className="overflow-hidden">
             <div
               className={`transition-all duration-1000 delay-200 ${
@@ -60,7 +114,7 @@ const Hero = () => {
               We Create
             </div>
           </div>
-          <div className="">
+          <div className="overflow-hidden">
             <div
               className={`text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-1000 delay-400 ${
                 isVisible
@@ -71,7 +125,7 @@ const Hero = () => {
               Extraordinary
             </div>
           </div>
-          <div className="">
+          <div className="overflow-hidden">
             <div
               className={`transition-all duration-1000 delay-600 ${
                 isVisible
@@ -86,7 +140,7 @@ const Hero = () => {
 
         {/* Subtitle */}
         <p
-          className={`text-xl md:text-xl text-gray-300 max-w-3xl mx-auto mb-2 leading-relaxed transition-all duration-1000 delay-800 ${
+          className={`text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed px-4 transition-all duration-1000 delay-800 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
@@ -95,13 +149,21 @@ const Hero = () => {
         </p>
 
         {/* CTA Buttons */}
-        <div
+        <nav
           className={`flex flex-col sm:flex-row gap-4 justify-center items-center transition-all duration-1000 delay-1000 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
+          aria-label="Primary navigation"
         >
-          <button className="group relative px-4 py-3 bg-orange-500 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/25 hover:scale-105">
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+          <Link
+            href="#portfolio"
+            className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-orange-500 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+            aria-label="View our portfolio work"
+          >
+            <span 
+              className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+              aria-hidden="true"
+            />
             <span className="relative z-10 flex items-center gap-2">
               View Our Work
               <svg
@@ -109,6 +171,7 @@ const Hero = () => {
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -118,9 +181,13 @@ const Hero = () => {
                 />
               </svg>
             </span>
-          </button>
+          </Link>
 
-          <button className="group px-4 py-3 border-2 border-gray-600 text-white font-semibold rounded-lg hover:border-orange-500 hover:text-orange-400 transition-all duration-300">
+          <Link
+            href="/contact"
+            className="group px-6 sm:px-8 py-3 sm:py-4 border-2 border-gray-600 text-white font-semibold rounded-lg hover:border-orange-500 hover:text-orange-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+            aria-label="Contact us"
+          >
             <span className="flex items-center gap-2">
               Get In Touch
               <svg
@@ -128,6 +195,7 @@ const Hero = () => {
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -137,23 +205,8 @@ const Hero = () => {
                 />
               </svg>
             </span>
-          </button>
-        </div>
-      </div>
-
-
-
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <div className="relative w-full h-full">
-          <img
-            src="/portfolios/graphic-design/6.png"
-            alt="Hero Background"
-            className="w-full h-full object-cover opacity-20"
-          />
-          {/* <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div> */}
-          {/* <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black/50"></div> */}
-        </div>
+          </Link>
+        </nav>
       </div>
 
       {/* Custom Styles */}
@@ -188,20 +241,6 @@ const Hero = () => {
           }
         }
 
-        @keyframes scroll-line {
-          0% {
-            transform: translateY(-100%);
-            opacity: 0;
-          }
-          50% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(100%);
-            opacity: 0;
-          }
-        }
-
         .animate-float-slow {
           animation: float-slow 6s ease-in-out infinite;
         }
@@ -214,30 +253,21 @@ const Hero = () => {
           animation: float-fast 3s ease-in-out infinite;
         }
 
-        .animate-scroll-line {
-          animation: scroll-line 2s ease-in-out infinite;
-        }
-
         .geometric-shape {
           backdrop-filter: blur(1px);
         }
 
-        .counter {
-          animation: countUp 2s ease-out forwards;
-        }
-
-        @keyframes countUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
+        @media (prefers-reduced-motion: reduce) {
+          *,
+          *::before,
+          *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
           }
         }
       `}</style>
-    </section>
+    </header>
   );
 };
 

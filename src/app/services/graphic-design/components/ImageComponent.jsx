@@ -1,23 +1,30 @@
+
+
+
 'use client';
 import Image from 'next/image';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback, memo } from 'react';
 
-const ImageComponent = ({ imageUrl, isFullWidth = false }) => {
+// Move animation variants outside component to prevent recreation
+const fadeInVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.8, ease: 'easeOut' },
+  },
+};
+
+const ImageComponent = memo(({ imageUrl, isFullWidth = false }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, threshold: 0.2 });
   const [isOpen, setIsOpen] = useState(false);
 
-  // Fade-in animation
-  const fadeInVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.8, ease: 'easeOut' },
-    },
-  };
+  // Memoize callbacks to prevent recreating functions
+  const handleOpen = useCallback(() => setIsOpen(true), []);
+  const handleClose = useCallback(() => setIsOpen(false), []);
 
   return (
     <>
@@ -25,14 +32,12 @@ const ImageComponent = ({ imageUrl, isFullWidth = false }) => {
       <motion.div
         ref={ref}
         className={`w-full cursor-pointer ${
-          isFullWidth
-            ? 'max-w-4xl mx-auto'
-            : 'h-auto'
+          isFullWidth ? 'max-w-4xl mx-auto' : 'h-auto'
         }`}
         variants={fadeInVariants}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
-        onClick={() => setIsOpen(true)}
+        onClick={handleOpen}
       >
         <div className="relative overflow-hidden rounded-lg shadow-lg group">
           <div className="transform transition-transform duration-300 ease-out group-hover:scale-105">
@@ -49,10 +54,10 @@ const ImageComponent = ({ imageUrl, isFullWidth = false }) => {
               }`}
             />
           </div>
-          
+
           {/* Hover overlay with gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/5 group-hover:to-pink-500/10 transition-all duration-300 rounded-lg"></div>
-          
+
           {/* Subtle glow effect */}
           <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-sm -z-10"></div>
         </div>
@@ -66,7 +71,7 @@ const ImageComponent = ({ imageUrl, isFullWidth = false }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsOpen(false)}
+            onClick={handleClose}
           >
             {/* Blurred Background */}
             <div className="absolute inset-0">
@@ -99,6 +104,8 @@ const ImageComponent = ({ imageUrl, isFullWidth = false }) => {
       </AnimatePresence>
     </>
   );
-};
+});
+
+ImageComponent.displayName = 'ImageComponent';
 
 export default ImageComponent;
