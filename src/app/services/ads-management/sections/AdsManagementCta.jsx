@@ -1,7 +1,8 @@
 "use client"
 import React, { memo } from 'react';
 import { motion } from 'framer-motion';
-import { TrendingUp, Users, Target, ArrowUpRight, Sparkles } from 'lucide-react';
+import Link from 'next/link';
+import {  ArrowUpRight, Sparkles } from 'lucide-react';
 
 // Move animation variants outside component
 const containerVariants = {

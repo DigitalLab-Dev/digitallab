@@ -1,20 +1,4 @@
-// import AdsHero from './sections/AdsHero';
-// import AdsManagementCTA from './sections/AdsManagementCta';
-// import AdsManagementPortfolio from './sections/AdsManagementPortfolio';
-// import ServicesSection from './sections/AdsServices';
-// import PainPointSection from './sections/PainPointSection';
 
-// export default function AdsManagement() {
-//   return (
-//     <main>
-//       <AdsHero />
-//       <PainPointSection />
-//       <ServicesSection/>
-//       <AdsManagementPortfolio/>
-//       <AdsManagementCTA/>
-//     </main>
-//   );
-// }
 
 
 
@@ -22,7 +6,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import Head from 'next/head';
+import Link from 'next/link';
 import Loader from '@/components/Loader';
 
 // Dynamic imports for better code splitting

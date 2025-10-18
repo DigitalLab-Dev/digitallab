@@ -4,12 +4,12 @@ import {
   TrendingUp,
   Target,
   DollarSign,
-  Play,
+  
   ArrowRight,
   BarChart3,
   Users,
   Zap,
-  Star,
+  
 } from 'lucide-react';
 import Link from 'next/link';
 

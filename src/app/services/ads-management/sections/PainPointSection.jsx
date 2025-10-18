@@ -4,6 +4,7 @@ import {
   AlertTriangle, Target, TrendingDown, DollarSign, 
   CheckCircle, ArrowRight, BarChart3, Eye, Lightbulb, RefreshCw 
 } from 'lucide-react';
+
 import { motion, AnimatePresence } from 'framer-motion';
 
 const PainPointSection = () => {
