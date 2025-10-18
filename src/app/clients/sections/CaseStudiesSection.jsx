@@ -6,7 +6,6 @@ import { TrendingUp, Zap, DollarSign, Star, Users, Eye, ThumbsUp, Award, X, Chec
 const CaseStudiesSection = () => {
   const [hoveredMetric, setHoveredMetric] = useState(null);
 
-  // Dummy case studies data with lucide icons
   const caseStudies = [
     {
       id: 1,
@@ -310,7 +309,7 @@ const CaseStudiesSection = () => {
   };
 
   return (
-    <section className="relative py-24 bg-black overflow-hidden">
+    <section id='case-studies' className="relative py-24 bg-black overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <motion.div 
