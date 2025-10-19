@@ -1,0 +1,34 @@
+@import 'tailwindcss';
+
+:root {
+  --background: #000000; /* Jet black */
+  --foreground: #ededed; /* Light gray for readability */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+::-webkit-scrollbar{
+  display: none;
+}
+*{
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--background);
+  color: var(--foreground);
+  scroll-behavior: smooth;
+}
+@font-face {
+  font-family: 'Italican';
+  src: url('/fonts/Italican.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.italican {
+  font-family: 'Italican', sans-serif;
+}
