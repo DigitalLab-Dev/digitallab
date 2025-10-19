@@ -33,6 +33,7 @@ export default function Clients() {
   const [loading, setLoading] = useState(true);
   const [contentLoaded, setContentLoaded] = useState(false);
 
+
   useEffect(() => {
     const handleLoad = () => {
       setTimeout(() => {
@@ -48,6 +49,10 @@ export default function Clients() {
       return () => window.removeEventListener('load', handleLoad);
     }
   }, []);
+
+
+
+
 
   return (
     <>

@@ -1,11 +1,9 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { Play, Sparkles, TrendingUp } from 'lucide-react';
+import { Sparkles, TrendingUp } from 'lucide-react';
 
 export default function ShowcasePortfolio() {
-  const [hoveredVideo, setHoveredVideo] = useState(null);
-  const [selectedVideo, setSelectedVideo] = useState(null);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
   const { scrollYProgress } = useScroll({
@@ -37,7 +35,7 @@ export default function ShowcasePortfolio() {
     <section
       id="short-form"
       ref={sectionRef}
-      className="relative min-h-screen bg-black  px-6 overflow-hidden"
+      className="relative min-h-screen bg-black px-6 overflow-hidden"
     >
       {/* Hidden heading for accessibility */}
       <h3 className="sr-only">
@@ -195,7 +193,7 @@ export default function ShowcasePortfolio() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 1, duration: 1 }}
-          className="grid grid-cols-2 md:grid-cols-3  gap-6"
+          className="grid grid-cols-2 md:grid-cols-3 gap-6"
         >
           {videos.map((video, index) => (
             <motion.article
@@ -207,71 +205,32 @@ export default function ShowcasePortfolio() {
                 duration: 0.6,
                 ease: [0.6, 0.05, 0.01, 0.9],
               }}
-              onMouseEnter={() => setHoveredVideo(video.id)}
-              onMouseLeave={() => setHoveredVideo(null)}
-              onClick={() => setSelectedVideo(video)}
-              className="group relative aspect-[9/16] cursor-pointer"
+              className="group relative aspect-[9/16]"
             >
-              {/* Glow effect */}
-              <motion.div
-                className="absolute -inset-1 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl opacity-0 blur-lg"
-                animate={
-                  hoveredVideo === video.id ? { opacity: 0.6 } : { opacity: 0 }
-                }
-                transition={{ duration: 0.3 }}
-              />
-
               {/* Video container */}
-              <motion.div
-                className="relative w-full h-full rounded-2xl overflow-hidden bg-zinc-900"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.4, ease: 'easeOut' }}
-              >
-                {/* YouTube iframe */}
+              <div className="relative w-full h-full rounded-2xl overflow-hidden bg-zinc-900">
+                {/* YouTube iframe - Auto-play when in view */}
                 <iframe
                   src={`https://www.youtube.com/embed/${video.ytId}?autoplay=${
-                    hoveredVideo === video.id ? 1 : 0
+                    isInView ? 1 : 0
                   }&mute=1&controls=0&loop=1&playlist=${
                     video.ytId
-                  }&modestbranding=1&rel=0`}
+                  }&modestbranding=1&rel=0&playsinline=1`}
                   title={`Short video ${index + 1}`}
                   allow="autoplay; encrypted-media"
-                  className="w-full h-full object-cover pointer-events-none"
-                  loading="lazy"
+                  className="w-full h-full object-cover"
+                  loading="eager"
                 />
 
                 {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
 
-                {/* Play button overlay when not hovering */}
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                  initial={{ opacity: 1 }}
-                  animate={
-                    hoveredVideo === video.id ? { opacity: 0 } : { opacity: 1 }
-                  }
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/50">
-                    <Play className="w-6 h-6 text-white fill-white ml-1" />
-                  </div>
-                </motion.div>
-
-                {/* Corner accents */}
-                <motion.div
-                  className="pointer-events-none"
-                  initial={{ opacity: 0 }}
-                  animate={
-                    hoveredVideo === video.id ? { opacity: 1 } : { opacity: 0 }
-                  }
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-orange-500" />
-                  <div className="absolute top-2 right-2 w-6 h-6 border-t-2 border-r-2 border-orange-500" />
-                  <div className="absolute bottom-2 left-2 w-6 h-6 border-b-2 border-l-2 border-orange-500" />
-                  <div className="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-orange-500" />
-                </motion.div>
-              </motion.div>
+                {/* Corner accents - always visible */}
+                <div className="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-orange-500/50" />
+                <div className="absolute top-2 right-2 w-6 h-6 border-t-2 border-r-2 border-orange-500/50" />
+                <div className="absolute bottom-2 left-2 w-6 h-6 border-b-2 border-l-2 border-orange-500/50" />
+                <div className="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-orange-500/50" />
+              </div>
 
               {/* Floating number badge */}
               <motion.div
@@ -320,46 +279,6 @@ export default function ShowcasePortfolio() {
           </motion.button>
         </motion.div>
       </motion.div>
-
-      {/* Modal for video playback */}
-      {selectedVideo && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 sm:p-6"
-          onClick={() => setSelectedVideo(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Video player modal"
-        >
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            className="relative w-full max-w-md aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl shadow-orange-500/20"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Full screen YouTube player with controls */}
-            <iframe
-              src={`https://www.youtube.com/embed/${selectedVideo.ytId}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1`}
-              title="Video player"
-              allow="autoplay; encrypted-media; fullscreen"
-              allowFullScreen
-              className="w-full h-full"
-            />
-
-            {/* Close button */}
-            <button
-              onClick={() => setSelectedVideo(null)}
-              className="absolute top-4 right-4 w-10 h-10 bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-orange-500 transition-colors z-10"
-              aria-label="Close video player"
-            >
-              <span className="text-xl leading-none">✕</span>
-            </button>
-          </motion.div>
-        </motion.div>
-      )}
     </section>
   );
 }

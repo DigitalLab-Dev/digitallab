@@ -18,7 +18,6 @@ const Team = () => {
         setError(null);
         
         const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://digitallab-server.vercel.app';
-        // const backendUrl='http://localhost:4000'
         const apiUrl = `${backendUrl}/api/team`;
         
         console.log('Fetching team from:', apiUrl);
@@ -456,33 +455,6 @@ const Team = () => {
             </div>
           )}
         </div>
-
-        {/* Indicators */}
-        {teamMembers.length > 1 && (
-          <motion.nav 
-            className="flex justify-center mt-8 gap-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            aria-label="Team member navigation"
-          >
-            {teamMembers.map((member, index) => (
-              <motion.button
-                key={member.id || index}
-                onClick={() => handleDotClick(index)}
-                className={`h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-black ${
-                  index === currentIndex
-                    ? 'bg-orange-500 w-8'
-                    : 'bg-gray-600 hover:bg-gray-500 w-3'
-                }`}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                aria-label={`View ${member.name}`}
-                aria-current={index === currentIndex ? 'true' : 'false'}
-              />
-            ))}
-          </motion.nav>
-        )}
       </div>
     </section>
   );

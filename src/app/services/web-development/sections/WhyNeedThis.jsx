@@ -19,7 +19,7 @@ const WhyNeedThis = () => {
           </h2>
           
           <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-100">
-            <strong className="text-orange-500 capitalize text-2xl sm:text-3xl md:text-4xl font-bold">
+            <strong className="text-orange-500 capitalize text-2xl sm:text-3xl md:text-4xl">
               Web development
             </strong>{' '}
             is essential because it builds the foundation of your online

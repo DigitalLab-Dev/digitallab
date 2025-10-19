@@ -9,8 +9,9 @@ import { memo, useMemo } from 'react';
 
 // Move static data outside component to prevent recreation on every render
 const DESIGNS = [
+
   '/portfolios/graphic-design/1.png',
-  '/portfolios/graphic-design/2.png',
+    '/portfolios/graphic-design/2.png',
   '/portfolios/graphic-design/3.png',
   '/portfolios/graphic-design/4.png',
   '/portfolios/graphic-design/5.png',

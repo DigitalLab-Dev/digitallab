@@ -32,9 +32,9 @@ const Leadership = () => {
       designation: 'CTO',
       image: '/images/sadaqat.jpg',
       socials: {
-        instagram: 'https://instagram.com/sadaqatmehmood',
-        linkedin: 'https://linkedin.com/in/sadaqatmehmood',
-        whatsapp: 'https://wa.me/+923001234569'
+        instagram: 'https://www.instagram.com/sadaqat_mehm00d?igsh=MWdraGpydHgxNzJseg==',
+        linkedin: 'https://www.linkedin.com/in/sadaqat-mehmood-8b70a9241?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+        whatsapp: 'https://wa.me/+923213374887'
       }
     },
   ];
@@ -60,8 +60,14 @@ const Leadership = () => {
     };
   }, []);
 
-const LeaderCard = ({ leader, index }) => {
+  const LeaderCard = ({ leader, index }) => {
     const [isHovered, setIsHovered] = useState(false);
+
+    const handleSocialClick = (e, url) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.open(url, '_blank', 'noopener,noreferrer');
+    };
 
     return (
       <div
@@ -94,41 +100,38 @@ const LeaderCard = ({ leader, index }) => {
           
           {/* Overlay */}
           <div
-            className={`absolute inset-0  bg-opacity-80 mt-30 flex items-center justify-center transition-all duration-300 ${
+            className={`absolute inset-0 bg-opacity-80 flex items-center mt-40 justify-center transition-all duration-300 ${
               isHovered ? 'opacity-100 visible' : 'opacity-0 invisible'
             }`}
           >
-            <div className="flex gap-4">
-              <a
-                href={leader.socials.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 hover:scale-110"
+            <div className="flex gap-4 z-50">
+              <button
+                onClick={(e) => handleSocialClick(e, leader.socials.instagram)}
+                className="p-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 hover:scale-110 cursor-pointer"
+                aria-label={`Visit ${leader.name}'s Instagram`}
               >
                 <Instagram size={20} />
-              </a>
-              <a
-                href={leader.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 hover:scale-110"
+              </button>
+              <button
+                onClick={(e) => handleSocialClick(e, leader.socials.linkedin)}
+                className="p-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 hover:scale-110 cursor-pointer"
+                aria-label={`Visit ${leader.name}'s LinkedIn`}
               >
                 <Linkedin size={20} />
-              </a>
-              <a
-                href={leader.socials.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 hover:scale-110"
+              </button>
+              <button
+                onClick={(e) => handleSocialClick(e, leader.socials.whatsapp)}
+                className="p-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 hover:scale-110 cursor-pointer"
+                aria-label={`Chat with ${leader.name} on WhatsApp`}
               >
                 <MessageCircle size={20} />
-              </a>
+              </button>
             </div>
           </div>
 
           {/* Orange ring on hover */}
           <div
-            className={`absolute inset-0 rounded-full border-4 border-orange-500 transition-all duration-300 ${
+            className={`absolute inset-0 rounded-full border-4 border-orange-500 transition-all duration-300 pointer-events-none ${
               isHovered ? 'scale-110 opacity-100' : 'scale-100 opacity-0'
             }`}
           />
@@ -157,7 +160,7 @@ const LeaderCard = ({ leader, index }) => {
   return (
     <section 
       ref={sectionRef}
-      className="px-10 flex items-center justify-center flex-col  min-h-screen "
+      className="px-10 flex items-center justify-center flex-col min-h-screen"
     >
       <h4
         className={`text-6xl font-semibold text-white mb-4 transition-all duration-900 transform ${
@@ -180,7 +183,7 @@ const LeaderCard = ({ leader, index }) => {
 
       {/* Decorative line */}
       <div
-        className={`w-24 h-0.5 bg-orange-500  transition-all duration-800 ${
+        className={`w-24 h-0.5 bg-orange-500 transition-all duration-800 ${
           isVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
         }`}
         style={{ transitionDelay: '300ms' }}

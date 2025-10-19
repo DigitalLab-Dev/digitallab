@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Play } from 'lucide-react';
+import Link from 'next/link';
 const CTASection = () => {
   return (
     <section className="py-20 bg-gradient-to-r from-black to-orange-400 relative overflow-hidden">
@@ -25,17 +26,10 @@ const CTASection = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-black text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-900 transition-colors inline-flex items-center gap-2"
+              className="bg-black text-white px-8 py-4 rounded-full font-semibold text-lg cursor-pointer transition-colors inline-flex items-center gap-2"
             >
-              Start Your Project <ArrowRight size={20} />
-            </motion.button>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-black hover:text-white transition-colors inline-flex items-center gap-2"
-            >
-              <Play size={20} /> Watch Our Story
+             <Link href="/contact">Start Your Project</Link> <ArrowRight size={20} />
             </motion.button>
           </div>
         </motion.div>

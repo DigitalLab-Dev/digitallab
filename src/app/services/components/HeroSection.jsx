@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Sparkles, Zap, TrendingUp } from 'lucide-react';
+import Link from 'next/link';
 
 export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -154,10 +155,12 @@ export default function HeroSection() {
                   whileTap={{ scale: 0.95 }}
                   className="group relative px-8 py-4 bg-orange-500 text-white font-bold rounded-xl overflow-hidden transition-all duration-300"
                 >
+                  <Link href="/contact">
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     Get Started
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </span>
+                  </Link>
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-400"
                     initial={{ x: '-100%' }}
@@ -166,13 +169,7 @@ export default function HeroSection() {
                   />
                 </motion.button>
 
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-transparent border-2 border-orange-500 text-orange-500 font-bold rounded-xl hover:bg-orange-500/10 transition-all duration-300"
-                >
-                  View Our Work
-                </motion.button>
+             
               </motion.div>
             </motion.div>
 
@@ -250,61 +247,9 @@ export default function HeroSection() {
                   />
                 ))}
 
-                {/* Floating Geometric Shapes */}
-                <motion.div
-                  className="absolute top-10 -left-6 w-20 h-20 border-4 border-orange-500 rounded-lg"
-                  animate={{ 
-                    rotate: 360,
-                    y: [-10, 10, -10],
-                  }}
-                  transition={{ 
-                    rotate: { duration: 20, repeat: Infinity, ease: 'linear' },
-                    y: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
-                  }}
-                />
-                
-                <motion.div
-                  className="absolute top-20 -right-8 w-16 h-16"
-                  animate={{ 
-                    rotate: -360,
-                    y: [10, -10, 10],
-                  }}
-                  transition={{ 
-                    rotate: { duration: 15, repeat: Infinity, ease: 'linear' },
-                    y: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
-                  }}
-                >
-                  <div className="w-full h-full border-4 border-white transform rotate-45" />
-                </motion.div>
 
-                <motion.div
-                  className="absolute bottom-32 -left-10 w-0 h-0"
-                  style={{
-                    borderLeft: '30px solid transparent',
-                    borderRight: '30px solid transparent',
-                    borderBottom: '52px solid #ff6600',
-                  }}
-                  animate={{ 
-                    rotate: 360,
-                    x: [-5, 5, -5],
-                  }}
-                  transition={{ 
-                    rotate: { duration: 18, repeat: Infinity, ease: 'linear' },
-                    x: { duration: 3.5, repeat: Infinity, ease: 'easeInOut' },
-                  }}
-                />
 
-                <motion.div
-                  className="absolute bottom-20 -right-6 w-16 h-16 border-4 border-white rounded-full"
-                  animate={{ 
-                    rotate: -360,
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{ 
-                    rotate: { duration: 15, repeat: Infinity, ease: 'linear' },
-                    scale: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
-                  }}
-                />
+
 
                 {/* Glowing Orbs */}
                 <motion.div
@@ -343,27 +288,7 @@ export default function HeroSection() {
                   }}
                 />
               </div>
-
-              {/* Floating Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                whileHover={{ scale: 1.05 }}
-                className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-black border-2 border-orange-500 rounded-2xl px-6 py-4 shadow-2xl backdrop-blur-sm"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
-                    <Sparkles className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-white font-bold">Award Winning</div>
-                    <div className="text-sm text-gray-400">Agency 2024</div>
-                  </div>
-                </div>
-              </motion.div>
             </motion.div>
-
           </div>
         </div>
       </motion.div>

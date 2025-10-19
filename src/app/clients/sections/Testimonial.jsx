@@ -196,7 +196,7 @@ const TestimonialCarousel = () => {
   }
 
   return (
-    <section className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section id='testimonials' className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div

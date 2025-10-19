@@ -14,6 +14,7 @@ import {
   Share2,
   PenTool,
   Target,
+  Search
 } from 'lucide-react';
 
 const Navbar = () => {
@@ -50,6 +51,11 @@ const Navbar = () => {
       name: 'Ads Management',
       icon: Target,
       href: '/services/ads-management',
+    },
+    {
+      name: 'SEO Optimization',
+      icon: Target,
+      href: '/services/seo',
     },
   ];
 
@@ -204,7 +210,7 @@ const Navbar = () => {
               Our Services
             </h3>
             <div className="grid grid-cols-2 gap-4">
-              {services.map(({ name, icon: Icon, href }) => (
+              {services.slice(0, 6).map(({ name, icon: Icon, href }) => (
                 <Link
                   key={name}
                   href={href}
@@ -219,6 +225,22 @@ const Navbar = () => {
                 </Link>
               ))}
             </div>
+            {/* Centered last item */}
+            {services[6] && (
+              <div className="flex justify-center mt-4">
+                <Link
+                  href={services[6].href}
+                  className="flex items-center space-x-4 p-3 hover:bg-white/10 rounded-md transition-colors duration-200 group w-[calc(50%-0.5rem)]"
+                >
+                  <div className="p-2 bg-orange-100/20 group-hover:bg-orange-500 rounded-md transition-colors duration-200">
+                    <Search className="w-5 h-5 text-orange-400 group-hover:text-white transition-colors duration-200" />
+                  </div>
+                  <span className="text-gray-200 font-medium group-hover:text-orange-400 transition-colors duration-200">
+                    {services[6].name}
+                  </span>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
 

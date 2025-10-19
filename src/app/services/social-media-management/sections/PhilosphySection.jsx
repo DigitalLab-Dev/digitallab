@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Target, Zap, TrendingUp, Heart, MessageCircle, Play, Eye, Share2, Bookmark } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const PhilosophySection = () => {
   // Mock social media content for the collage
@@ -63,12 +64,18 @@ const PhilosophySection = () => {
 
   const InstagramPost = ({ content }) => (
     <motion.div
-      className="bg-white rounded-xl shadow-lg overflow-hidden"
+      className="bg-white rounded-xl shadow-lg overflow-hidden h-full"
       whileHover={{ scale: 1.05, zIndex: 10 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="relative">
-        <img src={content.image} alt="" className="w-full h-48 object-cover" />
+      <div className="relative h-48">
+        <img
+          src={content.image} 
+          alt="Instagram post" 
+          fill
+          className="object-cover"
+          sizes="300px"
+        />
         <div className="absolute top-2 left-2 w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
           <div className="w-6 h-6 bg-white rounded-full"></div>
         </div>
@@ -77,9 +84,9 @@ const PhilosophySection = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Heart className="w-5 h-5 text-red-500 fill-current" />
-            <span className="text-sm font-semibold">{content.likes}</span>
+            <span className="text-sm font-semibold text-gray-800">{content.likes}</span>
             <MessageCircle className="w-5 h-5 text-gray-600" />
-            <span className="text-sm font-semibold">{content.comments}</span>
+            <span className="text-sm font-semibold text-gray-800">{content.comments}</span>
           </div>
           <Bookmark className="w-5 h-5 text-gray-600" />
         </div>
@@ -89,12 +96,18 @@ const PhilosophySection = () => {
 
   const TikTokReel = ({ content }) => (
     <motion.div
-      className="bg-black rounded-xl shadow-lg overflow-hidden relative"
+      className="bg-black rounded-xl shadow-lg overflow-hidden relative h-full"
       whileHover={{ scale: 1.05, zIndex: 10 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="relative h-80">
-        <img src={content.image} alt="" className="w-full h-full object-cover" />
+      <div className="relative h-full min-h-[320px]">
+        <img
+          src={content.image} 
+          alt="TikTok reel" 
+          fill
+          className="object-cover"
+          sizes="200px"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <Play className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 text-white/80" />
         <div className="absolute bottom-4 left-4">
@@ -112,12 +125,18 @@ const PhilosophySection = () => {
 
   const InstagramStory = ({ content }) => (
     <motion.div
-      className="bg-white rounded-xl shadow-lg overflow-hidden relative"
+      className="bg-white rounded-xl shadow-lg overflow-hidden relative h-full"
       whileHover={{ scale: 1.05, zIndex: 10 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="relative h-64">
-        <img src={content.image} alt="" className="w-full h-full object-cover" />
+      <div className="relative h-full min-h-[240px]">
+        <img 
+          src={content.image} 
+          alt="Instagram story" 
+          fill
+          className="object-cover"
+          sizes="200px"
+        />
         <div className="absolute top-2 left-2 right-2 h-1 bg-white/30 rounded-full overflow-hidden">
           <motion.div
             className="h-full bg-white rounded-full"
@@ -136,7 +155,7 @@ const PhilosophySection = () => {
 
   const LinkedInPost = ({ content }) => (
     <motion.div
-      className="bg-white rounded-xl shadow-lg p-4"
+      className="bg-white rounded-xl shadow-lg p-4 h-full"
       whileHover={{ scale: 1.05, zIndex: 10 }}
       transition={{ duration: 0.3 }}
     >
@@ -145,7 +164,7 @@ const PhilosophySection = () => {
           {content.author.charAt(0)}
         </div>
         <div>
-          <div className="font-semibold text-sm">{content.author}</div>
+          <div className="font-semibold text-sm text-gray-800">{content.author}</div>
           <div className="text-xs text-gray-500">Marketing Director</div>
         </div>
         <div className="ml-auto bg-blue-600 text-white px-2 py-1 rounded text-xs">
@@ -166,12 +185,18 @@ const PhilosophySection = () => {
 
   const YouTubeShort = ({ content }) => (
     <motion.div
-      className="bg-black rounded-xl shadow-lg overflow-hidden relative"
+      className="bg-black rounded-xl shadow-lg overflow-hidden relative h-full"
       whileHover={{ scale: 1.05, zIndex: 10 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="relative h-80">
-        <img src={content.image} alt="" className="w-full h-full object-cover" />
+      <div className="relative h-full min-h-[320px]">
+        <img
+          src={content.image} 
+          alt="YouTube short" 
+          fill
+          className="object-cover"
+          sizes="200px"
+        />
         <div className="absolute inset-0 bg-black/20" />
         <Play className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 text-white/90" />
         <div className="absolute bottom-4 left-4 text-white text-sm flex items-center gap-1">
@@ -190,7 +215,7 @@ const PhilosophySection = () => {
 
   const FacebookPost = ({ content }) => (
     <motion.div
-      className="bg-white rounded-xl shadow-lg overflow-hidden"
+      className="bg-white rounded-xl shadow-lg overflow-hidden h-full"
       whileHover={{ scale: 1.05, zIndex: 10 }}
       transition={{ duration: 0.3 }}
     >
@@ -200,12 +225,20 @@ const PhilosophySection = () => {
             B
           </div>
           <div>
-            <div className="font-semibold text-sm">Brand Page</div>
+            <div className="font-semibold text-sm text-gray-800">Brand Page</div>
             <div className="text-xs text-gray-500">2 hours ago</div>
           </div>
         </div>
       </div>
-      <img src={content.image} alt="" className="w-full h-32 object-cover" />
+      <div className="relative h-32">
+        <img
+          src={content.image} 
+          alt="Facebook post" 
+          fill
+          className="object-cover"
+          sizes="300px"
+        />
+      </div>
       <div className="p-3">
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center gap-3">
@@ -213,11 +246,11 @@ const PhilosophySection = () => {
               <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
                 <Heart className="w-2 h-2 text-white fill-current" />
               </div>
-              <span>{content.reactions}</span>
+              <span className="text-gray-800">{content.reactions}</span>
             </div>
             <div className="flex items-center gap-1">
               <Share2 className="w-4 h-4 text-gray-600" />
-              <span>{content.shares}</span>
+              <span className="text-gray-800">{content.shares}</span>
             </div>
           </div>
         </div>
@@ -269,9 +302,6 @@ const PhilosophySection = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Background gradient */}
-      {/* <div className="absolute inset-0 bg-gradient-to-br from-orange-900/20 via-black to-amber-900/20"></div> */}
-      
       <div className="container mx-auto px-6 py-10">
         {/* Centered heading section */}
         <motion.div
@@ -293,8 +323,8 @@ const PhilosophySection = () => {
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight max-w-4xl mx-auto">
-            <span className="text-white  mb-2 mr-4">Not just</span>
-            <span className="bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent  mb-2">
+            <span className="text-white mb-2 mr-4">Not just</span>
+            <span className="bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent mb-2">
               Posting.
             </span>
             <span className="text-white block">We create experiences</span>
@@ -355,31 +385,30 @@ const PhilosophySection = () => {
               ))}
             </div>
 
-            <motion.button
-              className="group relative px-4 py-3 cursor-pointer  bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold text-lg rounded-full overflow-hidden shadow-2xl"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.8 }}
-            >
-              <Link href="/contact">
-              
-              <span className="relative z-10">See Our Strategy in Action</span>
-              </Link>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600"
-                initial={{ x: '100%' }}
-                whileHover={{ x: '0%' }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.button>
+            <Link href="/contact">
+              <motion.button
+                className="group relative px-4 py-3 cursor-pointer bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold text-lg rounded-full overflow-hidden shadow-2xl"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8 }}
+              >
+                <span className="relative z-10">See Our Strategy in Action</span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600"
+                  initial={{ x: '100%' }}
+                  whileHover={{ x: '0%' }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.button>
+            </Link>
           </motion.div>
 
           {/* Right Side - Animated Collage */}
           <motion.div
-            className=" hidden md:relative h-[800px]"
+            className="hidden md:block relative h-[800px]"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"

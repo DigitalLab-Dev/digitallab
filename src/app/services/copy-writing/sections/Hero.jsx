@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Zap, ArrowRight } from 'lucide-react';
 import TextType from '@/components/ReactBit-Components/TextType';
+import Link from 'next/link';
 
 const CopywritingHero = () => {
   const [currentWord, setCurrentWord] = useState(0);
@@ -284,12 +285,14 @@ const CopywritingHero = () => {
             {/* CTA */}
             <div className={`fade-in-2 ${!isVisible && 'opacity-0'}`}>
               <div className="flex justify-center ">
-                <button className="group relative bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold px-4 py-3 rounded-full text-md button-glow transform transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden">
-                  <span className="relative z-10 flex items-center gap-3">
-                    <Zap className="w-5 h-5" />
-                    Transform Your Copy Now
-                    <ArrowRight className="w-5 h-5 transform transition-transform group-hover:translate-x-1" />
-                  </span>
+                <button className="group cursor-pointer relative bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold px-4 py-3 rounded-full text-md button-glow transform transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden">
+                  <Link href="/contact">
+                    <span className="relative z-10 flex items-center gap-3">
+                      <Zap className="w-5 h-5" />
+                      Transform Your Copy Now
+                      <ArrowRight className="w-5 h-5 transform transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </Link>
 
                   {/* Button shine effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />

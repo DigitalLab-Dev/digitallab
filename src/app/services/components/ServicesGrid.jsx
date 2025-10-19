@@ -8,6 +8,7 @@ import {
   Megaphone,
   Code,
   ArrowRight,
+  TrendingUp,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -16,35 +17,35 @@ const ServicesGrid = () => {
 
   const services = [
     {
-      title: "Content Writing",
+      title: "Copy Writing",
       icon: Pen,
       description: "Compelling content that converts visitors into customers with strategic storytelling",
       link: "/services/copy-writing",
       number: "01",
     },
     {
-      title: "Video Production",
+      title: "Video Editing",
       icon: Video,
       description: "Professional video production that captivates your audience and drives engagement",
       link: "/services/video-editing",
       number: "02",
     },
     {
-      title: "Design",
+      title: "Graphic Design",
       icon: Palette,
       description: "Stunning visual designs that make your brand memorable and impactful",
       link: "/services/graphic-design",
       number: "03",
     },
     {
-      title: "Social Media",
+      title: "Social Media Management",
       icon: Share2,
       description: "Strategic social presence that builds thriving communities around your brand",
       link: "/services/social-media-management",
       number: "04",
     },
     {
-      title: "Advertising",
+      title: "Ads Management",
       icon: Megaphone,
       description: "Targeted ad campaigns that maximize ROI and reach your ideal customers",
       link: "/services/ads-management",
@@ -57,10 +58,17 @@ const ServicesGrid = () => {
       link: "/services/web-development",
       number: "06",
     },
+    {
+      title: "SEO Optimization",
+      icon: TrendingUp,
+      description: "Boost your online visibility and drive organic traffic with proven SEO strategies",
+      link: "/services/seo-optimization",
+      number: "07",
+    }
   ];
 
   return (
-    <section className="py-32 bg-black relative overflow-hidden">
+    <section className="py-5 bg-black relative overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0" aria-hidden="true">
         {/* Grid Pattern */}
