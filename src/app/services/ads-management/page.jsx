@@ -22,7 +22,7 @@ const ServicesSection = dynamic(() => import('./sections/AdsServices'), {
 const AdsManagementPortfolio = dynamic(() => import('./sections/AdsManagementPortfolio'), {
   loading: () => null,
 });
-const AdsManagementCTA = dynamic(() => import('./sections/AdsManagementCTA'), {
+const AdsManagementCta = dynamic(() => import('./sections/AdsManagementCta'), {
   loading: () => null,
 });
 
@@ -83,7 +83,7 @@ const Page = () => {
         <PainPointSection />
         <ServicesSection />
         <AdsManagementPortfolio />
-        <AdsManagementCTA />
+        <AdsManagementCta />
 
       </main>
     </>

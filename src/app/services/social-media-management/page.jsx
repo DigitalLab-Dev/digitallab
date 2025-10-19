@@ -33,7 +33,7 @@ const PhilosophySection = dynamic(() => import('./sections/PhilosphySection'), {
 const CaseStudies = dynamic(() => import('./sections/CaseStudies'), {
   loading: () => null,
 });
-const FinalCTA = dynamic(() => import('./sections/FinalCTA'), {
+const FinalCta = dynamic(() => import('./sections/FinalCta'), {
   loading: () => null,
 });
 
@@ -94,7 +94,7 @@ const Page = () => {
         <HeroSection />
         <PhilosophySection />
         <CaseStudies />
-        <FinalCTA />
+        <FinalCta />
 
       </main>
     </>
