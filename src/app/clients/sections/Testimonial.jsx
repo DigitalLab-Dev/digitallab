@@ -293,14 +293,6 @@ const TestimonialCarousel = () => {
                             </div>
                           )}
                         </div>
-
-                        {/* Stars */}
-                        <div className="flex justify-center gap-1 mb-3">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className={`w-4 h-4 ${isCenter ? 'text-orange-400' : 'text-white/60'} fill-current transition-colors duration-500`} />
-                          ))}
-                        </div>
-
                         {/* Review */}
                         <p className={`${isCenter ? 'text-white' : 'text-white/70'} text-sm mb-4 leading-relaxed transition-colors duration-500 line-clamp-4`}>
                           "{testimonial.review}"
@@ -320,27 +312,6 @@ const TestimonialCarousel = () => {
               </AnimatePresence>
             </div>
 
-            {/* Navigation Buttons */}
-            {testimonials.length > 1 && (
-              <div className="flex justify-center gap-4 ">
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={handlePrev}
-                  className="w-12 h-12 bg-white/10 hover:bg-orange-500/20 rounded-full flex items-center justify-center text-white hover:text-orange-400 transition-all duration-300 border border-white/20 hover:border-orange-500/50"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={handleNext}
-                  className="w-12 h-12 bg-white/10 hover:bg-orange-500/20 rounded-full flex items-center justify-center text-white hover:text-orange-400 transition-all duration-300 border border-white/20 hover:border-orange-500/50"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </motion.button>
-              </div>
-            )}
           </div>
         ) : (
           <div className="text-center py-20">

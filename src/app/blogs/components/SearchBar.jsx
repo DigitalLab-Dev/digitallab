@@ -50,28 +50,10 @@ const SearchBar = ({ onSearch, isLoading }) => {
         {/* Loading spinner */}
         {isLoading && (
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-purple-600"></div>
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-orange-600"></div>
           </div>
         )}
       </div>
-
-      {/* Search button */}
-      {/* <button
-        onClick={handleSearchClick}
-        disabled={isLoading}
-        className={`
-    relative cursor-pointer z-10 px-6 py-3 
-    bg-gradient-to-r 
-    from-blue-600 from-[0%] 
-    via-blue-600 via-[60%] 
-    to-purple-700 to-[100%] 
-    text-white font-medium rounded-lg 
-    transition-opacity duration-200
-    ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90'}
-  `}
-      >
-        {isLoading ? 'Searching...' : 'Search'}
-      </button> */}
     </div>
   );
 };

@@ -70,11 +70,11 @@ const Methods = () => {
 
   const images = useMemo(
     () => [
-      '/images/planning.webp',
-      '/images/concept.webp',
-      '/images/design.webp',
-      '/images/optimize.webp',
-      '/images/launch.webp',
+      '/images/planning.png',
+      '/images/strategy.png',
+      '/images/design.png',
+      '/images/optimize.png',
+      '/images/launch.png',
     ],
     []
   );
@@ -147,8 +147,8 @@ const Methods = () => {
                   >
                     <Image
                       src={img}
-                      width={400}
-                      height={400}
+                      width={450}
+                      height={450}
                       alt={`${steps[i].heading} process visualization`}
                       className="rounded-lg shadow-lg"
                       priority={i === 0}

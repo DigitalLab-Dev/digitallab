@@ -199,7 +199,7 @@ const DesignMattersComponent = () => {
                 whileHover={{ y: -8 }}
               >
                 <motion.div
-                  className="bg-gradient-to-br from-gray-900 to-gray-800 border-2 rounded-2xl p-6 sm:p-8 h-full relative overflow-hidden backdrop-blur-sm"
+                  className="bg-neutral-950 border-2 rounded-2xl p-6 sm:p-8 h-full relative overflow-hidden backdrop-blur-sm"
                   animate={{
                     borderColor: hoveredCard === index ? '#f97316' : '#1f2937',
                     boxShadow:

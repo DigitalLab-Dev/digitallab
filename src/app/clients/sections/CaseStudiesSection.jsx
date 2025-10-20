@@ -105,21 +105,14 @@ const CaseStudiesSection = () => {
             <motion.img
               src={study.projectImage}
               alt={study.projectTitle}
-              className="w-full h-80 object-cover"
+              className="w-full h-180 object-cover"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
               onError={(e) => {
                 e.target.src = `https://via.placeholder.com/600x400/1a1a1a/ffffff?text=${study.projectTitle}`;
               }}
             />
-            
-            {/* Shimmer effect on hover */}
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-              initial={{ x: '-100%' }}
-              whileHover={{ x: '100%' }}
-              transition={{ duration: 0.8 }}
-            />
+
             
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>

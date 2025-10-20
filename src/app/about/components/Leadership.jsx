@@ -12,9 +12,9 @@ const Leadership = () => {
       designation: 'CEO & Co-Founder',
       image: '/images/ali.jpg',
       socials: {
-        instagram: 'https://instagram.com/aliturabi',
-        linkedin: 'https://linkedin.com/in/aliturabi',
-        whatsapp: 'https://wa.me/+923001234567'
+        instagram: 'https://www.instagram.com/syedaliturab514?igsh=MTZneGFvOWtkZjN4eg==',
+        linkedin: 'https://www.linkedin.com/in/syed-ali-turab-copywriting-expert?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+        whatsapp: 'https://wa.me/+923289660289'
       }
     },
     {
@@ -22,9 +22,9 @@ const Leadership = () => {
       designation: 'Co-Founder & COO',
       image: '/images/tassawar.webp',
       socials: {
-        instagram: 'https://instagram.com/tassawarabbas',
-        linkedin: 'https://linkedin.com/in/tassawarabbas',
-        whatsapp: 'https://wa.me/+923001234568'
+        instagram: 'https://www.instagram.com/s.tasawar_abbas?igsh=MXM1NnljY2lkbjFtZw==',
+        linkedin: 'https://www.linkedin.com/in/syed-tasawar-abbas-advertising-design-data',
+        whatsapp: 'https://wa.me/+923289660286'
       }
     },
     {
