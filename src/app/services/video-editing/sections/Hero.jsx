@@ -245,7 +245,7 @@ export default function VideoAgencyHero() {
             />
             <a href="#short-form" className="relative z-10 flex items-center gap-3">
               <Play className="w-5 h-5 fill-current" />
-              Watch Our Reel
+              View Our Portfolio
             </a>
           </motion.button>
 

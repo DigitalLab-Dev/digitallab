@@ -88,18 +88,17 @@ const Methods = () => {
     >
       <header className="w-full flex flex-col items-center justify-center gap-5">
         <p className="uppercase text-center text-2xl sm:text-4xl text-[#f0750f]">
-          Let's Walk You Through Our Process
+          Our clear and collaborative process
         </p>
         <h2
           id="methods-heading"
           className="uppercase text-2xl text-center sm:text-4xl md:text-5xl lg:text-6xl font-extrabold"
           itemProp="name"
         >
-          discover our work method
+         Behind Every Brand We Build
         </h2>
-        <p className="text-sm sm:text-lg md:text-xl text-center uppercase">
-          Discover the journey we take together to grow your brand <br /> Step
-          by step, your brand moves closer to its best version
+        <p className="text-sm sm:text-lg md:text-xl text-center uppercase md:w-2/3" itemProp="description">
+         Dive into the journey we take together to grow your brand Step by step, moving it closer to its best version.
         </p>
       </header>
 

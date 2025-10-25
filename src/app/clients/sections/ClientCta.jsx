@@ -37,7 +37,7 @@ const CtaSectionAnimated = () => {
     }
   }, []);
 
-  const heading = 'Ready to transform your business?';
+  const heading = 'It’s time to scale smarter';
   const words = heading.split(' ');
 
   const icons = [
@@ -120,7 +120,7 @@ const CtaSectionAnimated = () => {
               key={`word-${word}-${i}`}
               onMouseEnter={() => setHoveredWord(i)}
               onMouseLeave={() => setHoveredWord(null)}
-              className={`inline-block mr-2 sm:mr-3 cursor-pointer transition-all duration-500 ${
+              className={`inline-block mr-2  sm:mr-3 cursor-pointer transition-all duration-500 ${
                 isVisible
                   ? 'opacity-100 translate-y-0'
                   : 'opacity-0 translate-y-10'
@@ -133,7 +133,7 @@ const CtaSectionAnimated = () => {
                     : 'none',
               }}
             >
-              {word === 'transform' ? (
+              {word === 'scale' ? (
                 <span className="relative inline-block">
                   <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 text-transparent bg-clip-text animate-gradientShift">
                     {word}

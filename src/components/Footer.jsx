@@ -135,8 +135,7 @@ const Footer = () => {
                   Digital <span className="text-orange-500">Lab</span>
                 </h3>
                 <p className="text-gray-400 leading-relaxed mb-6">
-                  Transforming ideas into digital realities. We craft
-                  experiences that elevate brands and captivate audiences.
+                 Where creativity meets strategy to build brands that inspire and perform
                 </p>
 
                 {/* Contact Info */}

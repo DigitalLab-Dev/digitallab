@@ -283,7 +283,7 @@ const CaseStudiesSection = () => {
                     } : {}}
                     transition={{ duration: 0.5 }}
                   >
-                    <IconComponent size={32} strokeWidth={2} />
+                    {/* <IconComponent size={32} strokeWidth={2} /> */}
                   </motion.div>
                   <motion.div 
                     className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent"

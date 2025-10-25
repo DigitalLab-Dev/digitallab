@@ -157,6 +157,7 @@ const Team = () => {
   if (loading) {
     return (
       <section 
+        id='team'
         className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden"
         aria-live="polite"
         aria-busy="true"

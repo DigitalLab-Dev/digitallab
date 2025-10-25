@@ -97,7 +97,7 @@ const HeroSection = () => {
           }}
         >
           {/* Glow behind card */}
-          <div className="absolute -inset-6 rounded-2xl blur-3xl opacity-40 bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500"></div>
+          <div className="absolute -inset-6 rounded-2xl blur-3xl opacity-40 bg-gradient-to-r from-orange-400 via-amber-500 to-orange-500"></div>
 
           {/* Actual card */}
           <div className="relative bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 shadow-2xl">
@@ -121,7 +121,7 @@ const HeroSection = () => {
             transition={{ delay: 0.5 }}
           >
             <span className="block text-white">Building Brands</span>
-            <span className="block bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-orange-400 via-amber-500 to-orange-500 bg-clip-text text-transparent">
               That Trend,
             </span>
             <span className="block text-white">One Post at a Time</span>
@@ -164,8 +164,8 @@ const HeroSection = () => {
             transition={{ delay: 1.2, duration: 0.8 }}
           >
             {[
-              { number: '500M+', label: 'Views Generated' },
-              { number: '2.5K+', label: 'Brands Grown' },
+              { number: '15M+', label: 'Views Generated' },
+              { number: '50+', label: 'Brands Grown' },
               { number: '98%', label: 'Client Success Rate' }
             ].map((stat, index) => (
               <div key={index} className="text-center">
@@ -185,7 +185,7 @@ const HeroSection = () => {
             transition={{ delay: 1.5, duration: 0.8 }}
           >
             <motion.button
-              className="group relative p-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold text-lg rounded-full overflow-hidden shadow-2xl"
+              className="group relative p-3 bg-gradient-to-r from-orange-500 to-amber-700 text-white font-bold text-lg rounded-full overflow-hidden shadow-2xl"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

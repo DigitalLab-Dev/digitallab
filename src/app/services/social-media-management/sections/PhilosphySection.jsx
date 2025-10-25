@@ -408,7 +408,7 @@ const PhilosophySection = () => {
 
           {/* Right Side - Animated Collage */}
           <motion.div
-            className="hidden md:block relative h-[800px]"
+            className="hidden md:block relative h-[800px]  -mt-20"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
