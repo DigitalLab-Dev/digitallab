@@ -1,7 +1,7 @@
 import { Poppins } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import './globals.css';
-import SplashCursor from '@/components/ReactBit-Components/SplashCursor';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import Footor from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 
@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
         {children}
         <ScrollToTop/>
         <Footor />
-        {/* <SplashCursor/> */}
+       <SpeedInsights />
       </body>
     </html>
   );
