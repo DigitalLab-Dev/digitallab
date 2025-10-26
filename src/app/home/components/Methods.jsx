@@ -70,11 +70,16 @@ const Methods = () => {
 
   const images = useMemo(
     () => [
-      '/images/planning.png',
-      '/images/strategy.png',
-      '/images/design.png',
-      '/images/optimize.png',
-      '/images/launch.png',
+      // '/images/planning.png',
+      // '/images/strategy.png',
+      // '/images/design.png',
+      // '/images/optimize.png',
+      // '/images/launch.png',
+      'https://res.cloudinary.com/dt9wziort/image/upload/v1761452664/planning_ffpkjo.png',
+      'https://res.cloudinary.com/dt9wziort/image/upload/v1761452664/strategy_yvypsh.png',
+      'https://res.cloudinary.com/dt9wziort/image/upload/v1761452793/design_odnwxz.png',
+      'https://res.cloudinary.com/dt9wziort/image/upload/v1761452664/optimize_rrzudr.png',
+      'https://res.cloudinary.com/dt9wziort/image/upload/v1761452664/launch_lirxou.png',
     ],
     []
   );

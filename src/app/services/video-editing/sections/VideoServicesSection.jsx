@@ -14,7 +14,7 @@ const services = [
     title: "Short-Form Content (Reels/Shorts/TikToks)",
     description: "Viral-ready vertical content optimized for maximum engagement. We create fast-paced edits with trending effects and perfect timing to capture attention in the first 3 seconds.",
     tools: ["Premiere Pro", "After Effects", "CapCut", "DaVinci Resolve"],
-    image: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=800&q=80",
+    image: "/images/short.png",
     imageAlt: "A person creating vertical video content on a smartphone"
   },
   {
@@ -22,7 +22,7 @@ const services = [
     title: "Long-Form Content (YouTube & Podcasts)",
     description: "Transforming raw footage into engaging stories that boost audience retention. We handle everything from multi-cam editing and color grading to professional sound design.",
     tools: ["Premiere Pro", "DaVinci Resolve", "Adobe Audition", "Final Cut Pro"],
-    image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80",
+    image: "/images/long.png",
     imageAlt: "A professional video editing setup displaying a timeline"
   },
   {
@@ -30,7 +30,7 @@ const services = [
     title: "Documentary-Style Editing",
     description: "Crafting compelling narratives by weaving together interviews, B-roll, and archival footage. Our focus is on authentic storytelling that creates a deep emotional impact.",
     tools: ["DaVinci Resolve", "Premiere Pro", "Avid Media Composer", "Adobe Audition"],
-    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80",
+    image: "/images/documentry.png",
     imageAlt: "A professional film camera on a production set"
   },
   {
@@ -38,7 +38,7 @@ const services = [
     title: "Motion Graphics",
     description: "Bringing your brand and data to life with eye-catching animations. We specialize in logo reveals, explainer videos, animated infographics, and stylish lower thirds.",
     tools: ["After Effects", "Cinema 4D", "Adobe Illustrator", "Blender"],
-    image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80",
+    image: "/images/motion.png",
     imageAlt: "A designer working on motion graphics on a computer"
   },
   {
@@ -54,7 +54,7 @@ const services = [
     title: "Cinematic Editing",
     description: "Achieving a Hollywood-level aesthetic with dramatic pacing, advanced color grading, and immersive sound design. We turn your footage into a cinematic experience.",
     tools: ["DaVinci Resolve", "Premiere Pro", "Final Cut Pro", "After Effects"],
-    image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
+    image: "/images/cinematic.png",
     imageAlt: "A dramatic, cinematic shot of a person against a scenic background"
   }
 ];

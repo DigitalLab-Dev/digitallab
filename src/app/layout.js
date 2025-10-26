@@ -14,6 +14,14 @@ const poppins = Poppins({
 export const metadata = {
   title: 'DigitalLab',
   description: 'DigitalLab - A service providing agency',
+  other: {
+    'rel': 'preconnect',
+    'href': 'https://www.youtube.com',
+  },
+  other: { // You'll need to find the right way to add multiple "other" tags
+    'rel': 'preconnect',
+    'href': 'https://img.youtube.com',
+  },
 };
 
 export default function RootLayout({ children }) {

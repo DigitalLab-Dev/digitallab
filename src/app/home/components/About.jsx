@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { MdArrowOutward } from 'react-icons/md';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
 
 const About = () => {
@@ -10,16 +10,8 @@ const About = () => {
   const imageRef = useRef(null);
   const imageContainerRef = useRef(null);
 
-  // Scroll-based animations for background elements
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'],
-  });
 
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-
-  // Image zoom animation based on scroll position
+ // Image zoom animation based on scroll position
   const { scrollYProgress: imageScrollProgress } = useScroll({
     target: imageContainerRef,
     offset: ['start end', 'end start'],
@@ -182,12 +174,12 @@ const About = () => {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <Image
-                src="/images/about.webp"
+                // src="/images/about.webp"
+                src="https://res.cloudinary.com/dt9wziort/image/upload/v1761451560/about_msfcxd.webp"
                 width={700}
                 height={700}
                 alt="Digital marketing team collaborating on creative strategies and innovative solutions"
                 className="w-full h-auto object-cover"
-                priority
                 quality={85}
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 700px"
               />
