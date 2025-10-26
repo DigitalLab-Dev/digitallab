@@ -1,127 +1,5 @@
 
-
-// import React, { useEffect, useRef, useState } from 'react';
-// import gsap from 'gsap';
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// import { useInView } from 'framer-motion';
-
-// gsap.registerPlugin(ScrollTrigger);
-
-// const VideoSection = () => {
-//   const videoContainerRef = useRef(null);
-//   const playerRef = useRef(null);
-//   const [player, setPlayer] = useState(null);
-//   const isInView = useInView(videoContainerRef, { amount: 0.5 });
-
-//   // Replace with your YouTube video ID
-//   const YOUTUBE_VIDEO_ID = 'ljfgLSSbS5s';
-
-//   useEffect(() => {
-//     const el = videoContainerRef.current;
-
-//     // GSAP Scale Animation
-//     gsap.fromTo(
-//       el,
-//       { scale: 0.5, opacity: 0.5 },
-//       {
-//         scale: 1,
-//         opacity: 1,
-//         ease: 'power2.out',
-//         scrollTrigger: {
-//           trigger: el,
-//           start: 'top 100%',
-//           end: 'bottom 60%',
-//           scrub: true,
-//           toggleActions: 'play reverse play reverse',
-//         },
-//       }
-//     );
-
-//     return () => {
-//       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-//     };
-//   }, []);
-
-//   useEffect(() => {
-//     // Load YouTube IFrame API
-//     if (!window.YT) {
-//       const tag = document.createElement('script');
-//       tag.src = 'https://www.youtube.com/iframe_api';
-//       const firstScriptTag = document.getElementsByTagName('script')[0];
-//       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-//     }
-
-//     // Initialize YouTube player
-//     window.onYouTubeIframeAPIReady = () => {
-//       const ytPlayer = new window.YT.Player(playerRef.current, {
-//         videoId: YOUTUBE_VIDEO_ID,
-//         playerVars: {
-//           autoplay: 0,
-//           controls: 1,
-//           modestbranding: 1,
-//           rel: 0,
-//           showinfo: 0,
-//           fs: 1,
-//           mute: 1, // Muted to allow autoplay
-//         },
-//         events: {
-//           onReady: (event) => {
-//             setPlayer(event.target);
-//           },
-//         },
-//       });
-//     };
-
-//     return () => {
-//       if (player && typeof player.destroy === 'function') {
-//         player.destroy();
-//       }
-//     };
-//   }, []);
-
-//   useEffect(() => {
-//     if (!player) return;
-
-//     // Auto play/pause based on isInView
-//     if (isInView) {
-//       // Restart from beginning when entering viewport
-//       player.seekTo(0, true);
-//       player.playVideo();
-//     } else {
-//       // Stop video when leaving viewport
-//       player.pauseVideo();
-//     }
-//   }, [player, isInView]);
-
-//   return (
-//     <section 
-//       className="z-[9999] "
-//       aria-labelledby="video-section-heading"
-//     >
-//       <div className="w-full  z-[9999] h-[80vh] md:h-screen mx-auto">
-//         <div
-//           ref={videoContainerRef}
-//           className="relative h-full z-[9999]  w-full rounded-2xl overflow-hidden shadow-2xl"
-          
-//         >
-//           {/* YouTube Player */}
-//           <div
-//             ref={playerRef}
-//             className="absolute  inset-0 w-full h-full"
-//             title="About Digital Lab - Company Story Video"
-//           />
-
-//           {/* Decorative Border */}
-//           <div className="absolute inset-0 border-4 border-orange-500/20 rounded-2xl pointer-events-none" />
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default VideoSection;
-
-
+"use client"
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -241,7 +119,7 @@ const VideoSection = () => {
 
   return (
     <section 
-      className="z-[9999] py-16 "
+      className="z-[9999] py-16"
       aria-labelledby="video-section-heading"
     >
       <div className="w-full z-[9999] h-[80vh] md:h-screen mx-auto">
@@ -250,10 +128,17 @@ const VideoSection = () => {
           className="relative h-full z-[9999] w-full overflow-hidden shadow-2xl"
           style={{ willChange: 'transform, opacity' }}
         >
-          {/* YouTube Player */}
+          {/* FIX 1: YouTube Player with cover scaling to eliminate black bars */}
           <div
             ref={playerRef}
-            className="absolute inset-0 w-full h-full pointer-events-none "
+            className="absolute top-1/2 left-1/2 pointer-events-none"
+            style={{
+              width: '100vw',
+              height: '56.25vw', // 16:9 aspect ratio
+              minHeight: '100vh',
+              minWidth: '177.77vh', // 16:9 aspect ratio
+              transform: 'translate(-50%, -50%)',
+            }}
             title="About Digital Lab - Company Story Video"
           />
 

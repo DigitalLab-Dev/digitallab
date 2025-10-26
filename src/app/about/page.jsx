@@ -1,5 +1,3 @@
-
-
 'use client';
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
@@ -45,6 +43,32 @@ const Page = () => {
       return () => window.removeEventListener('load', handleLoad);
     }
   }, []);
+
+  // Hash scroll effect
+  useEffect(() => {
+    // Only run after content is loaded and loader is dismissed
+    if (!loading && contentLoaded) {
+      const hash = window.location.hash;
+      
+      if (hash) {
+        // Remove the # from hash to get the id
+        const elementId = hash.substring(1);
+        
+        // Wait a bit for all components to render
+        setTimeout(() => {
+          const element = document.getElementById(elementId);
+          
+          if (element) {
+            // Smooth scroll to the element
+            element.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            });
+          }
+        }, 100); // Small delay to ensure all content is rendered
+      }
+    }
+  }, [loading, contentLoaded]);
 
   return (
     <>

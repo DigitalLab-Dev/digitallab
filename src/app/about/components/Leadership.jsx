@@ -10,7 +10,8 @@ const Leadership = () => {
     {
       name: 'Sayed Ali Turab',
       designation: 'CEO & Co-Founder',
-      image: '/images/ali.jpg',
+      // image: '/images/ali.jpg',
+      image: 'https://res.cloudinary.com/dt9wziort/image/upload/v1761466205/ali_r70j25.png',
       socials: {
         instagram: 'https://www.instagram.com/syedaliturab514?igsh=MTZneGFvOWtkZjN4eg==',
         linkedin: 'https://www.linkedin.com/in/syed-ali-turab-copywriting-expert?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
@@ -20,7 +21,8 @@ const Leadership = () => {
     {
       name: 'Syed Tassawar Abbas',
       designation: 'Co-Founder & COO',
-      image: '/images/tassawar.webp',
+      // image: '/images/tassawar.webp',
+      image: 'https://res.cloudinary.com/dt9wziort/image/upload/v1761466205/tassawar_u1hsiz.png',
       socials: {
         instagram: 'https://www.instagram.com/s.tasawar_abbas?igsh=MXM1NnljY2lkbjFtZw==',
         linkedin: 'https://www.linkedin.com/in/syed-tasawar-abbas-advertising-design-data',
@@ -30,7 +32,8 @@ const Leadership = () => {
     {
       name: 'Sadaqat Mehmood',
       designation: 'CTO',
-      image: '/images/sadaqat.jpg',
+      // image: '/images/sadaqat.jpg',
+      image: 'https://res.cloudinary.com/dt9wziort/image/upload/v1761466205/sadaqat_cnvkoe.png',
       socials: {
         instagram: 'https://www.instagram.com/sadaqat_mehm00d?igsh=MWdraGpydHgxNzJseg==',
         linkedin: 'https://www.linkedin.com/in/sadaqat-mehmood-8b70a9241?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
