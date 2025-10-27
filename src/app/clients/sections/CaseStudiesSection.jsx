@@ -7,7 +7,7 @@ const caseStudies = [
   {
     id: 1,
     clientName: "Mrs Akthar",
-    clientLogo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=150&h=80&fit=crop",
+    clientLogo: "https://res.cloudinary.com/dt9wziort/image/upload/v1761591624/WhatsApp_Image_2025-10-26_at_19.06.00_4d94094e_okdxkr.jpg",
     projectImage: "https://res.cloudinary.com/dt9wziort/image/upload/v1761467419/delujo_iowrle.png",
     industry: "E-commerce",
     projectTitle: "Delujo – From Struggling Store to Growing Brand",
@@ -24,7 +24,7 @@ const caseStudies = [
   {
     id: 2,
     clientName: "Treble Health",
-    clientLogo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=150&h=80&fit=crop",
+    clientLogo: "https://res.cloudinary.com/dt9wziort/image/upload/v1761591519/logo9_u5siw4.png",
     projectImage: "https://res.cloudinary.com/dt9wziort/image/upload/v1761467668/treble_ttgclk.png",
     industry: "Personal Branding",
     projectTitle: "Treble Health – Reigniting Reach and Relevance",
@@ -41,8 +41,8 @@ const caseStudies = [
   {
     id: 3,
     clientName: "Naqvix",
-    clientLogo: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=150&h=80&fit=crop",
-    projectImage: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&h=400&fit=crop",
+    clientLogo: "https://res.cloudinary.com/dt9wziort/image/upload/v1761591453/logo_xu3dy6.png",
+    projectImage: "https://res.cloudinary.com/dt9wziort/image/upload/v1761591276/foodie_case_study_wy3zoc.png",
     industry: "Food & Hospitality",
     projectTitle: "Foodie – A Fresh Look for a Fresh Brand",
     problem: "Foodie — a promising social media app for restaurants — was stuck behind an outdated, lifeless design and an unresponsive website. The layout didn't reflect their dynamic concept, the user experience felt dull, and the platform wasn't built to perform on modern devices.",

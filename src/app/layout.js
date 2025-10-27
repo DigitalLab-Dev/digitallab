@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
         {children}
         <ScrollToTop/>
         <Footor />
-       <SpeedInsights />
+       {process.env.NODE_ENV === 'production' && <SpeedInsights />}
       </body>
     </html>
   );
