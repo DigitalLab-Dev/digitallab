@@ -73,6 +73,7 @@ export default function Home() {
           name="description" 
           content="Leading digital marketing agency specializing in SEO, PPC, social media marketing, and content strategy. Drive growth with data-driven marketing solutions tailored for your business." 
         />
+        <meta name="google-site-verification" content="y11QrZyULvbz1jlhbxTyx6ZOjkXTjbLR47GHCklMfV8" />
         <meta 
           name="keywords" 
           content="digital marketing agency, SEO services, PPC management, social media marketing, content marketing, online marketing, digital strategy, marketing consultation, brand development, lead generation" 

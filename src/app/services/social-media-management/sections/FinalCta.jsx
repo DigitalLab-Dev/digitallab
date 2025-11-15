@@ -64,11 +64,8 @@ const FinalCTA = () => {
     { emoji: '🔥', x: 20, y: 30, delay: 0 },
     { emoji: '❤️', x: 75, y: 25, delay: 0.5 },
     { emoji: '👍', x: 15, y: 60, delay: 1 },
-    { emoji: '😍', x: 85, y: 70, delay: 1.5 },
-    { emoji: '🚀', x: 40, y: 80, delay: 2 },
     { emoji: '💯', x: 65, y: 15, delay: 2.5 },
     { emoji: '⭐', x: 30, y: 25, delay: 3 },
-    { emoji: '🎉', x: 55, y: 60, delay: 3.5 },
     { emoji: '💡', x: 10, y: 75, delay: 4 },
     { emoji: '🔥', x: 90, y: 40, delay: 4.5 },
   ];

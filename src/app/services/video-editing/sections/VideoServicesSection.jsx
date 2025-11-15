@@ -46,7 +46,7 @@ const services = [
     title: "2D & 3D Animation",
     description: "From concept to final render, we create stunning animations that tell your story. Services include character animation, product visualizations, and building entire animated worlds.",
     tools: ["Blender", "Autodesk Maya", "Cinema 4D", "Toon Boom Harmony"],
-    image: "https://images.unsplash.com/photo-1593312241592-28e44b9a18d2?w=800&q=80",
+    image: "/images/DAnimations.png",
     imageAlt: "A 3D character model being animated in software"
   },
   {

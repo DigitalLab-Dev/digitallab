@@ -1,14 +1,10 @@
-
 'use client';
-import Image from 'next/image';
 import Link from 'next/link';
-import { motion,  } from 'framer-motion';
-import {  memo, useMemo } from 'react';
+import { motion } from 'framer-motion';
+import { memo, useMemo } from 'react';
 import { MdArrowOutward } from 'react-icons/md';
-
 import ImageComponent from './ImageComponent';
 
-// Move static data outside component
 const DESIGNS = [
   'https://res.cloudinary.com/dt9wziort/image/upload/v1761661577/7_jtv240.png',
   'https://res.cloudinary.com/dt9wziort/image/upload/v1761661574/9_otapks.png',
@@ -43,6 +39,9 @@ const DESIGNS = [
   'https://res.cloudinary.com/dt9wziort/image/upload/v1761662304/Innotech_1_oevcab.jpg',
   'https://res.cloudinary.com/dt9wziort/image/upload/v1761662311/Innotech_vfvoyx.jpg',
   'https://res.cloudinary.com/dt9wziort/image/upload/v1761662200/20_batfaq.jpg',
+];
+
+const logos = [
   'https://res.cloudinary.com/dt9wziort/image/upload/v1761662200/clothing_brand_1_unwdtf.png',
   'https://res.cloudinary.com/dt9wziort/image/upload/v1761662200/clothing_brand_wvequm.png',
   'https://res.cloudinary.com/dt9wziort/image/upload/v1761662312/Resturant_3_p9vbpl.png',
@@ -64,12 +63,12 @@ const Gallery = () => {
         rows.push(
           <div
             key={`row-${currentIndex}`}
-            className="flex flex-col sm:flex-row gap-4 mb-4 w-full"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 w-full"
           >
             {imagesInRow.map((imageUrl, index) => (
-              <div key={currentIndex + index} className="flex-1">
-                <ImageComponent 
-                  imageUrl={imageUrl} 
+              <div key={currentIndex + index} className="w-full h-full">
+                <ImageComponent
+                  imageUrl={imageUrl}
                   isFullWidth={false}
                   alt={`Design showcase ${currentIndex + index + 1}`}
                 />
@@ -80,12 +79,17 @@ const Gallery = () => {
         currentIndex += 2;
       } else {
         rows.push(
-          <div key={`row-${currentIndex}`} className="w-full mb-4">
-            <ImageComponent
-              imageUrl={DESIGNS[currentIndex]}
-              isFullWidth={true}
-              alt={`Featured design showcase ${currentIndex + 1}`}
-            />
+          <div
+            key={`row-${currentIndex}`}
+            className="w-full mb-4 flex justify-center"
+          >
+            <div className="w-full sm:w-2/3 lg:w-1/2">
+              <ImageComponent
+                imageUrl={DESIGNS[currentIndex]}
+                isFullWidth={true}
+                alt={`Featured design showcase ${currentIndex + 1}`}
+              />
+            </div>
           </div>
         );
         currentIndex += 1;
@@ -100,7 +104,7 @@ const Gallery = () => {
   return (
     <section className="my-10 bg-black">
       <header className="text-center my-10">
-        <motion.h2 
+        <motion.h2
           className="text-5xl sm:text-6xl font-bold text-white mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -119,9 +123,35 @@ const Gallery = () => {
           creativity and innovation.
         </motion.p>
       </header>
-      
+
       <div className="w-full max-w-7xl mx-auto px-4">{renderImages}</div>
-      
+
+      {/* Logos Section */}
+      <div className="w-full max-w-7xl mx-auto px-4 my-16">
+
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          {logos.map((logoUrl, index) => (
+            <motion.div
+              key={index}
+              className="flex items-center justify-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <div className="relative w-48 h-48 rounded-full overflow-hidden shadow-lg border-4 border-orange-500/20 hover:border-orange-500/50 transition-all duration-300 group">
+                <img
+                  src={logoUrl}
+                  alt={`Logo design ${index + 1}`}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-amber-500/0 group-hover:from-orange-500/10 group-hover:to-amber-500/10 transition-all duration-300" />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -141,7 +171,11 @@ const Gallery = () => {
             <span>See All Designs</span>
             <motion.div
               animate={{ x: [0, 5, 0] }}
-              transition={{ repeat: Infinity, duration: 1.2, ease: 'easeInOut' }}
+              transition={{
+                repeat: Infinity,
+                duration: 1.2,
+                ease: 'easeInOut',
+              }}
             >
               <MdArrowOutward className="w-5 h-5" />
             </motion.div>

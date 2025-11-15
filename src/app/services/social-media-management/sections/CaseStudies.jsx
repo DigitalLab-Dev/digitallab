@@ -1,122 +1,58 @@
+
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, TrendingUp, Users, Eye } from 'lucide-react';
 
 const CaseStudies = () => {
-  const [hoveredCase, setHoveredCase] = useState(null);
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-
   const caseStudies = [
     {
-      title: 'Fashion Brand Viral Campaign',
+      title: 'Model and Artist',
       description:
-        'Transformed a struggling fashion startup into a viral sensation with 2.5M+ reach across Instagram and TikTok. Our strategic content mix increased sales by 340% in just 3 months.',
+      "Elevated Rishi's Instagram presence with custom graphic posts and song posters. Gave his profile a clean, recognizable aesthetic that improved engagement and strengthened his artist brand.",
       image: '/portfolios/social-media/1.png',
-      link: '/case-study/fashion-viral',
       metrics: {
-        reach: '2.5M+',
-        growth: '340%',
-        platform: 'Instagram & TikTok',
+        reach: '500k+',
+        growth: '150%',
+        platform: 'Instagram',
       },
     },
     {
-      title: 'Tech Startup LinkedIn Success',
+      title: 'Digital Marketing Agency',
       description:
-        'Positioned a B2B SaaS company as industry thought leaders through strategic LinkedIn content. Generated 150+ qualified leads and secured $2M in new contracts.',
+        'Built Digital Lab Services from zero across social platforms with consistent video editing and graphic design content. Reached 800+ Instagram followers in just 3 months and established a professional brand presence.',
       image: '/portfolios/social-media/2.png',
-      link: '/case-study/tech-linkedin',
-      metrics: { leads: '150+', revenue: '$2M', platform: 'LinkedIn' },
+      metrics: { Projects: '500+', revenue: '$300k+', Clients: '100+' },
     },
     {
-      title: 'Restaurant Chain TikTok Boom',
+      title: 'Travel Agency',
       description:
-        'Created a viral TikTok strategy for a regional restaurant chain, resulting in 50M+ views and 200% increase in foot traffic across all locations.',
+        'Worked with Tafreehi.Agenda, a travel company with national and international reach, creating visually stunning videos of tourist destinations and monuments that significantly elevated their brand engagement.',
       image: '/portfolios/social-media/3.png',
-      link: '/case-study/restaurant-tiktok',
-      metrics: { views: '50M+', traffic: '200%', platform: 'TikTok' },
+      metrics: { views: '500k+', platform: 'Instagram' },
     },
     {
-      title: 'E-commerce YouTube Growth',
+      title: 'Social Media Influencer',
       description:
-        'Built a comprehensive YouTube strategy for an e-commerce brand, growing from 5K to 500K subscribers and generating $1.5M in direct sales through video content.',
+        'Worked with Kevvvads, an influencer focused on Meta Ads, producing high-quality video edits that tripled his views and amplified audience engagement.',
       image: '/portfolios/social-media/4.png',
-      link: '/case-study/ecommerce-youtube',
-      metrics: { subscribers: '500K', sales: '$1.5M', platform: 'YouTube' },
+      metrics: { Growth: '350%', platform: 'Instagram' },
     },
     {
-      title: 'Healthcare Brand Awareness',
+      title: 'Homeware Ecommerce Store',
       description:
-        'Developed a multi-platform awareness campaign for a healthcare provider, reaching 5M+ people and increasing appointment bookings by 180%.',
+        'Partnered with Delujo.uk, an e-commerce brand for household and homeware products, managing their Instagram with daily posts and overseeing their online store to boost brand presence and sales.',
       image: '/portfolios/social-media/5.png',
-      link: '/case-study/healthcare-awareness',
-      metrics: { reach: '5M+', bookings: '180%', platform: 'Multi-platform' },
+      metrics: { reach: '100K+', Sales: '200%', platform: 'Multi-platform' },
     },
     {
-      title: 'Real Estate Facebook Success',
+      title: 'Youtube Channel ',
       description:
-        "Transformed a real estate agency's Facebook presence, generating 300+ qualified leads and closing $15M in property sales within 6 months.",
+        "Managing Treble Health's YouTube channel with 170k followers, producing and editing both long-form and short-form videos to boost engagement and grow their audience.",
       image: '/portfolios/social-media/6.png',
-      link: '/case-study/realestate-facebook',
-      metrics: { leads: '300+', sales: '$15M', platform: 'Facebook' },
-    },
-    {
-      title: 'Beauty Brand Instagram Influence',
-      description:
-        'Launched a beauty brand to Instagram stardom with influencer partnerships and UGC campaigns, achieving 1M followers and $800K in monthly revenue.',
-      image: '/portfolios/social-media/7.jpg',
-      link: '/case-study/beauty-instagram',
-      metrics: { followers: '1M', revenue: '$800K/mo', platform: 'Instagram' },
-    },
-    {
-      title: 'Fitness App Multi-Platform Launch',
-      description:
-        'Orchestrated a cross-platform launch campaign for a fitness app, resulting in 250K downloads and 40K active subscribers within the first month.',
-      image: '/portfolios/social-media/8.png',
-      link: '/case-study/fitness-multiplatform',
-      metrics: {
-        downloads: '250K',
-        subscribers: '40K',
-        platform: 'Cross-platform',
-      },
-    },
-    {
-      title: 'Local Business Community Building',
-      description:
-        'Helped a local coffee shop build a strong community presence across social platforms, increasing daily customers by 120% and creating a loyal fanbase.',
-      image: '/portfolios/social-media/9.png',
-      link: '/case-study/local-community',
-      metrics: {
-        customers: '120%',
-        engagement: '450%',
-        platform: 'Multi-platform',
-      },
-    },
-    {
-      title: 'Non-Profit Awareness Campaign',
-      description:
-        'Created an impactful awareness campaign for a non-profit organization, reaching 10M+ people and increasing donations by 300% during their annual fundraiser.',
-      image: '/portfolios/social-media/10.png',
-      link: '/case-study/nonprofit-awareness',
-      metrics: { reach: '10M+', donations: '300%', platform: 'Multi-platform' },
-    },
-    {
-      title: 'Automotive Brand Engagement',
-      description:
-        "Revitalized an automotive brand's social presence with immersive content and AR experiences, leading to 500% increase in test drive bookings.",
-      image: '/portfolios/social-media/11.png',
-      link: '/case-study/automotive-engagement',
-      metrics: {
-        bookings: '500%',
-        engagement: '280%',
-        platform: 'Instagram & Facebook',
-      },
+      metrics: { views: '1M+ / Month',  platform: 'Youtube' },
     },
   ];
-
-  const handleMouseMove = (e) => {
-    setCursorPosition({ x: e.clientX, y: e.clientY });
-  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -142,23 +78,6 @@ const CaseStudies = () => {
 
   return (
     <section className="min-h-screen py-10 relative overflow-hidden">
-      {/* Custom cursor */}
-      {hoveredCase !== null && (
-        <motion.div
-          className="fixed top-0 left-0 w-20 h-20 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full flex items-center justify-center text-black font-bold text-xs z-50 pointer-events-none"
-          style={{
-            x: cursorPosition.x - 40,
-            y: cursorPosition.y - 40,
-          }}
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          exit={{ scale: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          VIEW
-        </motion.div>
-      )}
-
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <motion.div
@@ -215,59 +134,17 @@ const CaseStudies = () => {
               >
                 {/* Image Container */}
                 <motion.div
-                  className={`relative group ${
+                  className={`relative ${
                     !isEven ? 'lg:col-start-2' : ''
                   }`}
-                  onMouseEnter={() => setHoveredCase(index)}
-                  onMouseLeave={() => setHoveredCase(null)}
-                  onMouseMove={handleMouseMove}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
                 >
-                  {/* Glowing background */}
-                  <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/30 to-amber-500/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-
-
                   {/* Image */}
                   <div className="relative overflow-hidden rounded-xl">
                     <img
                       src={caseStudy.image}
                       alt={caseStudy.title}
-                      className="w-full h-80 object-contain transition-transform duration-500 group-hover:scale-110 cursor-none"
+                      className="w-full h-80 object-contain"
                     />
-
-                    {/* Overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                    {/* Metrics overlay */}
-                    <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <div className="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/20">
-                        <div className="grid grid-cols-3 gap-4 text-white text-sm">
-                          <div className="text-center">
-                            <div className="font-bold text-orange-400">
-                              {Object.values(caseStudy.metrics)[0]}
-                            </div>
-                            <div className="text-xs opacity-80">
-                              {Object.keys(caseStudy.metrics)[0]}
-                            </div>
-                          </div>
-                          <div className="text-center">
-                            <div className="font-bold text-amber-400">
-                              {Object.values(caseStudy.metrics)[1]}
-                            </div>
-                            <div className="text-xs opacity-80">
-                              {Object.keys(caseStudy.metrics)[1]}
-                            </div>
-                          </div>
-                          <div className="text-center">
-                            <div className="font-bold text-white">
-                              {caseStudy.metrics.platform}
-                            </div>
-                            <div className="text-xs opacity-80">Platform</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </motion.div>
 
