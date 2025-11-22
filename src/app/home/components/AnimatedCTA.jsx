@@ -75,7 +75,8 @@ const AnimatedCTA = () => {
     <>
       <style jsx>{`
         @keyframes float {
-          0%, 100% {
+          0%,
+          100% {
             transform: translate(0, 0) rotate(0deg);
           }
           25% {
@@ -104,7 +105,8 @@ const AnimatedCTA = () => {
         }
 
         @keyframes pulse-glow {
-          0%, 100% {
+          0%,
+          100% {
             opacity: 0.15;
             transform: scale(1);
           }
@@ -130,7 +132,10 @@ const AnimatedCTA = () => {
         aria-labelledby="cta-heading"
       >
         {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute inset-0 overflow-hidden pointer-events-none"
+          aria-hidden="true"
+        >
           {/* Floating SVG Shapes - Fixed Implementation */}
           {floatingShapes.map((shape, index) => (
             <motion.div
@@ -260,12 +265,12 @@ const AnimatedCTA = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="container mx-auto px-6 text-center relative z-10 max-w-6xl"
+          className="container mx-auto px-6 text-center   relative z-10 max-w-7xl w-full"
         >
           <article className="space-y-4">
             {/* Subtitle */}
             <motion.div variants={itemVariants}>
-              <span className="inline-block text-orange-500 text-xs md:text-sm font-bold tracking-[0.3em] uppercase px-4 py-2 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-sm">
+              <span className="inline-block  text-orange-500 text-xs md:text-sm font-bold tracking-[0.3em] uppercase px-4 py-2 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-sm">
                 Ready to Transform Your Business?
               </span>
             </motion.div>
@@ -277,7 +282,9 @@ const AnimatedCTA = () => {
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl  font-black text-white leading-tight"
             >
               Work Hand in Hand with{' '}
-              <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 animate-gradient">
+              <span
+                className=" md:block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 animate-gradient"
+              >
                 Digital Lab
               </span>
             </motion.h2>
@@ -285,10 +292,10 @@ const AnimatedCTA = () => {
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="text-gray-300 text-lg md:text-xl  max-w-3xl mx-auto leading-relaxed"
+              className="text-gray-300 text-md md:text-xl w-full  max-w-3xl mx-auto leading-relaxed"
             >
-              You focus on your business, we'll handle the digital magic, design,
-              marketing, and results that matter.
+              You focus on your business, we'll handle the digital magic,
+              design, marketing, and results that matter.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -298,7 +305,7 @@ const AnimatedCTA = () => {
             >
               <Link
                 href="/contact"
-                className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-base md:text-lg rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/50 focus:outline-none focus:ring-4 focus:ring-orange-500/50 inline-flex items-center gap-3"
+                className="group relative w-full px-8 sm:w-fit py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-base md:text-lg rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/50 focus:outline-none focus:ring-4 focus:ring-orange-500/50 inline-flex items-center justify-center gap-3"
                 aria-label="Start your project with Digital Lab"
               >
                 <span className="relative z-10">Start Your Project</span>
@@ -313,15 +320,13 @@ const AnimatedCTA = () => {
 
               <Link
                 href="/services"
-                className="group px-8 py-4 bg-transparent text-white font-bold text-base md:text-lg rounded-full border-2 border-white hover:border-orange-500 hover:text-orange-500 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/50 inline-flex items-center gap-3"
+                className="group px-8 w-full py-4 justify-center sm:w-fit bg-transparent text-white font-bold text-base md:text-lg rounded-full border-2 border-white hover:border-orange-500 hover:text-orange-500 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/50 inline-flex items-center gap-3"
                 aria-label="View our portfolio and services"
               >
                 <span>View Our Work</span>
                 <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
             </motion.div>
-
-
           </article>
         </motion.div>
       </section>

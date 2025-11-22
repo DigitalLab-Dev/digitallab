@@ -119,7 +119,7 @@ const VideoSection = () => {
 
   return (
     <section 
-      className="z-[9999] py-16"
+      className="z-[9999] py-16 md:block hidden"
       aria-labelledby="video-section-heading"
     >
       <div className="w-full z-[9999] h-[80vh] md:h-screen mx-auto">

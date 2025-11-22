@@ -579,19 +579,7 @@ const Testimonials = () => {
                   transition={{ duration: 0.5 }}
                   className="space-y-8"
                 >
-                  {/* Rating Stars */}
-                  <div className="flex gap-2">
-                    {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: i * 0.1 }}
-                      >
-                        <FaStar className="text-orange-400 text-2xl" />
-                      </motion.div>
-                    ))}
-                  </div>
+
 
                   {/* Quote */}
                   <div className="relative">

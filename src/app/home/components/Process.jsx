@@ -24,7 +24,7 @@ const Process = ({
   return (
     <article
       ref={ref}
-      className="min-h-[50vh]   md:h-[70vh] border-b border-orange-500 flex flex-col items-start justify-center py-4 md:py-0"
+      className="min-h-[40vh]   md:h-[70vh] border-b border-orange-500 flex flex-col items-start justify-center py-4 md:py-0"
       role="listitem"
       itemScope
       itemType="https://schema.org/HowToStep"

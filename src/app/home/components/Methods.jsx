@@ -70,11 +70,6 @@ const Methods = () => {
 
   const images = useMemo(
     () => [
-      // '/images/planning.png',
-      // '/images/strategy.png',
-      // '/images/design.png',
-      // '/images/optimize.png',
-      // '/images/launch.png',
       'https://res.cloudinary.com/dt9wziort/image/upload/v1761452664/planning_ffpkjo.png',
       'https://res.cloudinary.com/dt9wziort/image/upload/v1761452664/strategy_yvypsh.png',
       'https://res.cloudinary.com/dt9wziort/image/upload/v1761452793/design_odnwxz.png',
@@ -88,21 +83,19 @@ const Methods = () => {
     <section
       className="w-full py-10 px-5 flex flex-col items-center justify-center"
       aria-labelledby="methods-heading"
-      itemScope
-      itemType="https://schema.org/HowTo"
     >
       <header className="w-full flex flex-col items-center justify-center gap-5">
-        <p className="uppercase text-center text-2xl sm:text-4xl text-[#f0750f]">
+        <p className="uppercase text-center text-2xl  sm:text-4xl text-[#f0750f]">
           Our clear and collaborative process
         </p>
         <h2
           id="methods-heading"
-          className="uppercase text-2xl text-center sm:text-4xl md:text-5xl lg:text-6xl font-extrabold"
+          className="uppercase text-3xl text-center sm:text-4xl md:text-5xl lg:text-6xl font-extrabold"
           itemProp="name"
         >
          Behind Every Brand We Build
         </h2>
-        <p className="text-sm sm:text-lg md:text-xl text-center uppercase md:w-2/3" itemProp="description">
+        <p className="text-md sm:text-lg md:text-xl text-center uppercase md:w-2/3" itemProp="description">
          Dive into the journey we take together to grow your brand Step by step, moving it closer to its best version.
         </p>
       </header>

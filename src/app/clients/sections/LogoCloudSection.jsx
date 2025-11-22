@@ -271,7 +271,7 @@ const LogoCloudSection = () => {
           {/* Section Header */}
           <div className="text-center mb-5 perspective-3d">
             <motion.h2 
-              className="text-6xl md:text-7xl font-bold text-white mb-6 relative"
+              className="text-5xl md:text-7xl font-bold text-white mb-6 relative"
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -304,7 +304,7 @@ const LogoCloudSection = () => {
           <div className="relative flex justify-center items-center h-96 md:h-[500px]">
             {/* Center Hub */}
             <motion.div 
-              className="absolute z-20 w-32 h-32 bg-gradient-to-br from-orange-500 to-amber-600 rounded-full flex items-center justify-center glow-active"
+              className="absolute z-20 md:w-32 md:h-32 w-22 h-22 bg-gradient-to-br from-orange-500 to-amber-600 rounded-full flex items-center justify-center glow-active"
               animate={{
                 rotate: 360
               }}
@@ -314,7 +314,7 @@ const LogoCloudSection = () => {
                 ease: "linear"
               }}
             >
-              <div className="w-24 h-24 bg-black rounded-full flex items-center justify-center">
+              <div className="md:w-24 md:h-24 w-12 h-12 bg-black rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-lg">WE</span>
               </div>
             </motion.div>

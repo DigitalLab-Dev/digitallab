@@ -1,7 +1,7 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Quote, ChevronLeft, ChevronRight, X, MessageCircle, Upload, Loader, CheckCircle, AlertCircle } from 'lucide-react';
+import { Star, Quote,  X, MessageCircle, Upload, Loader, CheckCircle, AlertCircle } from 'lucide-react';
 
 const TestimonialCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -20,7 +20,7 @@ const TestimonialCarousel = () => {
   const [imagePreview, setImagePreview] = useState(null);
 
   // API configuration
-  const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://api.yourdomain.com';
+  const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000';
 
   // Fetch approved reviews from backend
   useEffect(() => {
@@ -39,7 +39,7 @@ const TestimonialCarousel = () => {
           title: review.role,
           review: review.review,
           image: review.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=ea580c&color=fff&size=150`,
-          rating: 5, // Default rating since backend doesn't have rating field
+          rating: 5, 
           email: review.email
         }));
         setTestimonials(transformedData);
@@ -58,18 +58,12 @@ const TestimonialCarousel = () => {
     if (testimonials.length > 0) {
       const timer = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-      }, 4000);
+      }, 5000);
       return () => clearInterval(timer);
     }
   }, [testimonials.length]);
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
 
   const getVisibleTestimonials = () => {
     if (testimonials.length === 0) return [];
@@ -142,8 +136,8 @@ const TestimonialCarousel = () => {
       if (formData.image) {
         submitData.append('image', formData.image);
       }
-
-      const response = await fetch(API_BASE_URL, {
+      const URL= `${API_BASE_URL}/api/review`
+      const response = await fetch(URL, {
         method: 'POST',
         body: submitData
       });

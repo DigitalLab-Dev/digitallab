@@ -126,7 +126,7 @@ const Services = () => {
             </span>
             <h2 
               id="services-heading"
-              className="text-4xl sm:text-5xl md:text-6xl font-bold lg:text-left text-center uppercase leading-tight"
+              className="text-[40px] sm:text-5xl md:text-6xl font-bold lg:text-left text-center uppercase leading-tight"
             >
               Top <span className="text-orange-400">Services</span> We
               Specialize In
@@ -134,7 +134,7 @@ const Services = () => {
           </header>
           
           <div className="w-full lg:w-1/2">
-            <p className="text-base sm:text-lg lg:text-xl text-neutral-300 lg:text-left text-center leading-relaxed">
+            <p className="text-md sm:text-lg lg:text-xl text-neutral-300 lg:text-left text-center leading-relaxed">
               Backed by proven digital strategies, we help businesses gain visibility, build reputation, expand reach, and grow revenue. Explore the services we've mastered to make that happen:
             </p>
           </div>

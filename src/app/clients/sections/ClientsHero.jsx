@@ -143,7 +143,7 @@ const ClientsHeroSection = () => {
         <motion.h1
           id="clients-hero-heading"
           variants={itemVariants}
-          className="text-5xl sm:text-6xl md:text-7xl  font-black leading-none mb-6"
+          className="text-6xl sm:text-6xl md:text-7xl  font-black leading-none mb-6"
         >
           <span className="text-white block mb-4">
             We Are The First Choice
@@ -181,7 +181,7 @@ const ClientsHeroSection = () => {
                 onClick={(e) => scrollToSection(e, cta.href)}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                className={`group relative px-8 py-4 rounded-xl font-semibold text-base flex items-center gap-3 transition-all duration-300 ${
+                className={`group relative px-8 py-4 w-full justify-center md:w-fit rounded-xl font-semibold text-base flex items-center gap-3 transition-all duration-300 ${
                   cta.primary
                     ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-500/30 hover:shadow-2xl hover:shadow-orange-500/40'
                     : 'bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-orange-500/30'

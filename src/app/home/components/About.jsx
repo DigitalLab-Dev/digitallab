@@ -11,13 +11,12 @@ const About = () => {
   const imageContainerRef = useRef(null);
 
 
- // Image zoom animation based on scroll position
   const { scrollYProgress: imageScrollProgress } = useScroll({
     target: imageContainerRef,
     offset: ['start end', 'end start'],
   });
 
-  // Smooth zoom: 0.9 when out of view, 1 when in center, 0.9 when leaving
+
   const imageScale = useTransform(
     imageScrollProgress,
     [0, 0.3, 0.7, 1],
@@ -216,7 +215,7 @@ const About = () => {
           {/* Content Section */}
           <motion.article variants={itemVariants} className="space-y-8">
             <motion.div variants={itemVariants}>
-              <h3 className="text-3xl sm:text-4xl uppercase md:text-5xl font-bold text-white text-center lg:text-left mb-6 leading-tight">
+              <h3 className="text-4xl sm:text-5xl uppercase md:text-5xl font-bold text-white text-center lg:text-left mb-6 leading-tight">
                 <motion.span
                   className="text-[#f48020] "
                   whileHover={{ scale: 1.02 }}
@@ -228,7 +227,7 @@ const About = () => {
               </h3>
 
               <motion.p
-                className="text-lg sm:text-xl text-gray-300 text-center lg:text-left leading-relaxed mb-8"
+                className="text-md sm:text-xl text-gray-300 text-center lg:text-left leading-relaxed mb-8"
                 variants={itemVariants}
               >
                 We’re architects of digital experiences, trusted by 100+ clients

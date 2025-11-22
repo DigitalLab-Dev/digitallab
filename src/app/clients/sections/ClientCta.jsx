@@ -113,7 +113,7 @@ const CtaSectionAnimated = () => {
         {/* Animated heading */}
         <h2
           id="cta-heading"
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight mb-6 sm:mb-8"
+          className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight mb-6 sm:mb-8"
         >
           {words.map((word, i) => (
             <span
@@ -170,7 +170,7 @@ const CtaSectionAnimated = () => {
         >
           <Link
             href="/contact"
-            className="group relative inline-flex items-center justify-center gap-3 sm:gap-4 rounded-full bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 px-6 sm:px-8 py-3 sm:py-4 text-lg sm:text-xl md:text-2xl font-bold text-white shadow-2xl transition-all duration-500 hover:shadow-orange-500/50 hover:scale-110 active:scale-95 overflow-hidden focus:outline-none focus:ring-4 focus:ring-orange-500/50"
+            className="group relative w-full md:w-fit  inline-flex items-center justify-center gap-3 sm:gap-4 rounded-full bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 px-6 sm:px-8 py-3 sm:py-4 text-lg sm:text-xl md:text-2xl font-bold text-white shadow-2xl transition-all duration-500 hover:shadow-orange-500/50 hover:scale-110 active:scale-95 overflow-hidden focus:outline-none focus:ring-4 focus:ring-orange-500/50"
             aria-label="Reserve your consultation spot"
           >
             {/* Animated background layers */}

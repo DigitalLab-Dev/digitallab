@@ -17,11 +17,8 @@ const Team = () => {
         setLoading(true);
         setError(null);
         
-        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://digitallab-server.vercel.app';
-        const apiUrl = `${backendUrl}/api/team`;
-        
-        console.log('Fetching team from:', apiUrl);
-        
+        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000/api/team';
+        const apiUrl = `${backendUrl}/api/team`;              
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
         
@@ -44,7 +41,6 @@ const Team = () => {
         const data = await res.json();
         console.log('Team data received:', data);
         
-        // Handle different response structures
         let members = [];
         if (Array.isArray(data)) {
           members = data;
@@ -64,25 +60,20 @@ const Team = () => {
         setTeamMembers(members);
       } catch (err) {
         console.error('Error fetching team:', err);
-        
-        // Provide more helpful error messages
         let errorMessage = err.message;
         if (err.name === 'AbortError') {
           errorMessage = 'Request timeout - Please check your internet connection';
         } else if (err.message.includes('Failed to fetch')) {
           errorMessage = 'CORS Error: Unable to connect to the server. Please ensure the backend allows requests from your domain.';
-        }
-        
+        }        
         setError(errorMessage);
       } finally {
         setLoading(false);
       }
     };
-
     fetchTeam();
   }, []);
 
-  // Auto-play carousel
   useEffect(() => {
     if (teamMembers.length <= 1) return;
 
@@ -153,11 +144,10 @@ const Team = () => {
     },
   });
 
-  // Loading state
+
   if (loading) {
     return (
       <section 
-        id='team'
         className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden"
         aria-live="polite"
         aria-busy="true"

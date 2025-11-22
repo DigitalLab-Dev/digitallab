@@ -163,10 +163,11 @@ const Leadership = () => {
   return (
     <section 
       ref={sectionRef}
-      className="px-10 flex items-center justify-center flex-col min-h-screen"
+      id='team'
+      className="px-10 py-10 flex items-center justify-center flex-col min-h-screen"
     >
       <h4
-        className={`text-6xl font-semibold text-white mb-4 transition-all duration-900 transform ${
+        className={`text-5xl md:text-6xl font-semibold text-white mb-4 transition-all duration-900 transform ${
           isVisible
             ? 'translate-y-0 opacity-100 scale-100'
             : 'translate-y-12 opacity-0 scale-95'

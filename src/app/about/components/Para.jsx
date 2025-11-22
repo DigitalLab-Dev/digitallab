@@ -34,26 +34,30 @@ const Para = () => {
       if (splitRef.current) {
         splitRef.current.revert();
       }
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
   return (
-    <section 
+    <section
       className="py-10  px-4 sm:px-6 md:px-8 lg:px-12"
       aria-labelledby="brand-statement"
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-center">
+      <div className="max-w-7xl w-full mx-auto flex items-center justify-center">
         <h2
           id="brand-statement"
           ref={textRef}
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl  w-full sm:w-11/12 md:w-10/12 lg:w-9/12 xl:w-3/4 font-light text-white leading-relaxed sm:leading-relaxed md:leading-snug text-center"
+          className="text-xl sm:text-3xl md:text-4xl lg:text-5xl  w-full sm:w-11/12 md:w-10/12 lg:w-9/12 xl:w-3/4 font-light text-white leading-relaxed sm:leading-relaxed md:leading-snug text-center"
         >
-          <strong className="font-semibold">We are a Brand Evolution Studio.</strong>{' '}
-          <strong className="font-semibold">We partner with ambitious clients</strong>
-          {' '}to create brand experiences{' '} {/* <-- Fixed: Removed extra space and comma */}
           <strong className="font-semibold">
-           that connect, inspire, and deliver real results.
+            We are a Brand Evolution Studio.
+          </strong>{' '}
+          <strong className="font-semibold">
+            We partner with ambitious clients
+          </strong>{' '}
+          to create brand experiences{' '}
+          <strong className="font-semibold">
+            that connect, inspire, and deliver real results.
           </strong>
         </h2>
       </div>

@@ -277,7 +277,7 @@ const Mission = () => {
 
                 {/* Animated Paragraph */}
                 <motion.p
-                  className="text-lg md:text-xl text-neutral-300 leading-relaxed max-w-2xl"
+                  className="text-md md:text-xl text-neutral-300 leading-relaxed max-w-2xl"
                   variants={paragraphVariants}
                 >
                   {mission.content}
