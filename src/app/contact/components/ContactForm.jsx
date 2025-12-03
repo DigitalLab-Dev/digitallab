@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { CheckCircle, XCircle, X } from "lucide-react";
 
@@ -23,24 +23,36 @@ const ContactForm = () => {
     setStatus(null);
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/email/send`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/email/send`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await res.json();
 
       if (res.ok && data.success) {
-        setStatus({ type: "success", message: "Message has been sent successfully!" });
+        setStatus({
+          type: "success",
+          message: "Message has been sent successfully!",
+        });
         setFormData({ name: "", email: "", service: "", message: "" }); // clear fields
       } else {
-        setStatus({ type: "error", message: "Failed to send message. Please try again." });
+        setStatus({
+          type: "error",
+          message: "Failed to send message. Please try again.",
+        });
       }
     } catch (err) {
-      setStatus({ type: "error", message: "Something went wrong. Please try again!" });
+      setStatus({
+        type: "error",
+        message: "Something went wrong. Please try again!",
+      });
     } finally {
       setLoading(false);
     }
@@ -100,32 +112,53 @@ const ContactForm = () => {
             className="w-full border-b-2 border-gray-300 focus:border-orange-500 outline-none p-2 bg-transparent transition-colors appearance-none cursor-pointer text-gray-700 dark:text-gray-300"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23f97316' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'right 0.5rem center',
-              paddingRight: '2rem'
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "right 0.5rem center",
+              paddingRight: "2rem",
             }}
             required
           >
-            <option value="" className="bg-white dark:bg-gray-800 text-gray-500">
+            <option
+              value=""
+              className="bg-white dark:bg-gray-800 text-gray-500"
+            >
               Select a Service
             </option>
-            <option value="Web Development" className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3">
-               Web Development
+            <option
+              value="Web Development"
+              className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3"
+            >
+              Web Development
             </option>
-            <option value="Mobile App Development" className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3">
-               Mobile App Development
+            <option
+              value="Mobile App Development"
+              className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3"
+            >
+              Mobile App Development
             </option>
-            <option value="SEO Optimization" className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3">
-               SEO Optimization
+            <option
+              value="SEO Optimization"
+              className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3"
+            >
+              SEO Optimization
             </option>
-            <option value="UI/UX Design" className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3">
-               UI/UX Design
+            <option
+              value="UI/UX Design"
+              className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3"
+            >
+              UI/UX Design
             </option>
-            <option value="Digital Marketing" className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3">
-               Digital Marketing
+            <option
+              value="Digital Marketing"
+              className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3"
+            >
+              Digital Marketing
             </option>
-            <option value="Digital Marketing" className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3">
-                Other Services
+            <option
+              value="Other Services"
+              className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3"
+            >
+              Other Services
             </option>
           </select>
         </div>
@@ -158,9 +191,25 @@ const ContactForm = () => {
         >
           {loading ? (
             <span className="flex items-center justify-center gap-2">
-              <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              <svg
+                className="animate-spin h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
               </svg>
               Sending...
             </span>
@@ -173,7 +222,7 @@ const ContactForm = () => {
       {/* Status Message - Toast Style */}
       {status && (
         <div
-          className={`fixed bottom-4 right-4 z-50 min-w-[320px] max-w-md rounded-xl shadow-2xl p-4 backdrop-blur-md border-2 transition-all duration-300 animate-slide-in ${
+          className={`fixed bottom-4 right-4 z-50 w-[90%] sm:min-w-[320px] max-w-md rounded-xl shadow-2xl p-4 backdrop-blur-md border-2 transition-all duration-300 animate-slide-in ${
             status.type === "success"
               ? "bg-green-50/90 dark:bg-green-900/90 border-green-500 text-green-800 dark:text-green-100"
               : "bg-red-50/90 dark:bg-red-900/90 border-red-500 text-red-800 dark:text-red-100"
@@ -208,7 +257,7 @@ const ContactForm = () => {
                 status.type === "success" ? "bg-green-600" : "bg-red-600"
               }`}
               style={{
-                animation: "progress 3s linear forwards"
+                animation: "progress 3s linear forwards",
               }}
             />
           </div>
@@ -224,7 +273,7 @@ const ContactForm = () => {
             width: 0%;
           }
         }
-        
+
         @keyframes slide-in {
           from {
             transform: translateX(100%);
@@ -235,7 +284,7 @@ const ContactForm = () => {
             opacity: 1;
           }
         }
-        
+
         .animate-slide-in {
           animation: slide-in 0.3s ease-out;
         }

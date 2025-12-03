@@ -1,33 +1,51 @@
-'use client';
-import { useState, useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { Play, X, Film } from 'lucide-react';
+"use client";
+import { useState, useRef, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
+import { Play, Film } from "lucide-react";
 
 export default function LongFormShowcase() {
   const [hoveredVideo, setHoveredVideo] = useState(null);
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [playingVideoId, setPlayingVideoId] = useState(null);
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const videos = [
-    { id: 1, ytLong: 'KvRWl2koK9U', Title: 'Documentary Talking Head' },
-    { id: 2, ytLong: 'f-CkgeEB9QI', Title: 'Cashcow' },
-    { id: 3, ytLong: '1yHGUXx_DXE', Title: 'Talking Head Health' },
-    { id: 4, ytLong: 'Hya05rr6-7Y', Title: 'Documentary' },
-    { id: 5, ytLong: 'unEKDg37vO8', Title: 'Documentary' },
-    { id: 6, ytLong: '99DraSjkOa0', Title: 'Podcast' },
-  ];
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        setLoading(true);
+        const backendUrl =
+          process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
+        const response = await fetch(`${backendUrl}/api/long-videos`);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch videos");
+        }
+
+        const data = await response.json();
+        if (data.success) {
+          setVideos(data.videos);
+        } else {
+          throw new Error(data.message || "Failed to fetch videos");
+        }
+      } catch (err) {
+        console.error("Error fetching videos:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVideos();
+  }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen bg-black mb-10  px-6 overflow-hidden"
+      className="relative min-h-screen bg-black mb-10 px-6 overflow-hidden"
     >
       {/* Animated background */}
       <div className="absolute inset-0">
@@ -36,16 +54,16 @@ export default function LongFormShowcase() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                'linear-gradient(rgba(249, 115, 22, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(249, 115, 22, 0.3) 1px, transparent 1px)',
-              backgroundSize: '100px 100px',
+                "linear-gradient(rgba(249, 115, 22, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(249, 115, 22, 0.3) 1px, transparent 1px)",
+              backgroundSize: "100px 100px",
             }}
           />
         </div>
 
-        <motion.div className="absolute inset-0" style={{ y }}>
+        <div className="absolute inset-0">
           <div className="absolute top-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
           <div className="absolute top-2/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-orange-500/20 to-transparent" />
-        </motion.div>
+        </div>
 
         <motion.div
           className="absolute top-1/4 left-1/3 w-96 h-96 bg-orange-500 rounded-full blur-3xl opacity-10"
@@ -56,7 +74,7 @@ export default function LongFormShowcase() {
           transition={{
             duration: 12,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
         />
       </div>
@@ -72,7 +90,7 @@ export default function LongFormShowcase() {
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.2, duration: 0.6, type: 'spring' }}
+            transition={{ delay: 0.2, duration: 0.6, type: "spring" }}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-orange-500/10 border border-orange-500/30 mb-8 backdrop-blur-sm"
           >
             <Film className="w-4 h-4 text-orange-500" />
@@ -93,7 +111,7 @@ export default function LongFormShowcase() {
           >
             STORIES THAT
           </motion.h2>
-          
+
           <motion.h3
             initial={{ y: 100, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
@@ -111,7 +129,7 @@ export default function LongFormShowcase() {
                 transition={{
                   duration: 3,
                   repeat: Infinity,
-                  ease: 'easeInOut',
+                  ease: "easeInOut",
                 }}
               >
                 CAPTIVATE
@@ -128,155 +146,137 @@ export default function LongFormShowcase() {
             transition={{ delay: 0.8, duration: 0.8 }}
             className="text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto"
           >
-            Cinematic storytelling that keeps audiences engaged from beginning to end
+            Cinematic storytelling that keeps audiences engaged from beginning
+            to end
           </motion.p>
         </motion.div>
 
-        {/* Grid of videos */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 1, duration: 1 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          {videos.map((video, index) => (
-            <motion.article
-              key={video.id}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                delay: 1.2 + index * 0.1,
-                duration: 0.8,
-                ease: [0.6, 0.05, 0.01, 0.9],
-              }}
-              onMouseEnter={() => setHoveredVideo(video.id)}
-              onMouseLeave={() => setHoveredVideo(null)}
-              onClick={() => setSelectedVideo(video)}
-              className="group relative cursor-pointer"
-            >
-              {/* Glow effect */}
-              <motion.div
-                className="absolute -inset-2 bg-gradient-to-br from-orange-500/40 to-orange-600/40 rounded-2xl opacity-0 blur-xl"
-                animate={
-                  hoveredVideo === video.id ? { opacity: 1 } : { opacity: 0 }
-                }
-                transition={{ duration: 0.3 }}
-              />
+        {/* Content based on state */}
+        {loading && (
+          <div className="flex items-center justify-center py-20">
+            <div className="text-orange-500 text-xl">Loading videos...</div>
+          </div>
+        )}
 
-              {/* Video container */}
-              <motion.div
-                className="relative w-full aspect-video rounded-xl overflow-hidden bg-zinc-900"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.4, ease: 'easeOut' }}
+        {error && (
+          <div className="flex items-center justify-center py-20">
+            <div className="text-red-500 text-xl">Error: {error}</div>
+          </div>
+        )}
+
+        {!loading && !error && (
+          /* Grid of videos */
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 1, duration: 1 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
+            {videos.map((video, index) => (
+              <motion.article
+                key={video._id || index}
+                initial={{ opacity: 0, y: 50 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  delay: 1.2 + index * 0.1,
+                  duration: 0.8,
+                  ease: [0.6, 0.05, 0.01, 0.9],
+                }}
+                onMouseEnter={() => setHoveredVideo(video._id)}
+                onMouseLeave={() => setHoveredVideo(null)}
+                className="group relative"
               >
-                {/* YouTube Thumbnail */}
-                <img
-                  src={`https://img.youtube.com/vi/${video.ytLong}/maxresdefault.jpg`}
-                  alt={video.Title}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
+                {/* Glow effect */}
+                <motion.div
+                  className="absolute -inset-2 bg-gradient-to-br from-orange-500/40 to-orange-600/40 rounded-2xl opacity-0 blur-xl"
+                  animate={
+                    hoveredVideo === video._id ? { opacity: 1 } : { opacity: 0 }
+                  }
+                  transition={{ duration: 0.3 }}
                 />
 
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-
-                {/* Play button */}
+                {/* Video container */}
                 <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={
-                    hoveredVideo === video.id
-                      ? { opacity: 1, scale: 1 }
-                      : { opacity: 0.7, scale: 0.9 }
+                  className="relative w-full aspect-video rounded-xl overflow-hidden bg-zinc-900"
+                  whileHover={
+                    playingVideoId !== video._id ? { scale: 1.05 } : {}
                   }
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                 >
-                  <motion.div
-                    className="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center shadow-2xl shadow-orange-500/50"
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <Play className="w-7 h-7 text-white fill-white ml-1" />
-                  </motion.div>
+                  {playingVideoId === video._id ? (
+                    <iframe
+                      src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&rel=0`}
+                      title={video.title}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <div
+                      className="relative w-full h-full cursor-pointer"
+                      onClick={() => setPlayingVideoId(video._id)}
+                    >
+                      {/* YouTube Thumbnail */}
+                      <img
+                        src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`}
+                        alt={video.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+
+                      {/* Gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+
+                      {/* Play button */}
+                      <motion.div
+                        className="absolute inset-0 flex items-center justify-center"
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={
+                          hoveredVideo === video._id
+                            ? { opacity: 1, scale: 1 }
+                            : { opacity: 0.7, scale: 0.9 }
+                        }
+                        transition={{ duration: 0.3 }}
+                      >
+                        <motion.div
+                          className="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center shadow-2xl shadow-orange-500/50"
+                          whileHover={{ scale: 1.2 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          <Play className="w-7 h-7 text-white fill-white ml-1" />
+                        </motion.div>
+                      </motion.div>
+
+                      {/* Title */}
+                      <div className="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 className="text-white font-bold text-lg line-clamp-2">
+                          {video.title}
+                        </h3>
+                      </div>
+
+                      {/* Corner accents */}
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={
+                          hoveredVideo === video._id
+                            ? { opacity: 1 }
+                            : { opacity: 0 }
+                        }
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="absolute top-3 left-3 w-8 h-8 border-t-2 border-l-2 border-orange-500" />
+                        <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-orange-500" />
+                        <div className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-orange-500" />
+                        <div className="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-orange-500" />
+                      </motion.div>
+                    </div>
+                  )}
                 </motion.div>
-
-                {/* Title */}
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <h3 className="text-white font-bold text-lg line-clamp-2">
-                    {video.Title}
-                  </h3>
-                </div>
-
-                {/* Corner accents */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={
-                    hoveredVideo === video.id ? { opacity: 1 } : { opacity: 0 }
-                  }
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="absolute top-3 left-3 w-8 h-8 border-t-2 border-l-2 border-orange-500" />
-                  <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-orange-500" />
-                  <div className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-orange-500" />
-                  <div className="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-orange-500" />
-                </motion.div>
-              </motion.div>
-            </motion.article>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* Video Modal */}
-      {selectedVideo && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 sm:p-6"
-          onClick={() => setSelectedVideo(null)}
-        >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="relative w-full max-w-6xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close button */}
-            <button
-              onClick={() => setSelectedVideo(null)}
-              className="absolute -top-12 right-0 w-10 h-10 bg-orange-500 hover:bg-orange-600 rounded-full flex items-center justify-center text-white transition-colors z-10"
-              aria-label="Close video"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            {/* Video container */}
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl shadow-orange-500/20">
-              <iframe
-                src={`https://www.youtube.com/embed/${selectedVideo.ytLong}?autoplay=1&rel=0`}
-                title={selectedVideo.Title}
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-
-            {/* Title below video */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="mt-6 text-center"
-            >
-              <h3 className="text-2xl sm:text-3xl font-bold text-white">
-                {selectedVideo.Title}
-              </h3>
-            </motion.div>
+              </motion.article>
+            ))}
           </motion.div>
-        </motion.div>
-      )}
+        )}
+      </div>
     </section>
   );
 }

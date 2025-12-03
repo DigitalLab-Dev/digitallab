@@ -1,7 +1,7 @@
-import CircularText from '@/components/ReactBit-Components/CircularText';
-import Image from 'next/image';
-import React from 'react';
-import { FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
+import CircularText from "@/components/ReactBit-Components/CircularText";
+import Image from "next/image";
+import React from "react";
+import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 
 const ImageSection = () => {
   return (
@@ -12,7 +12,7 @@ const ImageSection = () => {
         alt="Contact Illustration"
         width={450}
         height={450}
-        className="rounded-lg shadow-lg transition-transform duration-500 ease-in-out group-hover:scale-105"
+        className="rounded-lg shadow-lg transition-transform duration-500 ease-in-out group-hover:scale-105 w-full h-auto max-w-[450px]"
       />
 
       {/* Social Media Icons - Top Right */}
@@ -44,7 +44,7 @@ const ImageSection = () => {
       </div>
 
       {/* Second Circular Text (Bottom-Left of Image) */}
-      <div className="absolute bottom-0 left-0 -translate-x-1/3 translate-y-1/3">
+      <div className="absolute bottom-0 left-0 -translate-x-1/3 translate-y-1/3 hidden sm:block">
         <CircularText
           text="DIGITALLAB • CONTACT US • "
           onHover="speedUp"

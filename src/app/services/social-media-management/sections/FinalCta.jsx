@@ -286,8 +286,8 @@ const FinalCTA = () => {
             className="flex flex-wrap justify-center gap-8 py-8"
           >
             {[
-              { number: '500M+', label: 'Content Views' },
-              { number: '2.5K+', label: 'Brands Grown' },
+              { number: '15M+', label: 'Content Views' },
+              { number: '250+', label: 'Brands Grown' },
               { number: '98%', label: 'Success Rate' },
               { number: '24/7', label: 'Support' },
             ].map((stat, index) => (

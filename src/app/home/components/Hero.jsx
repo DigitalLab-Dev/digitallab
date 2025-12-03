@@ -1,11 +1,11 @@
-'use client';
-import ShinyText from '@/components/ReactBit-Components/ShinyText';
-import TextType from '@/components/ReactBit-Components/TextType';
-import React, { Suspense, useState } from 'react';
-import { MdArrowOutward } from 'react-icons/md';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import Spline from '@splinetool/react-spline';
+"use client";
+import ShinyText from "@/components/ReactBit-Components/ShinyText";
+import TextType from "@/components/ReactBit-Components/TextType";
+import React, { Suspense, useState } from "react";
+import { MdArrowOutward } from "react-icons/md";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import Spline from "@splinetool/react-spline";
 
 const Hero = () => {
   const [splineLoaded, setSplineLoaded] = useState(false);
@@ -15,18 +15,18 @@ const Hero = () => {
 
   return (
     <motion.section
-      className="w-full relative min-h-screen flex mt-10 sm:mt-20  justify-center items-center flex-col px-5 overflow-hidden"
+      className="w-full relative min-h-[90vh] flex mt-10 sm:mt-20  justify-center items-center flex-col px-5 overflow-hidden"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       aria-label="Hero section - Digital marketing agency introduction"
     >
       <div
         className="absolute inset-0 -z-10"
-        style={{ pointerEvents: 'auto' }}
+        style={{ pointerEvents: "auto" }}
         aria-hidden="true"
       >
-        <div className="w-full h-full scale-125 sm:scale-125 md:scale-125 -translate-y-10 md:-translate-y-10">
+        <div className="w-full h-full scale-100 sm:scale-125 md:scale-125 -translate-y-10 md:-translate-y-10">
           <Suspense
             fallback={
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-slate-900 to-slate-800">
@@ -38,10 +38,10 @@ const Hero = () => {
               scene="https://prod.spline.design/7fTn8KMQWLjD9qLo/scene.splinecode"
               onLoad={onSplineLoad}
               style={{
-                width: '100%',
-                height: '100%',
+                width: "100%",
+                height: "100%",
                 opacity: splineLoaded ? 1 : 0,
-                transition: 'opacity 0.5s ease-in-out',
+                transition: "opacity 0.5s ease-in-out",
               }}
             />
           </Suspense>
@@ -49,7 +49,7 @@ const Hero = () => {
       </div>
       <div
         className="flex flex-col w-fit items-center justify-center text-center gap-5 relative z-10"
-        style={{ pointerEvents: 'none' }}
+        style={{ pointerEvents: "none" }}
       >
         <motion.header
           className="flex flex-col w-fit items-center  justify-center text-center gap-5"
@@ -59,10 +59,10 @@ const Hero = () => {
         >
           <motion.div
             className={
-              'flex items-center justify-center gap-2 rounded-full px-5 py-1 ' +
-              'bg-white/10 border border-white/20 shadow-lg shadow-black/30 ' +
-              'backdrop-blur-md supports-[backdrop-filter]:backdrop-blur-md ' +
-              'ring-1 ring-white/10'
+              "flex items-center justify-center gap-2 rounded-full px-5 py-1 " +
+              "bg-white/10 border border-white/20 shadow-lg shadow-black/30 " +
+              "backdrop-blur-md supports-[backdrop-filter]:backdrop-blur-md " +
+              "ring-1 ring-white/10"
             }
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -79,25 +79,24 @@ const Hero = () => {
             </p>
           </motion.div>
           <motion.h1
-            className="text-[53px] sm:text-[13vw] md:text-[9vw] tracking-tight font-bold leading-tight sm:leading-[1] capitalize text-[#FFFFFF] w-full"
+            className="text-[13vw] sm:text-[15vw] md:text-[9vw] tracking-tight font-bold leading-tight sm:leading-[1] capitalize text-[#FFFFFF] w-full"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
           >
-            We <span className="relative z-5">turn</span>{' '}
+            We <span className="relative z-5">turn</span>{" "}
             <span className="italican lowercase rounded-2xl inline-block">
-              <span  className="hidden sm:block">
+              <span className="hidden sm:block">
                 <TextType
-                  text={['vision', 'ideas', 'aims', 'goals', 'designs']}
+                  text={["vision", "ideas", "aims", "goals", "designs"]}
                   typingSpeed={75}
                   pauseDuration={1500}
                   showCursor={true}
                   cursorCharacter=""
-                 
                 />
               </span>
-              <span className='sm:hidden text-[#f48020]'>visions</span>
-            </span>{' '}
+              <span className="sm:hidden text-[#f48020]">visions</span>
+            </span>{" "}
             <br className="hidden sm:block" />
             <span className="sm:inline block mt-2 sm:mt-0">
               into digital realities
@@ -125,7 +124,7 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1.3, duration: 0.6 }}
-          style={{ pointerEvents: 'auto' }}
+          style={{ pointerEvents: "auto" }}
           className="mt-5"
         >
           <Link

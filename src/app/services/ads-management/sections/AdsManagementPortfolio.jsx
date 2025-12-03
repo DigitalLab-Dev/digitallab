@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { TrendingUp, Users, DollarSign, Target, ArrowUpRight, Calendar, Award } from 'lucide-react';
+import { TrendingUp, Users, DollarSign, Target, ArrowUpRight, Calendar, Award, Eye } from 'lucide-react';
 
 const AdsManagementPortfolio = () => {
   const [selectedCase, setSelectedCase] = useState(null);
@@ -10,94 +10,94 @@ const AdsManagementPortfolio = () => {
   const caseStudies = [
     {
       id: 1,
-      title: "E-commerce Fashion Brand",
+      title: "Beauty & Fashion Brand",
       category: "Facebook & Instagram Ads",
       image: "/portfolios/ads-management/1.png",
-      duration: "3 months",
-      budget: "$15,000",
+      duration: "Ongoing",
+      budget: "Confidential",
       results: {
-        roas: "4.2x",
-        conversions: "+340%",
-        cpc: "-65%",
-        reach: "2.1M"
+        ctr: "3.72%",
+        leads: "145+",
+        cpc: "Rs 3.23",
+        reach: "30.5K"
       },
-      description: "Transformed a struggling fashion e-commerce store into a profitable business through strategic audience targeting and creative optimization.",
-      challenges: "Low conversion rates, high cost per acquisition, poor audience targeting",
-      solution: "Implemented lookalike audiences, A/B tested creatives, optimized for conversion events",
+      description: "Generated high-volume direct sales inquiries for a local beauty/fashion brand by utilizing a \"Click-to-Message\" strategy, bypassing website friction to connect customers directly with sales agents.",
+      challenges: "High competition in the fashion niche, expensive Cost Per Click (CPC) on standard campaigns, and customers hesitating to buy without asking questions first.",
+      solution: "Switched objective to \"Messaging Conversations\" to encourage direct interaction. Utilized high-contrast lifestyle imagery which resulted in a massive 3.72% CTR.",
       metrics: [
-        { label: "ROAS", value: "4.2x", icon: TrendingUp },
-        { label: "Conversions", value: "+340%", icon: Target },
-        { label: "Cost per Click", value: "-65%", icon: DollarSign },
-        { label: "Reach", value: "2.1M", icon: Users }
+        { label: "CTR", value: "3.72%", icon: TrendingUp },
+        { label: "New Leads", value: "145+", icon: Target },
+        { label: "Cost per Click", value: "Rs 3.23", icon: DollarSign },
+        { label: "Reach", value: "30.5K", icon: Users }
       ]
     },
     {
       id: 2,
-      title: "SaaS Lead Generation",
-      category: "Google Ads & LinkedIn",
+      title: "Service-Based Lead Generation",
+      category: "Facebook & Instagram Ads",
       image: "/portfolios/ads-management/2.jpg",
-      duration: "6 months",
-      budget: "$25,000",
+      duration: "Campaign",
+      budget: "Confidential",
       results: {
-        roas: "6.8x",
-        conversions: "+580%",
-        cpc: "-45%",
-        reach: "850K"
+        ctr: "4.56%",
+        inquiries: "60+",
+        cpc: "Rs 7.73",
+        conversion_cost: "< Rs 70"
       },
-      description: "Generated high-quality B2B leads for a SaaS platform through targeted Google Search and LinkedIn campaigns.",
-      challenges: "High competition, expensive keywords, low-quality leads",
-      solution: "Refined keyword strategy, implemented negative keywords, created compelling ad copy with clear CTAs",
+      description: "Executed a high-efficiency \"Click-to-Message\" campaign for a service-based client. The campaign focused on driving immediate conversations rather than passive website clicks, resulting in a direct line of communication with potential customers.",
+      challenges: "Client needed immediate leads but had a limited budget. Previous campaigns had high impressions but low engagement, failing to connect the business with interested prospects.",
+      solution: "We developed a high-intent messaging campaign targeting users likely to engage. By optimizing for \"Conversations\" rather than just \"Clicks,\" we achieved a massive 4.56% CTR and drove 60 qualified inquiries for less than Rs 70 each.",
       metrics: [
-        { label: "ROAS", value: "6.8x", icon: TrendingUp },
-        { label: "Lead Quality", value: "+580%", icon: Target },
-        { label: "Cost per Lead", value: "-45%", icon: DollarSign },
-        { label: "Impressions", value: "850K", icon: Users }
+        { label: "CTR", value: "4.56%", icon: TrendingUp },
+        { label: "New Inquiries", value: "60+", icon: Target },
+        { label: "Cost Per Click", value: "Rs 7.73", icon: DollarSign },
+        { label: "Cost Per Lead", value: "< Rs 70", icon: Award }
       ]
     },
     {
       id: 3,
-      title: "Local Restaurant Chain",
-      category: "Facebook & Google Local",
+      title: "Premium Service / High-Ticket Lead Gen",
+      category: "Facebook & Instagram Ads",
       image: "/portfolios/ads-management/3.jpg",
-      duration: "4 months",
-      budget: "$8,000",
+      duration: "Targeted",
+      budget: "High Value",
       results: {
-        roas: "5.5x",
-        conversions: "+420%",
-        cpc: "-55%",
-        reach: "1.5M"
+        leads: "30",
+        reach: "14,400+",
+        frequency: "~2.0",
+        cpl: "-27%"
       },
-      description: "Boosted foot traffic and online orders for a local restaurant chain through location-based advertising.",
-      challenges: "Limited local reach, seasonal fluctuations, competition from delivery apps",
-      solution: "Geo-targeted campaigns, seasonal promotions, integrated online ordering system",
+      description: "A targeted lead generation campaign for a premium service offering. Unlike mass-market campaigns, this strategy focused on quality over quantity, targeting a specific affluent demographic to drive high-value conversations.",
+      challenges: "The client required serious inquiries for a high-ticket offer, needing to filter out \"window shoppers\" who would waste the sales team's time.",
+      solution: "We implemented a \"Quality-First\" targeting strategy. By narrowing the audience and using personalized ad sets (A/B testing different personas), we accepted a higher Cost Per Lead to ensure the 30 conversations generated were from genuine, high-intent prospects.",
       metrics: [
-        { label: "ROAS", value: "5.5x", icon: TrendingUp },
-        { label: "Foot Traffic", value: "+420%", icon: Target },
-        { label: "Order Cost", value: "-55%", icon: DollarSign },
-        { label: "Local Reach", value: "1.5M", icon: Users }
+        { label: "Qualified Leads", value: "30", icon: Target },
+        { label: "Targeted Reach", value: "14,400+", icon: Users },
+        { label: "Frequency", value: "~2.0", icon: TrendingUp },
+        { label: "Cost Per Lead", value: "-27%", icon: DollarSign }
       ]
     },
     {
       id: 4,
-      title: "Tech Startup Launch",
-      category: "Multi-Platform Campaign",
+      title: "Brand Awareness & Mass Reach",
+      category: "Facebook & Instagram Ads",
       image: "/portfolios/ads-management/4.jpg",
-      duration: "5 months",
-      budget: "$35,000",
+      duration: "High Velocity",
+      budget: "Optimized",
       results: {
-        roas: "7.2x",
-        conversions: "+650%",
-        cpc: "-70%",
-        reach: "3.2M"
+        reach: "118,500+",
+        impressions: "125,000+",
+        cpm: "Rs 22",
+        frequency: "1.06"
       },
-      description: "Successfully launched a tech startup's product across multiple platforms with comprehensive market penetration.",
-      challenges: "Brand awareness from zero, complex product positioning, diverse target audiences",
-      solution: "Multi-funnel approach, educational content, retargeting campaigns, influencer partnerships",
+      description: "A high-velocity \"Brand Awareness\" campaign designed to flood the market with visibility. We utilized a reach-optimized strategy to ensure the brand was seen by the maximum number of unique users for the lowest possible cost.",
+      challenges: "The brand needed immediate market presence and name recognition but had a limited budget to compete with established players.",
+      solution: "We executed a \"Broad Reach\" strategy, bypassing expensive conversion auctions to focus purely on visibility. By optimizing for unique reach, we successfully introduced the brand to nearly 120,000 people for the price of a standard dinner.",
       metrics: [
-        { label: "ROAS", value: "7.2x", icon: TrendingUp },
-        { label: "Signups", value: "+650%", icon: Target },
-        { label: "Acquisition Cost", value: "-70%", icon: DollarSign },
-        { label: "Brand Reach", value: "3.2M", icon: Users }
+        { label: "Unique Reach", value: "118,500+", icon: Users },
+        { label: "Impressions", value: "125,000+", icon: Eye },
+        { label: "Cost Per 1k", value: "Rs 22", icon: DollarSign },
+        { label: "Frequency", value: "1.06", icon: TrendingUp }
       ]
     }
   ];
