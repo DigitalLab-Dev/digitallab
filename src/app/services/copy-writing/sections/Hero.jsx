@@ -179,7 +179,7 @@ const CopywritingHero = () => {
         }}
       />
 
-      <section className="relative  md:min-h-screen  text-white overflow-hidden">
+      <section className="relative   text-white overflow-hidden">
         {/* Animated Background Grid */}
         <div className="absolute inset-0" aria-hidden="true">
           {[...Array(50)].map((_, i) => (

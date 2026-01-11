@@ -21,7 +21,7 @@ const services = [
     id: 2,
     title: "Long-Form Content (YouTube & Podcasts)",
     description: "Transforming raw footage into engaging stories that boost audience retention. We handle everything from multi-cam editing and color grading to professional sound design.",
-    tools: ["Premiere Pro", "DaVinci Resolve", "Adobe Audition", "Final Cut Pro"],
+    tools: ["Premiere Pro", "DaVinci Resolve", "Adobe Audition", "Capcut"],
     image: "/images/long.png",
     imageAlt: "A professional video editing setup displaying a timeline"
   },
@@ -37,7 +37,7 @@ const services = [
     id: 4,
     title: "Motion Graphics",
     description: "Bringing your brand and data to life with eye-catching animations. We specialize in logo reveals, explainer videos, animated infographics, and stylish lower thirds.",
-    tools: ["After Effects", "Cinema 4D", "Adobe Illustrator", "Blender"],
+    tools: ["After Effects", "DaVinci Resolve",],
     image: "/images/motion.png",
     imageAlt: "A designer working on motion graphics on a computer"
   },
@@ -45,7 +45,7 @@ const services = [
     id: 5,
     title: "2D & 3D Animation",
     description: "From concept to final render, we create stunning animations that tell your story. Services include character animation, product visualizations, and building entire animated worlds.",
-    tools: ["Blender", "Autodesk Maya", "Cinema 4D", "Toon Boom Harmony"],
+    tools: ["Blender", "Adobe Animate"],
     image: "/images/DAnimations.png",
     imageAlt: "A 3D character model being animated in software"
   },

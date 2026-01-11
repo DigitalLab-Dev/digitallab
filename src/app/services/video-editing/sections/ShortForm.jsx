@@ -2,6 +2,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { Sparkles, TrendingUp } from "lucide-react";
+import Link from "next/link";
 
 export default function ShowcasePortfolio() {
   const sectionRef = useRef(null);
@@ -291,7 +292,7 @@ export default function ShowcasePortfolio() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative px-12 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-lg rounded-full overflow-hidden"
+                className="group relative cursor-pointer px-12 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-lg rounded-full overflow-hidden"
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-500"
@@ -299,7 +300,7 @@ export default function ShowcasePortfolio() {
                   whileHover={{ x: 0 }}
                   transition={{ duration: 0.4 }}
                 />
-                <span className="relative z-10 flex items-center gap-3">
+                <a target="_blank" href="https://drive.google.com/drive/folders/15MokUI_m7qu5Avwm2VTCMH6Y_ENT0ZoO" className="relative z-10 flex items-center gap-3">
                   View Full Portfolio
                   <motion.span
                     animate={{ x: [0, 5, 0] }}
@@ -307,7 +308,7 @@ export default function ShowcasePortfolio() {
                   >
                     →
                   </motion.span>
-                </span>
+                </a>
               </motion.button>
             </motion.div>
           </>

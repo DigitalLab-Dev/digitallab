@@ -2,43 +2,43 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 
-// Move data outside component
+
 const clientLogos = [
   {
-    id: 1, name: "TechCorp", imageUrl: "/logos/logo1.jpg",
-    category: "Technology", year: "2023", projects: "15+"
+    id: 1, name: "Foodie", imageUrl: "/logos/logo1.jpg",
+    category: "Technology", year: "2025", projects: "15+"
   },
   {
-    id: 2, name: "FinanceFlow", imageUrl: "/logos/logo2.png",
-    category: "Finance", year: "2022", projects: "8+"
+    id: 2, name: "Saurez Assitant ", imageUrl: "/logos/logo2.png",
+    category: "Finance", year: "2025", projects: "8+"
   },
   {
-    id: 3, name: "HealthPlus", imageUrl: "/logos/logo3.png",
-    category: "Healthcare", year: "2023", projects: "12+"
+    id: 3, name: "Emosta", imageUrl: "/logos/logo3.png",
+    category: "Healthcare", year: "2024", projects: "12+"
   },
   {
-    id: 4, name: "RetailMax", imageUrl: "/logos/logo9.png",
-    category: "Retail", year: "2021", projects: "20+"
+    id: 4, name: "Treble Health", imageUrl: "/logos/logo9.png",
+    category: "Retail", year: "2025", projects: "20+"
   },
   {
-    id: 5, name: "EduTech", imageUrl: "/logos/logo5.png",
-    category: "Education", year: "2023", projects: "6+"
+    id: 5, name: "One4", imageUrl: "/logos/logo5.png",
+    category: "Education", year: "2025", projects: "6+"
   },
   {
-    id: 6, name: "GreenEnergy", imageUrl: "/logos/logo6.png",
-    category: "Energy", year: "2022", projects: "10+"
+    id: 6, name: "Investor Deli", imageUrl: "/logos/logo6.png",
+    category: "Energy", year: "2024", projects: "10+"
   },
   {
-    id: 7, name: "FoodieHub", imageUrl: "/logos/logo7.png",
-    category: "Food & Beverage", year: "2023", projects: "14+"
+    id: 7, name: "GreenKnight", imageUrl: "/logos/logo7.png",
+    category: "Food & Beverage", year: "2025", projects: "Digital Agency "
   },
   {
-    id: 8, name: "TravelWise", imageUrl: "/logos/logo8.jpg",
-    category: "Travel", year: "2022", projects: "9+"
+    id: 8, name: "Elevate", imageUrl: "/logos/logo8.jpg",
+    category: "Travel", year: "2025", projects: "9+"
   },
   {
-    id: 9, name: "MediaCo", imageUrl: "/logos/logo4.png",
-    category: "Media", year: "2022", projects: "9+"
+    id: 9, name: "Agency", imageUrl: "/logos/logo4.png",
+    category: "Media", year: "2025", projects: "9+"
   }
 ];
 
@@ -122,8 +122,6 @@ const OrbitalLogo = React.memo(({ logo, index, totalLogos, rotation, isActive, o
           <div className="w-full h-full rounded-full bg-gradient-to-br from-orange-500 to-amber-500 p-1 shadow-2xl">
             <div className="w-full h-full bg-black rounded-full flex flex-col items-center justify-center text-white text-center px-3">
               <div className="font-bold text-sm mb-1 truncate w-full px-2">{logo.name}</div>
-              <div className="text-orange-400 text-xs font-semibold">{logo.projects}</div>
-              <div className="text-white/70 text-[10px] mt-1">{logo.year}</div>
             </div>
           </div>
         </div>
@@ -386,29 +384,6 @@ const LogoCloudSection = () => {
                   >
                     {clientLogos[activeIndex].name}
                   </motion.h3>
-                  <motion.p 
-                    className="text-orange-400 mb-4"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15 }}
-                  >
-                    {clientLogos[activeIndex].category}
-                  </motion.p>
-                  <motion.div 
-                    className="flex justify-center gap-6 text-sm text-white/70"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    <div>
-                      <span className="block text-amber-500 font-bold text-lg">{clientLogos[activeIndex].projects}</span>
-                      <span>Projects</span>
-                    </div>
-                    <div>
-                      <span className="block text-orange-500 font-bold text-lg">{clientLogos[activeIndex].year}</span>
-                      <span>Since</span>
-                    </div>
-                  </motion.div>
                 </div>
               </motion.div>
             )}

@@ -22,7 +22,7 @@ const PhilosophySection = () => {
       type: 'tiktok-reel',
       image: 'https://images.unsplash.com/photo-1611605698335-8b1569810432?w=200&h=350&fit=crop',
       views: '2.1M',
-      platform: 'tiktok',
+      platform: 'Twitter',
       size: 'tall'
     },
     {
@@ -117,7 +117,7 @@ const PhilosophySection = () => {
           </div>
         </div>
         <div className="absolute top-4 right-4 bg-black/50 text-white px-2 py-1 rounded-full text-xs">
-          TikTok
+          Twitter
         </div>
       </div>
     </motion.div>

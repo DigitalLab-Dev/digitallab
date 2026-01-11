@@ -303,12 +303,12 @@ const AnimatedCTA = () => {
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mt-5"
             >
-              <Link
-                href="/contact"
+              <a
+                href="https://calendly.com/syed-ali-turab/30min"
                 className="group relative w-full px-8 sm:w-fit py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-base md:text-lg rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/50 focus:outline-none focus:ring-4 focus:ring-orange-500/50 inline-flex items-center justify-center gap-3"
                 aria-label="Start your project with Digital Lab"
               >
-                <span className="relative z-10">Start Your Project</span>
+                <span className="relative z-10">Book Appointment</span>
                 <FaArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700"
@@ -316,7 +316,7 @@ const AnimatedCTA = () => {
                   whileHover={{ x: 0 }}
                   transition={{ duration: 0.3 }}
                 />
-              </Link>
+              </a>
 
               <Link
                 href="/services"
