@@ -7,7 +7,7 @@ import CountUp from '@/components/ReactBit-Components/Countup';
 const Stats = () => {
   const stats = [
     {
-      stat: 250,
+      stat: 256,
       label: 'Projects Delivered',
       para: 'You’re joining 250+ businesses who’ve launched successful projects with us, and we’re ready to build yours next.',
     },

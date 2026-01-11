@@ -239,7 +239,7 @@ const About = () => {
 
               <Link
                 href="/about"
-                className="inline-block"
+                className="block w-fit mx-auto"
                 aria-label="Learn more about our agency and team"
               >
                 <motion.button

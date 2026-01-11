@@ -97,8 +97,16 @@ const CaseStudyCard = React.memo(({ study, index, hoveredMetric, setHoveredMetri
       variants={containerVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className="grid lg:grid-cols-2 gap-12 items-center"
+      className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
     >
+      {/* Mobile Title (Visible only on mobile) */}
+      <motion.h3 
+        className="text-3xl font-bold text-white lg:hidden mb-2"
+        variants={itemVariants}
+      >
+        {study.projectTitle}
+      </motion.h3>
+
       {/* Image Section */}
       <motion.div 
         className={`${isEven ? 'lg:order-1' : 'lg:order-2'} relative group`}
@@ -109,7 +117,7 @@ const CaseStudyCard = React.memo(({ study, index, hoveredMetric, setHoveredMetri
           <motion.img
             src={study.projectImage}
             alt={study.projectTitle}
-            className="w-full h-120 object-cover"
+            className="w-full h-80 sm:h-96 lg:h-120 object-cover"
             style={{ y: imageY }}
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -123,14 +131,14 @@ const CaseStudyCard = React.memo(({ study, index, hoveredMetric, setHoveredMetri
           
           {/* Floating client logo */}
           <motion.div 
-            className="absolute top-6 right-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-3"
+            className="absolute top-4 right-4 lg:top-6 lg:right-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-2 lg:p-3"
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           >
             <img
               src={study.clientLogo}
               alt={study.clientName}
-              className="w-16 h-8 object-contain"
+              className="w-12 h-6 lg:w-16 lg:h-8 object-contain"
               onError={(e) => {
                 e.target.src = `https://via.placeholder.com/150x80/333/fff?text=${study.clientName}`;
               }}
@@ -139,13 +147,32 @@ const CaseStudyCard = React.memo(({ study, index, hoveredMetric, setHoveredMetri
           
           {/* Industry tag */}
           <motion.div 
-            className="absolute bottom-6 left-6"
+            className="absolute bottom-4 left-4 lg:bottom-6 lg:left-6"
             whileHover={{ scale: 1.05 }}
           >
-            <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+            <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-3 py-1 lg:px-4 lg:py-2 rounded-full text-xs lg:text-sm font-semibold shadow-lg">
               {study.industry}
             </span>
           </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Mobile Details (Visible only on mobile) */}
+      <motion.div className="lg:hidden space-y-4 mb-2" variants={itemVariants}>
+        <div>
+          <p className="text-orange-400 text-lg font-medium">
+            {study.clientName}
+          </p>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {study.tags.map((tag, tagIndex) => (
+              <span
+                key={tagIndex}
+                className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-white/70 text-sm"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </motion.div>
 
@@ -154,8 +181,8 @@ const CaseStudyCard = React.memo(({ study, index, hoveredMetric, setHoveredMetri
         className={`${isEven ? 'lg:order-2' : 'lg:order-1'} space-y-8`}
         variants={itemVariants}
       >
-        {/* Header */}
-        <div className="space-y-4">
+        {/* Desktop Header (Hidden on mobile) */}
+        <div className="space-y-4 hidden lg:block">
           <motion.h3 
             className="text-3xl md:text-4xl font-bold text-white"
             variants={itemVariants}
@@ -195,7 +222,7 @@ const CaseStudyCard = React.memo(({ study, index, hoveredMetric, setHoveredMetri
             transition={{ delay: 0.2 }}
           >
             <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 to-red-600 rounded-full"></div>
-            <h4 className="text-red-400 font-bold text-lg mb-3 flex items-center">
+            <h4 className="text-red-400 font-bold text-lg mb-2 lg:mb-3 flex items-center">
               <motion.span 
                 className="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center mr-3"
                 whileHover={{ rotate: 180, scale: 1.1 }}
@@ -205,7 +232,7 @@ const CaseStudyCard = React.memo(({ study, index, hoveredMetric, setHoveredMetri
               </motion.span>
               Problem
             </h4>
-            <p className="text-white/80 leading-relaxed">{study.problem}</p>
+            <p className="text-white/80 leading-relaxed text-sm lg:text-base">{study.problem}</p>
           </motion.div>
 
           {/* Solution */}
@@ -216,7 +243,7 @@ const CaseStudyCard = React.memo(({ study, index, hoveredMetric, setHoveredMetri
             transition={{ delay: 0.3 }}
           >
             <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full"></div>
-            <h4 className="text-blue-400 font-bold text-lg mb-3 flex items-center">
+            <h4 className="text-blue-400 font-bold text-lg mb-2 lg:mb-3 flex items-center">
               <motion.span 
                 className="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center mr-3"
                 whileHover={{ rotate: 360, scale: 1.1 }}
@@ -226,7 +253,7 @@ const CaseStudyCard = React.memo(({ study, index, hoveredMetric, setHoveredMetri
               </motion.span>
               Solution
             </h4>
-            <p className="text-white/80 leading-relaxed">{study.solution}</p>
+            <p className="text-white/80 leading-relaxed text-sm lg:text-base">{study.solution}</p>
           </motion.div>
 
           {/* Result */}
@@ -237,7 +264,7 @@ const CaseStudyCard = React.memo(({ study, index, hoveredMetric, setHoveredMetri
             transition={{ delay: 0.4 }}
           >
             <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-green-500 to-green-600 rounded-full"></div>
-            <h4 className="text-green-400 font-bold text-lg mb-3 flex items-center">
+            <h4 className="text-green-400 font-bold text-lg mb-2 lg:mb-3 flex items-center">
               <motion.span 
                 className="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center mr-3"
                 whileHover={{ scale: 1.2 }}
@@ -247,7 +274,7 @@ const CaseStudyCard = React.memo(({ study, index, hoveredMetric, setHoveredMetri
               </motion.span>
               Result
             </h4>
-            <p className="text-white/80 leading-relaxed mb-6">{study.result}</p>
+            <p className="text-white/80 leading-relaxed mb-6 text-sm lg:text-base">{study.result}</p>
           </motion.div>
         </motion.div>
 
@@ -282,6 +309,7 @@ const CaseStudyCard = React.memo(({ study, index, hoveredMetric, setHoveredMetri
                   } : {}}
                   transition={{ duration: 0.5 }}
                 >
+                  <IconComponent size={24} />
                 </motion.div>
                 <motion.div 
                   className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent"

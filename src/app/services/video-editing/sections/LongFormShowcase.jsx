@@ -1,11 +1,136 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { Play, Film } from "lucide-react";
+import { Play, Film, Volume2, VolumeX } from "lucide-react";
+
+function VideoCard({ video, index, isInView: sectionInView }) {
+  const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const iframeRef = useRef(null);
+  const containerRef = useRef(null);
+  
+  // Use a smaller margin for the video itself to trigger playing
+  const isVideoInView = useInView(containerRef, {
+    margin: "0px 0px -200px 0px", // Play when it's well within view
+    amount: 0.5 // Require 50% visibility
+  });
+
+  // Handle Play/Pause based on view state
+  useEffect(() => {
+    if (isVideoInView && sectionInView) {
+      if (!isPlaying) {
+        setIsPlaying(true);
+        // Play video
+        iframeRef.current?.contentWindow?.postMessage(
+          JSON.stringify({ event: "command", func: "playVideo", args: "" }),
+          "*"
+        );
+      }
+    } else {
+      if (isPlaying) {
+        setIsPlaying(false);
+        // Pause video
+        iframeRef.current?.contentWindow?.postMessage(
+          JSON.stringify({ event: "command", func: "pauseVideo", args: "" }),
+          "*"
+        );
+      }
+    }
+  }, [isVideoInView, sectionInView]);
+
+  // Handle Mute/Unmute without reloading
+  const toggleMute = (e) => {
+    e.stopPropagation(); // Prevent triggering other clicks
+    const newMuteState = !isMuted;
+    setIsMuted(newMuteState);
+    
+    const command = newMuteState ? "mute" : "unMute";
+    iframeRef.current?.contentWindow?.postMessage(
+      JSON.stringify({ event: "command", func: command, args: "" }),
+      "*"
+    );
+  };
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 50 }}
+      animate={sectionInView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        delay: 0.2 + index * 0.1,
+        duration: 0.8,
+        ease: [0.6, 0.05, 0.01, 0.9],
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group relative"
+      ref={containerRef}
+    >
+      {/* Glow effect */}
+      <motion.div
+        className="absolute -inset-2 bg-gradient-to-br from-orange-500/40 to-orange-600/40 rounded-2xl opacity-0 blur-xl"
+        animate={isHovered ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      />
+
+      {/* Video container */}
+      <motion.div
+        className="relative w-full aspect-video rounded-xl overflow-hidden bg-zinc-900"
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+      >
+        {/* Iframe with API enabled */}
+        <iframe
+          ref={iframeRef}
+          src={`https://www.youtube.com/embed/${video.videoId}?enablejsapi=1&autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist=${video.videoId}&playsinline=1`}
+          title={video.title}
+          className="w-full h-full pointer-events-none" // Disable pointer events on iframe to handle clicks via overlay
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+
+        {/* Interaction Overlay */}
+        <div className="absolute inset-0 z-10">
+          {/* Mute Toggle Button */}
+          <button
+            onClick={toggleMute}
+            className="absolute bottom-4 right-4 p-3 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-white hover:bg-orange-500 hover:border-orange-500 transition-all duration-300 group-hover:opacity-100 opacity-0 pointer-events-auto"
+            aria-label={isMuted ? "Unmute" : "Mute"}
+          >
+            {isMuted ? (
+              <VolumeX className="w-5 h-5" />
+            ) : (
+              <Volume2 className="w-5 h-5" />
+            )}
+          </button>
+          
+          {/* Title Overlay (visible on hover) */}
+          <div className="absolute top-0 left-0 right-0 p-5 bg-gradient-to-b from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+             <h3 className="text-white font-bold text-lg line-clamp-2">
+               {video.title}
+             </h3>
+          </div>
+        </div>
+
+        {/* Corner accents */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isHovered ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="pointer-events-none"
+        >
+          <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-orange-500" />
+          <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-orange-500" />
+          <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-orange-500" />
+          <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-orange-500" />
+        </motion.div>
+      </motion.div>
+    </motion.article>
+  );
+}
 
 export default function LongFormShowcase() {
-  const [hoveredVideo, setHoveredVideo] = useState(null);
-  const [playingVideoId, setPlayingVideoId] = useState(null);
+  const [hoveredVideo, setHoveredVideo] = useState(null); // Keep for consistency if needed elsewhere, but mostly moved to VideoCard
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
@@ -173,106 +298,12 @@ export default function LongFormShowcase() {
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
           >
             {videos.map((video, index) => (
-              <motion.article
+              <VideoCard 
                 key={video._id || index}
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  delay: 1.2 + index * 0.1,
-                  duration: 0.8,
-                  ease: [0.6, 0.05, 0.01, 0.9],
-                }}
-                onMouseEnter={() => setHoveredVideo(video._id)}
-                onMouseLeave={() => setHoveredVideo(null)}
-                className="group relative"
-              >
-                {/* Glow effect */}
-                <motion.div
-                  className="absolute -inset-2 bg-gradient-to-br from-orange-500/40 to-orange-600/40 rounded-2xl opacity-0 blur-xl"
-                  animate={
-                    hoveredVideo === video._id ? { opacity: 1 } : { opacity: 0 }
-                  }
-                  transition={{ duration: 0.3 }}
-                />
-
-                {/* Video container */}
-                <motion.div
-                  className="relative w-full aspect-video rounded-xl overflow-hidden bg-zinc-900"
-                  whileHover={
-                    playingVideoId !== video._id ? { scale: 1.05 } : {}
-                  }
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                >
-                  {playingVideoId === video._id ? (
-                    <iframe
-                      src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&rel=0`}
-                      title={video.title}
-                      className="w-full h-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  ) : (
-                    <div
-                      className="relative w-full h-full cursor-pointer"
-                      onClick={() => setPlayingVideoId(video._id)}
-                    >
-                      {/* YouTube Thumbnail */}
-                      <img
-                        src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`}
-                        alt={video.title}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-
-                      {/* Play button */}
-                      <motion.div
-                        className="absolute inset-0 flex items-center justify-center"
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={
-                          hoveredVideo === video._id
-                            ? { opacity: 1, scale: 1 }
-                            : { opacity: 0.7, scale: 0.9 }
-                        }
-                        transition={{ duration: 0.3 }}
-                      >
-                        <motion.div
-                          className="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center shadow-2xl shadow-orange-500/50"
-                          whileHover={{ scale: 1.2 }}
-                          whileTap={{ scale: 0.9 }}
-                        >
-                          <Play className="w-7 h-7 text-white fill-white ml-1" />
-                        </motion.div>
-                      </motion.div>
-
-                      {/* Title */}
-                      <div className="absolute bottom-0 left-0 right-0 p-5">
-                        <h3 className="text-white font-bold text-lg line-clamp-2">
-                          {video.title}
-                        </h3>
-                      </div>
-
-                      {/* Corner accents */}
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={
-                          hoveredVideo === video._id
-                            ? { opacity: 1 }
-                            : { opacity: 0 }
-                        }
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className="absolute top-3 left-3 w-8 h-8 border-t-2 border-l-2 border-orange-500" />
-                        <div className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-orange-500" />
-                        <div className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-orange-500" />
-                        <div className="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-orange-500" />
-                      </motion.div>
-                    </div>
-                  )}
-                </motion.div>
-              </motion.article>
+                video={video}
+                index={index}
+                isInView={isInView}
+              />
             ))}
           </motion.div>
         )}

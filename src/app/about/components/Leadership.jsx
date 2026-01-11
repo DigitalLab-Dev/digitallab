@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect, useRef } from 'react';
-import { Instagram, Linkedin, MessageCircle } from 'lucide-react';
+import { Linkedin } from 'lucide-react';
 
 const Leadership = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -8,14 +8,12 @@ const Leadership = () => {
 
   const leaders = [
     {
-      name: 'Sayed Ali Turab',
+      name: 'Syed Ali Turab',
       designation: 'CEO & Co-Founder',
       // image: '/images/ali.jpg',
       image: 'https://res.cloudinary.com/dt9wziort/image/upload/v1761466205/ali_r70j25.png',
       socials: {
-        instagram: 'https://www.instagram.com/syedaliturab514?igsh=MTZneGFvOWtkZjN4eg==',
         linkedin: 'https://www.linkedin.com/in/syed-ali-turab-copywriting-expert?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-        whatsapp: 'https://wa.me/+923289660289'
       }
     },
     {
@@ -24,9 +22,7 @@ const Leadership = () => {
       // image: '/images/tassawar.webp',
       image: 'https://res.cloudinary.com/dt9wziort/image/upload/v1761466205/tassawar_u1hsiz.png',
       socials: {
-        instagram: 'https://www.instagram.com/s.tasawar_abbas?igsh=MXM1NnljY2lkbjFtZw==',
         linkedin: 'https://www.linkedin.com/in/syed-tasawar-abbas-advertising-design-data',
-        whatsapp: 'https://wa.me/+923289660286'
       }
     },
     {
@@ -35,9 +31,7 @@ const Leadership = () => {
       // image: '/images/sadaqat.jpg',
       image: 'https://res.cloudinary.com/dt9wziort/image/upload/v1761466205/sadaqat_cnvkoe.png',
       socials: {
-        instagram: 'https://www.instagram.com/sadaqat_mehm00d?igsh=MWdraGpydHgxNzJseg==',
         linkedin: 'https://www.linkedin.com/in/sadaqat-mehmood-8b70a9241?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-        whatsapp: 'https://wa.me/+923213374887'
       }
     },
   ];
@@ -109,25 +103,11 @@ const Leadership = () => {
           >
             <div className="flex gap-4 z-50">
               <button
-                onClick={(e) => handleSocialClick(e, leader.socials.instagram)}
-                className="p-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 hover:scale-110 cursor-pointer"
-                aria-label={`Visit ${leader.name}'s Instagram`}
-              >
-                <Instagram size={20} />
-              </button>
-              <button
                 onClick={(e) => handleSocialClick(e, leader.socials.linkedin)}
                 className="p-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 hover:scale-110 cursor-pointer"
                 aria-label={`Visit ${leader.name}'s LinkedIn`}
               >
                 <Linkedin size={20} />
-              </button>
-              <button
-                onClick={(e) => handleSocialClick(e, leader.socials.whatsapp)}
-                className="p-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 hover:scale-110 cursor-pointer"
-                aria-label={`Chat with ${leader.name} on WhatsApp`}
-              >
-                <MessageCircle size={20} />
               </button>
             </div>
           </div>

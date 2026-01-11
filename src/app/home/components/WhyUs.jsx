@@ -85,18 +85,21 @@ const ReasonCard = memo(({ reason, index }) => {
       variants={cardVariants}
       viewport={{ once: true, amount: 0.2 }}
       className={`relative w-full max-w-lg ${reason.position === 'right' ? 'ml-auto' : ''}`}
+      style={{ willChange: "transform, opacity" }}
       itemScope
       itemType="https://schema.org/Service"
     >
       <motion.div
         whileHover={hoverVariants}
         className="relative p-8 rounded-2xl backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl overflow-hidden group cursor-pointer"
+        style={{ willChange: "transform" }}
       >
         {/* Simplified Background Glow - Only on hover */}
         <div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
           style={{
-            background: 'radial-gradient(circle at center, rgba(244, 128, 32, 0.12) 0%, transparent 70%)'
+            background: 'radial-gradient(circle at center, rgba(244, 128, 32, 0.12) 0%, transparent 70%)',
+            willChange: "opacity"
           }}
           aria-hidden="true"
         />
@@ -108,7 +111,8 @@ const ReasonCard = memo(({ reason, index }) => {
           animate={isInView ? { opacity: 0.15 } : { opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           style={{
-            background: 'radial-gradient(circle at 50% 100%, rgba(255, 193, 7, 0.2) 0%, rgba(255, 193, 7, 0) 60%)'
+            background: 'radial-gradient(circle at 50% 100%, rgba(255, 193, 7, 0.2) 0%, rgba(255, 193, 7, 0) 60%)',
+            willChange: "opacity"
           }}
           aria-hidden="true"
         />
@@ -119,6 +123,7 @@ const ReasonCard = memo(({ reason, index }) => {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 0.4 } : { opacity: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
+          style={{ willChange: "opacity" }}
           aria-hidden="true"
         />
         
@@ -129,22 +134,21 @@ const ReasonCard = memo(({ reason, index }) => {
             initial={{ scale: 1 }}
             animate={isInView ? {
               scale: [1, 1.05, 1],
-              boxShadow: [
-                "0 8px 32px rgba(244, 128, 32, 0.3)",
-                "0 8px 32px rgba(244, 128, 32, 0.5)",
-                "0 8px 32px rgba(244, 128, 32, 0.3)"
-              ]
             } : {
               scale: 1
+            }}
+            whileHover={{ 
+              boxShadow: "0 8px 32px rgba(244, 128, 32, 0.5)" 
             }}
             transition={{ 
               duration: 2,
               ease: "easeInOut",
               repeat: 1
             }}
+            style={{ willChange: "transform" }}
             aria-hidden="true"
           >
-            <reason.icon className="text-white text-xl filter drop-shadow-sm" />
+            <reason.icon className="text-white text-xl" />
           </motion.div>
 
           <h3

@@ -102,7 +102,7 @@ const Gallery = () => {
   }, []);
 
   return (
-    <section className="my-10 bg-black">
+    <section id="portfolio" className="my-10 pt-2 bg-black">
       <header className="text-center my-10">
         <motion.h2
           className="text-5xl sm:text-6xl font-bold text-white mb-4"
@@ -128,8 +128,19 @@ const Gallery = () => {
 
       {/* Logos Section */}
       <div className="w-full max-w-7xl mx-auto px-4 my-16">
+        <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           className="text-center mb-12"
+        >
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+            <span className="text-orange-500">LOGOS</span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-amber-500 mx-auto rounded-full" />
+        </motion.div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           {logos.map((logoUrl, index) => (
             <motion.div
               key={index}
@@ -157,7 +168,7 @@ const Gallery = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         viewport={{ once: true }}
-        className="flex items-center justify-center gap-3 my-10"
+        className="flex items-center justify-center gap-3 mb-10"
       >
         <motion.div
           whileHover={{ scale: 1.05 }}

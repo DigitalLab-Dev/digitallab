@@ -271,7 +271,7 @@ const AnimatedCTA = () => {
             {/* Subtitle */}
             <motion.div variants={itemVariants}>
               <span className="inline-block  text-orange-500 text-xs md:text-sm font-bold tracking-[0.3em] uppercase px-4 py-2 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-sm">
-                Ready to Transform Your Business?
+                Ready to Elevate Your Business?
               </span>
             </motion.div>
 
