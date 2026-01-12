@@ -176,7 +176,7 @@ const DesignMattersComponent = () => {
             <strong className="text-orange-500 font-semibold">
               higher conversions
             </strong>
-            . It's the invisible force that transforms casual browsers into loyal
+            . It's the invisible force that leads casual browsers into loyal
             customers and elevates your brand above the competition.
           </motion.p>
         </motion.header>
@@ -305,7 +305,7 @@ const DesignMattersComponent = () => {
               />
               
               <Heart className="w-5 h-5 sm:w-6 sm:h-6 relative z-10" aria-hidden="true" />
-              <span className="relative z-10">Transform Your Brand Today</span>
+              <span className="relative z-10">Lead Your Brand Today</span>
               <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
             </motion.div>
           </Link>

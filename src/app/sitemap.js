@@ -1,7 +1,7 @@
 import { blogApi } from '@/utils/blogApi';
 
 export default async function sitemap() {
-  const baseUrl = 'https://digitallabservices.com';
+  const baseUrl = 'https://www.digitallabservices.com';
 
   // Static routes
   const routes = [

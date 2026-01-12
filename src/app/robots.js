@@ -5,6 +5,6 @@ export default function robots() {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://digitallabservices.com/sitemap.xml',
+    sitemap: 'https://www.digitallabservices.com/sitemap.xml',
   };
 }

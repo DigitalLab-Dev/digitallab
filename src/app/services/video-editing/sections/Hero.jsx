@@ -30,7 +30,7 @@ export default function VideoAgencyHero() {
     <header className="relative min-h-screen  overflow-hidden py-20  flex items-center justify-center">
       {/* SEO */}
       <div className="sr-only">
-        <h1>Professional Video Editing Agency - Transform Your Vision Into Cinematic Reality</h1>
+        <h1>Professional Video Editing Agency - Elevate Your Vision Into Cinematic Reality</h1>
       </div>
 
       {/* Dynamic Background */}
@@ -219,7 +219,7 @@ export default function VideoAgencyHero() {
           transition={{ delay: 1, duration: 0.8 }}
           className="text-xl sm:text-2xl lg:text-3xl text-gray-400 max-w-4xl mx-auto mb-12 font-light leading-relaxed"
         >
-          We transform raw footage into visual masterpieces that
+          We redefine raw footage into visual masterpieces that
           <span className="text-white font-medium"> captivate</span>,
           <span className="text-white font-medium"> inspire</span>, and
           <span className="text-orange-500 font-medium"> convert</span>

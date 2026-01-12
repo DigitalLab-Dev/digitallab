@@ -289,7 +289,7 @@ const CopywritingHero = () => {
                   <Link href="/contact">
                     <span className="relative z-10 flex items-center gap-3">
                       <Zap className="w-5 h-5" />
-                      Transform Your Copy Now
+                      Shape Your Copy Now
                       <ArrowRight className="w-5 h-5 transform transition-transform group-hover:translate-x-1" />
                     </span>
                   </Link>

@@ -394,7 +394,7 @@ const CaseStudiesSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Real projects, real results. Discover how we've transformed businesses across industries with innovative solutions.
+            Real projects, real results. Discover how we've crafted businesses across industries with innovative solutions.
           </motion.p>
           <motion.div 
             className="w-32 h-1 bg-gradient-to-r from-orange-500 to-amber-500 mx-auto mt-8 rounded-full"
