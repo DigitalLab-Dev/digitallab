@@ -23,8 +23,9 @@ const ContactForm = () => {
     setStatus(null);
 
     try {
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:4000';
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/email/send`,
+        `${backendUrl}/api/email/send`,
         {
           method: "POST",
           headers: {

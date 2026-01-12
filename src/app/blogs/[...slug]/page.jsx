@@ -11,7 +11,7 @@ import { blogApi } from '@/utils/blogApi';
 const IndividualBlogPage = () => {
   const params = useParams();
   const router = useRouter();
-  const blogId = params.slug;
+  const blogId = Array.isArray(params.slug) ? params.slug[0] : params.slug;
 
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);

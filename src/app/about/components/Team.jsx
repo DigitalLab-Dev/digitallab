@@ -17,7 +17,7 @@ const Team = () => {
         setLoading(true);
         setError(null);
         
-        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000/api/team';
+        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:4000';
         const apiUrl = `${backendUrl}/api/team`;              
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
@@ -39,7 +39,6 @@ const Team = () => {
         }
 
         const data = await res.json();
-        console.log('Team data received:', data);
         
         let members = [];
         if (Array.isArray(data)) {

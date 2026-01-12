@@ -1,4 +1,5 @@
 const API_BASE_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
   (typeof window !== 'undefined'
     ? 'http://localhost:4000/api/blogs'
@@ -57,7 +58,6 @@ export const blogApi = {
             }
 
             const url = `${API_BASE_URL}/get/${id}`;
-            console.log('Making API request to:', url);
 
             const response = await fetch(url, {
               method: 'GET',
