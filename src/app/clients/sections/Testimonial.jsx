@@ -20,7 +20,7 @@ const TestimonialCarousel = () => {
   const [imagePreview, setImagePreview] = useState(null);
 
   // API configuration
-  const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000';
+  const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:4000';
 
   // Fetch approved reviews from backend
   useEffect(() => {

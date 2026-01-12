@@ -12,8 +12,7 @@ const InfluencerShowcase = () => {
   // Fetch influencers from API
   const fetchInfluencers = async () => {
     try {
-      const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
-      // const API_URL = 'http://localhost:4000';
+      const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:4000';
       setLoading(true);
       setError(null);
 

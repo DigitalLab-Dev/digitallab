@@ -12,7 +12,7 @@ const FAQ = () => {
   useEffect(() => {
     const fetchFAQs = async () => {
       try {
-        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:4000';
         const response = await fetch(`${backendUrl}/api/faq`);
 
         if (!response.ok) {

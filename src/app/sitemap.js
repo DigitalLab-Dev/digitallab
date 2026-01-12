@@ -40,7 +40,7 @@ export default async function sitemap() {
       }));
     }
   } catch (error) {
-    console.error('Failed to fetch blogs for sitemap:', error);
+    console.warn('⚠️ Warning: Failed to fetch blogs for sitemap. Generating sitemap with static pages only.', error.message);
     // Continue with static routes if blog fetch fails
   }
 

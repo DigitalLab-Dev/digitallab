@@ -1,6 +1,6 @@
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
+  (process.env.NEXT_PUBLIC_BACKEND_URL ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blogs` : null) ||
   (typeof window !== 'undefined'
     ? 'http://localhost:4000/api/blogs'
     : 'http://127.0.0.1:4000/api/blogs');
@@ -17,6 +17,7 @@ class ApiError extends Error {
 export const blogApi = {
   // Fetch blogs with filters
   async getBlogs(params = {}) {
+    let url = '';
     try {
       const searchParams = new URLSearchParams();
 
@@ -40,7 +41,7 @@ export const blogApi = {
       ) {
         searchParams.append('category', params.category);
       }
-      const url = `${API_BASE_URL}${
+      url = `${API_BASE_URL}${
         searchParams.toString() ? `?${searchParams.toString()}` : ''
       }`;
       const response = await fetch(url, {
@@ -50,69 +51,6 @@ export const blogApi = {
           Accept: 'application/json',
         },
 
-        // Get single blog by ID
-        async getBlogById(id) {
-          try {
-            if (!id) {
-              throw new ApiError('Blog ID is required', 400);
-            }
-
-            const url = `${API_BASE_URL}/get/${id}`;
-
-            const response = await fetch(url, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-              },
-              mode: 'cors',
-              credentials: 'include',
-            });
-            if (!response.ok) {
-              if (response.status === 404) {
-                throw new ApiError('Blog not found', 404);
-              }
-              if (response.status === 400) {
-                const errorData = await response.json();
-                throw new ApiError(errorData.error || 'Invalid blog ID', 400);
-              }
-
-              const errorText = await response.text();
-              throw new ApiError(
-                `Failed to fetch blog: ${response.statusText}`,
-                response.status
-              );
-            }
-
-            const data = await response.json();
-            if (!data.blog) {
-              throw new ApiError('Invalid response format from server', 500);
-            }
-
-            return data.blog;
-          } catch (error) {
-            console.error('API Error Details:', {
-              name: error.name,
-              message: error.message,
-              stack: error.stack,
-            });
-
-            if (error instanceof ApiError) {
-              throw error;
-            }
-            if (error instanceof TypeError && error.message.includes('fetch')) {
-              throw new ApiError(
-                'Network error: Unable to connect to server. Make sure your Express server is running on http://localhost:4000',
-                0
-              );
-            }
-
-            throw new ApiError(
-              'An unexpected error occurred while fetching the blog',
-              500
-            );
-          }
-        },
         mode: 'cors', // Explicitly set CORS mode
         credentials: 'include', // Include credentials if needed
       });
@@ -146,6 +84,7 @@ export const blogApi = {
       console.error('API Error Details:', {
         name: error.name,
         message: error.message,
+        url: url, // Log the URL being matched
         stack: error.stack,
       });
 
@@ -154,15 +93,15 @@ export const blogApi = {
       }
 
       // Handle network errors
-      if (error instanceof TypeError && error.message.includes('fetch')) {
+      if (error instanceof TypeError && (error.message.includes('fetch') || error.message.includes('connect'))) {
         throw new ApiError(
-          'Network error: Unable to connect to server. Make sure your Express server is running on http://localhost:4000',
+          `Network error connecting to ${API_BASE_URL}: ${error.message}`,
           0
         );
       }
 
       throw new ApiError(
-        'An unexpected error occurred while fetching blogs',
+        `An unexpected error occurred while fetching blogs: ${error.message}`,
         500
       );
     }
