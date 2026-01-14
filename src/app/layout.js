@@ -4,6 +4,7 @@ import './globals.css';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import Footor from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
+import CanonicalTag from '@/components/CanonicalTag';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -12,20 +13,21 @@ const poppins = Poppins({
 });
 
 export const metadata = {
+  metadataBase: new URL('https://www.digitallabservices.com'),
   title: 'DigitalLab',
   description: 'DigitalLab - A service providing agency',
-
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${poppins.variable} font-poppins antialiased`}>
+        <CanonicalTag />
         <Navbar />
         {children}
-        <ScrollToTop/>
+        <ScrollToTop />
         <Footor />
-       {process.env.NODE_ENV === 'production' && <SpeedInsights />}
+        {process.env.NODE_ENV === 'production' && <SpeedInsights />}
       </body>
     </html>
   );

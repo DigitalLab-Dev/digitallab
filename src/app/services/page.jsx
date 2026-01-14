@@ -77,8 +77,8 @@ export default function ServicesPage() {
 
         {/* Additional SEO */}
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://yourwebsite.com/services" />
-        
+        <link rel="canonical" href="https://www.digitallabservices.com/services" />
+
         {/* Schema.org structured data */}
         <script type="application/ld+json">
           {JSON.stringify({
@@ -139,9 +139,8 @@ export default function ServicesPage() {
 
       {/* Main Content with Fade-in Animation */}
       <main
-        className={`relative transition-opacity duration-700 ${
-          contentLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
+        className={`relative transition-opacity duration-700 ${contentLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
         style={{ minHeight: '100vh' }}
       >
         {/* Fixed Background - Black base */}
@@ -151,15 +150,15 @@ export default function ServicesPage() {
         >
           {/* Gradient overlay for visual interest */}
           <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-orange-500/10" />
-          
+
           {/* Animated background effects */}
           <div className="absolute inset-0 opacity-30">
             {/* Radial gradients for depth */}
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl animate-pulse" 
-                 style={{ animationDuration: '8s' }} 
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl animate-pulse"
+              style={{ animationDuration: '8s' }}
             />
-            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl animate-pulse" 
-                 style={{ animationDuration: '10s', animationDelay: '2s' }} 
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl animate-pulse"
+              style={{ animationDuration: '10s', animationDelay: '2s' }}
             />
           </div>
         </div>

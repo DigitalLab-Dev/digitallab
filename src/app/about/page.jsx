@@ -49,15 +49,15 @@ const Page = () => {
     // Only run after content is loaded and loader is dismissed
     if (!loading && contentLoaded) {
       const hash = window.location.hash;
-      
+
       if (hash) {
         // Remove the # from hash to get the id
         const elementId = hash.substring(1);
-        
+
         // Wait a bit for all components to render
         setTimeout(() => {
           const element = document.getElementById(elementId);
-          
+
           if (element) {
             // Smooth scroll to the element
             element.scrollIntoView({
@@ -105,7 +105,7 @@ const Page = () => {
 
         {/* Additional SEO */}
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://yourwebsite.com/about" />
+        <link rel="canonical" href="https://www.digitallabservices.com/about" />
       </Head>
 
       {/* Loader Overlay */}
@@ -125,9 +125,8 @@ const Page = () => {
 
       {/* Main Content */}
       <main
-        className={`relative transition-opacity duration-700 ${
-          contentLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
+        className={`relative transition-opacity duration-700 ${contentLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
         style={{ minHeight: '100vh' }}
       >
         {/* Fixed Background Gradient */}

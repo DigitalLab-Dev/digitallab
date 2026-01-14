@@ -69,31 +69,31 @@ export default function Home() {
       <Head>
         {/* SEO Meta Tags */}
         <title>Digital Marketing Agency | Expert SEO, PPC & Social Media Services</title>
-        <meta 
-          name="description" 
-          content="Leading digital marketing agency specializing in SEO, PPC, social media marketing, and content strategy. Drive growth with data-driven marketing solutions tailored for your business." 
+        <meta
+          name="description"
+          content="Leading digital marketing agency specializing in SEO, PPC, social media marketing, and content strategy. Drive growth with data-driven marketing solutions tailored for your business."
         />
-        <meta name="google-site-verification" content="y11QrZyULvbz1jlhbxTyx6ZOjkXTjbLR47GHCklMfV8" />
-        <meta 
-          name="keywords" 
-          content="digital marketing agency, SEO services, PPC management, social media marketing, content marketing, online marketing, digital strategy, marketing consultation, brand development, lead generation" 
+        <meta name="google-site-verification" content="y11QrZyULvbz1jlhbxTyx6ZOjkXTjbLR47GHCklMfV8" />
+        <meta
+          name="keywords"
+          content="digital marketing agency, SEO services, PPC management, social media marketing, content marketing, online marketing, digital strategy, marketing consultation, brand development, lead generation"
         />
-        
+
         {/* Open Graph Tags */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Digital Marketing Agency | Expert Marketing Services" />
-        <meta 
-          property="og:description" 
-          content="Transform your online presence with our comprehensive digital marketing services. Get results-driven SEO, PPC, and social media solutions." 
-        />        
-        
+        <meta
+          property="og:description"
+          content="Transform your online presence with our comprehensive digital marketing services. Get results-driven SEO, PPC, and social media solutions."
+        />
+
         {/* Additional SEO Tags */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta httpEquiv="content-language" content="en" />
         <meta name="author" content="Your Agency Name" />
-        <link rel="canonical" href="https://digitallabservices.com" />
-        
+        <link rel="canonical" href="https://www.digitallabservices.com/" />
+
         {/* Performance Hints */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
@@ -117,9 +117,8 @@ export default function Home() {
 
       {/* Main Content - Hidden until loaded */}
       <main
-        className={`transition-opacity duration-700 ${
-          contentLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
+        className={`transition-opacity duration-700 ${contentLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
         style={{ minHeight: '100vh' }}
       >
         <Hero />
