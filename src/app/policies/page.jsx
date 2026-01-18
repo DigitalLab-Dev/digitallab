@@ -1,10 +1,10 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FaShieldAlt, 
-  FaLock, 
-  FaUserSecret, 
+import {
+  FaShieldAlt,
+  FaLock,
+  FaUserSecret,
   FaCookie,
   FaDatabase,
   FaExclamationTriangle,
@@ -114,7 +114,7 @@ These providers are contractually obligated to protect your data and use it only
 • Right to object: Object to certain types of processing
 • Right to withdraw consent: Withdraw previously given consent
 
-To exercise these rights, please contact us at privacy@youragency.com. We will respond within 30 days.`
+To exercise these rights, please contact us at support@digitallabservices.com. We will respond within 30 days.`
     },
     {
       id: 'data-retention',
@@ -130,16 +130,78 @@ To exercise these rights, please contact us at privacy@youragency.com. We will r
 When data is no longer needed, we securely delete or anonymize it. You can request early deletion by contacting our privacy team.`
     },
     {
+      id: 'team-policy',
+      icon: FaUserSecret,
+      title: 'Team Policies & Code of Conduct',
+      content: `This Team Policy outlines the expectations, responsibilities, and rules for all team members working with Digital Lab Services. These policies are designed to maintain professionalism, accountability, and smooth collaboration within the agency.
+
+By working with the agency, you agree to follow the rules mentioned below.
+
+1. Work Discipline & Consistency
+
+• Every team member is required to work daily during their assigned working hours.
+• All assigned tasks must be completed within the given deadline.
+• Consistency in work performance is mandatory and non-negotiable.
+
+Penalty:
+If a team member fails to complete assigned tasks on time without a valid reason, a PKR 1,000 fine will be applied.
+
+2. Attendance & Leave Policy
+
+• Only Sunday is considered an official off day.
+• Any leave other than Sunday must be approved in advance by the management.
+• Leaving work, disappearing, or going inactive without informing the agency is strictly prohibited.
+
+Penalty:
+If a team member leaves or remains absent without prior notice, PKR 2,000 will be deducted from their salary.
+
+3. Ownership of Work & Files
+
+• All project files, designs, source files, documents, data, and work created during your time with the agency are sole property of Digital Lab Services.
+• No team member is allowed to delete, modify, move, or share any project files without prior approval.
+• Unauthorized deletion or misuse of agency property will be treated as a serious violation.
+
+4. Exit & Project Handover Policy
+
+• In case of resignation, termination, or any dispute between the agency and the team member:
+  ○ The team member is fully responsible for delivering all project files, assets, and credentials related to assigned work.
+  ○ Project handover must be completed before officially leaving the agency.
+• Leaving the agency without delivering project files will be considered a breach of trust.
+
+Legal Action:
+If project files are not delivered, damaged, or misused, the agency reserves the right to take legal and government action as per applicable laws.
+
+5. Professional Behavior & Conduct
+
+• All team members must maintain professional behavior, respect deadlines, and communicate clearly.
+• Creating conflicts, spreading misinformation, damaging agency reputation, or internal politics will not be tolerated.
+• Confidential agency and client information must never be shared externally.
+
+6. Confidentiality & Data Protection
+
+• Client data, internal strategies, pricing, and processes are strictly confidential.
+• Any misuse or leakage of confidential information will result in immediate action, including termination and legal consequences.
+
+7. Policy Acceptance & Updates
+
+• These policies apply to all employees, interns, freelancers, and contractors working with the agency.
+• The agency reserves the right to update or modify policies at any time.
+• Continued work with the agency implies acceptance of all updated policies.
+
+Final Note:
+These policies are created to ensure fairness, discipline, and long-term growth for both the agency and its team members. Cooperation and responsibility are expected from everyone.`
+    },
+    {
       id: 'contact',
       icon: FaEnvelope,
       title: 'Contact Information',
       content: `If you have questions or concerns about this Privacy Policy:
 
-Email: privacy@youragency.com
-Phone: +1 (555) 123-4567
-Address: 123 Agency Street, Suite 100, City, State 12345
+Email: support@digitallabservices.com
+Phone: +92 326 5929677
+Address: Ali Hussain Abad, Lahore, Pakistan
 
-Data Protection Officer: dpo@youragency.com
+Data Protection Officer: support@digitallabservices.com
 
 We will respond to all inquiries within 48 hours during business days.
 
@@ -348,7 +410,7 @@ Effective Date: January 1, 2025`
                 If you have any questions about our Privacy Policy, please don't hesitate to contact us.
               </p>
               <motion.a
-                href="mailto:privacy@youragency.com"
+                href="mailto:support@digitallabservices.com"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-orange-500 hover:bg-orange-600 rounded-lg font-semibold transition-colors duration-300"

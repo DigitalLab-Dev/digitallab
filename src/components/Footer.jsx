@@ -135,7 +135,7 @@ const Footer = () => {
                   Digital <span className="text-orange-500">Lab</span>
                 </h3>
                 <p className="text-gray-400 leading-relaxed mb-6">
-                 Where creativity meets strategy to build brands that inspire and perform
+                  Where creativity meets strategy to build brands that inspire and perform
                 </p>
 
                 {/* Contact Info */}
@@ -305,10 +305,10 @@ const Footer = () => {
               </p>
               <nav className="flex gap-6" aria-label="Legal links">
                 <Link
-                  href="/privacy"
+                  href="/policies"
                   className="hover:text-orange-500 transition-colors duration-300"
                 >
-                  Privacy Policy
+                  Policies
                 </Link>
                 <Link
                   href="/terms"
