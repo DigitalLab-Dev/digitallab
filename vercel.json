@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "digitallabservices.com"
+        }
+      ],
+      "destination": "https://www.digitallabservices.com/$1",
+      "permanent": true
+    }
+  ]
+}
