@@ -22,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
+      <body className={`${poppins.variable} font-poppins antialiased`}>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-FP5LSNLNBS"
           strategy="afterInteractive"
@@ -35,8 +35,6 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-FP5LSNLNBS');
           `}
         </Script>
-      </head>
-      <body className={`${poppins.variable} font-poppins antialiased`}>
         <CanonicalTag />
         <Navbar />
         {children}
