@@ -306,23 +306,25 @@ const FinalCTA = () => {
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
             {/* Primary CTA */}
-            <motion.button
-              className="group relative px-5 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-black font-bold text-xl rounded-full overflow-hidden shadow-2xl"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="relative z-10 flex items-center gap-3">
-                <Rocket className="w-6 h-6" />
-                Start Your Project
-                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-              </span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600"
-                initial={{ x: '100%' }}
-                whileHover={{ x: '0%' }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.button>
+            <a href="https://calendly.com/syed-ali-turab/30min" target="_blank" rel="noopener noreferrer">
+              <motion.button
+                className="group relative px-5 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-black font-bold text-xl rounded-full overflow-hidden shadow-2xl"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="relative z-10 flex items-center gap-3">
+                  <Rocket className="w-6 h-6" />
+                  Start Your Project
+                  <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                </span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600"
+                  initial={{ x: '100%' }}
+                  whileHover={{ x: '0%' }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.button>
+            </a>
           </motion.div>
         </motion.div>
       </div>

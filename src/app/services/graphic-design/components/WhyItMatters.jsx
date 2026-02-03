@@ -78,7 +78,7 @@ const DesignMattersComponent = () => {
   };
 
   return (
-    <section 
+    <section
       className="min-h-screen text-white overflow-hidden relative py-10"
       aria-labelledby="design-matters-heading"
     >
@@ -87,7 +87,7 @@ const DesignMattersComponent = () => {
         {/* Gradient orbs */}
         <div className="absolute top-1/4 left-1/6 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/6 w-80 h-80 bg-orange-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        
+
         {/* Animated particles */}
         {[...Array(15)].map((_, i) => (
           <motion.div
@@ -131,7 +131,7 @@ const DesignMattersComponent = () => {
         animate={isInView ? 'visible' : 'hidden'}
       >
         {/* Header Section */}
-        <motion.header 
+        <motion.header
           className="text-center 
            mb-5"
           variants={itemVariants}
@@ -149,7 +149,7 @@ const DesignMattersComponent = () => {
             >
               <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
             </motion.div>
-            <h2 
+            <h2
               id="design-matters-heading"
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-orange-200 to-orange-500 bg-clip-text text-transparent pb-3"
             >
@@ -275,11 +275,11 @@ const DesignMattersComponent = () => {
         </motion.div>
 
         {/* Enhanced Call to Action */}
-        <motion.div 
+        <motion.div
           className="text-center"
           variants={itemVariants}
         >
-          <Link href="/contact" className="inline-block group">
+          <Link href="https://calendly.com/syed-ali-turab/30min" target="_blank" rel="noopener noreferrer" className="inline-block group">
             <motion.div
               className="inline-flex items-center gap-3 sm:gap-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg shadow-xl shadow-orange-500/30 relative overflow-hidden"
               whileHover={{
@@ -303,7 +303,7 @@ const DesignMattersComponent = () => {
                 }}
                 aria-hidden="true"
               />
-              
+
               <Heart className="w-5 h-5 sm:w-6 sm:h-6 relative z-10" aria-hidden="true" />
               <span className="relative z-10">Lead Your Brand Today</span>
               <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 group-hover:translate-x-1 transition-transform" aria-hidden="true" />

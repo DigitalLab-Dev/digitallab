@@ -105,33 +105,30 @@ const Hero = () => {
         <h1 className="text-5xl sm:text-6xl  md:text-7xl xl:text-8xl font-bold text-white leading-tighter mb-6 " aria-label="Graphic Design Services">
           <div className="overflow-hidden">
             <div
-              className={`transition-all duration-1000 delay-200 ${
-                isVisible
+              className={`transition-all duration-1000 delay-200 ${isVisible
                   ? 'transform translate-y-0 opacity-100'
                   : 'transform translate-y-full opacity-0'
-              }`}
+                }`}
             >
               We Create
             </div>
           </div>
           <div className="overflow-hidden">
             <div
-              className={`text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-1000 delay-400 ${
-                isVisible
+              className={`text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-1000 delay-400 ${isVisible
                   ? 'transform translate-y-0 opacity-100'
                   : 'transform translate-y-full opacity-0'
-              }`}
+                }`}
             >
               Extraordinary
             </div>
           </div>
           <div className="overflow-hidden">
             <div
-              className={`transition-all duration-1000 delay-600 ${
-                isVisible
+              className={`transition-all duration-1000 delay-600 ${isVisible
                   ? 'transform translate-y-0 opacity-100'
                   : 'transform translate-y-full opacity-0'
-              }`}
+                }`}
             >
               Digital Experiences
             </div>
@@ -140,9 +137,8 @@ const Hero = () => {
 
         {/* Subtitle */}
         <p
-          className={`text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed px-4 transition-all duration-1000 delay-800 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-          }`}
+          className={`text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed px-4 transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
         >
           Where innovation meets artistry. We transform ideas into stunning
           visual narratives that leave lasting impressions.
@@ -150,9 +146,8 @@ const Hero = () => {
 
         {/* CTA Buttons */}
         <nav
-          className={`flex flex-col sm:flex-row gap-4 justify-center items-center transition-all duration-1000 delay-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-          }`}
+          className={`flex flex-col sm:flex-row gap-4 justify-center items-center transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
           aria-label="Primary navigation"
         >
           <Link
@@ -160,7 +155,7 @@ const Hero = () => {
             className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-orange-500 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/25 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900"
             aria-label="View our portfolio work"
           >
-            <span 
+            <span
               className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
               aria-hidden="true"
             />
@@ -184,7 +179,8 @@ const Hero = () => {
           </Link>
 
           <Link
-            href="/contact"
+            href="https://calendly.com/syed-ali-turab/30min"
+            target="_blank"
             className="group px-6 sm:px-8 py-3 sm:py-4 border-2 border-gray-600 text-white font-semibold rounded-lg hover:border-orange-500 hover:text-orange-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900"
             aria-label="Contact us"
           >

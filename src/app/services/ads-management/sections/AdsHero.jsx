@@ -4,12 +4,12 @@ import {
   TrendingUp,
   Target,
   DollarSign,
-  
+
   ArrowRight,
   BarChart3,
   Users,
   Zap,
-  
+
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -108,13 +108,11 @@ const AdsHero = () => {
         {floatingElements.map((element) => (
           <div
             key={element.id}
-            className={`absolute right-0 w-1/2 ${
-              element.size
-            } transform transition-all duration-1000 ${
-              isVisible
+            className={`absolute right-0 w-1/2 ${element.size
+              } transform transition-all duration-1000 ${isVisible
                 ? 'translate-y-0 opacity-60'
                 : 'translate-y-10 opacity-0'
-            }`}
+              }`}
             style={{
               left: element.x,
               top: element.y,
@@ -140,11 +138,10 @@ const AdsHero = () => {
           <div className="space-y-8 lg:space-y-10">
             {/* Main Headline */}
             <div
-              className={`transform transition-all duration-1000 delay-200 ${
-                isVisible
+              className={`transform transition-all duration-1000 delay-200 ${isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-10 opacity-0'
-              }`}
+                }`}
             >
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tighter">
                 <span className="block text-white mb-2">Turn Clicks Into</span>
@@ -159,11 +156,10 @@ const AdsHero = () => {
 
             {/* Subheadline */}
             <p
-              className={`text-lg sm:text-xl lg:text-xl text-gray-300 leading-relaxed max-w-2xl transform transition-all duration-1000 delay-400 ${
-                isVisible
+              className={`text-lg sm:text-xl lg:text-xl text-gray-300 leading-relaxed max-w-2xl transform transition-all duration-1000 delay-400 ${isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-10 opacity-0'
-              }`}
+                }`}
             >
               Maximize your{' '}
               <span className="text-orange-400 font-semibold">ROI</span> with
@@ -182,11 +178,10 @@ const AdsHero = () => {
 
             {/* Stats Row */}
             <div
-              className={`grid grid-cols-3 gap-4 lg:gap-6 transform transition-all duration-1000 delay-600 ${
-                isVisible
+              className={`grid grid-cols-3 gap-4 lg:gap-6 transform transition-all duration-1000 delay-600 ${isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-10 opacity-0'
-              }`}
+                }`}
             >
               {[
                 { value: '300%', label: 'ROI Boost', icon: TrendingUp },
@@ -209,14 +204,13 @@ const AdsHero = () => {
 
             {/* CTA Section */}
             <div
-              className={`space-y-4 transform transition-all duration-1000 delay-800 ${
-                isVisible
+              className={`space-y-4 transform transition-all duration-1000 delay-800 ${isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-10 opacity-0'
-              }`}
+                }`}
             >
               <button className="group relative inline-flex items-center justify-center px-8 py-4 lg:px-4 lg:py-4 text-lg lg:text-xl font-bold text-white cursor-pointer bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 rounded-full hover:from-orange-300 hover:via-orange-400 hover:to-orange-500 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/30 focus:outline-none focus:ring-4 focus:ring-orange-400/50 focus:ring-offset-2 focus:ring-offset-black">
-                <Link href="/contact">
+                <Link href="https://calendly.com/syed-ali-turab/30min" target="_blank" rel="noopener noreferrer">
                   <span className="relative z-10 flex items-center">
                     Get Your Free Ad Strategy Call
                     <ArrowRight className="ml-3 w-5 h-5 lg:w-6 lg:h-6 group-hover:translate-x-1 transition-transform duration-300" />
@@ -235,21 +229,19 @@ const AdsHero = () => {
 
             {/* Ad Platform Mockups */}
             <div
-              className={`relative z-10 transform transition-all duration-1000 delay-1000 ${
-                isVisible
+              className={`relative z-10 transform transition-all duration-1000 delay-1000 ${isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-20 opacity-0'
-              }`}
+                }`}
             >
               <div className="space-y-6 lg:space-y-8">
                 {adMockups.map((ad, index) => (
                   <div
                     key={index}
-                    className={`transform transition-all duration-1000 hover:scale-105 ${
-                      index % 2 === 0
+                    className={`transform transition-all duration-1000 hover:scale-105 ${index % 2 === 0
                         ? 'translate-x-0'
                         : 'translate-x-8 lg:translate-x-12'
-                    }`}
+                      }`}
                     style={{
                       animationDelay: `${ad.delay}s`,
                       animation: `slideIn 10s ease-in-out infinite ${ad.delay}s`,

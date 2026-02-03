@@ -403,7 +403,7 @@ import Link from 'next/link';
 const WebsiteCTA = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
-  
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
@@ -550,7 +550,7 @@ const WebsiteCTA = () => {
                 </span>
               </motion.div>
 
-              <h2 
+              <h2
                 id="cta-heading"
                 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
               >
@@ -575,7 +575,7 @@ const WebsiteCTA = () => {
             </motion.div>
 
             {/* Features */}
-            <motion.div 
+            <motion.div
               className="grid grid-cols-1 sm:grid-cols-2 gap-4"
               variants={itemVariants}
             >
@@ -605,8 +605,9 @@ const WebsiteCTA = () => {
 
             {/* CTA Button */}
             <motion.div variants={itemVariants}>
-              <Link 
-                href="/contact"
+              <Link
+                href="https://calendly.com/syed-ali-turab/30min"
+                target="_blank"
                 className="inline-block"
                 aria-label="Get started with your project - Contact us"
               >
@@ -615,18 +616,18 @@ const WebsiteCTA = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <div 
+                  <div
                     className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     aria-hidden="true"
                   />
                   <div className="relative flex items-center justify-center gap-2">
                     <span>Get Started Now</span>
-                    <ArrowRight 
-                      className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" 
+                    <ArrowRight
+                      className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
                       aria-hidden="true"
                     />
                   </div>
-                  <div 
+                  <div
                     className="absolute inset-0 -z-10 bg-gradient-to-r from-orange-500 to-orange-600 blur-xl opacity-50"
                     aria-hidden="true"
                   />
@@ -635,7 +636,7 @@ const WebsiteCTA = () => {
             </motion.div>
 
             {/* Trust indicators */}
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-400"
             >
@@ -651,7 +652,7 @@ const WebsiteCTA = () => {
           </div>
 
           {/* Right Content - Interactive Card */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             style={{ y }}
           >
@@ -667,14 +668,14 @@ const WebsiteCTA = () => {
                 }}
               >
                 {/* Glow effect */}
-                <div 
+                <div
                   className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-2xl blur-xl pointer-events-none"
                   aria-hidden="true"
                 />
 
                 {/* Content */}
                 <div className="relative z-10 text-center space-y-6">
-                  <div 
+                  <div
                     className="inline-flex p-4 sm:p-6 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 mb-4"
                     aria-hidden="true"
                   >
@@ -714,11 +715,11 @@ const WebsiteCTA = () => {
                 </div>
 
                 {/* Decorative elements */}
-                <div 
+                <div
                   className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-orange-400/20 to-transparent rounded-full blur-2xl pointer-events-none"
                   aria-hidden="true"
                 />
-                <div 
+                <div
                   className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-tr from-white/10 to-transparent rounded-full blur-xl pointer-events-none"
                   aria-hidden="true"
                 />

@@ -120,11 +120,10 @@ const CtaSectionAnimated = () => {
               key={`word-${word}-${i}`}
               onMouseEnter={() => setHoveredWord(i)}
               onMouseLeave={() => setHoveredWord(null)}
-              className={`inline-block mr-2  sm:mr-3 cursor-pointer transition-all duration-500 ${
-                isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-10'
-              } ${hoveredWord === i ? 'scale-110 text-orange-400' : ''}`}
+              className={`inline-block mr-2  sm:mr-3 cursor-pointer transition-all duration-500 ${isVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-10'
+                } ${hoveredWord === i ? 'scale-110 text-orange-400' : ''}`}
               style={{
                 transitionDelay: `${i * 100}ms`,
                 textShadow:
@@ -152,9 +151,8 @@ const CtaSectionAnimated = () => {
 
         {/* Subheading with stagger */}
         <p
-          className={`text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-300 max-w-3xl mx-auto font-light transition-all duration-700 delay-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-          }`}
+          className={`text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-300 max-w-3xl mx-auto font-light transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}
         >
           Let's have a{' '}
           <strong className="text-orange-400 font-semibold">1-on-1 call</strong>{' '}
@@ -164,12 +162,12 @@ const CtaSectionAnimated = () => {
 
         {/* CTA Button with intense effects */}
         <div
-          className={`mt-10 sm:mt-14 transition-all duration-700 delay-1000 ${
-            isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-          }`}
+          className={`mt-10 sm:mt-14 transition-all duration-700 delay-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+            }`}
         >
           <Link
-            href="/contact"
+            href="https://calendly.com/syed-ali-turab/30min"
+            target="_blank"
             className="group relative w-full md:w-fit  inline-flex items-center justify-center gap-3 sm:gap-4 rounded-full bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 px-6 sm:px-8 py-3 sm:py-4 text-lg sm:text-xl md:text-2xl font-bold text-white shadow-2xl transition-all duration-500 hover:shadow-orange-500/50 hover:scale-110 active:scale-95 overflow-hidden focus:outline-none focus:ring-4 focus:ring-orange-500/50"
             aria-label="Reserve your consultation spot"
           >
@@ -205,9 +203,8 @@ const CtaSectionAnimated = () => {
 
           {/* Trust indicators */}
           <div
-            className={`mt-6 sm:mt-8 flex flex-wrap justify-center gap-4 sm:gap-6 text-gray-400 text-sm sm:text-base transition-all duration-700 delay-1200 ${
-              isVisible ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={`mt-6 sm:mt-8 flex flex-wrap justify-center gap-4 sm:gap-6 text-gray-400 text-sm sm:text-base transition-all duration-700 delay-1200 ${isVisible ? 'opacity-100' : 'opacity-0'
+              }`}
           >
             <span className="flex items-center gap-2">
               <Zap size={16} className="text-orange-400" aria-hidden="true" />

@@ -2,15 +2,15 @@
 import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import {  ArrowUpRight, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Sparkles } from 'lucide-react';
 
 // Move animation variants outside component
 const containerVariants = {
   hidden: { opacity: 0, y: 50 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
-    transition: { 
+    transition: {
       duration: 0.8,
       staggerChildren: 0.1
     }
@@ -19,8 +19,8 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: { duration: 0.5 }
   }
@@ -36,7 +36,7 @@ const AdsManagementCTA = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -50,11 +50,11 @@ const AdsManagementCTA = () => {
             <div className="absolute bottom-20 left-32 w-12 h-12 border-2 border-white rounded-full" />
             <div className="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full opacity-10" />
           </div>
-          
+
           <div className="bg-gradient-to-br from-orange-600 via-orange-500 to-orange-400 rounded-3xl p-8 md:p-12 lg:p-16 relative shadow-2xl">
             {/* Animated Background Elements */}
-            <motion.div 
-              animate={{ 
+            <motion.div
+              animate={{
                 rotate: 360,
                 scale: [1, 1.1, 1]
               }}
@@ -64,9 +64,9 @@ const AdsManagementCTA = () => {
               }}
               className="absolute top-8 right-8 w-32 h-32 border border-white/30 rounded-full"
             />
-            
-            <motion.div 
-              animate={{ 
+
+            <motion.div
+              animate={{
                 rotate: -360,
                 y: [0, -10, 0]
               }}
@@ -93,13 +93,13 @@ const AdsManagementCTA = () => {
                   Ready to <span className="text-white drop-shadow-lg">10x</span> Your ROI?
                 </h2>
                 <p className="text-lg md:text-xl lg:text-2xl text-black/90 mb-6 max-w-3xl mx-auto leading-relaxed">
-                  Join 50+ successful businesses who've transformed their advertising performance 
+                  Join 50+ successful businesses who've transformed their advertising performance
                   with our proven strategies. Your competitors are already ahead – catch up now.
                 </p>
               </motion.div>
 
               {/* CTA Buttons */}
-              <motion.div 
+              <motion.div
                 variants={itemVariants}
                 className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
               >
@@ -108,12 +108,12 @@ const AdsManagementCTA = () => {
                   whileTap={{ scale: 0.98 }}
                   className="bg-black text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-black/60 transition-all duration-300 flex items-center gap-3 group w-full sm:w-auto justify-center"
                 >
-                  <Link href="/contact">
-                  <span>Start Your Campaign</span>
+                  <Link href="https://calendly.com/syed-ali-turab/30min" target="_blank" rel="noopener noreferrer">
+                    <span>Start Your Campaign</span>
                   </Link>
                   <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                 </motion.button>
-                
+
               </motion.div>
 
             </div>

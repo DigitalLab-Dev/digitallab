@@ -118,11 +118,10 @@ const Navbar = () => {
 
       <header
         className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 
-        ${
-          isScrolled
+        ${isScrolled
             ? ' shadow-lg backdrop-blur-xl'
             : ' backdrop-blur-md'
-        }`}
+          }`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           {/* Logo */}
@@ -150,33 +149,29 @@ const Navbar = () => {
                       <Link
                         href={item.href}
                         className={`flex items-center justify-center  px-3 py-2 text-sm font-medium uppercase tracking-wide relative
-                          ${
-                            isActive(item.href)
-                              ? 'text-orange-400'
-                              : 'text-gray-300 hover:text-orange-400'
+                          ${isActive(item.href)
+                            ? 'text-orange-400'
+                            : 'text-gray-300 hover:text-orange-400'
                           }`}
                       >
                         <span className="relative  inline-block w-20">
                           <span
-                            className={`absolute inset-0 transition-opacity duration-500 ${
-                              showServices ? 'opacity-100' : 'opacity-0'
-                            }`}
+                            className={`absolute inset-0 transition-opacity duration-500 ${showServices ? 'opacity-100' : 'opacity-0'
+                              }`}
                           >
                             Services
                           </span>
                           <span
-                            className={`absolute inset-0 transition-opacity duration-500 ${
-                              showServices ? 'opacity-0' : 'opacity-100'
-                            }`}
+                            className={`absolute inset-0 transition-opacity duration-500 ${showServices ? 'opacity-0' : 'opacity-100'
+                              }`}
                           >
                             Portfolio
                           </span>
                           <span className="invisible">Services</span>
                         </span>
                         <ChevronDown
-                          className={`w-5 h-5  transition-transform duration-200 ${
-                            isDropdownOpen ? 'rotate-180' : ''
-                          }`}
+                          className={`w-5 h-5  transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''
+                            }`}
                         />
                         {isActive(item.href) && (
                           <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-orange-400 shadow-[0_0_8px_2px_rgba(255,165,0,0.7)] rounded-full"></span>
@@ -187,10 +182,9 @@ const Navbar = () => {
                     <Link
                       href={item.href}
                       className={`px-3 py-2 text-sm font-medium uppercase tracking-wide relative
-                        ${
-                          isActive(item.href)
-                            ? 'text-orange-400'
-                            : 'text-gray-300 hover:text-orange-400'
+                        ${isActive(item.href)
+                          ? 'text-orange-400'
+                          : 'text-gray-300 hover:text-orange-400'
                         }`}
                     >
                       {item.name}
@@ -206,9 +200,9 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex">
-            <Link href="/contact">
+            <Link href="https://calendly.com/syed-ali-turab/30min" target="_blank">
               <button className="flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 font-semibold text-sm uppercase tracking-wide transition-all duration-200 rounded-lg shadow-lg cursor-pointer">
-                <span>Let's Talk</span>
+                <span>Book 1 to 1 Call</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </Link>
@@ -227,11 +221,10 @@ const Navbar = () => {
         <div
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className={`hidden lg:block absolute top-full left-1/2 -translate-x-1/2 w-[700px] bg-black backdrop-blur-lg border border-white/10 rounded-xl shadow-xl transition-all duration-300 ${
-            isDropdownOpen
-              ? 'opacity-100 translate-y-0 pointer-events-auto'
-              : 'opacity-0 -translate-y-2 pointer-events-none'
-          }`}
+          className={`hidden lg:block absolute top-full left-1/2 -translate-x-1/2 w-[700px] bg-black backdrop-blur-lg border border-white/10 rounded-xl shadow-xl transition-all duration-300 ${isDropdownOpen
+            ? 'opacity-100 translate-y-0 pointer-events-auto'
+            : 'opacity-0 -translate-y-2 pointer-events-none'
+            }`}
         >
           <div className="px-8 py-8">
             <h3 className="text-lg font-semibold text-white mb-6">
@@ -274,11 +267,10 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`lg:hidden absolute top-full left-0 right-0 bg-black/90 backdrop-blur-lg shadow-xl border-t border-gray-800 transition-all duration-300 ${
-            isMobileMenuOpen
-              ? 'max-h-screen opacity-100'
-              : 'max-h-0 opacity-0 overflow-hidden'
-          }`}
+          className={`lg:hidden absolute top-full left-0 right-0 bg-black/90 backdrop-blur-lg shadow-xl border-t border-gray-800 transition-all duration-300 ${isMobileMenuOpen
+            ? 'max-h-screen opacity-100'
+            : 'max-h-0 opacity-0 overflow-hidden'
+            }`}
         >
           <div className="px-4 py-6 space-y-4">
             {navLinks.map(({ name, href }) => (
@@ -290,33 +282,29 @@ const Navbar = () => {
                         setIsMobileServicesOpen(!isMobileServicesOpen)
                       }
                       className={`flex items-center justify-between w-full py-3 px-4 font-medium text-sm uppercase tracking-wide transition-colors duration-200 rounded-md
-                        ${
-                          isActive(href)
-                            ? 'text-orange-400'
-                            : 'text-gray-200 hover:text-orange-400'
+                        ${isActive(href)
+                          ? 'text-orange-400'
+                          : 'text-gray-200 hover:text-orange-400'
                         }`}
                     >
                       <span className="relative inline-block">
                         <span
-                          className={`absolute inset-0 transition-opacity duration-500 ${
-                            showServices ? 'opacity-100' : 'opacity-0'
-                          }`}
+                          className={`absolute inset-0 transition-opacity duration-500 ${showServices ? 'opacity-100' : 'opacity-0'
+                            }`}
                         >
                           Services
                         </span>
                         <span
-                          className={`absolute inset-0 transition-opacity duration-500 ${
-                            showServices ? 'opacity-0' : 'opacity-100'
-                          }`}
+                          className={`absolute inset-0 transition-opacity duration-500 ${showServices ? 'opacity-0' : 'opacity-100'
+                            }`}
                         >
                           Portfolio
                         </span>
                         <span className="invisible">Services</span>
                       </span>
                       <ChevronDown
-                        className={`w-4 h-4 transition-transform duration-200 ${
-                          isMobileServicesOpen ? 'rotate-180' : ''
-                        }`}
+                        className={`w-4 h-4 transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''
+                          }`}
                       />
                     </button>
                     {/* Mobile Services Dropdown */}
@@ -345,10 +333,9 @@ const Navbar = () => {
                     href={href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`block w-full text-left py-3 px-4 font-medium text-sm uppercase tracking-wide transition-colors duration-200 rounded-md
-                      ${
-                        isActive(href)
-                          ? 'text-orange-400 bg-white/5'
-                          : 'text-gray-200 hover:text-orange-400 hover:bg-white/5'
+                      ${isActive(href)
+                        ? 'text-orange-400 bg-white/5'
+                        : 'text-gray-200 hover:text-orange-400 hover:bg-white/5'
                       }`}
                   >
                     {name}

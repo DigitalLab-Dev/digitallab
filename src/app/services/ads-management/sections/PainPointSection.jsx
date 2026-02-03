@@ -1,8 +1,8 @@
 "use client"
 import React, { useState } from 'react';
-import { 
-  AlertTriangle, Target, TrendingDown, DollarSign, 
-  CheckCircle, ArrowRight, BarChart3, Eye, Lightbulb, RefreshCw 
+import {
+  AlertTriangle, Target, TrendingDown, DollarSign,
+  CheckCircle, ArrowRight, BarChart3, Eye, Lightbulb, RefreshCw
 } from 'lucide-react';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -85,7 +85,7 @@ const PainPointSection = () => {
   const isProblems = activeView === 'problems';
 
   return (
-    <motion.section 
+    <motion.section
       id="pain-point-section"
       className="relative min-h-screen bg-black py-10 overflow-x-hidden"
       aria-label="Ads Problems and Solutions"
@@ -101,8 +101,8 @@ const PainPointSection = () => {
         {/* Corrected gradient side background */}
         <div
           className={`absolute top-0 w-1/2 h-full transition-all duration-1000
-          ${isProblems ? 'left-0 bg-gradient-to-r from-red-900/20 via-orange-900/15 to-transparent' 
-                       : 'right-0 bg-gradient-to-l from-orange-900/20 via-orange-800/15 to-transparent'}`}
+          ${isProblems ? 'left-0 bg-gradient-to-r from-red-900/20 via-orange-900/15 to-transparent'
+              : 'right-0 bg-gradient-to-l from-orange-900/20 via-orange-800/15 to-transparent'}`}
         />
 
         {/* Animated particles */}
@@ -123,9 +123,9 @@ const PainPointSection = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-6 lg:mb-10"
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -133,23 +133,23 @@ const PainPointSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 ">
-            Stop Losing Money on 
-            <span className={`flex items-center justify-center py-4 bg-gradient-to-r ${isProblems 
-              ? 'from-red-400 via-orange-400 to-red-600' 
+            Stop Losing Money on
+            <span className={`flex items-center justify-center py-4 bg-gradient-to-r ${isProblems
+              ? 'from-red-400 via-orange-400 to-red-600'
               : 'from-orange-400 via-orange-500 to-orange-600'} 
               bg-clip-text text-transparent  transition-all duration-1000`}>
               {isProblems ? 'Failed Ads' : 'Winning Ads'}
             </span>
           </h2>
           <p className="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">
-            {isProblems 
+            {isProblems
               ? "Most businesses waste thousands on ineffective ad campaigns. Here's what's going wrong."
               : 'Transform your ad performance with our proven strategies that deliver real results.'}
           </p>
         </motion.div>
 
         {/* Toggle Switch */}
-        <motion.div 
+        <motion.div
           className="flex justify-center mb-16"
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -157,35 +157,33 @@ const PainPointSection = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <div className="relative w-fit bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-full p-2">
-            <div 
+            <div
               className={`absolute top-2 w-[45%] h-12 rounded-full transition-all duration-500 ease-out transform
               ${activeView === 'solutions' ? 'translate-x-full' : 'translate-x-0'}
-              ${isProblems 
-                ? 'bg-gradient-to-r from-red-500 via-orange-500 to-red-600' 
-                : 'bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600'}`}
+              ${isProblems
+                  ? 'bg-gradient-to-r from-red-500 via-orange-500 to-red-600'
+                  : 'bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600'}`}
             />
-            
+
             <div className="relative z-10 flex">
               <button
                 onClick={() => setActiveView('problems')}
-                className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 ${
-                  activeView === 'problems' 
-                    ? 'text-white' 
-                    : 'text-gray-400 hover:text-white'
-                }`}
+                className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 ${activeView === 'problems'
+                  ? 'text-white'
+                  : 'text-gray-400 hover:text-white'
+                  }`}
                 aria-pressed={activeView === 'problems'}
               >
                 <AlertTriangle className="w-5 h-5 inline-block mr-2" />
                 Problems
               </button>
-              
+
               <button
                 onClick={() => setActiveView('solutions')}
-                className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 ${
-                  activeView === 'solutions' 
-                    ? 'text-white' 
-                    : 'text-gray-400 hover:text-white'
-                }`}
+                className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 ${activeView === 'solutions'
+                  ? 'text-white'
+                  : 'text-gray-400 hover:text-white'
+                  }`}
                 aria-pressed={activeView === 'solutions'}
               >
                 <CheckCircle className="w-5 h-5 inline-block mr-2" />
@@ -197,7 +195,7 @@ const PainPointSection = () => {
 
         {/* Content Grid */}
         <AnimatePresence mode="wait">
-          <motion.div 
+          <motion.div
             key={activeView}
             className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16"
             initial={{ opacity: 0, y: 20 }}
@@ -222,7 +220,7 @@ const PainPointSection = () => {
                 >
                   {/* Background glow */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-5 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`} />
-                  
+
                   <div className="relative z-10">
                     <div className="flex items-start space-x-4 mb-4">
                       <div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
@@ -237,7 +235,7 @@ const PainPointSection = () => {
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className={`inline-flex items-center px-4 py-2 bg-gradient-to-r  bg-opacity-20 backdrop-blur-sm border border-orange-400/30 rounded-full text-sm font-medium text-orange-300`}>
                       <item.icon className="w-4 h-4 mr-2" />
                       {item.stat}
@@ -263,7 +261,7 @@ const PainPointSection = () => {
                   whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-5 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`} />
-                  
+
                   <div className="relative z-10">
                     <div className="flex items-start space-x-4 mb-4">
                       <div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
@@ -278,7 +276,7 @@ const PainPointSection = () => {
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className={`inline-flex items-center px-4 py-2 bg-gradient-to-r  bg-opacity-20 backdrop-blur-sm border border-orange-400/30 rounded-full text-sm font-medium ${isProblems ? 'text-red-300' : 'text-orange-300'}`}>
                       <item.icon className="w-4 h-4 mr-2" />
                       {item.stat}
@@ -287,7 +285,7 @@ const PainPointSection = () => {
 
                   <AnimatePresence>
                     {hoveredItem === item.id && !isProblems && (
-                      <motion.div 
+                      <motion.div
                         className="absolute top-1/2 right-6 transform -translate-y-1/2 text-orange-400"
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -312,31 +310,33 @@ const PainPointSection = () => {
         {/* Bottom CTA */}
         <AnimatePresence>
           {!isProblems && (
-            <motion.div 
+            <motion.div
               className="text-center mt-16 lg:mt-24"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -30 }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <motion.button 
-                className="group inline-flex items-center px-8 py-4 lg:px-12 lg:py-6 text-lg lg:text-xl font-bold text-black 
+              <a href="https://calendly.com/syed-ali-turab/30min" target="_blank">
+                <motion.button
+                  className="group inline-flex items-center px-8 py-4 lg:px-12 lg:py-6 text-lg lg:text-xl font-bold text-black 
                 bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 rounded-full 
                 hover:from-orange-300 hover:via-orange-400 hover:to-orange-500 transition-all duration-300 
                 transform hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/40 
                 focus:outline-none focus:ring-4 focus:ring-orange-400/50 focus:ring-offset-2 focus:ring-offset-black"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Let's Fix Your Ads Together
-                <motion.div
-                  className="ml-3"
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <ArrowRight className="w-5 h-5 lg:w-6 lg:h-6" />
-                </motion.div>
-              </motion.button>
+                  Let's Fix Your Ads Together
+                  <motion.div
+                    className="ml-3"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <ArrowRight className="w-5 h-5 lg:w-6 lg:h-6" />
+                  </motion.div>
+                </motion.button>
+              </a>
             </motion.div>
           )}
         </AnimatePresence>

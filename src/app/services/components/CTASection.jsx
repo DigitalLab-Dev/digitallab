@@ -29,7 +29,7 @@ const CTASection = () => {
               className="bg-black text-white px-8 py-4 rounded-full font-semibold text-lg cursor-pointer transition-colors inline-flex items-center gap-2"
             >
 
-             <Link href="/contact">Start Your Project</Link> <ArrowRight size={20} />
+              <Link href="https://calendly.com/syed-ali-turab/30min" target="_blank" rel="noopener noreferrer">Start Your Project</Link> <ArrowRight size={20} />
             </motion.button>
           </div>
         </motion.div>

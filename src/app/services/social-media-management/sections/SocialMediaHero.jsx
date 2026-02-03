@@ -53,8 +53,8 @@ const HeroSection = () => {
 
   const textVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.8, ease: "easeOut" }
     }
@@ -63,7 +63,7 @@ const HeroSection = () => {
   return (
     <div className="relative min-h-screen overflow-hidden pt-20 bg-black">
       {/* Grid pattern overlay */}
-      <div 
+      <div
         className="absolute inset-0 opacity-5"
         style={{
           backgroundImage: `
@@ -81,8 +81,8 @@ const HeroSection = () => {
           className="absolute z-10 md:opacity-100 opacity-0"
           style={card.position}
           initial={{ opacity: 0, y: 50 }}
-          animate={{ 
-            opacity: 1, 
+          animate={{
+            opacity: 1,
             y: 0,
             rotate: [0, 1, -1, 0]
           }}
@@ -138,7 +138,7 @@ const HeroSection = () => {
             <p className="text-xl text-gray-200 mb-6 leading-relaxed">
               We craft viral content and drive engagement across all major platforms
             </p>
-            
+
             {/* Platform badges */}
             <div className="flex flex-wrap justify-center gap-3 mb-8">
               {['Instagram', 'TikTok', 'LinkedIn', 'Facebook', 'YouTube'].map((platform, index) => (
@@ -192,7 +192,7 @@ const HeroSection = () => {
               <span className="relative z-10 flex items-center gap-2">
                 <a href="#work">
 
-                View Our Work
+                  View Our Work
                 </a>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>

@@ -62,10 +62,10 @@ const CTASection = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Link href="/contact">
+                  <Link href="https://calendly.com/syed-ali-turab/30min" target="_blank">
                     Start Your Project
                   </Link>
-    
+
                 </motion.button>
               </motion.div>
             </div>

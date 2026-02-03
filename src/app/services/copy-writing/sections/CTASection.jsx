@@ -93,7 +93,9 @@ export default function CTASection() {
               className="flex flex-col sm:flex-row gap-4 pt-4"
             >
               <Link
-                href="/contact"
+                href="https://calendly.com/syed-ali-turab/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex cursor-pointer items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-bold text-white shadow-xl hover:shadow-orange-500/50 transition-shadow"
               >
                 Start Your Project
