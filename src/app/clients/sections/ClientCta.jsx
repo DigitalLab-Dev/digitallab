@@ -193,11 +193,9 @@ const CtaSectionAnimated = () => {
 
             {/* Button content */}
             <span className="relative z-10 flex items-center gap-2 sm:gap-4">
-              <Link href="/contact">
-                <span className="group-hover:tracking-wider transition-all duration-300">
-                  Reserve Your Spot
-                </span>
-              </Link>
+              <span className="group-hover:tracking-wider transition-all duration-300">
+                Reserve Your Spot
+              </span>
             </span>
           </Link>
 

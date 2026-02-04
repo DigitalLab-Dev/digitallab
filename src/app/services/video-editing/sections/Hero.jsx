@@ -52,28 +52,6 @@ export default function VideoAgencyHero() {
           }}
         />
 
-        {/* Moving particles */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-orange-500 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -100, 0],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
-
         {/* Glowing lines */}
         <motion.div
           className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-orange-500/50 to-transparent"
@@ -133,13 +111,13 @@ export default function VideoAgencyHero() {
                 ease: "linear"
               }}
             />
-            
+
             {/* Corner accents */}
             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-orange-500" />
             <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-orange-500" />
             <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-orange-500" />
             <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-orange-500" />
-            
+
             {/* Glitch effect bars */}
             <motion.div
               className="absolute inset-0"

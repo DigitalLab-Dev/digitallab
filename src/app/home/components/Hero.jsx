@@ -2,14 +2,12 @@
 
 import ShinyText from "@/components/ReactBit-Components/ShinyText";
 import TextType from "@/components/ReactBit-Components/TextType";
-import React, { useState } from "react";
+import React from "react";
 import { MdArrowOutward } from "react-icons/md";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Spline from "@splinetool/react-spline";
 
 const Hero = () => {
-  const [splineLoaded, setSplineLoaded] = useState(false);
 
   return (
     <motion.section
@@ -19,23 +17,42 @@ const Hero = () => {
       transition={{ duration: 0.8, ease: "easeOut" }}
       aria-label="Hero section - Digital marketing agency introduction"
     >
-      {/* Background Spline (non-blocking) */}
+      {/* Premium Black Background with Orange Dots */}
       <div
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 -z-10 bg-black"
         aria-hidden="true"
       >
-        <div className="w-full h-full scale-100 sm:scale-125 md:scale-125 -translate-y-10 md:-translate-y-10">
-          <Spline
-            scene="https://prod.spline.design/7fTn8KMQWLjD9qLo/scene.splinecode"
-            onLoad={() => setSplineLoaded(true)}
-            style={{
-              width: "100%",
-              height: "100%",
-              opacity: splineLoaded ? 1 : 0,
-              transition: "opacity 0.6s ease-in-out",
-            }}
-          />
+        {/* Animated Orange Dots */}
+        <div className="absolute inset-0">
+          {/* Large dots */}
+          <div className="absolute top-[10%] left-[15%] w-3 h-3 rounded-full bg-[#f48020]/40 animate-pulse" style={{ animationDuration: '3s' }} />
+          <div className="absolute top-[20%] right-[20%] w-2 h-2 rounded-full bg-[#f48020]/30 animate-pulse" style={{ animationDuration: '4s', animationDelay: '0.5s' }} />
+          <div className="absolute top-[60%] left-[10%] w-4 h-4 rounded-full bg-[#f48020]/50 animate-pulse" style={{ animationDuration: '2.5s', animationDelay: '1s' }} />
+          <div className="absolute top-[80%] right-[15%] w-2.5 h-2.5 rounded-full bg-[#f48020]/35 animate-pulse" style={{ animationDuration: '3.5s' }} />
+
+          {/* Medium dots */}
+          <div className="absolute top-[30%] left-[25%] w-1.5 h-1.5 rounded-full bg-[#f48020]/25 animate-pulse" style={{ animationDuration: '4.5s', animationDelay: '0.3s' }} />
+          <div className="absolute top-[45%] right-[30%] w-3.5 h-3.5 rounded-full bg-[#f48020]/45 animate-pulse" style={{ animationDuration: '3s', animationDelay: '1.5s' }} />
+          <div className="absolute top-[70%] left-[40%] w-2 h-2 rounded-full bg-[#f48020]/20 animate-pulse" style={{ animationDuration: '5s' }} />
+          <div className="absolute top-[15%] right-[40%] w-1 h-1 rounded-full bg-[#f48020]/30 animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '2s' }} />
+
+          {/* Small dots */}
+          <div className="absolute top-[25%] left-[50%] w-1 h-1 rounded-full bg-[#f48020]/20 animate-pulse" style={{ animationDuration: '4s', animationDelay: '0.8s' }} />
+          <div className="absolute top-[55%] right-[25%] w-1.5 h-1.5 rounded-full bg-[#f48020]/35 animate-pulse" style={{ animationDuration: '3s' }} />
+          <div className="absolute top-[85%] left-[30%] w-1 h-1 rounded-full bg-[#f48020]/25 animate-pulse" style={{ animationDuration: '5s', animationDelay: '1.2s' }} />
+          <div className="absolute top-[40%] right-[45%] w-2 h-2 rounded-full bg-[#f48020]/40 animate-pulse" style={{ animationDuration: '4s', animationDelay: '0.5s' }} />
+          <div className="absolute top-[10%] left-[60%] w-1.5 h-1.5 rounded-full bg-[#f48020]/30 animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '1.8s' }} />
+          <div className="absolute top-[65%] right-[10%] w-1 h-1 rounded-full bg-[#f48020]/20 animate-pulse" style={{ animationDuration: '4.5s' }} />
+
+          {/* Extra ambient dots */}
+          <div className="absolute top-[5%] left-[70%] w-2 h-2 rounded-full bg-[#f48020]/15 animate-pulse" style={{ animationDuration: '5s', animationDelay: '2.5s' }} />
+          <div className="absolute top-[50%] left-[80%] w-1 h-1 rounded-full bg-[#f48020]/25 animate-pulse" style={{ animationDuration: '3s', animationDelay: '0.2s' }} />
+          <div className="absolute top-[75%] right-[35%] w-1.5 h-1.5 rounded-full bg-[#f48020]/30 animate-pulse" style={{ animationDuration: '4s', animationDelay: '1s' }} />
+          <div className="absolute top-[35%] left-[5%] w-2.5 h-2.5 rounded-full bg-[#f48020]/40 animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '0.7s' }} />
         </div>
+
+        {/* Subtle radial gradient overlay for depth */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(244,128,32,0.05),transparent_60%)]" />
       </div>
 
       {/* Foreground Content */}

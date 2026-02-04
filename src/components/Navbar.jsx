@@ -202,7 +202,7 @@ const Navbar = () => {
           <div className="hidden lg:flex">
             <Link href="https://calendly.com/syed-ali-turab/30min" target="_blank">
               <button className="flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 font-semibold text-sm uppercase tracking-wide transition-all duration-200 rounded-lg shadow-lg cursor-pointer">
-                <span>Book 1 to 1 Call</span>
+                <span>Let's Talk</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </Link>

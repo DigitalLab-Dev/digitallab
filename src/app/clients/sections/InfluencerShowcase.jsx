@@ -12,7 +12,7 @@ const InfluencerShowcase = () => {
   // Fetch influencers from API
   const fetchInfluencers = async () => {
     try {
-      const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:4000';
+      const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000';
       setLoading(true);
       setError(null);
 
@@ -119,8 +119,8 @@ const InfluencerShowcase = () => {
   }
 
   return (
-    <section 
-    id='creators'
+    <section
+      id='creators'
       className="min-h-screen  bg-black py-20 px-4 sm:px-6 lg:px-8"
       aria-labelledby="influencer-heading"
     >
@@ -173,9 +173,8 @@ const InfluencerShowcase = () => {
               <motion.article
                 key={influencer._id}
                 variants={itemVariants}
-                className={`flex flex-col ${
-                  isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                } items-center gap-12 lg:gap-16`}
+                className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
+                  } items-center gap-12 lg:gap-16`}
               >
                 {/* Image Section */}
                 <div className="relative flex-shrink-0">
@@ -185,7 +184,7 @@ const InfluencerShowcase = () => {
                     className="relative"
                   >
                     {/* Glow Effect */}
-                    <div 
+                    <div
                       className="absolute inset-0 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full blur-md opacity-20"
                       aria-hidden="true"
                     />
@@ -207,9 +206,8 @@ const InfluencerShowcase = () => {
 
                 {/* Content Section */}
                 <div
-                  className={`flex-1 text-center ${
-                    isEven ? 'lg:text-left' : 'lg:text-right'
-                  } max-w-2xl`}
+                  className={`flex-1 text-center ${isEven ? 'lg:text-left' : 'lg:text-right'
+                    } max-w-2xl`}
                 >
                   <motion.h2
                     initial={{ opacity: 0, x: isEven ? -30 : 30 }}
@@ -228,9 +226,8 @@ const InfluencerShowcase = () => {
                       initial={{ opacity: 0, x: isEven ? -30 : 30 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.3, duration: 0.6 }}
-                      className={`flex flex-wrap gap-2 mb-6 ${
-                        isEven ? 'lg:justify-start' : 'lg:justify-end'
-                      } justify-center`}
+                      className={`flex flex-wrap gap-2 mb-6 ${isEven ? 'lg:justify-start' : 'lg:justify-end'
+                        } justify-center`}
                     >
                       {influencer.keywords.map((keyword, idx) => (
                         <span

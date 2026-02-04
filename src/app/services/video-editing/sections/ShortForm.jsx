@@ -1,8 +1,119 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, memo, useCallback } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { Sparkles, TrendingUp } from "lucide-react";
-import Link from "next/link";
+import { Sparkles, TrendingUp, Volume2, VolumeX } from "lucide-react";
+
+// Video card component - moved outside to prevent recreation on parent re-renders
+const VideoCard = memo(({ video, index, isMobile, isInView, mutedStates, onToggleMute }) => {
+  const cardRef = useRef(null);
+  // Larger margin to preload videos before they're visible (aggressive preloading)
+  const isCardInView = useInView(cardRef, { margin: "500px" });
+  const iframeRef = useRef(null);
+
+  // Only auto-play on desktop for first 5 videos when in view
+  const shouldAutoPlay = !isMobile && index < 5 && isCardInView;
+
+  // Handle play/pause based on scroll position
+  useEffect(() => {
+    if (iframeRef.current && !isMobile && index < 5) {
+      const iframe = iframeRef.current;
+      const message = isCardInView ? 'playVideo' : 'pauseVideo';
+      iframe.contentWindow?.postMessage(
+        JSON.stringify({ event: 'command', func: message, args: '' }),
+        '*'
+      );
+    }
+  }, [isCardInView, isMobile, index]);
+
+  // Handle mute/unmute using YouTube iframe API
+  const handleToggleMute = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (iframeRef.current) {
+      const currentMutedState = mutedStates[index];
+      const message = currentMutedState ? 'unMute' : 'mute';
+
+      // Send command to YouTube iframe FIRST
+      iframeRef.current.contentWindow?.postMessage(
+        JSON.stringify({ event: 'command', func: message, args: '' }),
+        '*'
+      );
+
+      // Then update state
+      onToggleMute(index);
+    }
+  }, [index, mutedStates, onToggleMute]);
+
+  return (
+    <motion.article
+      ref={cardRef}
+      key={video._id || index}
+      initial={{ opacity: 0, y: 50, scale: 0.8 }}
+      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{
+        delay: 1.2 + index * 0.1,
+        duration: 0.6,
+        ease: [0.6, 0.05, 0.01, 0.9],
+      }}
+      className="group relative aspect-[9/16]"
+    >
+      {/* Video container */}
+      <div className="relative w-full h-full rounded-2xl overflow-hidden bg-zinc-900">
+        {/* YouTube iframe - static src with enablejsapi */}
+        <iframe
+          ref={iframeRef}
+          src={`https://www.youtube.com/embed/${video.videoId}?${shouldAutoPlay ? 'autoplay=1&' : ''
+            }mute=1&controls=1&loop=1&playlist=${video.videoId
+            }&modestbranding=1&rel=0&playsinline=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
+          title={`Short video ${index + 1}`}
+          allow={shouldAutoPlay ? "autoplay; encrypted-media" : "encrypted-media"}
+          className="w-full h-full object-cover"
+          loading={index < 10 ? "eager" : "lazy"}
+        />
+
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+
+        {/* Unmute button */}
+        <button
+          onClick={handleToggleMute}
+          className="absolute bottom-4 right-4 p-2 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 text-white hover:bg-orange-500 hover:border-orange-500 transition-all duration-300 z-10"
+          aria-label={mutedStates[index] ? "Unmute video" : "Mute video"}
+          type="button"
+        >
+          {mutedStates[index] ? (
+            <VolumeX className="w-5 h-5" />
+          ) : (
+            <Volume2 className="w-5 h-5" />
+          )}
+        </button>
+
+        {/* Corner accents - always visible */}
+        <div className="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-orange-500/50" />
+        <div className="absolute top-2 right-2 w-6 h-6 border-t-2 border-r-2 border-orange-500/50" />
+        <div className="absolute bottom-2 left-2 w-6 h-6 border-b-2 border-l-2 border-orange-500/50" />
+        <div className="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-orange-500/50" />
+      </div>
+
+      {/* Floating number badge */}
+      <motion.div
+        className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-orange-500/50"
+        initial={{ scale: 0, rotate: -180 }}
+        animate={isInView ? { scale: 1, rotate: 0 } : {}}
+        transition={{
+          delay: 1.2 + index * 0.1 + 0.3,
+          type: "spring",
+          stiffness: 200,
+        }}
+      >
+        {index + 1}
+      </motion.div>
+    </motion.article>
+  );
+});
+
+VideoCard.displayName = 'VideoCard';
 
 export default function ShowcasePortfolio() {
   const sectionRef = useRef(null);
@@ -17,6 +128,18 @@ export default function ShowcasePortfolio() {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mutedStates, setMutedStates] = useState({});
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -33,6 +156,12 @@ export default function ShowcasePortfolio() {
         const data = await response.json();
         if (data.success) {
           setVideos(data.videos);
+          // Initialize all videos as muted
+          const initialMutedStates = {};
+          data.videos.forEach((_, index) => {
+            initialMutedStates[index] = true;
+          });
+          setMutedStates(initialMutedStates);
         } else {
           throw new Error(data.message || "Failed to fetch videos");
         }
@@ -45,6 +174,14 @@ export default function ShowcasePortfolio() {
     };
 
     fetchVideos();
+  }, []); // Only run once on mount
+
+  // Memoized toggle function to prevent recreation on every render
+  const handleToggleMute = useCallback((index) => {
+    setMutedStates(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
   }, []);
 
   return (
@@ -88,29 +225,6 @@ export default function ShowcasePortfolio() {
             ease: "easeInOut",
           }}
         />
-
-        {/* Floating particles */}
-        {[...Array(30)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-orange-500/30 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -100, 0],
-              opacity: [0, 1, 0],
-              scale: [0, 1, 0],
-            }}
-            transition={{
-              duration: 5 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
       </div>
 
       <motion.div
@@ -200,6 +314,7 @@ export default function ShowcasePortfolio() {
               className="text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto"
             >
               Scroll-stopping content that racks up millions of views
+              {!isMobile && " · First 4 videos auto-play on desktop"}
             </motion.p>
           </motion.div>
         </header>
@@ -227,58 +342,15 @@ export default function ShowcasePortfolio() {
               className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6"
             >
               {videos?.map((video, index) => (
-                <motion.article
+                <VideoCard
                   key={video._id || index}
-                  initial={{ opacity: 0, y: 50, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                  transition={{
-                    delay: 1.2 + index * 0.1,
-                    duration: 0.6,
-                    ease: [0.6, 0.05, 0.01, 0.9],
-                  }}
-                  className="group relative aspect-[9/16]"
-                >
-                  {/* Video container */}
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden bg-zinc-900">
-                    {/* YouTube iframe - Auto-play when in view */}
-                    <iframe
-                      src={`https://www.youtube.com/embed/${
-                        video.videoId
-                      }?autoplay=${
-                        isInView ? 1 : 0
-                      }&mute=1&controls=0&loop=1&playlist=${
-                        video.videoId
-                      }&modestbranding=1&rel=0&playsinline=1`}
-                      title={`Short video ${index + 1}`}
-                      allow="autoplay; encrypted-media"
-                      className="w-full h-full object-cover"
-                      loading="eager"
-                    />
-
-                    {/* Overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
-
-                    {/* Corner accents - always visible */}
-                    <div className="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-orange-500/50" />
-                    <div className="absolute top-2 right-2 w-6 h-6 border-t-2 border-r-2 border-orange-500/50" />
-                    <div className="absolute bottom-2 left-2 w-6 h-6 border-b-2 border-l-2 border-orange-500/50" />
-                    <div className="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-orange-500/50" />
-                  </div>
-
-                  {/* Floating number badge */}
-                  <motion.div
-                    className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-orange-500/50"
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={isInView ? { scale: 1, rotate: 0 } : {}}
-                    transition={{
-                      delay: 1.2 + index * 0.1 + 0.3,
-                      type: "spring",
-                      stiffness: 200,
-                    }}
-                  >
-                    {index + 1}
-                  </motion.div>
-                </motion.article>
+                  video={video}
+                  index={index}
+                  isMobile={isMobile}
+                  isInView={isInView}
+                  mutedStates={mutedStates}
+                  onToggleMute={handleToggleMute}
+                />
               ))}
             </motion.div>
 
