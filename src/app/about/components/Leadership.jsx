@@ -34,6 +34,14 @@ const Leadership = () => {
         linkedin: 'https://www.linkedin.com/in/sadaqat-mehmood-8b70a9241?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
       }
     },
+    {
+      name: 'Syed Adnan Hamdani',
+      designation: 'CCO',
+      image: 'https://res.cloudinary.com/dt9wziort/image/upload/v1771271558/WhatsApp_Image_2026-02-16_at_18.20.02_oiop8a.jpg',
+      socials: {
+        linkedin: 'https://www.linkedin.com/in/adnan-hassan-b7525515a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+      }
+    }
   ];
 
   useEffect(() => {
@@ -68,11 +76,10 @@ const Leadership = () => {
 
     return (
       <div
-        className={`flex flex-col items-center justify-center gap-3 mt-10 transition-all duration-700 transform ${
-          isVisible
+        className={`flex flex-col items-center justify-center gap-3 mt-10 transition-all duration-700 transform ${isVisible
             ? 'translate-y-0 opacity-100'
             : 'translate-y-12 opacity-0'
-        }`}
+          }`}
         style={{ transitionDelay: `${index * 200}ms` }}
       >
         <div
@@ -94,12 +101,11 @@ const Leadership = () => {
               `)}`;
             }}
           />
-          
+
           {/* Overlay */}
           <div
-            className={`absolute inset-0 bg-opacity-80 flex items-center mt-40 justify-center transition-all duration-300 ${
-              isHovered ? 'opacity-100 visible' : 'opacity-0 invisible'
-            }`}
+            className={`absolute inset-0 bg-opacity-80 flex items-center mt-40 justify-center transition-all duration-300 ${isHovered ? 'opacity-100 visible' : 'opacity-0 invisible'
+              }`}
           >
             <div className="flex gap-4 z-50">
               <button
@@ -114,24 +120,21 @@ const Leadership = () => {
 
           {/* Orange ring on hover */}
           <div
-            className={`absolute inset-0 rounded-full border-4 border-orange-500 transition-all duration-300 pointer-events-none ${
-              isHovered ? 'scale-110 opacity-100' : 'scale-100 opacity-0'
-            }`}
+            className={`absolute inset-0 rounded-full border-4 border-orange-500 transition-all duration-300 pointer-events-none ${isHovered ? 'scale-110 opacity-100' : 'scale-100 opacity-0'
+              }`}
           />
         </div>
 
         <h4
-          className={`text-2xl font-semibold text-white transition-all duration-500 ${
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-          }`}
+          className={`text-2xl font-semibold text-white transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+            }`}
           style={{ transitionDelay: `${index * 200 + 100}ms` }}
         >
           {leader.name}
         </h4>
         <p
-          className={`text-lg italic text-orange-400 transition-all duration-500 ${
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-          }`}
+          className={`text-lg italic text-orange-400 transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+            }`}
           style={{ transitionDelay: `${index * 200 + 200}ms` }}
         >
           {leader.designation}
@@ -141,25 +144,23 @@ const Leadership = () => {
   };
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       id='team'
       className="px-10 py-10 flex items-center justify-center flex-col min-h-screen"
     >
       <h4
-        className={`text-5xl md:text-6xl font-semibold text-white mb-4 transition-all duration-900 transform ${
-          isVisible
+        className={`text-5xl md:text-6xl font-semibold text-white mb-4 transition-all duration-900 transform ${isVisible
             ? 'translate-y-0 opacity-100 scale-100'
             : 'translate-y-12 opacity-0 scale-95'
-        }`}
+          }`}
       >
         OUR{' '}
         <span className="text-orange-500 relative">
           LEADERS
           <div
-            className={`absolute bottom-0 left-0 h-1 bg-orange-500 transition-all duration-1000 ${
-              isVisible ? 'w-full' : 'w-0'
-            }`}
+            className={`absolute bottom-0 left-0 h-1 bg-orange-500 transition-all duration-1000 ${isVisible ? 'w-full' : 'w-0'
+              }`}
             style={{ transitionDelay: '500ms' }}
           />
         </span>
@@ -167,9 +168,8 @@ const Leadership = () => {
 
       {/* Decorative line */}
       <div
-        className={`w-24 h-0.5 bg-orange-500 transition-all duration-800 ${
-          isVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
-        }`}
+        className={`w-24 h-0.5 bg-orange-500 transition-all duration-800 ${isVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
+          }`}
         style={{ transitionDelay: '300ms' }}
       />
 
