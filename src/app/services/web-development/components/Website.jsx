@@ -29,13 +29,13 @@ const Website = ({ image, link }) => {
   };
 
   const containerVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: 50,
-      scale: 0.9 
+      scale: 0.9
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       scale: 1,
       transition: {
@@ -65,11 +65,11 @@ const Website = ({ image, link }) => {
   };
 
   const overlayVariants = {
-    hidden: { 
+    hidden: {
       opacity: 0,
-      scale: 0.8 
+      scale: 0.8
     },
-    visible: { 
+    visible: {
       opacity: 1,
       scale: 1,
       transition: {
@@ -111,14 +111,14 @@ const Website = ({ image, link }) => {
             exit="hidden"
           >
             <div className="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center shadow-xl shadow-orange-500/30">
-              <motion.span 
+              <motion.span
                 className="text-white font-bold text-sm"
-                animate={{ 
+                animate={{
                   scale: [1, 1.1, 1],
                 }}
-                transition={{ 
-                  duration: 1.5, 
-                  repeat: Infinity 
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity
                 }}
               >
                 VIEW
@@ -129,7 +129,7 @@ const Website = ({ image, link }) => {
       </AnimatePresence>
 
       {/* Main Component */}
-      <motion.div 
+      <motion.div
         className="w-full md:w-[45%] h-full group cursor-none"
         variants={containerVariants}
         initial="hidden"
@@ -142,7 +142,7 @@ const Website = ({ image, link }) => {
         {/* Container with glow effect */}
         <div className="relative rounded-2xl overflow-hidden shadow-2xl group-hover:shadow-orange-500/20 transition-shadow duration-500">
           {/* Glow border effect */}
-          <motion.div 
+          <motion.div
             className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"
             style={{ padding: '2px' }}
           >
@@ -150,7 +150,7 @@ const Website = ({ image, link }) => {
           </motion.div>
 
           {/* Image container */}
-          <motion.div 
+          <motion.div
             className="relative rounded-2xl overflow-hidden"
             variants={imageVariants}
             whileHover="hover"
@@ -159,12 +159,12 @@ const Website = ({ image, link }) => {
               src={image}
               width={400}
               height={400}
-              className="w-full h-[80vh] rounded-2xl object-cover"
+              className="w-full h-[40vh] md:h-[80vh] rounded-2xl object-cover object-top"
               alt="Website preview"
             />
 
             {/* Overlay gradient */}
-            <motion.div 
+            <motion.div
               className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"
               variants={overlayVariants}
               initial="hidden"
@@ -183,7 +183,7 @@ const Website = ({ image, link }) => {
                     exit={{ scale: 0, rotate: 90 }}
                     transition={{ duration: 0.3 }}
                   />
-                  
+
                   {/* Bottom accent line */}
                   <motion.div
                     className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-400 to-orange-600"
@@ -203,22 +203,22 @@ const Website = ({ image, link }) => {
                         left: `${20 + i * 15}%`,
                         top: `${30 + (i % 2) * 20}%`,
                       }}
-                      initial={{ 
-                        opacity: 0, 
+                      initial={{
+                        opacity: 0,
                         scale: 0,
-                        y: 20 
+                        y: 20
                       }}
-                      animate={{ 
+                      animate={{
                         opacity: [0.5, 1, 0.5],
                         scale: [0, 1, 0.8],
                         y: [20, 0, -10]
                       }}
-                      exit={{ 
+                      exit={{
                         opacity: 0,
                         scale: 0,
                         y: -20
                       }}
-                      transition={{ 
+                      transition={{
                         duration: 2,
                         delay: i * 0.1,
                         repeat: Infinity,
@@ -244,7 +244,7 @@ const Website = ({ image, link }) => {
         </div>
 
         {/* Reflection effect */}
-        <motion.div 
+        <motion.div
           className="absolute -bottom-20 left-0 right-0 h-20 opacity-20 group-hover:opacity-30 transition-opacity duration-500"
           style={{
             background: 'linear-gradient(to bottom, rgba(251, 146, 60, 0.3), transparent)',

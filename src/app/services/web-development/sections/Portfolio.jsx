@@ -36,12 +36,12 @@ const Portfolio = () => {
     },
   ];
   return (
-    <section id='portfolio' className="py-10 relative">
-      <div className="flex flex-col items-center justify-center">
-        <span className="px-3 py-2 rounded-full text-orange-500 ">
+    <section id='portfolio' className="py-10 relative scroll-mt-20">
+      <div className="flex flex-col items-center justify-center px-4">
+        <span className="px-3 py-2 rounded-full text-orange-500 font-medium tracking-wider">
           PORTFOLIO
         </span>
-        <h3 className="text-6xl  font-semibold md:w-[50%] text-center w-full uppercase">
+        <h3 className="text-4xl md:text-6xl font-semibold md:w-[70%] lg:w-[50%] text-center w-full uppercase leading-tight">
           Some samples of our work
         </h3>
       </div>
