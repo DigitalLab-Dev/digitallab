@@ -20,6 +20,9 @@ const Mission = dynamic(() => import('./components/Mission'), {
 const Leadership = dynamic(() => import('./components/Leadership'), {
   loading: () => null,
 });
+const TopRepresentators = dynamic(() => import('./components/TopRepresentators'), {
+  loading: () => null,
+});
 const Team = dynamic(() => import('./components/Team'), {
   loading: () => null,
 });
@@ -141,6 +144,7 @@ const Page = () => {
         <Para />
         <Mission />
         <Leadership />
+        <TopRepresentators />
         <Team />
       </main>
     </>

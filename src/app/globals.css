@@ -1,8 +1,10 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #000000; /* Jet black */
-  --foreground: #ededed; /* Light gray for readability */
+  --background: #000000;
+  /* Jet black */
+  --foreground: #ededed;
+  /* Light gray for readability */
 }
 
 @theme inline {
@@ -11,27 +13,34 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
   display: none;
 }
-*{
+
+* {
   scroll-behavior: smooth;
 }
-.reset-tw , .reset-tw *{
-   all: revert !important;
+
+.reset-tw,
+.reset-tw * {
+  all: revert !important;
 }
+
 body {
   background: var(--background);
   color: var(--foreground);
   scroll-behavior: smooth;
 }
+
 @font-face {
   font-family: 'Italican';
   src: url('/fonts/Italican.woff2') format('woff2'),
-       url('/fonts/Italican.woff') format('woff');
+    url('/fonts/Italican.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-  font-display: swap; /* Prevent invisible text during font load */
+  font-display: swap;
+  /* Prevent invisible text during font load */
 }
 
 .italican {
@@ -44,6 +53,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -54,6 +64,7 @@ body {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -64,6 +75,7 @@ body {
     opacity: 0;
     transform: scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: scale(1);

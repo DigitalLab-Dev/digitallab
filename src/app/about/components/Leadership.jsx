@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect, useRef } from 'react';
-import { Linkedin } from 'lucide-react';
+import { Linkedin, Globe } from 'lucide-react';
 
 const Leadership = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -14,6 +14,7 @@ const Leadership = () => {
       image: 'https://res.cloudinary.com/dt9wziort/image/upload/v1761466205/ali_r70j25.png',
       socials: {
         linkedin: 'https://www.linkedin.com/in/syed-ali-turab-copywriting-expert?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+        website: 'https://ali.digitallabservices.com/',
       }
     },
     {
@@ -32,14 +33,6 @@ const Leadership = () => {
       image: 'https://res.cloudinary.com/dt9wziort/image/upload/v1761466205/sadaqat_cnvkoe.png',
       socials: {
         linkedin: 'https://www.linkedin.com/in/sadaqat-mehmood-8b70a9241?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-      }
-    },
-    {
-      name: 'Syed Adnan Hamdani',
-      designation: 'CCO',
-      image: 'https://res.cloudinary.com/dt9wziort/image/upload/v1771271558/WhatsApp_Image_2026-02-16_at_18.20.02_oiop8a.jpg',
-      socials: {
-        linkedin: 'https://www.linkedin.com/in/adnan-hassan-b7525515a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
       }
     }
   ];
@@ -139,6 +132,19 @@ const Leadership = () => {
         >
           {leader.designation}
         </p>
+
+        {leader.socials.website && (
+          <a
+            href={leader.socials.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`mt-1 text-sm font-medium text-orange-500 hover:text-orange-400 border-b border-orange-500/30 hover:border-orange-400 transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+              }`}
+            style={{ transitionDelay: `${index * 200 + 300}ms` }}
+          >
+            Know more
+          </a>
+        )}
       </div>
     );
   };

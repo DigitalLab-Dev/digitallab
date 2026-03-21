@@ -191,7 +191,7 @@ const InfluencerShowcase = () => {
 
                     {/* Image */}
                     <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden ring-4 ring-orange-500/30">
-                      <img
+                      <Image
                         src={influencer.pic}
                         alt={`${influencer.name} - Influencer portrait`}
                         fill
