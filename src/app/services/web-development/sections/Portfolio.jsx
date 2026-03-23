@@ -6,7 +6,7 @@ const Portfolio = () => {
       image: '/portfolios/web-development/1.png',
       link: 'https://hci-webapp.vercel.app',
     },
-    {
+  /*  {
       image: '/portfolios/web-development/2.png',
       link: 'https://naqvix.com',
     },
@@ -17,7 +17,7 @@ const Portfolio = () => {
     {
       image: '/portfolios/web-development/4.png',
       link: 'https://getfoodie.io',
-    },
+    },*/
     {
       image: '/portfolios/web-development/5.png',
       link: 'https://chemistryonlinetuition.com',

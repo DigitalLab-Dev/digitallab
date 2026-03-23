@@ -38,7 +38,7 @@ const caseStudies = [
     ],
     tags: ["Video Editing", "Content Strategy", "YouTube Channel Management"]
   },
-  {
+  /*{
     id: 3,
     clientName: "Naqvix",
     clientLogo: "https://res.cloudinary.com/dt9wziort/image/upload/v1761591453/logo_xu3dy6.png",
@@ -54,7 +54,7 @@ const caseStudies = [
       { label: "Client Feedback", value: "5★", icon: Award, color: "text-amber-400" }
     ],
     tags: ["Web Design", "Web Development", "SEO Optimization"]
-  },
+  },*/
 ];
 
 const CaseStudyCard = React.memo(({ study, index, hoveredMetric, setHoveredMetric }) => {
