@@ -21,7 +21,7 @@ const caseStudies = [
     ],
     tags: ["Branding", "Social Media Management", "Store Optimization", "Shopify"]
   },
-  {
+ n.       {
     id: 2,
     clientName: "Treble Health",
     clientLogo: "https://res.cloudinary.com/dt9wziort/image/upload/v1761591519/logo9_u5siw4.png",

@@ -311,6 +311,12 @@ const Footer = () => {
                   Policies
                 </Link>
                 <Link
+                  href="/refund-policy"
+                  className="hover:text-orange-500 transition-colors duration-300"
+                >
+                  Refund Policy
+                </Link>
+                <Link
                   href="/terms"
                   className="hover:text-orange-500 transition-colors duration-300"
                 >
