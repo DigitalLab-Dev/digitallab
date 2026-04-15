@@ -2,10 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  FaShieldAlt,
-  FaCheckCircle,
-  FaHandshake,
   FaClipboardCheck,
+  FaHandshake,
+  FaCheckCircle,
   FaGem,
   FaHistory,
   FaExchangeAlt,
@@ -13,18 +12,17 @@ import {
   FaInfoCircle,
   FaExclamationCircle,
   FaHeadset,
-  FaEnvelope
+  FaEnvelope,
+  FaLaptopCode
 } from 'react-icons/fa';
 
 const RefundPolicy = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate content loading
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-
     return () => clearTimeout(timer);
   }, []);
 
@@ -40,9 +38,34 @@ We are committed to delivering measurable results and ensuring client satisfacti
 This policy outlines the conditions for refunds, returns, exchanges, and the mandatory turnaround times for processing refund requests to ensure clarity and trust.`
     },
     {
+      id: 'saas-credits',
+      icon: FaLaptopCode,
+      title: 'SaaS Product Credit Refunds',
+      content: `Digital Lab SaaS Products — Credit Refund Policy:
+
+100% Credit Refund Guarantee:
+• If you have purchased credits for any of our SaaS products and have NOT used them, you are eligible for a full 100% refund
+• No questions asked — unused credits are fully refundable
+• Refund requests for unused credits are processed within 7 business days
+
+Partial Credit Usage:
+• If some credits have been used, only the unused portion is eligible for refund
+• Used credits are non-refundable as the service has been consumed
+• Credit usage history is available in your dashboard for transparency
+
+How to Claim SaaS Credit Refund:
+1. Log into your Digital Lab SaaS account
+2. Navigate to Billing → Credit History
+3. Email info@digitallabservices.com with subject: "CREDIT REFUND REQUEST"
+4. Include your account email and credit purchase reference
+5. Refund will be processed to your original payment method
+
+Note: This refund policy applies to credits only. SaaS subscription fees are governed by the cancellation terms in our Terms & Conditions.`
+    },
+    {
       id: 'eligibility',
       icon: FaClipboardCheck,
-      title: 'Refund Eligibility Conditions',
+      title: 'Refund Eligibility — Digital Services',
       content: `Eligible for Full Refund
 Before Service Commencement
 • Cancellation 48+ hours before the agreed start date
@@ -82,7 +105,7 @@ Non-Refundable Services
       id: 'service-specific',
       icon: FaGem,
       title: 'Service-Specific Refund Policies',
-      content: `**Brand Building & Social Media Management**
+      content: `Brand Building & Social Media Management
 • Setup Phase: Full refund if cancelled before onboarding
 • Ongoing Management: 30-day notice with pro-rated refunds
 • Performance Issues: Service revisions or partial refunds
@@ -147,13 +170,15 @@ Exchange Conditions
 • Request before 25% project completion
 • Price difference adjustment
 • Revised timeline agreement
-• Written confirmation required`
+• Written confirmation required
+
+Note: Whenever any application is eligible for a refund under this policy, it will automatically be reflected in our Return Policy as well.`
     },
     {
       id: 'how-to-request',
       icon: FaQuestionCircle,
       title: 'How to Request a Refund',
-      content: `1. Submit Request: Email us at info@digitallabservices.com with subject: “REFUND REQUEST”
+      content: `1. Submit Request: Email us at info@digitallabservices.com with subject: "REFUND REQUEST"
 2. Provide Details: Include service details, reason, and supporting information
 3. Review Process: Our team reviews within 3 business days
 4. Decision & Processing: Refund processed within 7–14 business days if approved`
@@ -181,12 +206,12 @@ Refund Details
 • Flexible rescheduling
 • Service credits for delays
 
-**International Clients**
+International Clients
 • Currency conversion based on current rates
 • Possible deduction of transaction fees
 • Processing time up to 21 business days
 
-**Dispute Resolution**
+Dispute Resolution
 If you disagree with a decision:
 • Escalate via info@digitallabservices.com
 • Provide additional documentation
@@ -198,9 +223,12 @@ If you disagree with a decision:
       title: 'Contact Information',
       content: `Company: Digital Lab
 Email: info@digitallabservices.com
-Phone: +92 3265929677
-Location: Ali hussain abad, Lahore, pakistan
-Working Hours: Monday – Friday, 9:00 AM – 6:00 PM (PKT)`
+Phone: +92 326 5929677
+Location: Ali Hussain Abad, Lahore, Pakistan
+Working Hours: Monday – Friday, 9:00 AM – 6:00 PM (PKT)
+
+Last Updated: April 2026
+Effective Date: April 15, 2026`
     }
   ];
 
@@ -215,37 +243,25 @@ Working Hours: Monday – Friday, 9:00 AM – 6:00 PM (PKT)`
       const offset = 100;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
   };
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Animated Background */}
       <div className="fixed inset-0 pointer-events-none">
         <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.05, 0.1, 0.05],
-          }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.1, 0.05] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute top-20 left-10 w-96 h-96 bg-orange-500 rounded-full blur-3xl"
         />
         <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.03, 0.08, 0.03],
-          }}
+          animate={{ scale: [1, 1.3, 1], opacity: [0.03, 0.08, 0.03] }}
           transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
           className="absolute bottom-20 right-10 w-80 h-80 bg-orange-600 rounded-full blur-3xl"
         />
       </div>
 
-      {/* Loading Screen */}
       <AnimatePresence>
         {isLoading && (
           <motion.div
@@ -272,14 +288,12 @@ Working Hours: Monday – Friday, 9:00 AM – 6:00 PM (PKT)`
         )}
       </AnimatePresence>
 
-      {/* Main Content */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoading ? 0 : 1 }}
         transition={{ duration: 0.5 }}
         className="relative z-10"
       >
-        {/* Hero Section */}
         <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
@@ -306,7 +320,7 @@ Working Hours: Monday – Friday, 9:00 AM – 6:00 PM (PKT)`
               transition={{ delay: 0.4 }}
               className="text-xl text-gray-400 mb-8"
             >
-              Transparent refund, return, and exchange conditions for all our services.
+              Transparent refund, return, and exchange conditions for all our services and SaaS products.
             </motion.p>
 
             <motion.div
@@ -321,7 +335,6 @@ Working Hours: Monday – Friday, 9:00 AM – 6:00 PM (PKT)`
           </div>
         </section>
 
-        {/* Table of Contents */}
         <section className="py-12 px-4 sm:px-6 lg:px-8 border-y border-white/10">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-2xl font-bold mb-6 text-center">Table of Contents</h2>
@@ -344,7 +357,6 @@ Working Hours: Monday – Friday, 9:00 AM – 6:00 PM (PKT)`
           </div>
         </section>
 
-        {/* Content Sections */}
         <section className="py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto space-y-12">
             {sections.map((section, index) => (
@@ -358,21 +370,14 @@ Working Hours: Monday – Friday, 9:00 AM – 6:00 PM (PKT)`
                 className="relative"
               >
                 <div className="p-8 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:border-orange-500/30 transition-all duration-300">
-                  {/* Icon */}
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     className="inline-flex items-center justify-center w-14 h-14 bg-orange-500/20 rounded-xl mb-6"
                   >
                     <section.icon className="text-2xl text-orange-500" />
                   </motion.div>
-
-                  {/* Title */}
-                  <h3 className="text-3xl font-bold mb-4 text-white">
-                    {section.title}
-                  </h3>
-
-                  {/* Content */}
-                  <div className="text-gray-300 leading-relaxed whitespace-pre-line prose prose-invert max-w-none">
+                  <h3 className="text-3xl font-bold mb-4 text-white">{section.title}</h3>
+                  <div className="text-gray-300 leading-relaxed whitespace-pre-line">
                     {section.content.split('\n').map((line, i) => {
                        if (line.startsWith('### ')) {
                          return <h4 key={i} className="text-2xl font-semibold text-white mt-6 mb-3">{line.replace('### ', '')}</h4>;
@@ -385,7 +390,6 @@ Working Hours: Monday – Friday, 9:00 AM – 6:00 PM (PKT)`
                   </div>
                 </div>
 
-                {/* Decorative line */}
                 {index < sections.length - 1 && (
                   <div className="mt-12 flex items-center gap-4">
                     <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
@@ -398,7 +402,6 @@ Working Hours: Monday – Friday, 9:00 AM – 6:00 PM (PKT)`
           </div>
         </section>
 
-        {/* CTA Section */}
         <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-white/10">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div

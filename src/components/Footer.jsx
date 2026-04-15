@@ -305,19 +305,19 @@ const Footer = () => {
               </p>
               <nav className="flex gap-6" aria-label="Legal links">
                 <Link
-                  href="/policies"
+                  href="/legal"
                   className="hover:text-orange-500 transition-colors duration-300"
                 >
-                  Policies
+                  Legal
                 </Link>
                 <Link
-                  href="/refund-policy"
+                  href="/legal/privacy-policy"
                   className="hover:text-orange-500 transition-colors duration-300"
                 >
-                  Refund Policy
+                  Privacy Policy
                 </Link>
                 <Link
-                  href="/terms"
+                  href="/legal/terms-of-service"
                   className="hover:text-orange-500 transition-colors duration-300"
                 >
                   Terms of Service
