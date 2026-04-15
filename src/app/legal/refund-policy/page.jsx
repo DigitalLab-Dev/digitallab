@@ -415,13 +415,15 @@ Effective Date: April 15, 2026`
                 If you have any questions or would like to request a refund, please contact our support team.
               </p>
               <motion.a
-                href="mailto:info@digitallabservices.com"
+                href="https://calendly.com/syed-ali-turab/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-orange-500 hover:bg-orange-600 rounded-lg font-semibold transition-colors duration-300"
               >
                 <FaEnvelope />
-                Contact Support Team
+                Book Appointment
               </motion.a>
             </motion.div>
           </div>

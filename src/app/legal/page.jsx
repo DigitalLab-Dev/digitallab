@@ -329,13 +329,15 @@ const LegalPage = () => {
                 If you have any questions, concerns, or need clarification about any of our legal documents, our team is here to help.
               </p>
               <motion.a
-                href="mailto:info@digitallabservices.com"
+                href="https://calendly.com/syed-ali-turab/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-orange-500 hover:bg-orange-600 rounded-lg font-semibold transition-colors duration-300"
               >
                 <FaArrowRight />
-                Contact Our Team
+                Book Appointment
               </motion.a>
             </motion.div>
           </div>

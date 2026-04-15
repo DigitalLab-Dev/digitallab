@@ -306,10 +306,10 @@ Effective Date: April 15, 2026`
               className="p-8 bg-gradient-to-br from-orange-500/10 to-orange-600/10 border border-orange-500/20 rounded-2xl">
               <h3 className="text-3xl font-bold mb-4">Need Assistance?</h3>
               <p className="text-gray-400 mb-6">If you have questions about our exchange policy or need help with alternatives, we're here for you.</p>
-              <motion.a href="mailto:info@digitallabservices.com" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+              <motion.a href="https://calendly.com/syed-ali-turab/30min" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-orange-500 hover:bg-orange-600 rounded-lg font-semibold transition-colors duration-300">
                 <FaEnvelope />
-                Contact Support Team
+                Book Appointment
               </motion.a>
             </motion.div>
           </div>

@@ -285,10 +285,10 @@ Effective Date: April 15, 2026`
               <p className="text-gray-400 mb-6">
                 Returns are processed automatically with approved refunds. Contact us if you have questions.
               </p>
-              <motion.a href="mailto:info@digitallabservices.com" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+              <motion.a href="https://calendly.com/syed-ali-turab/30min" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-orange-500 hover:bg-orange-600 rounded-lg font-semibold transition-colors duration-300">
                 <FaEnvelope />
-                Contact Support Team
+                Book Appointment
               </motion.a>
             </motion.div>
           </div>
