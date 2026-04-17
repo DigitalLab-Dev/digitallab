@@ -32,9 +32,14 @@ const Footer = () => {
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about' },
     { name: 'Services', href: '/services' },
+    { name: 'Products', href: '/products' },
     { name: 'Clients', href: '/clients' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
+  ];
+
+  const products = [
+    { name: 'RestCart — Restaurant OS', href: '/products/restcart' },
   ];
 
   const services = [
@@ -217,7 +222,32 @@ const Footer = () => {
               </nav>
             </motion.div>
 
-            {/* Newsletter - Spans 4 columns */}
+            {/* Products - Spans 2 columns */}
+            <motion.div
+              className="lg:col-span-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+            >
+              <h4 className="text-lg font-bold text-white mb-6">Our Products</h4>
+              <nav className="space-y-3" aria-label="Products navigation">
+                {products.map((product, index) => (
+                  <Link
+                    key={index}
+                    href={product.href}
+                    className="block text-gray-400 hover:text-orange-500 hover:translate-x-2 transition-all duration-300 text-sm"
+                  >
+                    {product.name}
+                  </Link>
+                ))}
+                <div className="pt-2">
+                  <span className="inline-flex items-center gap-1 text-xs text-gray-600 bg-white/5 border border-white/10 rounded-full px-3 py-1">
+                    More coming soon
+                  </span>
+                </div>
+              </nav>
+            </motion.div>
             <motion.div
               className="lg:col-span-4"
               initial={{ opacity: 0, y: 20 }}

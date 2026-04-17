@@ -64,6 +64,7 @@ const Navbar = () => {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
+    { name: 'Products', href: '/products' },
     { name: 'Clients', href: '/clients' },
     { name: 'Team', href: '/about#team' },
     { name: 'Blogs', href: '/blogs' },
@@ -87,6 +88,9 @@ const Navbar = () => {
   const isActive = (href) => {
     if (href === '/services') {
       return pathname.startsWith('/services');
+    }
+    if (href === '/products') {
+      return pathname.startsWith('/products');
     }
     return pathname === href;
   };

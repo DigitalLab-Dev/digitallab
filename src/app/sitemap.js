@@ -29,6 +29,8 @@ export default async function sitemap() {
     '/services/social-media-management',
     '/services/video-editing',
     '/services/web-development',
+    '/products',
+    '/products/restcart',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
