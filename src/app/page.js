@@ -5,6 +5,7 @@ import WhyUs from './home/components/WhyUs';
 import Methods from './home/components/Methods';
 import Stats from './home/components/Stats';
 import Testimonials from './home/components/Testimonials';
+import FAQSection from './home/components/FAQSection';
 import AnimatedCTA from './home/components/AnimatedCTA';
 
 // Proper metadata export for Next.js App Router
@@ -54,6 +55,7 @@ export default function Home() {
       <Methods />
       <Stats />
       <Testimonials />
+      <FAQSection />
       <AnimatedCTA />
     </main>
   );
