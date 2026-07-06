@@ -9,7 +9,7 @@ const Stats = () => {
     {
       stat: 256,
       label: 'Projects Delivered',
-      para: 'You’re joining 250+ businesses who’ve launched successful projects with us, and we’re ready to build yours next.',
+      para: 'You’re joining 500+ projects launched successfully with us, and we’re ready to build yours next.',
     },
     {
       stat: 90,

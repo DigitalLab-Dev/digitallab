@@ -39,6 +39,9 @@ const ServicesSection = dynamic(() => import('./sections/ServicesSection'), {
 const Portfolio = dynamic(() => import('./sections/Portfolio'), {
   loading: () => null,
 });
+const FAQSection = dynamic(() => import('./sections/FAQSection'), {
+  loading: () => null,
+});
 const WebsiteCTA = dynamic(() => import('./sections/WebsiteCTA'), {
   loading: () => null,
 });
@@ -96,6 +99,7 @@ const Page = () => {
         <WhyNeedThis/>
         <ServicesSection/>
         <Portfolio/>
+        <FAQSection/>
         <WebsiteCTA/>
         
       </main>

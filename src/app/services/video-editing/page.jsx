@@ -24,6 +24,9 @@ const ShowcasePortfolio = dynamic(
 const LongFormShowcase = dynamic(() => import('./sections/LongFormShowcase'), {
   loading: () => null,
 });
+const FAQSection = dynamic(() => import('./sections/FAQSection'), {
+  loading: () => null,
+});
 export default function VideoPage() {
   const [loading, setLoading] = useState(true);
   const [contentLoaded, setContentLoaded] = useState(false);
@@ -76,6 +79,8 @@ export default function VideoPage() {
 
         {/* Influencer Showcase - Featured Clients/Influencers */}
         <LongFormShowcase />
+
+        <FAQSection />
       </main>
     </>
   );

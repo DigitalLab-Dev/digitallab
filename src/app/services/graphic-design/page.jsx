@@ -17,6 +17,9 @@ const DesignMattersComponent = dynamic(
 const Gallery = dynamic(() => import('./components/Gallery'), {
   loading: () => null,
 });
+const FAQSection = dynamic(() => import('./components/FAQSection'), {
+  loading: () => null,
+});
 const CTASection = dynamic(() => import('./components/CTASection'), {
   loading: () => null,
 });
@@ -75,6 +78,7 @@ const Page = () => {
         <Hero />
         <DesignMattersComponent />
         <Gallery />
+        <FAQSection />
         <CTASection />
       </main>
     </>

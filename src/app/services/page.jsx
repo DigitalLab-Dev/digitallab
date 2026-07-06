@@ -2,8 +2,45 @@
 
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import Head from 'next/head';
 import Loader from '@/components/Loader';
+
+const servicesSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Digital Marketing Services',
+  provider: {
+    '@type': 'Organization',
+    name: 'Digital Lab',
+  },
+  areaServed: 'Worldwide',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Digital Marketing Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'SEO Services',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Content Marketing',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Social Media Marketing',
+        },
+      },
+    ],
+  },
+};
 
 // Dynamic imports for better code splitting and performance
 const HeroSection = dynamic(() => import('./components/HeroSection'), {
@@ -44,82 +81,10 @@ export default function ServicesPage() {
 
   return (
     <>
-      <Head>
-        {/* SEO Meta Tags */}
-        <title>Our Services | Digital Lab - Comprehensive Digital Marketing Solutions</title>
-        <meta
-          name="description"
-          content="Explore Digital Lab's comprehensive digital marketing services. From SEO and content marketing to social media management and web development - we've got you covered."
-        />
-        <meta
-          name="keywords"
-          content="digital marketing services, SEO services, content marketing, social media marketing, web development, graphic design, video production, marketing agency"
-        />
-
-        {/* Open Graph Tags */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Digital Marketing Services | Digital Lab" />
-        <meta
-          property="og:description"
-          content="Comprehensive digital marketing solutions tailored to your business needs. Explore our full range of services."
-        />
-        <meta property="og:url" content="https://yourwebsite.com/services" />
-        <meta property="og:image" content="https://yourwebsite.com/services-og-image.jpg" />
-
-        {/* Twitter Card Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Digital Marketing Services | Digital Lab" />
-        <meta
-          name="twitter:description"
-          content="Comprehensive digital marketing solutions for modern businesses."
-        />
-        <meta name="twitter:image" content="https://yourwebsite.com/services-twitter-image.jpg" />
-
-        {/* Additional SEO */}
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.digitallabservices.com/services" />
-
-        {/* Schema.org structured data */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "serviceType": "Digital Marketing Services",
-            "provider": {
-              "@type": "Organization",
-              "name": "Digital Lab"
-            },
-            "areaServed": "Worldwide",
-            "hasOfferCatalog": {
-              "@type": "OfferCatalog",
-              "name": "Digital Marketing Services",
-              "itemListElement": [
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "SEO Services"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Content Marketing"
-                  }
-                },
-                {
-                  "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Social Media Marketing"
-                  }
-                }
-              ]
-            }
-          })}
-        </script>
-      </Head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
+      />
 
       {/* Loader Overlay with Fade Animation */}
       {loading && (

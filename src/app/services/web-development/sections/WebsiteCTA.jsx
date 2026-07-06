@@ -687,7 +687,7 @@ const WebsiteCTA = () => {
                   </h3>
 
                   <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-6">
-                    Join 500+ satisfied clients who trust us with their digital
+                    Join 100+ satisfied clients who trust us with their digital
                     presence. Let's create something amazing together.
                   </p>
 

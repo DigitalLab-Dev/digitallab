@@ -1,100 +1,142 @@
-'use client';
-
-import React, { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import BlogImageGallery from '../components/BlogImageGallery';
 import MarkdownRenderer from '@/utils/MarkdownRenderer';
-import SingleBlogLoading from '../components/SingleBlogLanding';
-import ErrorDisplay from '@/components/ErrorDisplay';
 import { blogApi } from '@/utils/blogApi';
 
-const IndividualBlogPage = () => {
-  const params = useParams();
-  const router = useRouter();
-  const blogId = Array.isArray(params.slug) ? params.slug[0] : params.slug;
+const SITE_URL = 'https://www.digitallabservices.com';
 
-  const [blog, setBlog] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+// Revalidate a rendered post's cached HTML periodically (ISR) so edits
+// made in the CMS show up without a full redeploy.
+export const revalidate = 3600;
 
-  // Fetch blog data
-  useEffect(() => {
-    const fetchBlog = async () => {
-      if (!blogId) {
-        setError(new Error('Blog ID not found'));
-        setLoading(false);
-        return;
-      }
+function resolveSlug(slug) {
+  return Array.isArray(slug) ? slug[0] : slug;
+}
 
-      try {
-        setLoading(true);
-        setError(null);
-
-        const blogData = await blogApi.getBlogById(blogId);
-        setBlog(blogData);
-      } catch (err) {
-        setError(err);
-        console.error('Error fetching blog:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBlog();
-  }, [blogId]);
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  };
-
-  // Handle retry
-  const handleRetry = () => {
-    window.location.reload();
-  };
-
-  // Loading state
-  if (loading) {
-    return <SingleBlogLoading />;
+async function getBlog(slug) {
+  try {
+    return await blogApi.getBlogById(slug);
+  } catch (error) {
+    return null;
   }
+}
 
-  if (error) {
-    return (
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <ErrorDisplay error={error} onRetry={handleRetry} />
-      </div>
-    );
+export async function generateStaticParams() {
+  try {
+    const { blogs } = await blogApi.getBlogs({ limit: 1000 });
+    if (!Array.isArray(blogs)) return [];
+    return blogs
+      .filter((blog) => blog.slug)
+      .map((blog) => ({ slug: [blog.slug] }));
+  } catch (error) {
+    console.warn('⚠️ generateStaticParams: failed to fetch blogs, falling back to on-demand rendering.', error.message);
+    return [];
   }
+}
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const blog = await getBlog(resolveSlug(slug));
 
   if (!blog) {
-    return (
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            Blog Not Found
-          </h1>
-          <p className="text-gray-600 mb-8">
-            The blog you're looking for doesn't exist.
-          </p>
-          <button
-            onClick={() => router.push('/blogs')}
-            className="px-6 py-3 bg-gradient-to-r from-black to-orange-600 text-white font-medium rounded-lg hover:from-gray-900 hover:to-orange-700 transition-all"
-          >
-            Back to Blogs
-          </button>
-        </div>
-      </div>
-    );
+    return {
+      title: 'Blog Post Not Found | Digital Lab',
+      description: 'The blog post you are looking for could not be found.',
+    };
   }
+
+  const url = `${SITE_URL}/blogs/${blog.slug}`;
+  const title = `${blog.title} | Digital Lab Blog`;
+  const description = blog.excerpt || blog.title;
+  const image = blog.images?.[0]?.url;
+
+  return {
+    title,
+    description,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      type: 'article',
+      locale: 'en_US',
+      url,
+      title,
+      description,
+      siteName: 'DigitalLab Services',
+      publishedTime: blog.createdAt,
+      modifiedTime: blog.updatedAt,
+      ...(image && { images: [{ url: image }] }),
+    },
+    twitter: {
+      card: image ? 'summary_large_image' : 'summary',
+      title,
+      description,
+      ...(image && { images: [image] }),
+    },
+  };
+}
+
+const formatDate = (dateString) =>
+  new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+const IndividualBlogPage = async ({ params }) => {
+  const { slug } = await params;
+  const blog = await getBlog(resolveSlug(slug));
+
+  if (!blog) {
+    notFound();
+  }
+
+  const url = `${SITE_URL}/blogs/${blog.slug}`;
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: blog.title,
+    description: blog.excerpt,
+    datePublished: blog.createdAt,
+    dateModified: blog.updatedAt || blog.createdAt,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
+    },
+    author: {
+      '@type': 'Organization',
+      name: 'Digital Lab',
+      url: SITE_URL,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Digital Lab',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/android-chrome-512x512.png`,
+      },
+    },
+    ...(blog.images?.length && {
+      image: blog.images.map((img) => img.url),
+    }),
+  };
 
   return (
     <article className="max-w-4xl mx-auto px-4 py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+
       {/* Back Button */}
-      <button
-        onClick={() => router.push('/blogs')}
-        className="flex items-center gap-2 mb-8 text-slate-500 hover:text-slate-400 transition-colors group"
+      <Link
+        href="/blogs"
+        className="flex items-center gap-2 mb-8 text-slate-500 hover:text-slate-400 transition-colors group w-fit"
       >
         <svg
           className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform"
@@ -110,7 +152,7 @@ const IndividualBlogPage = () => {
           />
         </svg>
         Back to Blogs
-      </button>
+      </Link>
 
       {/* Blog Header */}
       <header className="mb-8">
@@ -125,8 +167,8 @@ const IndividualBlogPage = () => {
 
         {/* Title */}
         <h1
-          className="text-[7vw] text-center lg:text-left md:text-[4.25vw] font-extrabold leading-tight 
-            bg-gradient-to-r from-neutral-300 via-orange-500 to-orange-700 
+          className="text-[7vw] text-center lg:text-left md:text-[4.25vw] font-extrabold leading-tight
+            bg-gradient-to-r from-neutral-300 via-orange-500 to-orange-700
             bg-clip-text text-transparent
             "
         >
@@ -134,7 +176,7 @@ const IndividualBlogPage = () => {
         </h1>
 
         {/* Subtitle */}
-        {blog.subtitle && (
+        {blog.excerpt && (
           <h2 className="text-xl lg:text-2xl text-slate-600 font-medium  leading-relaxed mb-6">
             {blog.excerpt}
           </h2>
@@ -211,12 +253,12 @@ const IndividualBlogPage = () => {
             )}
           </div>
 
-          <button
-            onClick={() => router.push('/blogs')}
-            className="self-start sm:self-auto px-6 py-2 bg-orange-100 hover:bg-orange-200 text-orange-700 cursor-pointer font-medium rounded-lg transition-colors"
+          <Link
+            href="/blogs"
+            className="self-start sm:self-auto px-6 py-2 bg-orange-100 hover:bg-orange-200 text-orange-700 cursor-pointer font-medium rounded-lg transition-colors w-fit"
           >
             ← More Articles
-          </button>
+          </Link>
         </div>
       </footer>
     </article>

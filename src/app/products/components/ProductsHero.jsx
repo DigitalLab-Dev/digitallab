@@ -76,7 +76,7 @@ export default function ProductsHero() {
         >
           {[
             { label: 'Countries', value: '10+' },
-            { label: 'Happy Clients', value: '500+' },
+            { label: 'Happy Clients', value: '100+' },
             { label: 'Products Launched', value: '1' },
             { label: 'Setup Time', value: '24hrs' },
           ].map((stat) => (
