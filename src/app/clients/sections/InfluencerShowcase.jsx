@@ -1,45 +1,13 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Star, Tag, Loader2, AlertCircle, RefreshCw } from 'lucide-react';
+import { Star, Tag } from 'lucide-react';
 import Image from 'next/image';
 
-const InfluencerShowcase = () => {
-  const [influencers, setInfluencers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // Fetch influencers from API
-  const fetchInfluencers = async () => {
-    try {
-      const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000';
-      setLoading(true);
-      setError(null);
-
-      const response = await fetch(`${API_URL}/api/influencers`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch influencers: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      setInfluencers(data);
-    } catch (err) {
-      console.error('Error fetching influencers:', err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchInfluencers();
-  }, []);
+const InfluencerShowcase = ({ initialInfluencers = [] }) => {
+  // Influencer data is fetched server-side (see page.jsx) so it's present
+  // in the initial HTML instead of behind a client-side loading state.
+  const influencers = initialInfluencers;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -66,40 +34,6 @@ const InfluencerShowcase = () => {
       },
     },
   };
-
-  // Loading State
-  if (loading) {
-    return (
-      <section className="min-h-screen bg-black py-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-        <div className="text-center">
-          <Loader2 className="w-12 h-12 text-orange-500 animate-spin mx-auto mb-4" />
-          <p className="text-white/70 text-lg">Loading influencers...</p>
-        </div>
-      </section>
-    );
-  }
-
-  // Error State
-  if (error) {
-    return (
-      <section className="min-h-screen bg-black py-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-        <div className="text-center max-w-md">
-          <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-white mb-2">
-            Failed to Load Influencers
-          </h3>
-          <p className="text-white/70 mb-6">{error}</p>
-          <button
-            onClick={fetchInfluencers}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition-colors duration-300"
-          >
-            <RefreshCw className="w-4 h-4" />
-            Retry
-          </button>
-        </div>
-      </section>
-    );
-  }
 
   // Empty State
   if (influencers.length === 0) {

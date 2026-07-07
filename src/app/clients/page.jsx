@@ -1,98 +1,58 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
-import Loader from '@/components/Loader';
+import ClientsPageClient from './ClientsPageClient';
 
-// Dynamic imports for better code splitting
-const ClientsHeroSection = dynamic(() => import('./sections/ClientsHero'), {
-  loading: () => null,
-});
-const LogoCloudSection = dynamic(() => import('./sections/LogoCloudSection'), {
-  loading: () => null,
-});
-const CaseStudiesSection = dynamic(
-  () => import('./sections/CaseStudiesSection'),
-  {
-    loading: () => null,
+// Revalidate periodically (ISR) so newly-approved reviews/influencers show
+// up without a full redeploy, while still SSR-ing real content on first load.
+export const revalidate = 3600;
+
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:4000';
+
+async function fetchInfluencers() {
+  try {
+    const response = await fetch(`${BACKEND_URL}/api/influencers`);
+    if (!response.ok) return [];
+    const data = await response.json();
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.warn('⚠️ Failed to fetch /api/influencers for SSR:', error.message);
+    return [];
   }
-);
-const InfluencerShowcase = dynamic(
-  () => import('./sections/InfluencerShowcase'),
-  {
-    loading: () => null,
+}
+
+async function fetchTestimonials() {
+  try {
+    const response = await fetch(`${BACKEND_URL}/api/review/approved`);
+    if (!response.ok) return [];
+    const data = await response.json();
+    if (!Array.isArray(data)) return [];
+
+    return data.map((review) => ({
+      id: review._id,
+      name: review.name,
+      title: review.role,
+      review: review.review,
+      image:
+        review.image ||
+        `https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=ea580c&color=fff&size=150`,
+      rating: 5,
+      email: review.email,
+    }));
+  } catch (error) {
+    console.warn('⚠️ Failed to fetch /api/review/approved for SSR:', error.message);
+    return [];
   }
-);
-const TestimonialCarousel = dynamic(() => import('./sections/Testimonial'), {
-  loading: () => null,
-});
-const CtaSectionAnimated = dynamic(() => import('./sections/ClientCta'), {
-  loading: () => null,
-});
+}
 
-export default function Clients() {
-  const [loading, setLoading] = useState(true);
-  const [contentLoaded, setContentLoaded] = useState(false);
-
-
-  useEffect(() => {
-    const handleLoad = () => {
-      setTimeout(() => {
-        setContentLoaded(true);
-        setTimeout(() => setLoading(false), 300);
-      }, 500);
-    };
-
-    if (document.readyState === 'complete') {
-      handleLoad();
-    } else {
-      window.addEventListener('load', handleLoad);
-      return () => window.removeEventListener('load', handleLoad);
-    }
-  }, []);
-
-
-
-
+export default async function Clients() {
+  const [influencers, testimonials] = await Promise.all([
+    fetchInfluencers(),
+    fetchTestimonials(),
+  ]);
 
   return (
-    <>
-      {loading && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-500"
-          style={{
-            opacity: loading ? 1 : 0,
-            pointerEvents: loading ? 'auto' : 'none',
-          }}
-          aria-label="Loading content"
-          role="status"
-        >
-          <Loader />
-        </div>
-      )}
-
-      {/* Main Content */}
-      <main
-        className={`relative transition-opacity duration-700 ${
-          contentLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{ minHeight: '100vh' }}
-      >
-        {/* Hero Section */}
-        <ClientsHeroSection />
-        {/* Case Studies - Detailed Project Showcases */}
-        <CaseStudiesSection />
-        {/* Logo Cloud - Client Logos */}
-        <LogoCloudSection />
-
-        {/* Influencer Showcase - Featured Clients/Influencers */}
-        <InfluencerShowcase />
-
-        {/* Testimonials - Client Reviews */}
-        <TestimonialCarousel />
-        {/* Call to Action - Contact/Consultation */}
-        <CtaSectionAnimated />
-        
-      </main>
-    </>
+    <ClientsPageClient
+      initialInfluencers={influencers}
+      initialTestimonials={testimonials}
+    />
   );
 }

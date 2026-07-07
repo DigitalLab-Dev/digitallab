@@ -3,13 +3,14 @@ import  { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Quote,  X, MessageCircle, Upload, Loader, CheckCircle, AlertCircle } from 'lucide-react';
 
-const TestimonialCarousel = () => {
+const TestimonialCarousel = ({ initialTestimonials = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [testimonials, setTestimonials] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // Testimonials are fetched server-side (see page.jsx) so they're present
+  // in the initial HTML instead of behind a client-side loading state.
+  const testimonials = initialTestimonials;
   const [submitting, setSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null); 
+  const [submitStatus, setSubmitStatus] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,37 +22,6 @@ const TestimonialCarousel = () => {
 
   // API configuration
   const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:4000';
-
-  // Fetch approved reviews from backend
-  useEffect(() => {
-    fetchApprovedReviews();
-  }, []);
-
-  const fetchApprovedReviews = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/review/approved`);
-      if (response.ok) {
-        const data = await response.json();
-        // Transform backend data to match component structure
-        const transformedData = data.map(review => ({
-          id: review._id,
-          name: review.name,
-          title: review.role,
-          review: review.review,
-          image: review.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=ea580c&color=fff&size=150`,
-          rating: 5, 
-          email: review.email
-        }));
-        setTestimonials(transformedData);
-      } else {
-        console.error('Failed to fetch reviews');
-      }
-    } catch (error) {
-      console.error('Error fetching reviews:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   // Auto-rotate testimonials
   useEffect(() => {
@@ -178,17 +148,6 @@ const TestimonialCarousel = () => {
     setImagePreview(null);
   };
 
-  if (loading) {
-    return (
-      <section className="min-h-screen bg-black py-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-        <div className="text-center">
-          <Loader className="w-12 h-12 text-orange-500 animate-spin mx-auto mb-4" />
-          <p className="text-white/70 text-lg">Loading testimonials...</p>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section id='testimonials' className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -243,7 +202,8 @@ const TestimonialCarousel = () => {
                   const { position } = testimonial;
                   const isCenter = position === 0;
                   const angle = position * 25; // degrees
-                  const radius = Math.min(200, window.innerWidth * 0.15); // responsive radius
+                  const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1280;
+                  const radius = Math.min(200, viewportWidth * 0.15); // responsive radius
                   const scale = isCenter ? 1 : Math.max(0.6, 1 - Math.abs(position) * 0.2);
                   const opacity = Math.max(0.3, 1 - Math.abs(position) * 0.3);
                   

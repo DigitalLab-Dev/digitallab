@@ -1,6 +1,6 @@
 'use client';
 import { Mouse } from 'lucide-react';
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, Fragment } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 
@@ -87,36 +87,40 @@ const Hero = () => {
             {/* Orange Text Animation */}
             <span className="font-semibold text-orange-500 block mb-2">
               {orangeWords.map((word, index) => (
-                <span
-                  key={index}
-                  className={`inline-block mr-2 sm:mr-3 md:mr-4 transition-all duration-1000 ease-out ${textVisible
-                    ? 'opacity-100 translate-y-0 blur-0'
-                    : 'opacity-0 translate-y-12 blur-sm'
-                    }`}
-                  style={{
-                    transitionDelay: `${index * 0.15}s`,
-                  }}
-                >
-                  {word}
-                </span>
+                <Fragment key={index}>
+                  <span
+                    className={`inline-block mr-2 sm:mr-3 md:mr-4 transition-all duration-1000 ease-out ${textVisible
+                      ? 'opacity-100 translate-y-0 blur-0'
+                      : 'opacity-0 translate-y-12 blur-sm'
+                      }`}
+                    style={{
+                      transitionDelay: `${index * 0.15}s`,
+                    }}
+                  >
+                    {word}
+                  </span>
+                  {index < orangeWords.length - 1 && ' '}
+                </Fragment>
               ))}
             </span>
 
             {/* White Text Animation */}
             <span className="block">
               {whiteWords.map((word, index) => (
-                <span
-                  key={index}
-                  className={`inline-block mr-2 sm:mr-3 md:mr-4 transition-all duration-1000 ease-out ${textVisible
-                    ? 'opacity-100 translate-y-0 blur-0'
-                    : 'opacity-0 -translate-y-12 blur-sm'
-                    }`}
-                  style={{
-                    transitionDelay: `${(orangeWords.length + index) * 0.15}s`,
-                  }}
-                >
-                  {word}
-                </span>
+                <Fragment key={index}>
+                  <span
+                    className={`inline-block mr-2 sm:mr-3 md:mr-4 transition-all duration-1000 ease-out ${textVisible
+                      ? 'opacity-100 translate-y-0 blur-0'
+                      : 'opacity-0 -translate-y-12 blur-sm'
+                      }`}
+                    style={{
+                      transitionDelay: `${(orangeWords.length + index) * 0.15}s`,
+                    }}
+                  >
+                    {word}
+                  </span>
+                  {index < whiteWords.length - 1 && ' '}
+                </Fragment>
               ))}
             </span>
           </h1>

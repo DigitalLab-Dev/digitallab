@@ -25,6 +25,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropdownTimeout, setDropdownTimeout] = useState(null);
   const [showServices, setShowServices] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   const services = [
     { name: 'Video Editing', icon: Play, href: '/services/video-editing' },
@@ -76,14 +77,22 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Only crossfade "Services" <-> "Portfolio" once mounted client-side, so the
+  // server-rendered/pre-hydration HTML contains just the plain "Services"
+  // text instead of both alternate labels concatenated together.
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Alternating label effect
   useEffect(() => {
+    if (!mounted) return;
     const interval = setInterval(() => {
       setShowServices(prev => !prev);
     }, 2500); // 2.5 seconds (2s visible + 0.5s transition)
 
     return () => clearInterval(interval);
-  }, []);
+  }, [mounted]);
 
   const isActive = (href) => {
     if (href === '/services') {
@@ -159,19 +168,25 @@ const Navbar = () => {
                           }`}
                       >
                         <span className="relative  inline-block w-20">
-                          <span
-                            className={`absolute inset-0 transition-opacity duration-500 ${showServices ? 'opacity-100' : 'opacity-0'
-                              }`}
-                          >
-                            Services
-                          </span>
-                          <span
-                            className={`absolute inset-0 transition-opacity duration-500 ${showServices ? 'opacity-0' : 'opacity-100'
-                              }`}
-                          >
-                            Portfolio
-                          </span>
-                          <span className="invisible">Services</span>
+                          {mounted ? (
+                            <>
+                              <span
+                                className={`absolute inset-0 transition-opacity duration-500 ${showServices ? 'opacity-100' : 'opacity-0'
+                                  }`}
+                              >
+                                Services
+                              </span>
+                              <span
+                                className={`absolute inset-0 transition-opacity duration-500 ${showServices ? 'opacity-0' : 'opacity-100'
+                                  }`}
+                              >
+                                Portfolio
+                              </span>
+                              <span className="invisible">Services</span>
+                            </>
+                          ) : (
+                            'Services'
+                          )}
                         </span>
                         <ChevronDown
                           className={`w-5 h-5  transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''
@@ -292,19 +307,25 @@ const Navbar = () => {
                         }`}
                     >
                       <span className="relative inline-block">
-                        <span
-                          className={`absolute inset-0 transition-opacity duration-500 ${showServices ? 'opacity-100' : 'opacity-0'
-                            }`}
-                        >
-                          Services
-                        </span>
-                        <span
-                          className={`absolute inset-0 transition-opacity duration-500 ${showServices ? 'opacity-0' : 'opacity-100'
-                            }`}
-                        >
-                          Portfolio
-                        </span>
-                        <span className="invisible">Services</span>
+                        {mounted ? (
+                          <>
+                            <span
+                              className={`absolute inset-0 transition-opacity duration-500 ${showServices ? 'opacity-100' : 'opacity-0'
+                                }`}
+                            >
+                              Services
+                            </span>
+                            <span
+                              className={`absolute inset-0 transition-opacity duration-500 ${showServices ? 'opacity-0' : 'opacity-100'
+                                }`}
+                            >
+                              Portfolio
+                            </span>
+                            <span className="invisible">Services</span>
+                          </>
+                        ) : (
+                          'Services'
+                        )}
                       </span>
                       <ChevronDown
                         className={`w-4 h-4 transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''

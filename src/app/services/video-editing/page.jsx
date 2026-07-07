@@ -1,87 +1,29 @@
+import VideoPageClient from './VideoPageClient';
 
+// Revalidate periodically (ISR) so newly-added videos show up without a
+// full redeploy, while still SSR-ing real content on first load.
+export const revalidate = 3600;
 
-'use client';
-import React, { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
-import Loader from '@/components/Loader';
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:4000';
 
-// Dynamic imports for better code splitting
-const VideoAgencyHero = dynamic(() => import('./sections/Hero'), {
-  loading: () => null,
-});
-const VideoServicesSection = dynamic(
-  () => import('./sections/VideoServicesSection'),
-  {
-    loading: () => null,
+async function fetchVideos(path) {
+  try {
+    const response = await fetch(`${BACKEND_URL}${path}`);
+    if (!response.ok) return [];
+    const data = await response.json();
+    return data.success && Array.isArray(data.videos) ? data.videos : [];
+  } catch (error) {
+    console.warn(`⚠️ Failed to fetch ${path} for SSR:`, error.message);
+    return [];
   }
-);
-const ShowcasePortfolio = dynamic(
-  () => import('./sections/ShortForm'),
-  {
-    loading: () => null,
-  }
-);
-const LongFormShowcase = dynamic(() => import('./sections/LongFormShowcase'), {
-  loading: () => null,
-});
-const FAQSection = dynamic(() => import('./sections/FAQSection'), {
-  loading: () => null,
-});
-export default function VideoPage() {
-  const [loading, setLoading] = useState(true);
-  const [contentLoaded, setContentLoaded] = useState(false);
+}
 
-  useEffect(() => {
-    const handleLoad = () => {
-      setTimeout(() => {
-        setContentLoaded(true);
-        setTimeout(() => setLoading(false), 300);
-      }, 500);
-    };
+export default async function VideoPage() {
+  const [shortVideos, longVideos] = await Promise.all([
+    fetchVideos('/api/short-videos'),
+    fetchVideos('/api/long-videos'),
+  ]);
 
-    if (document.readyState === 'complete') {
-      handleLoad();
-    } else {
-      window.addEventListener('load', handleLoad);
-      return () => window.removeEventListener('load', handleLoad);
-    }
-  }, []);
-
-  return (
-    <>
-      {loading && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-500"
-          style={{
-            opacity: loading ? 1 : 0,
-            pointerEvents: loading ? 'auto' : 'none',
-          }}
-          aria-label="Loading content"
-          role="status"
-        >
-          <Loader />
-        </div>
-      )}
-
-      {/* Main Content */}
-      <main
-        className={`relative transition-opacity duration-700 ${
-          contentLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{ minHeight: '100vh' }}
-      >
-        {/* Hero Section */}
-        <VideoAgencyHero />
-        {/* Case Studies - Detailed Project Showcases */}
-        <VideoServicesSection />
-        {/* Logo Cloud - Client Logos */}
-        <ShowcasePortfolio />
-
-        {/* Influencer Showcase - Featured Clients/Influencers */}
-        <LongFormShowcase />
-
-        <FAQSection />
-      </main>
-    </>
-  );
+  return <VideoPageClient shortVideos={shortVideos} longVideos={longVideos} />;
 }
