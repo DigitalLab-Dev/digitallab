@@ -3,75 +3,12 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const Team = () => {
+const Team = ({ initialTeam = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [teamMembers, setTeamMembers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // Team data is fetched server-side (see page.jsx) so it's present in the
+  // initial HTML instead of behind a client-side loading state.
+  const teamMembers = initialTeam;
   const [direction, setDirection] = useState(0);
-
-  // Fetch team members from backend
-  useEffect(() => {
-    const fetchTeam = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        
-        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:4000';
-        const apiUrl = `${backendUrl}/api/team`;              
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000);
-        
-        const res = await fetch(apiUrl, {
-          signal: controller.signal,
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          mode: 'cors',
-        });
-        
-        clearTimeout(timeoutId);
-
-        if (!res.ok) {
-          throw new Error(`Failed to fetch team members: ${res.status} ${res.statusText}`);
-        }
-
-        const data = await res.json();
-        
-        let members = [];
-        if (Array.isArray(data)) {
-          members = data;
-        } else if (data && Array.isArray(data.data)) {
-          members = data.data;
-        } else if (data && Array.isArray(data.members)) {
-          members = data.members;
-        } else if (data && typeof data === 'object') {
-          // If single object, wrap in array
-          members = [data];
-        }
-
-        if (members.length === 0) {
-          throw new Error('No team members found in the response');
-        }
-
-        setTeamMembers(members);
-      } catch (err) {
-        console.error('Error fetching team:', err);
-        let errorMessage = err.message;
-        if (err.name === 'AbortError') {
-          errorMessage = 'Request timeout - Please check your internet connection';
-        } else if (err.message.includes('Failed to fetch')) {
-          errorMessage = 'CORS Error: Unable to connect to the server. Please ensure the backend allows requests from your domain.';
-        }        
-        setError(errorMessage);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTeam();
-  }, []);
 
   useEffect(() => {
     if (teamMembers.length <= 1) return;
@@ -143,88 +80,6 @@ const Team = () => {
     },
   });
 
-
-  if (loading) {
-    return (
-      <section 
-        className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden"
-        aria-live="polite"
-        aria-busy="true"
-      >
-        {/* Background Effects */}
-        <div className="absolute inset-0" aria-hidden="true">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-orange-500 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              variants={particleVariants(Math.random() * 2, 2 + Math.random() * 2)}
-              animate="animate"
-            />
-          ))}
-        </div>
-
-        <div className="text-center relative z-10">
-          <motion.div
-            className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full mx-auto mb-4"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-          />
-          <p className="text-gray-400 text-lg">Loading team members...</p>
-        </div>
-      </section>
-    );
-  }
-
-  // Error state
-  if (error) {
-    return (
-      <section 
-        className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden"
-        role="alert"
-        aria-live="assertive"
-      >
-        {/* Background Effects */}
-        <div className="absolute inset-0" aria-hidden="true">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-orange-500 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              variants={particleVariants(Math.random() * 2, 2 + Math.random() * 2)}
-              animate="animate"
-            />
-          ))}
-        </div>
-
-        <motion.div 
-          className="text-center max-w-2xl px-4 relative z-10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="bg-black/80 border-2 border-orange-500 rounded-2xl p-8 backdrop-blur-sm">
-            <h2 className="text-orange-500 text-2xl font-bold mb-4">Unable to Load Team</h2>
-            <p className="text-gray-300 mb-6">{error}</p>
-            <motion.button 
-              onClick={() => window.location.reload()} 
-              className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Try Again
-            </motion.button>
-          </div>
-        </motion.div>
-      </section>
-    );
-  }
 
   // No team members
   if (teamMembers.length === 0) {
