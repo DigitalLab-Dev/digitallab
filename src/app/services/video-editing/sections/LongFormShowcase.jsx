@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Play, Film, Volume2, VolumeX } from "lucide-react";
+import GlowText from "@/components/GlowText";
 
 function VideoCard({ video, index, isInView: sectionInView }) {
   const [isMuted, setIsMuted] = useState(true);
@@ -129,43 +130,14 @@ function VideoCard({ video, index, isInView: sectionInView }) {
   );
 }
 
-export default function LongFormShowcase() {
+export default function LongFormShowcase({ initialVideos = [] }) {
   const [hoveredVideo, setHoveredVideo] = useState(null); // Keep for consistency if needed elsewhere, but mostly moved to VideoCard
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        setLoading(true);
-        const backendUrl =
-          process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
-        const response = await fetch(`${backendUrl}/api/long-videos`);
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch videos");
-        }
-
-        const data = await response.json();
-        if (data.success) {
-          setVideos(data.videos);
-        } else {
-          throw new Error(data.message || "Failed to fetch videos");
-        }
-      } catch (err) {
-        console.error("Error fetching videos:", err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchVideos();
-  }, []);
+  // Video data is fetched server-side (see page.jsx) so it's present in the
+  // initial HTML instead of behind a client-side loading state.
+  const videos = initialVideos;
 
   return (
     <section
@@ -247,22 +219,13 @@ export default function LongFormShowcase() {
             }}
             className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none mb-8"
           >
-            <span className="relative inline-block">
-              <motion.span
-                className="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400 blur-xl"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                CAPTIVATE
-              </motion.span>
-              <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400">
-                CAPTIVATE
-              </span>
-            </span>
+            <GlowText
+              gradientClassName="bg-gradient-to-r from-orange-500 to-orange-400"
+              glowColor="rgba(249,115,22,0.7)"
+              pulse
+            >
+              CAPTIVATE
+            </GlowText>
           </motion.h3>
 
           <motion.p
@@ -276,20 +239,12 @@ export default function LongFormShowcase() {
           </motion.p>
         </motion.div>
 
-        {/* Content based on state */}
-        {loading && (
+        {/* Content */}
+        {videos.length === 0 ? (
           <div className="flex items-center justify-center py-20">
-            <div className="text-orange-500 text-xl">Loading videos...</div>
+            <div className="text-gray-400 text-xl">No videos available yet.</div>
           </div>
-        )}
-
-        {error && (
-          <div className="flex items-center justify-center py-20">
-            <div className="text-red-500 text-xl">Error: {error}</div>
-          </div>
-        )}
-
-        {!loading && !error && (
+        ) : (
           /* Grid of videos */
           <motion.div
             initial={{ opacity: 0 }}

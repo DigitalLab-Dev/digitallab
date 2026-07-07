@@ -2,6 +2,7 @@
 import { useRef, useState, useEffect, memo, useCallback } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { Sparkles, TrendingUp, Volume2, VolumeX } from "lucide-react";
+import GlowText from "@/components/GlowText";
 
 // Video card component - moved outside to prevent recreation on parent re-renders
 const VideoCard = memo(({ video, index, isMobile, isInView, mutedStates, onToggleMute }) => {
@@ -115,7 +116,7 @@ const VideoCard = memo(({ video, index, isMobile, isInView, mutedStates, onToggl
 
 VideoCard.displayName = 'VideoCard';
 
-export default function ShowcasePortfolio() {
+export default function ShowcasePortfolio({ initialVideos = [] }) {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const { scrollYProgress } = useScroll({
@@ -125,11 +126,17 @@ export default function ShowcasePortfolio() {
 
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
-  const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // Video data is fetched server-side (see page.jsx) so it's present in the
+  // initial HTML; this component only owns client-only interaction state.
+  const videos = initialVideos;
   const [isMobile, setIsMobile] = useState(false);
-  const [mutedStates, setMutedStates] = useState({});
+  const [mutedStates, setMutedStates] = useState(() => {
+    const initial = {};
+    initialVideos.forEach((_, index) => {
+      initial[index] = true;
+    });
+    return initial;
+  });
 
   // Detect mobile device
   useEffect(() => {
@@ -140,41 +147,6 @@ export default function ShowcasePortfolio() {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-
-  useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        setLoading(true);
-        const backendUrl =
-          process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
-        const response = await fetch(`${backendUrl}/api/short-videos`);
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch videos");
-        }
-
-        const data = await response.json();
-        if (data.success) {
-          setVideos(data.videos);
-          // Initialize all videos as muted
-          const initialMutedStates = {};
-          data.videos.forEach((_, index) => {
-            initialMutedStates[index] = true;
-          });
-          setMutedStates(initialMutedStates);
-        } else {
-          throw new Error(data.message || "Failed to fetch videos");
-        }
-      } catch (err) {
-        console.error("Error fetching videos:", err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchVideos();
-  }, []); // Only run once on mount
 
   // Memoized toggle function to prevent recreation on every render
   const handleToggleMute = useCallback((index) => {
@@ -295,14 +267,12 @@ export default function ShowcasePortfolio() {
                 }}
                 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none"
               >
-                <span className="relative inline-block">
-                  <span className="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400 blur-lg">
-                    DOMINATION
-                  </span>
-                  <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400">
-                    DOMINATION
-                  </span>
-                </span>
+                <GlowText
+                  gradientClassName="bg-gradient-to-r from-orange-500 to-orange-400"
+                  glowColor="rgba(249,115,22,0.6)"
+                >
+                  DOMINATION
+                </GlowText>
               </motion.h5>
             </div>
 
@@ -319,20 +289,12 @@ export default function ShowcasePortfolio() {
           </motion.div>
         </header>
 
-        {/* Content based on state */}
-        {loading && (
+        {/* Content */}
+        {videos.length === 0 ? (
           <div className="flex items-center justify-center py-20">
-            <div className="text-orange-500 text-xl">Loading videos...</div>
+            <div className="text-gray-400 text-xl">No videos available yet.</div>
           </div>
-        )}
-
-        {error && (
-          <div className="flex items-center justify-center py-20">
-            <div className="text-red-500 text-xl">Error: {error}</div>
-          </div>
-        )}
-
-        {!loading && !error && (
+        ) : (
           <>
             {/* Video Grid */}
             <motion.div
