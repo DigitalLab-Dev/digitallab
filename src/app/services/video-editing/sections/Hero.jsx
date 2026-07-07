@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Play, Zap, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import GlowText from '@/components/GlowText';
 
 export default function VideoAgencyHero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -179,14 +180,13 @@ export default function VideoAgencyHero() {
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.8, ease: [0.6, 0.05, 0.01, 0.9] }}
-            className="relative inline-block"
           >
-            <span className="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 blur-xl">
+            <GlowText
+              gradientClassName="bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600"
+              glowColor="rgba(249,115,22,0.6)"
+            >
               BY FRAME
-            </span>
-            <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600">
-              BY FRAME
-            </span>
+            </GlowText>
           </motion.div>
         </motion.h1>
 
