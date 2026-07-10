@@ -37,11 +37,6 @@ const Services = () => {
       link: '/services/copy-writing',
     },
     {
-      heading: 'SEO',
-      para: 'Search engine optimization strategies that boost rankings and drive organic traffic to your site.',
-      link: '/services/seo',
-    },
-    {
       heading: 'Web Development',
       para: 'Powerful websites that sell, engage, and inspire action with modern design and functionality.',
       link: '/services/web-development',
