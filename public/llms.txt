@@ -1,0 +1,39 @@
+# Digital Lab
+
+> Digital Lab is a digital agency offering web development, graphic design, video editing, copywriting, social media management, and paid ads management, alongside its own in-house SaaS products for businesses that want an integrated team rather than separate vendors for each service.
+
+Digital Lab works with local and international businesses, combining marketing execution (content, ads, social) with technical delivery (custom web development, software products) under one team. The company also builds and sells its own software, starting with RestCart, a restaurant operations platform.
+
+## Services
+
+- [Web Development](https://www.digitallabservices.com/services/web-development): Custom web development services built for growth — website redesigns to full builds, for brands that need results, not templates.
+- [Graphic Design](https://www.digitallabservices.com/services/graphic-design): Logo and branding services — brand systems, logos, and design built to convert, not just look good.
+- [Video Editing](https://www.digitallabservices.com/services/video-editing): Corporate video production and motion graphics — professional editing, effects, and storytelling.
+- [Copywriting](https://www.digitallabservices.com/services/copy-writing): Website and SEO copywriting — persuasive, on-brand copy for web pages, ads, and content that sells.
+- [Social Media Management](https://www.digitallabservices.com/services/social-media-management): Social media marketing built on real engagement, not vanity metrics — strategy, content, and community management.
+- [Ads Management](https://www.digitallabservices.com/services/ads-management): Google, Facebook, and Instagram ads management — campaigns built for ROI and continuous optimization.
+- [All Services](https://www.digitallabservices.com/services): Overview of Digital Lab's full service range.
+
+## Products
+
+- [RestCart](https://www.digitallabservices.com/products/restcart): All-in-one restaurant management software — QR digital menus, order management, POS, inventory tracking, and automated tax handling.
+- [Products Overview](https://www.digitallabservices.com/products): Digital Lab's in-house SaaS products.
+
+## Company
+
+- [About](https://www.digitallabservices.com/about): Digital Lab's story, mission, and leadership team.
+- [Clients](https://www.digitallabservices.com/clients): Brands Digital Lab has partnered with and case studies of results delivered.
+- [Contact](https://www.digitallabservices.com/contact): Get a free consultation or quote for a project.
+
+## Blog
+
+- [Navigating Business Evolution in 2025 - From Adaptation to Leadership](https://www.digitallabservices.com/blogs/navigating-business-evolution-in-2025-from-adaptation-to-leadership): How resilient companies are evolving beyond survival in 2025 through technology, sustainability, and agility.
+- [Marketing in 2025 - How Brands Can Thrive with Hyper-Personalisation and AI-Driven Strategy](https://www.digitallabservices.com/blogs/marketing-in-2025-how-brands-can-thrive-with-hyper-personalisation-and-ai-driven-strategy): How generative AI, omnichannel experiences, and first-party data are reshaping marketing.
+- [How AI Is Transforming Digital Marketing in 2025 (And What It Means for Your Business)](https://www.digitallabservices.com/blogs/how-ai-is-transforming-digital-marketing-in-2025-and-what-it-means-for-your-business): How AI is changing websites, ad campaigns, and creative content production.
+- [Blog Index](https://www.digitallabservices.com/blogs): All articles on AI, marketing, business growth, and automation.
+
+## Optional
+
+- [Sitemap](https://www.digitallabservices.com/sitemap.xml): Full list of indexed pages.
+- [Privacy Policy](https://www.digitallabservices.com/legal/privacy-policy)
+- [Terms of Service](https://www.digitallabservices.com/legal/terms-of-service)
