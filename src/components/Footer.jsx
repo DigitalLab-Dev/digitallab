@@ -50,7 +50,6 @@ const Footer = () => {
       href: '/services/social-media-management',
     },
     { name: 'Ads Management', href: '/services/ads-management' },
-    { name: 'SEO Services', href: '/services/seo' },
     { name: 'Web Development', href: '/services/web-development' },
   ];
 

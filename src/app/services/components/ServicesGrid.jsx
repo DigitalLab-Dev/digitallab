@@ -8,7 +8,6 @@ import {
   Megaphone,
   Code,
   ArrowRight,
-  TrendingUp,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -57,13 +56,6 @@ const ServicesGrid = () => {
       description: "Custom web applications built with cutting-edge technologies and best practices",
       link: "/services/web-development",
       number: "06",
-    },
-    {
-      title: "SEO Optimization",
-      icon: TrendingUp,
-      description: "Boost your online visibility and drive organic traffic with proven SEO strategies",
-      link: "/services/seo-optimization",
-      number: "07",
     }
   ];
 

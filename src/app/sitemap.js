@@ -25,7 +25,6 @@ export default async function sitemap() {
     '/services/ads-management',
     '/services/copy-writing',
     '/services/graphic-design',
-    '/services/seo',
     '/services/social-media-management',
     '/services/video-editing',
     '/services/web-development',
