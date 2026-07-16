@@ -31,7 +31,7 @@ export default function VideoAgencyHero() {
     <header className="relative min-h-screen  overflow-hidden py-20  flex items-center justify-center">
       {/* SEO */}
       <div className="sr-only">
-        <h1>Professional Video Editing Agency - Elevate Your Vision Into Cinematic Reality</h1>
+        <h1>Corporate Video Production Company & Video Editing Agency - Elevate Your Vision Into Cinematic Reality</h1>
       </div>
 
       {/* Dynamic Background */}
@@ -163,7 +163,7 @@ export default function VideoAgencyHero() {
         </motion.div>
 
         {/* Main Heading with split text animation */}
-        <motion.h1
+        <motion.div
           className="text-6xl sm:text-7xl lg:text-9xl font-black text-white mb-8 leading-none tracking-tight"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -188,7 +188,7 @@ export default function VideoAgencyHero() {
               BY FRAME
             </GlowText>
           </motion.div>
-        </motion.h1>
+        </motion.div>
 
         {/* Subtitle */}
         <motion.p
