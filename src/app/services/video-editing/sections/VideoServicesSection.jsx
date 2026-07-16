@@ -12,7 +12,7 @@ const services = [
   {
     id: 1,
     title: "Short-Form Content (Reels/Shorts/TikToks)",
-    description: "Viral-ready vertical content optimized for maximum engagement. We create fast-paced edits with trending effects and perfect timing to capture attention in the first 3 seconds.",
+    description: "Viral-ready vertical content optimized for maximum engagement. As a reels editing service and TikTok video editing service, we create fast-paced edits with trending effects and perfect timing to capture attention in the first 3 seconds.",
     tools: ["Premiere Pro", "After Effects", "CapCut", "DaVinci Resolve"],
     image: "/images/short.png",
     imageAlt: "A person creating vertical video content on a smartphone"
@@ -20,7 +20,7 @@ const services = [
   {
     id: 2,
     title: "Long-Form Content (YouTube & Podcasts)",
-    description: "Transforming raw footage into engaging stories that boost audience retention. We handle everything from multi-cam editing and color grading to professional sound design.",
+    description: "Transforming raw footage into engaging stories that boost audience retention. From YouTube channels to podcast video editing services, we handle everything from multi-cam editing and color grading to professional sound design.",
     tools: ["Premiere Pro", "DaVinci Resolve", "Adobe Audition", "Capcut"],
     image: "/images/long.png",
     imageAlt: "A professional video editing setup displaying a timeline"
@@ -36,7 +36,7 @@ const services = [
   {
     id: 4,
     title: "Motion Graphics",
-    description: "Bringing your brand and data to life with eye-catching animations. We specialize in logo reveals, explainer videos, animated infographics, and stylish lower thirds.",
+    description: "Bringing your brand and data to life with eye-catching animations. As a motion graphics agency, we specialize in logo reveals, explainer videos, animated infographics, and stylish lower thirds.",
     tools: ["After Effects", "DaVinci Resolve",],
     image: "/images/motion.png",
     imageAlt: "A designer working on motion graphics on a computer"
@@ -44,7 +44,7 @@ const services = [
   {
     id: 5,
     title: "2D & 3D Animation",
-    description: "From concept to final render, we create stunning animations that tell your story. Services include character animation, product visualizations, and building entire animated worlds.",
+    description: "From concept to final render, we create stunning animations that tell your story. As a 2D animation studio and 3D animation studio, our services include character animation, product visualizations, and building entire animated worlds.",
     tools: ["Blender", "Adobe Animate"],
     image: "/images/DAnimations.png",
     imageAlt: "A 3D character model being animated in software"
@@ -173,7 +173,7 @@ const services = [
     <section  ref={sectionRef} className="relative bg-black py-10 px-6 overflow-hidden">
       {/* SEO */}
       <div className="sr-only">
-        <h2>Professional Video Editing Services - YouTube, Social Media, Commercials, Motion Graphics & VFX</h2>
+        <h2>Professional Video Editing Agency Services - Corporate Video Editing, YouTube Video Editing & Motion Graphics</h2>
       </div>
 
       {/* Background effects */}
@@ -218,12 +218,12 @@ const services = [
             </span>
           </motion.div>
 
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight max-w-4xl">
+          <div className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight max-w-4xl">
             Services That Transform
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400">
               Your Vision
             </span>
-          </h2>
+          </div>
 
           <p className="text-xl text-gray-400 max-w-3xl leading-relaxed">
             From concept to final cut, we deliver professional video editing services that elevate your content and engage your audience
