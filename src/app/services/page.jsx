@@ -3,15 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Loader from '@/components/Loader';
+import { organizationSchema, organizationRef } from '@/utils/schema/organization';
 
 const servicesSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   serviceType: 'Digital Marketing Services',
-  provider: {
-    '@type': 'Organization',
-    name: 'Digital Lab',
-  },
+  provider: organizationRef,
   areaServed: 'Worldwide',
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -81,6 +79,10 @@ export default function ServicesPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}

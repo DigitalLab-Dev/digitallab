@@ -4,6 +4,7 @@ import BlogImageGallery from '../components/BlogImageGallery';
 import BlogFAQ from '../components/BlogFAQ';
 import MarkdownRenderer from '@/utils/MarkdownRenderer';
 import { blogApi } from '@/utils/blogApi';
+import { organizationSchema, organizationRef } from '@/utils/schema/organization';
 
 const SITE_URL = 'https://www.digitallabservices.com';
 
@@ -176,19 +177,8 @@ const IndividualBlogPage = async ({ params }) => {
       '@type': 'WebPage',
       '@id': url,
     },
-    author: {
-      '@type': 'Organization',
-      name: 'Digital Lab',
-      url: SITE_URL,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Digital Lab',
-      logo: {
-        '@type': 'ImageObject',
-        url: `${SITE_URL}/android-chrome-512x512.png`,
-      },
-    },
+    author: organizationRef,
+    publisher: organizationRef,
     ...(blog.images?.length && {
       image: blog.images.map((img) => img.url),
     }),
@@ -212,6 +202,10 @@ const IndividualBlogPage = async ({ params }) => {
 
   return (
     <article className="max-w-4xl mx-auto px-4 py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}

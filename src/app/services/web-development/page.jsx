@@ -25,6 +25,47 @@ import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Loader from '@/components/Loader';
+import { organizationSchema, organizationRef } from '@/utils/schema/organization';
+
+const webDevelopmentServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Custom Web Development Services',
+  serviceType: 'Web Development',
+  provider: organizationRef,
+  description:
+    'Custom web development services built for growth. From website redesigns to full builds, 500+ projects delivered for brands that need results, not templates.',
+  areaServed: {
+    '@type': 'Country',
+    name: 'United States',
+  },
+  url: 'https://www.digitallabservices.com/services/web-development',
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://www.digitallabservices.com/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Services',
+      item: 'https://www.digitallabservices.com/services',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Web Development',
+      item: 'https://www.digitallabservices.com/services/web-development',
+    },
+  ],
+};
 
 // Dynamic imports for better code splitting
 const Hero = dynamic(() => import('./sections/Hero'), {
@@ -66,7 +107,22 @@ const Page = () => {
   }, []);
 
   return (
-    <>      {/* Loader Overlay */}
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webDevelopmentServiceSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {/* Loader Overlay */}
       {loading && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-500"

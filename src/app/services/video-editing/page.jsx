@@ -1,4 +1,5 @@
 import VideoPageClient from './VideoPageClient';
+import { organizationSchema, organizationRef } from '@/utils/schema/organization';
 
 // Revalidate periodically (ISR) so newly-added videos show up without a
 // full redeploy, while still SSR-ing real content on first load.
@@ -12,17 +13,7 @@ const videoEditingServiceSchema = {
   '@type': 'Service',
   serviceType: 'Video Editing Services',
   name: 'Video Editing Agency & Corporate Video Production Company',
-  provider: {
-    '@type': 'Organization',
-    name: 'Digital Lab',
-    url: 'https://www.digitallabservices.com',
-    logo: 'https://www.digitallabservices.com/images/logo.png',
-    sameAs: [
-      'https://www.facebook.com/home.of.professionals',
-      'https://www.instagram.com/digitallabservices',
-      'https://www.linkedin.com/company/digtal-lab/',
-    ],
-  },
+  provider: organizationRef,
   areaServed: {
     '@type': 'Country',
     name: 'United States',
@@ -106,14 +97,7 @@ function buildVideoSchema(video, isLongForm) {
     uploadDate: video.createdAt,
     embedUrl: `https://www.youtube.com/embed/${video.videoId}`,
     contentUrl: `https://www.youtube.com/watch?v=${video.videoId}`,
-    publisher: {
-      '@type': 'Organization',
-      name: 'Digital Lab',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.digitallabservices.com/images/logo.png',
-      },
-    },
+    publisher: organizationRef,
   };
 }
 
@@ -142,6 +126,10 @@ export default async function VideoPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
