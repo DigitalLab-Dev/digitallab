@@ -12,7 +12,7 @@ const faqs = [
   {
     question: 'What should you look for when hiring a web developer?',
     answer:
-      'Look for a developer with a portfolio of live, working sites, clear communication about timelines, and transparency about what happens after launch. Digital Lab includes post-launch support and maintenance as part of every web development engagement, not as a hidden extra.',
+      'Look for three things: a portfolio of live websites, clear timelines, and an honest plan for what happens after the site goes live. Digital Lab includes post-launch support and maintenance in every project, never as a hidden cost.',
   },
   {
     question: 'Why hire a web developer instead of building it yourself?',
@@ -43,6 +43,11 @@ const faqs = [
     question: 'Who will actually work on my project?',
     answer:
       "Digital Lab gives you direct access to the actual team working on your build, not just senior staff during sales calls followed by a handoff to unnamed juniors. You'll know who's building your site from the first conversation.",
+  },
+  {
+    question: 'Do you handle API integrations with other business systems?',
+    answer:
+      'Yes. We build custom connections between your website and the tools you already use, like your CRM, payment setup, or inventory software. Your site will fit perfectly into how you already run your business.',
   },
 ];
 
