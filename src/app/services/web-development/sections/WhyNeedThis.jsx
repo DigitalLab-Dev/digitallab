@@ -14,22 +14,12 @@ const WhyNeedThis = () => {
       
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-center max-w-7xl mx-auto">
         <article className="w-full mt-6 lg:mt-10">
-          <h2 id="why-web-dev-heading" className="sr-only">
-            Why Web Development Matters
-          </h2>
-          
           <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-100">
-            <strong className="text-orange-500 capitalize text-2xl sm:text-3xl md:text-4xl">
-              Web development
-            </strong>{' '}
-            is essential because it builds the foundation of your online
-            presence, making your brand accessible to anyone, anywhere. A
-            well-structured website helps you{' '}
-            <strong className="text-orange-500 text-xl sm:text-2xl md:text-3xl font-semibold">
-              showcase your services, products, and values
-            </strong>{' '}
-            in a professional way. It improves credibility and trust, allowing
-            potential customers to engage confidently with your business.
+            Your website is the foundation of your online presence. It is
+            your digital storefront, open to anyone, anywhere, at any time. A
+            great website does more than just look pretty. It builds trust,
+            shows off your services, and gives customers the confidence to
+            buy from you.
           </p>
         </article>
         

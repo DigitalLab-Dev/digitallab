@@ -178,6 +178,7 @@ const Hero = () => {
             {/* Left Side - Content */}
             <div className="space-y-6 sm:space-y-8 text-center lg:text-left">
               <h1
+                aria-label="Custom Web Development Services | Digital Lab"
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
                 style={{
                   animation: isLoaded
@@ -206,8 +207,8 @@ const Hero = () => {
                     : 'none',
                 }}
               >
-                Transform your ideas into revolutionary digital solutions with
-                cutting-edge technology and innovative design.
+                Turn your ideas into powerful digital solutions using modern
+                technology and smart design.
               </p>
 
               <nav

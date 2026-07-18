@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
-import { Code, ShoppingCart, Smartphone, RefreshCw, FileEdit } from 'lucide-react';
+import { Code, ShoppingCart, Smartphone, RefreshCw, FileEdit, Layers } from 'lucide-react';
 
 const ServicesSection = () => {
   const sectionRef = useRef(null);
@@ -11,33 +11,39 @@ const ServicesSection = () => {
   const services = [
     {
       title: 'Custom Website Development',
-      description: 'Tailored web solutions built from scratch to meet your unique business requirements and brand identity.',
+      description: 'Tailored web solutions built from scratch to match your unique brand and business goals.',
       icon: Code,
       gradient: 'from-orange-400 to-orange-600'
     },
     {
       title: 'E-Commerce Solutions',
-      description: 'Complete online store development with Shopify, WooCommerce, and custom platforms for seamless shopping experiences.',
+      description: 'Complete ecommerce website design and development using Shopify, WooCommerce, or custom platforms. We build smooth online stores that turn casual browsers into paying buyers.',
       icon: ShoppingCart,
       gradient: 'from-orange-500 to-red-500'
     },
     {
       title: 'Web App Development',
-      description: 'Dynamic and interactive web applications with modern frameworks and cutting-edge technologies.',
+      description: 'Fast, interactive web applications built with modern tools. This includes SaaS web application development for businesses that want to build software products, not just basic marketing sites.',
       icon: Smartphone,
       gradient: 'from-orange-400 to-yellow-500'
     },
     {
       title: 'Website Redesign & Optimization',
-      description: 'Transform your existing website with modern design principles and performance optimization techniques.',
+      description: 'Give your current website a fresh, modern look. We update your design and speed up your site so it runs perfectly.',
       icon: RefreshCw,
       gradient: 'from-orange-600 to-pink-500'
     },
     {
       title: 'CMS Development',
-      description: 'Content management systems with WordPress, Webflow, and custom solutions for easy content control.',
+      description: 'Easy content management systems using WordPress, Webflow development services, or custom setups. Your team can update text and images easily without needing a developer for every small change.',
       icon: FileEdit,
       gradient: 'from-orange-500 to-purple-500'
+    },
+    {
+      title: 'Modern Stack Development',
+      description: 'Built on Next.js and modern React architecture for top speed and easy growth. We do not use cheap site builders that lock you in. We also use AI-powered development tools to create smarter workflows and better user experiences.',
+      icon: Layers,
+      gradient: 'from-orange-400 to-orange-600'
     }
   ];
 
