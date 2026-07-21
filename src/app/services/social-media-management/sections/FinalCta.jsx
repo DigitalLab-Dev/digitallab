@@ -276,8 +276,8 @@ const FinalCTA = () => {
             className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
             Stop dreaming about viral success and start creating it. Join
-            hundreds of brands that trust us to amplify their voice and drive
-            real results.
+            50+ brands that trust us to amplify their voice and drive real
+            results.
           </motion.p>
 
           {/* Stats bar */}
@@ -287,7 +287,7 @@ const FinalCTA = () => {
           >
             {[
               { number: '15M+', label: 'Content Views' },
-              { number: '250+', label: 'Brands Grown' },
+              { number: '50+', label: 'Brands Grown' },
               { number: '98%', label: 'Success Rate' },
               { number: '24/7', label: 'Support' },
             ].map((stat, index) => (

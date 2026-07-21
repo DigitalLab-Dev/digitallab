@@ -104,6 +104,7 @@ const HeroSection = () => {
             <div className="text-2xl mb-2">{card.icon}</div>
             <div className="text-white font-semibold text-sm">{card.platform}</div>
             <div className="text-orange-300 text-xs font-medium">{card.content}</div>
+            <div className="text-white/40 text-[10px] mt-1">Example content</div>
           </div>
         </motion.div>
       ))}
@@ -114,6 +115,7 @@ const HeroSection = () => {
 
           {/* Main headline */}
           <motion.h1
+            aria-label="Social Media Marketing Agency | Digital Lab"
             className="text-5xl md:text-7xl font-black leading-tighter mb-6"
             variants={textVariants}
             initial="hidden"
@@ -136,7 +138,11 @@ const HeroSection = () => {
             transition={{ delay: 0.8 }}
           >
             <p className="text-xl text-gray-200 mb-6 leading-relaxed">
-              We craft viral content and drive engagement across all major platforms
+              Posting content is just a task. It is not a strategy. We build
+              social media programs around what actually grows your brand:
+              great content, real daily interaction, and a smart platform
+              strategy. As a full-service social media marketing agency, we
+              handle the whole picture, not just the calendar.
             </p>
 
             {/* Platform badges */}

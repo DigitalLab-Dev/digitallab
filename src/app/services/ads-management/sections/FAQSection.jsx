@@ -5,39 +5,39 @@ import { Plus, Minus } from 'lucide-react';
 
 const faqs = [
   {
-    question: 'Why hire a graphic designer instead of doing it yourself?',
+    question: 'What is PPC and ads management?',
     answer:
-      'DIY tools work for quick, one-off graphics, but a professional designer builds a visual identity that stays consistent across your website, social media, and marketing materials. Digital Lab designs with that consistency in mind from the first project, not as an afterthought.',
+      'PPC (pay-per-click) advertising is a model where you pay each time someone clicks your ad, running on platforms like Google, Meta, and TikTok. Ads management is the ongoing work of building, running, and optimizing those campaigns, from targeting and budget decisions to creative testing and performance tracking, so your ad spend actually turns into revenue.',
   },
   {
-    question: 'How do you choose a graphic design agency?',
+    question: 'How do you choose an ads management agency?',
     answer:
-      'Choosing a graphic design agency comes down to reviewing real portfolio work relevant to your industry and understanding their process before committing. Digital Lab walks every client through relevant past work and a clear process before any project begins.',
+      'Look at real campaign results across accounts similar to yours, not just basic badges or certifications. Digital Lab shares real performance data from comparable campaigns before you sign any contract.',
   },
   {
-    question: 'Is it better to hire a freelance graphic designer or an agency?',
+    question: 'Is it better to hire a freelancer or an agency for PPC management?',
     answer:
-      'Freelancers can work well for a single small project, but an agency like Digital Lab gives you a full team, more consistent availability, and the ability to add related services like web development or branding without switching providers later.',
+      'Freelancers can work well for a single, simple campaign. An agency like Digital Lab gives you a full team covering multiple platforms, consistent daily support, and the ability to scale up easily as your budget grows.',
   },
   {
-    question: 'Where do you find a graphic designer to hire?',
+    question: 'How do you outsource PPC management?',
     answer:
-      'Finding the right graphic designer means comparing real portfolios and past results, not just browsing freelance marketplaces with inconsistent quality. Digital Lab gives you direct access to the actual team working on your project from the first conversation.',
+      'Start by defining your goals, budget, and target audience clearly. Then, review the agency\'s real campaign history before handing over account access. Digital Lab uses regular reporting and check-ins so you are always in the loop.',
   },
   {
-    question: "Do you own the rights to your design after it's completed?",
+    question: 'How much does PPC management cost?',
     answer:
-      "Yes. Digital Lab transfers full ownership of the final design, including editable source files, once the project is complete and paid for, so you're never locked into needing us for basic future use of your own brand assets.",
+      'Costs depend on your total ad spend, how many platforms you use, and how complex your funnel setup needs to be. Digital Lab provides a clear, specific quote based on your exact goals before work begins.',
   },
   {
-    question: 'Do you offer packaging design?',
+    question: 'Do you offer white-label PPC management for other agencies?',
     answer:
-      'Yes. We design packaging that works in the real world. We handle everything from the first idea to the print-ready files.',
+      "Yes. We manage campaigns under your agency's own name and brand. We handle the strategy, execution, and reporting behind the scenes so you can offer paid ads to your clients without hiring an in-house team.",
   },
   {
-    question: 'How much does professional graphic design cost?',
+    question: 'Which ad platform is right for my business?',
     answer:
-      'Costs depend on what you need. A single logo costs less than a full brand system with multiple applications. Digital Lab always gives you a clear, fixed quote based on your needs before any work begins.',
+      'It depends on where your customers are. Google Ads is best for capturing people who are already actively searching to buy. Meta and TikTok are great for reaching people earlier in the decision cycle. LinkedIn Ads work best for reaching B2B decision-makers directly. We help you find the perfect mix.',
   },
 ];
 
@@ -54,6 +54,15 @@ const faqSchema = {
   })),
 };
 
+const speakableSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['.faq-answer'],
+  },
+};
+
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -64,11 +73,15 @@ const FAQSection = () => {
   return (
     <section
       className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 relative"
-      aria-labelledby="graphic-design-faq-heading"
+      aria-labelledby="ads-management-faq-heading"
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
       />
 
       <div className="max-w-4xl mx-auto relative z-10">
@@ -78,7 +91,7 @@ const FAQSection = () => {
           </span>
 
           <h2
-            id="graphic-design-faq-heading"
+            id="ads-management-faq-heading"
             className="text-4xl sm:text-5xl font-bold text-white mb-6"
           >
             Frequently Asked{' '}
@@ -88,7 +101,7 @@ const FAQSection = () => {
           </h2>
 
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Everything you need to know about hiring a graphic design team.
+            Everything you need to know about hiring an ads management team.
           </p>
         </div>
 
@@ -130,7 +143,7 @@ const FAQSection = () => {
                   transition={{ duration: 0.3, ease: 'easeInOut' }}
                   className="overflow-hidden"
                 >
-                  <p className="px-6 pb-6 text-gray-300 leading-relaxed">
+                  <p className="faq-answer px-6 pb-6 text-gray-300 leading-relaxed">
                     {faq.answer}
                   </p>
                 </motion.div>

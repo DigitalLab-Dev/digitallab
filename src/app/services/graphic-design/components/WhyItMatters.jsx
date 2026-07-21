@@ -14,25 +14,25 @@ const DesignMattersComponent = () => {
       {
         icon: Eye,
         title: 'Brand Recognition',
-        description: 'Memorable visuals that stick in customers\' minds and create lasting impressions',
-        stat: '80%',
-        metric: 'brand recall increase',
+        description: "Build visuals that stick in your customers' minds and make a lasting impact.",
+        stat: '33%',
+        metric: 'revenue increase from consistent branding (Source: Lucidpress)',
         gradient: 'from-orange-500 to-red-500',
       },
       {
         icon: Award,
         title: 'Professional Identity',
-        description: 'Credibility that converts prospects into loyal customers and builds trust',
-        stat: '75%',
-        metric: 'trust improvement',
+        description: 'Look like the expert you are. Professional design builds the credibility you need to close deals.',
+        stat: null,
+        metric: 'Consumers now trust brands more than they trust government, media, or NGOs (Source: Edelman 2025)',
         gradient: 'from-orange-500 to-yellow-500',
       },
       {
         icon: Users,
         title: 'Customer Engagement',
-        description: 'Compelling designs that drive interaction, loyalty, and meaningful connections',
-        stat: '94%',
-        metric: 'engagement boost',
+        description: 'Create clean, smart designs that keep people interacting with your brand. Consistent design builds loyalty that keeps customers coming back.',
+        stat: null,
+        metric: null,
         gradient: 'from-orange-500 to-pink-500',
       },
     ],
@@ -161,23 +161,10 @@ const DesignMattersComponent = () => {
             className="text-base sm:text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-4"
             variants={itemVariants}
           >
-            In today's competitive landscape,{' '}
-            <strong className="text-orange-500 font-semibold">
-              exceptional graphic design
-            </strong>{' '}
-            isn't just aesthetics—it's your business's most powerful asset. Great
-            design builds{' '}
-            <strong className="text-orange-500 font-semibold">brand trust</strong>,
-            captures{' '}
-            <strong className="text-orange-500 font-semibold">
-              customer attention
-            </strong>
-            , and drives{' '}
-            <strong className="text-orange-500 font-semibold">
-              higher conversions
-            </strong>
-            . It's the invisible force that leads casual browsers into loyal
-            customers and elevates your brand above the competition.
+            Great graphic design is your best business asset. It builds
+            instant trust and grabs your customers' attention. Good design
+            turns casual browsers into loyal buyers and helps you easily
+            stand out from the crowd.
           </motion.p>
         </motion.header>
 
@@ -248,25 +235,35 @@ const DesignMattersComponent = () => {
                       {benefit.description}
                     </p>
 
-                    <motion.div
-                      className="text-center border-t-2 pt-6"
-                      animate={{
-                        borderColor: hoveredCard === index ? '#f97316' : '#374151',
-                      }}
-                    >
+                    {benefit.metric && (
                       <motion.div
-                        className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent mb-1"
+                        className="text-center border-t-2 pt-6"
                         animate={{
-                          scale: hoveredCard === index ? 1.15 : 1,
+                          borderColor: hoveredCard === index ? '#f97316' : '#374151',
                         }}
-                        transition={{ type: 'spring', stiffness: 400 }}
                       >
-                        {benefit.stat}
+                        {benefit.stat ? (
+                          <>
+                            <motion.div
+                              className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent mb-1"
+                              animate={{
+                                scale: hoveredCard === index ? 1.15 : 1,
+                              }}
+                              transition={{ type: 'spring', stiffness: 400 }}
+                            >
+                              {benefit.stat}
+                            </motion.div>
+                            <div className="text-xs sm:text-sm text-gray-500 uppercase tracking-wider font-medium">
+                              {benefit.metric}
+                            </div>
+                          </>
+                        ) : (
+                          <div className="text-sm sm:text-base text-gray-400 leading-relaxed">
+                            {benefit.metric}
+                          </div>
+                        )}
                       </motion.div>
-                      <div className="text-xs sm:text-sm text-gray-500 uppercase tracking-wider font-medium">
-                        {benefit.metric}
-                      </div>
-                    </motion.div>
+                    )}
                   </div>
                 </motion.div>
               </motion.article>

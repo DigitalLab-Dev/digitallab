@@ -22,7 +22,7 @@ const PhilosophySection = () => {
       type: 'tiktok-reel',
       image: 'https://images.unsplash.com/photo-1611605698335-8b1569810432?w=200&h=350&fit=crop',
       views: '2.1M',
-      platform: 'Twitter',
+      platform: 'TikTok',
       size: 'tall'
     },
     {
@@ -117,7 +117,7 @@ const PhilosophySection = () => {
           </div>
         </div>
         <div className="absolute top-4 right-4 bg-black/50 text-white px-2 py-1 rounded-full text-xs">
-          Twitter
+          {content.platform}
         </div>
       </div>
     </motion.div>
@@ -362,9 +362,9 @@ const PhilosophySection = () => {
             {/* Key principles */}
             <div className="space-y-4">
               {[
-                { icon: Target, title: 'Strategic Planning', desc: 'Every post aligns with your business goals' },
-                { icon: Zap, title: 'Creative Excellence', desc: 'Content that stops the scroll and starts conversations' },
-                { icon: TrendingUp, title: 'Data-Driven Results', desc: 'We measure what matters and optimize for growth' }
+                { icon: Target, title: 'Strategic Planning', desc: 'Every account starts with a real plan, never a rushed content calendar. We map out what to post, when, and why. We tie everything to clear goals like growth, engagement, or new leads.' },
+                { icon: Zap, title: 'Creative Excellence', desc: 'We make content that stops the scroll instead of blending into the feed. We build custom visuals, captions, and videos made for how each specific platform works.' },
+                { icon: TrendingUp, title: 'Data-Driven Results', desc: 'We track what actually works, not just simple likes and follower counts. Our reporting focuses on the numbers that connect to real business growth.' }
               ].map((principle, index) => (
                 <motion.div
                   key={index}
@@ -378,7 +378,7 @@ const PhilosophySection = () => {
                     <principle.icon className="w-6 h-6 text-black" />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold mb-1">{principle.title}</h4>
+                    <h3 className="text-white font-bold mb-1">{principle.title}</h3>
                     <p className="text-gray-400 text-sm">{principle.desc}</p>
                   </div>
                 </motion.div>
@@ -414,6 +414,10 @@ const PhilosophySection = () => {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
           >
+            <div className="absolute -top-2 right-4 z-20 text-white/30 text-[10px] tracking-wide">
+              Illustrative example
+            </div>
+
             {/* Grid layout for the collage */}
             <div className="absolute inset-0 grid grid-cols-12 grid-rows-12 gap-4 p-4">
               

@@ -5,39 +5,39 @@ import { Plus, Minus } from 'lucide-react';
 
 const faqs = [
   {
-    question: 'Why hire a graphic designer instead of doing it yourself?',
+    question: 'What is social media management?',
     answer:
-      'DIY tools work for quick, one-off graphics, but a professional designer builds a visual identity that stays consistent across your website, social media, and marketing materials. Digital Lab designs with that consistency in mind from the first project, not as an afterthought.',
+      "Social media management is the daily work of planning, creating, and publishing content across your brand's social accounts. It also includes talking with your audience and tracking performance data to build a long-term platform strategy.",
   },
   {
-    question: 'How do you choose a graphic design agency?',
+    question: 'How do you choose a social media management agency?',
     answer:
-      'Choosing a graphic design agency comes down to reviewing real portfolio work relevant to your industry and understanding their process before committing. Digital Lab walks every client through relevant past work and a clear process before any project begins.',
+      'Look at real examples of content and results they have delivered for brands like yours. Never sign a contract without seeing a clear strategy first. Digital Lab walks you through relevant past work before you commit.',
   },
   {
-    question: 'Is it better to hire a freelance graphic designer or an agency?',
+    question: 'Is it better to hire a freelancer or an agency for social media?',
     answer:
-      'Freelancers can work well for a single small project, but an agency like Digital Lab gives you a full team, more consistent availability, and the ability to add related services like web development or branding without switching providers later.',
+      'Freelancers can handle a single, simple account. An agency like Digital Lab gives you a full team that covers content creation, strategy, and community growth together across all your channels.',
   },
   {
-    question: 'Where do you find a graphic designer to hire?',
+    question: 'How do you outsource social media management?',
     answer:
-      'Finding the right graphic designer means comparing real portfolios and past results, not just browsing freelance marketplaces with inconsistent quality. Digital Lab gives you direct access to the actual team working on your project from the first conversation.',
+      "Start by sharing your business goals, brand voice, and target audience clearly. Then, review the agency's past work before sharing account access. We use regular check-ins and clean dashboards so you are never left guessing.",
   },
   {
-    question: "Do you own the rights to your design after it's completed?",
+    question: 'How much does social media management cost?',
     answer:
-      "Yes. Digital Lab transfers full ownership of the final design, including editable source files, once the project is complete and paid for, so you're never locked into needing us for basic future use of your own brand assets.",
+      'Costs depend on how many platforms you use, how much content you need, and if you want active community management. We give you a clear, fixed quote based on your exact needs before any work begins.',
   },
   {
-    question: 'Do you offer packaging design?',
+    question: 'Do you offer white-label social media management for other agencies?',
     answer:
-      'Yes. We design packaging that works in the real world. We handle everything from the first idea to the print-ready files.',
+      "Yes. We run accounts under your agency's name and brand. We handle the daily strategy, writing, and reporting behind the scenes so you can scale your services without hiring a new internal team.",
   },
   {
-    question: 'How much does professional graphic design cost?',
+    question: 'Which social platforms do you manage?',
     answer:
-      'Costs depend on what you need. A single logo costs less than a full brand system with multiple applications. Digital Lab always gives you a clear, fixed quote based on your needs before any work begins.',
+      'We manage Instagram, TikTok, LinkedIn, Facebook, and YouTube. We build a custom mix based on where your exact buyers hang out, rather than blasting the same copy everywhere.',
   },
 ];
 
@@ -64,7 +64,7 @@ const FAQSection = () => {
   return (
     <section
       className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 relative"
-      aria-labelledby="graphic-design-faq-heading"
+      aria-labelledby="social-media-faq-heading"
     >
       <script
         type="application/ld+json"
@@ -78,7 +78,7 @@ const FAQSection = () => {
           </span>
 
           <h2
-            id="graphic-design-faq-heading"
+            id="social-media-faq-heading"
             className="text-4xl sm:text-5xl font-bold text-white mb-6"
           >
             Frequently Asked{' '}
@@ -88,7 +88,7 @@ const FAQSection = () => {
           </h2>
 
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Everything you need to know about hiring a graphic design team.
+            Everything you need to know about hiring a social media management team.
           </p>
         </div>
 

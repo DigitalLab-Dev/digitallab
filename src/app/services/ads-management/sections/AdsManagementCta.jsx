@@ -93,8 +93,8 @@ const AdsManagementCTA = () => {
                   Ready to <span className="text-white drop-shadow-lg">10x</span> Your ROI?
                 </h2>
                 <p className="text-lg md:text-xl lg:text-2xl text-black/90 mb-6 max-w-3xl mx-auto leading-relaxed">
-                  Join 50+ successful businesses who've transformed their advertising performance
-                  with our proven strategies. Your competitors are already ahead – catch up now.
+                  Join 50+ successful businesses who trust us to scale their
+                  growth. Let's turn your ad spend into profit.
                 </p>
               </motion.div>
 
