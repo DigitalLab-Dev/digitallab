@@ -3,6 +3,47 @@ import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Loader from '@/components/Loader';
+import { organizationSchema, organizationRef } from '@/utils/schema/organization';
+
+const graphicDesignServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Graphic Design Services',
+  serviceType: 'Graphic Design',
+  provider: organizationRef,
+  description:
+    'Professional logo and branding services that give your business a visual identity people remember. Brand systems, logos, and design built to convert.',
+  areaServed: {
+    '@type': 'Country',
+    name: 'United States',
+  },
+  url: 'https://www.digitallabservices.com/services/graphic-design',
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://www.digitallabservices.com/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Services',
+      item: 'https://www.digitallabservices.com/services',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Graphic Design',
+      item: 'https://www.digitallabservices.com/services/graphic-design',
+    },
+  ],
+};
 
 // Dynamic imports for better code splitting
 const Hero = dynamic(() => import('./components/Hero'), {
@@ -14,6 +55,9 @@ const DesignMattersComponent = dynamic(
     loading: () => null,
   }
 );
+const ServicesOffered = dynamic(() => import('./components/ServicesOffered'), {
+  loading: () => null,
+});
 const Gallery = dynamic(() => import('./components/Gallery'), {
   loading: () => null,
 });
@@ -46,6 +90,20 @@ const Page = () => {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(graphicDesignServiceSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* Loader Overlay */}
       {loading && (
         <div
@@ -77,6 +135,7 @@ const Page = () => {
 
         <Hero />
         <DesignMattersComponent />
+        <ServicesOffered />
         <Gallery />
         <FAQSection />
         <CTASection />

@@ -29,6 +29,16 @@ const faqs = [
     answer:
       "Yes. Digital Lab transfers full ownership of the final design, including editable source files, once the project is complete and paid for, so you're never locked into needing us for basic future use of your own brand assets.",
   },
+  {
+    question: 'Do you offer packaging design?',
+    answer:
+      'Yes. We design packaging that works in the real world. We handle everything from the first idea to the print-ready files.',
+  },
+  {
+    question: 'How much does professional graphic design cost?',
+    answer:
+      'Costs depend on what you need. A single logo costs less than a full brand system with multiple applications. Digital Lab always gives you a clear, fixed quote based on your needs before any work begins.',
+  },
 ];
 
 const faqSchema = {

@@ -24,7 +24,7 @@ const CTASection = () => {
           >
             <div className="space-y-6">
               {/* Main Heading */}
-              <motion.h4
+              <motion.h3
                 className="text-4xl md:text-5xl  font-bold leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ const CTASection = () => {
                 Let's Create
                 <span className="block text-orange-500">Something Amazing</span>
                 <span className="block">Together</span>
-              </motion.h4>
+              </motion.h3>
 
               {/* Description */}
               <motion.p

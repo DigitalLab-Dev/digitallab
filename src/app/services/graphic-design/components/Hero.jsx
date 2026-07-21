@@ -140,8 +140,9 @@ const Hero = () => {
           className={`text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed px-4 transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
         >
-          Where innovation meets artistry. We transform ideas into stunning
-          visual narratives that leave lasting impressions.
+          Turn your ideas into clear, bold visuals. We provide professional
+          graphic design services that grab attention, build trust, and
+          drive real business results.
         </p>
 
         {/* CTA Buttons */}
