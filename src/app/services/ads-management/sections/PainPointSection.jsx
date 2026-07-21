@@ -16,32 +16,28 @@ const PainPointSection = () => {
       id: 1,
       icon: DollarSign,
       title: 'Wasted Ad Budget',
-      description: 'Throwing money at broad audiences with no clear targeting strategy',
-      stat: '67% of ad spend wasted',
+      description: 'Money goes to clicks that never convert due to loose targeting or weak keyword match types.',
       color: 'from-red-500 via-orange-600 to-red-700'
     },
     {
       id: 2,
       icon: Target,
       title: 'Wrong Targeting',
-      description: 'Reaching people who will never convert into paying customers',
-      stat: 'Only 23% relevant traffic',
+      description: 'Ads reach people well outside your customer base just to hit a broad audience.',
       color: 'from-orange-500 via-red-500 to-orange-700'
     },
     {
       id: 3,
       icon: TrendingDown,
       title: 'Low ROI Performance',
-      description: 'Campaigns that drain budgets without delivering measurable results',
-      stat: 'Average ROI below 150%',
+      description: 'Campaigns get plenty of clicks but very little actual revenue because the wrong metrics are tracked.',
       color: 'from-red-600 via-orange-500 to-red-800'
     },
     {
       id: 4,
       icon: Eye,
       title: 'Poor Creative Performance',
-      description: 'Ad creatives that fail to capture attention or drive engagement',
-      stat: 'CTR below industry average',
+      description: 'Ad creative gets scrolled past because it was never tested or updated as performance dropped.',
       color: 'from-orange-600 via-red-600 to-orange-800'
     }
   ];
@@ -51,32 +47,28 @@ const PainPointSection = () => {
       id: 1,
       icon: Target,
       title: 'Laser-Sharp Targeting',
-      description: 'Advanced audience segmentation based on behavior, demographics, and interests',
-      stat: '4x higher conversion rates',
+      description: 'We look at intent signals, past behavior, and platform data to target people most likely to buy.',
       color: 'from-orange-400 via-orange-500 to-orange-600'
     },
     {
       id: 2,
       icon: Lightbulb,
       title: 'Creative Testing',
-      description: 'A/B testing multiple ad variations to find winning combinations',
-      stat: '250% better CTR',
+      description: 'We constantly test multiple ad variations to find what works best today, beating ad fatigue before it starts.',
       color: 'from-orange-500 via-yellow-500 to-orange-600'
     },
     {
       id: 3,
       icon: RefreshCw,
       title: 'Continuous Optimization',
-      description: 'Real-time campaign adjustments based on performance data',
-      stat: '300% ROI improvement',
+      description: 'Your campaigns improve week after week based on live data, not "set-and-forget" settings.',
       color: 'from-green-500 via-orange-500 to-orange-600'
     },
     {
       id: 4,
       icon: BarChart3,
       title: 'Performance Analytics',
-      description: 'Detailed insights and reporting to track every dollar spent',
-      stat: '99.2% budget efficiency',
+      description: 'Clear reporting tied to real business outcomes, so you see revenue instead of just clicks and impressions.',
       color: 'from-blue-500 via-orange-500 to-orange-600'
     }
   ];
@@ -141,6 +133,11 @@ const PainPointSection = () => {
               {isProblems ? 'Failed Ads' : 'Winning Ads'}
             </span>
           </h2>
+          <p className="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto mb-4">
+            Most failed ad campaigns drop the ball because of the same
+            simple mistakes. Here is what typically goes wrong, and how our
+            ads management fixes it.
+          </p>
           <p className="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">
             {isProblems
               ? "Most businesses waste thousands on ineffective ad campaigns. Here's what's going wrong."
@@ -235,11 +232,6 @@ const PainPointSection = () => {
                         </p>
                       </div>
                     </div>
-
-                    <div className={`inline-flex items-center px-4 py-2 bg-gradient-to-r  bg-opacity-20 backdrop-blur-sm border border-orange-400/30 rounded-full text-sm font-medium text-orange-300`}>
-                      <item.icon className="w-4 h-4 mr-2" />
-                      {item.stat}
-                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -275,11 +267,6 @@ const PainPointSection = () => {
                           {item.description}
                         </p>
                       </div>
-                    </div>
-
-                    <div className={`inline-flex items-center px-4 py-2 bg-gradient-to-r  bg-opacity-20 backdrop-blur-sm border border-orange-400/30 rounded-full text-sm font-medium ${isProblems ? 'text-red-300' : 'text-orange-300'}`}>
-                      <item.icon className="w-4 h-4 mr-2" />
-                      {item.stat}
                     </div>
                   </div>
 

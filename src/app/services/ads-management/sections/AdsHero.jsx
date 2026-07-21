@@ -55,19 +55,22 @@ const AdsHero = () => {
     {
       platform: 'Google Ads',
       color: 'from-blue-500 to-blue-700',
-      stats: '+250% ROI',
+      description:
+        'Search, Display, and YouTube campaigns built around real buying intent. We target the exact moment someone is actively looking for what you sell. This ensures your budget goes toward clicks that actually buy.',
       delay: 1,
     },
     {
       platform: 'Facebook',
       color: 'from-blue-600 to-purple-700',
-      stats: '89% CTR',
+      description:
+        'We use deep targeting to put your ads in front of people who match your real customer profile. Our creative is built to stop the scroll instead of blending into the feed.',
       delay: 2,
     },
     {
       platform: 'TikTok',
       color: 'from-pink-500 to-red-600',
-      stats: '2.4M Reach',
+      description:
+        'Short-form video built for how people actually watch TikTok. We create native-feeling video that looks like natural content, which easily outperforms traditional ads on this platform.',
       delay: 3,
     },
   ];
@@ -161,45 +164,25 @@ const AdsHero = () => {
                   : 'translate-y-10 opacity-0'
                 }`}
             >
-              Maximize your{' '}
-              <span className="text-orange-400 font-semibold">ROI</span> with
-              precision
-              <span className="text-orange-400 font-semibold">
-                {' '}
-                targeting
-              </span>{' '}
-              that delivers
-              <span className="text-orange-400 font-semibold">
-                {' '}
-                measurable results
-              </span>
-              . Transform your ad spend into profitable growth.
+              Running ads without a real strategy is just expensive
+              guesswork. We build, manage, and optimize paid campaigns
+              across the platforms your customers actually use. We turn
+              your ad spend into real revenue, not just empty views.
             </p>
 
-            {/* Stats Row */}
+            {/* Sourced stat */}
             <div
-              className={`grid grid-cols-3 gap-4 lg:gap-6 transform transition-all duration-1000 delay-600 ${isVisible
+              className={`flex items-start gap-3 transform transition-all duration-1000 delay-600 ${isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-10 opacity-0'
                 }`}
             >
-              {[
-                { value: '300%', label: 'ROI Boost', icon: TrendingUp },
-                { value: '89%', label: 'Accuracy', icon: Target },
-                { value: '2.5M+', label: 'Reached', icon: Users },
-              ].map((stat, index) => (
-                <div key={index} className="text-center group">
-                  <div className="mb-2">
-                    <stat.icon className="w-6 h-6 lg:w-8 lg:h-8 text-orange-400 mx-auto group-hover:scale-110 transition-transform duration-300" />
-                  </div>
-                  <div className="text-xl lg:text-2xl xl:text-3xl font-bold text-white">
-                    {stat.value}
-                  </div>
-                  <div className="text-gray-400 text-xs lg:text-sm">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
+              <TrendingUp className="w-6 h-6 text-orange-400 flex-shrink-0 mt-1" />
+              <p className="text-gray-300 text-base lg:text-lg leading-relaxed">
+                Google Ads conversion rates rose across 87% of industries in
+                2026, and we build every campaign to put you on the right
+                side of that trend.
+              </p>
             </div>
 
             {/* CTA Section */}
@@ -260,11 +243,8 @@ const AdsHero = () => {
                             <TrendingUp className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
                           </div>
                         </div>
-                        <div className="text-orange-200 text-2xl lg:text-3xl font-bold mb-2">
-                          {ad.stats}
-                        </div>
-                        <div className="text-white/80 text-sm lg:text-base">
-                          Campaign Performance
+                        <div className="text-white/80 text-sm lg:text-base leading-relaxed">
+                          {ad.description}
                         </div>
                       </div>
                     </div>

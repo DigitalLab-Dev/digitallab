@@ -13,7 +13,6 @@ import {
   ArrowRight,
   Check,
   Star,
-  Zap,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -30,14 +29,13 @@ const ServicesSection = () => {
       color: 'from-orange-400 via-orange-500 to-orange-600',
       bgColor: 'from-orange-400/20 via-orange-500/20 to-orange-600/20',
       description:
-        'Reach 3.8 billion users across Facebook and Instagram with precision targeting',
+        'Facebook and Instagram campaigns built around your customer journey. We manage both together so retargeting and audience data work across the full funnel.',
       features: [
         'Advanced Audience Targeting',
         'Creative A/B Testing',
         'Conversion Optimization',
         'Retargeting Campaigns',
       ],
-      stats: { metric: 'ROAS', value: '4.2x', label: 'Average Return' },
       platforms: ['Facebook', 'Instagram', 'Messenger', 'Audience Network'],
     },
     {
@@ -48,14 +46,13 @@ const ServicesSection = () => {
       color: 'from-orange-400 via-orange-500 to-orange-600',
       bgColor: 'from-orange-400/20 via-orange-500/20 to-orange-600/20',
       description:
-        'Dominate search results and capture high-intent customers actively searching',
+        'Search, Display, and YouTube campaigns targeting real purchase intent. We focus heavily on capturing demand that already exists.',
       features: [
         'Search Campaigns',
         'Display Network',
         'YouTube Advertising',
         'Shopping Ads',
       ],
-      stats: { metric: 'CTR', value: '8.5%', label: 'Click-Through Rate' },
       platforms: ['Search', 'Display', 'YouTube', 'Shopping'],
     },
     {
@@ -66,14 +63,13 @@ const ServicesSection = () => {
       color: 'from-orange-400 via-orange-500 to-orange-600',
       bgColor: 'from-orange-400/20 via-orange-500/20 to-orange-600/20',
       description:
-        'Connect with decision-makers and professionals in your industry',
+        'B2B campaigns that reach decision-makers by role, industry, and company size, not just broad job titles.',
       features: [
         'B2B Lead Generation',
         'Professional Targeting',
         'Sponsored Content',
         'InMail Campaigns',
       ],
-      stats: { metric: 'Leads', value: '340%', label: 'Quality Increase' },
       platforms: [
         'Sponsored Content',
         'Message Ads',
@@ -89,14 +85,13 @@ const ServicesSection = () => {
       color: 'from-orange-400 via-orange-500 to-orange-600',
       bgColor: 'from-orange-400/20 via-orange-500/20 to-orange-600/20',
       description:
-        'Engage Gen Z and millennials with creative video content that goes viral',
+        'Organic-feeling video content built specifically for how the platform works.',
       features: [
         'Video Ad Creation',
         'Hashtag Challenges',
         'Brand Takeovers',
         'Spark Ads',
       ],
-      stats: { metric: 'Engagement', value: '6.2%', label: 'Avg Rate' },
       platforms: ['In-Feed Ads', 'TopView', 'Branded Effects', 'Spark Ads'],
     },
     {
@@ -107,14 +102,13 @@ const ServicesSection = () => {
       color: 'from-orange-400 via-orange-500 to-orange-600',
       bgColor: 'from-orange-400/20 via-orange-500/20 to-orange-600/20',
       description:
-        'Convert abandoned carts and re-engage website visitors across all platforms',
+        'Bringing back visitors who were close to buying before they forget your brand entirely. This is often the highest-ROI part of a campaign.',
       features: [
         'Cross-Platform Retargeting',
         'Dynamic Product Ads',
         'Lookalike Audiences',
         'Sequential Messaging',
       ],
-      stats: { metric: 'CVR', value: '12.8%', label: 'Conversion Rate' },
       platforms: ['Web Visitors', 'App Users', 'Customer Lists', 'Lookalikes'],
     },
     {
@@ -125,14 +119,13 @@ const ServicesSection = () => {
       color: 'from-orange-400 via-orange-500 to-orange-600',
       bgColor: 'from-orange-400/20 via-orange-500/20 to-orange-600/20',
       description:
-        'Complete funnel optimization with advanced tracking and conversion analytics',
+        'Technical tracking built to show you what drives revenue, not just clicks, so you can make smart budget choices.',
       features: [
         'Conversion Tracking',
         'Attribution Modeling',
         'Custom Dashboards',
         'ROI Analysis',
       ],
-      stats: { metric: 'Accuracy', value: '99.2%', label: 'Tracking Rate' },
       platforms: [
         'GA4',
         'Facebook Pixel',
@@ -260,9 +253,9 @@ const ServicesSection = () => {
           </h2>
 
           <p className="text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto">
-            From Google Search to TikTok videos, we create and manage
-            high-converting ad campaigns across all major platforms to maximize
-            your reach and ROI.
+            Different platforms reach customers at different points in their
+            buying journey. Here is how we handle each one to ensure your
+            paid campaigns succeed.
           </p>
         </motion.div>
 
@@ -316,24 +309,6 @@ const ServicesSection = () => {
                   <p className="text-gray-300 text-sm lg:text-base leading-relaxed mb-6">
                     {service.description}
                   </p>
-
-                  {/* Stats */}
-                  <div className="flex items-center justify-between">
-                    <div
-                      className={`px-8 py-2 bg-gradient-to-r  bg-opacity-20 backdrop-blur-sm border border-orange-400/30 rounded-xl`}
-                    >
-                      <div className="text-orange-300 font-bold text-lg">
-                        {service.stats.value}
-                      </div>
-                      <div className="text-orange-200 text-xs">
-                        {service.stats.label}
-                      </div>
-                    </div>
-
-                    <div className="text-gray-400">
-                      <Zap className="w-5 h-5" />
-                    </div>
-                  </div>
 
                   {/* Platform Tags */}
                   <div className="flex flex-wrap gap-2 mt-4">

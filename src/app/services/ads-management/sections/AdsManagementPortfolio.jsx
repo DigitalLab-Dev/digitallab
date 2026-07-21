@@ -136,9 +136,9 @@ const AdsManagementPortfolio = () => {
         >
           <div className="flex items-center justify-center gap-2 mb-4">
             <Target className="w-8 h-8 text-orange-500" />
-            <h1 className="text-5xl font-bold">
+            <h2 className="text-5xl font-bold">
               Ads Management <span className="text-orange-500">Portfolio</span>
-            </h1>
+            </h2>
           </div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Proven results across industries. Our strategic approach to paid advertising 
