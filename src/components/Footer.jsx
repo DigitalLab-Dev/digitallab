@@ -242,7 +242,7 @@ const Footer = () => {
                 ))}
                 <div className="pt-2">
                   <span className="inline-flex items-center gap-1 text-xs text-gray-600 bg-white/5 border border-white/10 rounded-full px-3 py-1">
-                    More coming soon
+                    New products in development
                   </span>
                 </div>
               </nav>
