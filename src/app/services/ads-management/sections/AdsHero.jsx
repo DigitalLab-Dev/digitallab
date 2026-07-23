@@ -148,9 +148,11 @@ const AdsHero = () => {
             >
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tighter">
                 <span className="block text-white mb-2">Turn Clicks Into</span>
+                {' '}
                 <span className="block bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent mb-3">
                   Customers
                 </span>
+                {' '}
                 <span className="block text-white text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-medium">
                   with Smart Ads Management
                 </span>

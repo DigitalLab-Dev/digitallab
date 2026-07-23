@@ -247,6 +247,7 @@ const ServicesSection = () => {
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6">
             <span className="block mb-2">Dominate Every Platform</span>
+            {' '}
             <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent">
               We've Got You Covered
             </span>

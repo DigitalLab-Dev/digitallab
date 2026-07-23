@@ -148,6 +148,7 @@ const ClientsHeroSection = () => {
           <span className="text-white block mb-4">
             We Are The First Choice
           </span>
+          {' '}
           <span className="block">
             <span className="relative inline-block">
               <span className="absolute inset-0 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 blur-2xl opacity-50" />
