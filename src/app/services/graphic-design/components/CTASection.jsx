@@ -31,8 +31,9 @@ const CTASection = () => {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                Let's Create
+                Let's Create{' '}
                 <span className="block text-orange-500">Something Amazing</span>
+                {' '}
                 <span className="block">Together</span>
               </motion.h3>
 

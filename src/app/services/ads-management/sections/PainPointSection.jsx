@@ -125,7 +125,7 @@ const PainPointSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 ">
-            Stop Losing Money on
+            Stop Losing Money on{' '}
             <span className={`flex items-center justify-center py-4 bg-gradient-to-r ${isProblems
               ? 'from-red-400 via-orange-400 to-red-600'
               : 'from-orange-400 via-orange-500 to-orange-600'} 

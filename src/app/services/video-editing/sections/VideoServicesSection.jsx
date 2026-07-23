@@ -219,7 +219,7 @@ const services = [
           </motion.div>
 
           <div className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight max-w-4xl">
-            Services That Transform
+            Services That Transform{' '}
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-400">
               Your Vision
             </span>

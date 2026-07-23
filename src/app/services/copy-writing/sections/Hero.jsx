@@ -258,6 +258,7 @@ const CopywritingHero = () => {
             >
               <h1 className="text-4xl md:text-5xl lg:text-8xl font-black leading-tighter">
                 <span className="block gradient-text">Words That</span>
+                {' '}
                 <span className="flex flex-col items-center justify-center mt-2 ">
                   <span className="text-white">Make Your Brand </span>
             <span className="italican lowercase text-[#BED3CC] rounded-2xl">

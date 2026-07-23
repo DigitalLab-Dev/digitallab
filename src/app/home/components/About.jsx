@@ -125,6 +125,7 @@ const About = () => {
                 </motion.span>
               ))}
             </motion.span>
+            {' '}
 
             {/* Second Line - DIGITAL */}
             <motion.span className="block mb-2 text-[#f48020]">
@@ -140,6 +141,7 @@ const About = () => {
                 </motion.span>
               ))}
             </motion.span>
+            {' '}
 
             {/* Third Line - EXCELLENCE */}
             <motion.span className="block">

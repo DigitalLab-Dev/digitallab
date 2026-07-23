@@ -261,9 +261,9 @@ const IndividualBlogPage = async ({ params }) => {
 
         {/* Subtitle */}
         {blog.excerpt && (
-          <h2 className="text-xl lg:text-2xl text-slate-600 font-medium  leading-relaxed mb-6">
+          <p className="text-xl lg:text-2xl text-slate-600 font-medium  leading-relaxed mb-6">
             {blog.excerpt}
-          </h2>
+          </p>
         )}
 
         {/* Meta Information */}

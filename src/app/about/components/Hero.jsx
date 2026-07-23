@@ -103,6 +103,7 @@ const Hero = () => {
                 </Fragment>
               ))}
             </span>
+            {' '}
 
             {/* White Text Animation */}
             <span className="block">

@@ -123,9 +123,11 @@ const HeroSection = () => {
             transition={{ delay: 0.5 }}
           >
             <span className="block text-white">Building Brands</span>
+            {' '}
             <span className="block bg-gradient-to-r from-orange-400 via-amber-500 to-orange-500 bg-clip-text text-transparent">
               That Trend,
             </span>
+            {' '}
             <span className="block text-white">One Post at a Time</span>
           </motion.h1>
 

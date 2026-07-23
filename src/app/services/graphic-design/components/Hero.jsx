@@ -113,6 +113,7 @@ const Hero = () => {
               We Create
             </div>
           </div>
+          {' '}
           <div className="overflow-hidden">
             <div
               className={`text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-1000 delay-400 ${isVisible
@@ -123,6 +124,7 @@ const Hero = () => {
               Extraordinary
             </div>
           </div>
+          {' '}
           <div className="overflow-hidden">
             <div
               className={`transition-all duration-1000 delay-600 ${isVisible
