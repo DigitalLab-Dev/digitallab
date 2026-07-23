@@ -5,6 +5,7 @@ import BlogFAQ from '../components/BlogFAQ';
 import MarkdownRenderer from '@/utils/MarkdownRenderer';
 import { blogApi } from '@/utils/blogApi';
 import { organizationSchema, organizationRef } from '@/utils/schema/organization';
+import { SERVICES } from '@/data/services';
 
 const SITE_URL = 'https://www.digitallabservices.com';
 
@@ -15,39 +16,6 @@ export const revalidate = 3600;
 // Template-level internal linking: rendered around every post based on its
 // category, not stored in the DB content field, so it applies to all
 // existing and future posts automatically.
-const SERVICES = [
-  {
-    slug: 'web-development',
-    name: 'Web Development',
-    description: 'Custom websites and web apps built for growth.',
-  },
-  {
-    slug: 'graphic-design',
-    name: 'Graphic Design',
-    description: 'Logos and branding that make your business memorable.',
-  },
-  {
-    slug: 'video-editing',
-    name: 'Video Editing',
-    description: 'Cinematic video production that captivates audiences.',
-  },
-  {
-    slug: 'copy-writing',
-    name: 'Copywriting',
-    description: 'Persuasive copy that turns visitors into customers.',
-  },
-  {
-    slug: 'social-media-management',
-    name: 'Social Media Management',
-    description: 'Social strategy and content that builds real engagement.',
-  },
-  {
-    slug: 'ads-management',
-    name: 'Ads Management',
-    description: 'Google and Meta ad campaigns that convert.',
-  },
-];
-
 const CATEGORY_SERVICE_MAP = {
   Business: ['web-development', 'ads-management'],
   Marketing: ['social-media-management', 'ads-management', 'copy-writing'],

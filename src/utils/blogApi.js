@@ -41,6 +41,10 @@ export const blogApi = {
       ) {
         searchParams.append('category', params.category);
       }
+
+      if (params.full) {
+        searchParams.append('full', 'true');
+      }
       url = `${API_BASE_URL}${
         searchParams.toString() ? `?${searchParams.toString()}` : ''
       }`;
