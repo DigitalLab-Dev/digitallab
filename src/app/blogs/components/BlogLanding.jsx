@@ -1,38 +1,24 @@
 // src/components/BlogLoading.jsx
 const BlogCardSkeleton = () => {
   return (
-    <div className="w-80 h-96 bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
-      {/* Image skeleton */}
-      <div className="w-full h-48 bg-gray-200"></div>
-      
-      {/* Content skeleton */}
-      <div className="p-5 h-48 flex flex-col justify-between">
-        <div className="flex-1">
-          {/* Title skeleton */}
-          <div className="h-5 bg-gray-200 rounded mb-3"></div>
-          <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-          
-          {/* Subtitle skeleton */}
-          <div className="h-3 bg-gray-200 rounded w-1/2 mb-3"></div>
-          
-          {/* Description skeleton */}
-          <div className="space-y-2 mb-3">
-            <div className="h-3 bg-gray-200 rounded"></div>
-            <div className="h-3 bg-gray-200 rounded"></div>
-            <div className="h-3 bg-gray-200 rounded w-2/3"></div>
-          </div>
+    <div className="h-full flex flex-col rounded-2xl border border-white/10 bg-white/5 overflow-hidden animate-pulse">
+      <div className="w-full aspect-video bg-white/10"></div>
+
+      <div className="p-5 flex flex-col flex-1 gap-3">
+        <div className="h-5 bg-white/10 rounded w-4/5"></div>
+        <div className="space-y-2">
+          <div className="h-3 bg-white/10 rounded"></div>
+          <div className="h-3 bg-white/10 rounded"></div>
+          <div className="h-3 bg-white/10 rounded w-2/3"></div>
         </div>
-        
-        {/* Read more skeleton */}
-        <div className="h-4 bg-gray-200 rounded w-24"></div>
       </div>
     </div>
   );
 };
 
-const BlogLoading = ({ count = 6 }) => {
+const BlogLoading = ({ count = 10 }) => {
   return (
-    <div className="mt-10 flex flex-wrap items-center justify-center gap-5">
+    <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
       {Array.from({ length: count }).map((_, index) => (
         <BlogCardSkeleton key={index} />
       ))}

@@ -3,32 +3,32 @@
 import Link from 'next/link';
 
 const BlogCard = ({ title, excerpt, imageUrl, slug, readingTime }) => {
-  // Truncate description to show only first 120 characters
-  const truncateText = (text, maxLength = 120) => {
-    if (!text) return '';
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength) + '...';
-  };
-
   return (
-    <Link href={`/blogs/${slug}`} passHref>
-      <div className="w-140 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer">
-        {/* Image Section */}
-        <div className="w-full h-120 overflow-hidden">
+    <Link href={`/blogs/${slug}`} className="group block h-full">
+      <div className="h-full flex flex-col rounded-2xl border border-white/10 bg-white/5 overflow-hidden hover:border-orange-500/40 hover:bg-white/10 transition-all duration-300">
+        <div className="w-full aspect-video overflow-hidden">
           <img
             src={imageUrl || '/api/placeholder/320/192'}
             alt={title}
-            className="w-full h-full rounded-2xl object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
         </div>
 
-        <div className="w-full mt-2 flex items-center justify-between">
-          <div className="w-[80%] text-xl">
-            <h3>{title}</h3>
+        <div className="flex flex-col flex-1 p-5">
+          <div className="flex items-start justify-between gap-3 mb-2">
+            <h3 className="text-lg font-bold text-white leading-snug line-clamp-2">
+              {title}
+            </h3>
+            <span className="shrink-0 bg-orange-500 px-3 py-1 rounded-full text-white text-xs font-semibold whitespace-nowrap">
+              {readingTime} min
+            </span>
           </div>
-          <div className="bg-orange-400 px-3 py-2 rounded-full text-white text-sm">
-            <p className="text-sm">{readingTime} min read</p>
-          </div>
+
+          {excerpt && (
+            <p className="text-sm text-gray-400 leading-relaxed line-clamp-3">
+              {excerpt}
+            </p>
+          )}
         </div>
       </div>
     </Link>

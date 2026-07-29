@@ -148,7 +148,7 @@ export default function BlogsClient({ initialBlogs, initialPagination }) {
       ) : blogs.length > 0 ? (
         <>
           {/* Blog Cards */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-5">
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
             {blogs.map((blog) => (
               <BlogCard
                 key={blog.id}
