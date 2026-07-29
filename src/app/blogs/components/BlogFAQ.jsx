@@ -49,7 +49,7 @@ const BlogFAQ = ({ faqs }) => {
               transition={{ duration: 0.3, ease: 'easeInOut' }}
               className="overflow-hidden"
             >
-              <p className="px-6 pb-6 text-gray-400 leading-relaxed">
+              <p className="faq-answer px-6 pb-6 text-gray-400 leading-relaxed">
                 {faq.answer}
               </p>
             </motion.div>

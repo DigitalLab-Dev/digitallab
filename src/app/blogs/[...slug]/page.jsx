@@ -169,6 +169,45 @@ const IndividualBlogPage = async ({ params }) => {
       }
     : null;
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: `${SITE_URL}/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: `${SITE_URL}/blogs`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: blog.title,
+        item: url,
+      },
+    ],
+  };
+
+  // Matches the Ads Management page's speakable pattern: a standalone
+  // WebPage block whose cssSelector targets the FAQ answer text - the
+  // same .faq-answer class BlogFAQ.jsx renders on every post.
+  const speakableSchema = hasFaqs
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        speakable: {
+          '@type': 'SpeakableSpecification',
+          cssSelector: ['.faq-answer'],
+        },
+      }
+    : null;
+
   return (
     <article className="max-w-4xl mx-auto px-4 py-20">
       <script
@@ -179,10 +218,20 @@ const IndividualBlogPage = async ({ params }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {hasFaqs && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+      {hasFaqs && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
         />
       )}
 
