@@ -20,13 +20,14 @@ const CATEGORY_SERVICE_MAP = {
   Business: ['web-development', 'ads-management'],
   Marketing: ['social-media-management', 'ads-management', 'copy-writing'],
   'Artificial Intelligence': ['web-development', 'ads-management'],
+  Technology: ['web-development', 'graphic-design'],
 };
 
 function getRelatedServices(category) {
   const slugs = CATEGORY_SERVICE_MAP[category];
   if (!slugs) {
-    // Unmapped category (e.g. a future Technology/Finance/Data Automation
-    // post) - fall back to showing all services rather than none.
+    // Unmapped category (e.g. a future Finance/Data Automation post) -
+    // fall back to showing all services rather than none.
     return SERVICES;
   }
   return slugs
