@@ -2,10 +2,12 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BlogImageGallery from '../components/BlogImageGallery';
 import BlogFAQ from '../components/BlogFAQ';
+import BlogTOC from '../components/BlogTOC';
 import MarkdownRenderer from '@/utils/MarkdownRenderer';
 import { blogApi } from '@/utils/blogApi';
 import { organizationSchema, organizationRef } from '@/utils/schema/organization';
 import { SERVICES } from '@/data/services';
+import { extractHeadings, slugifyFaqQuestions } from '@/utils/extractHeadings';
 
 const SITE_URL = 'https://www.digitallabservices.com';
 
@@ -133,6 +135,20 @@ const IndividualBlogPage = async ({ params }) => {
 
   const relatedServices = getRelatedServices(blog.category);
   const otherPosts = await getOtherPosts(blog.slug);
+  const hasFaqs = Array.isArray(blog.faqs) && blog.faqs.length > 0;
+  const faqSlugs = hasFaqs ? slugifyFaqQuestions(blog.faqs) : [];
+  const headings = extractHeadings(blog.content);
+  // FAQ content lives in blog.faqs, not blog.content, so extractHeadings
+  // never sees it - append its heading (and one entry per question,
+  // nested under it) manually. blog-faq-heading matches the FAQ
+  // section's <h2> id; faqSlugs matches the id BlogFAQ.jsx renders on
+  // each question's <h3>.
+  if (hasFaqs) {
+    headings.push({ level: 2, text: 'Frequently Asked Questions', slug: 'blog-faq-heading' });
+    blog.faqs.forEach((faq, index) => {
+      headings.push({ level: 3, text: faq.question, slug: faqSlugs[index] });
+    });
+  }
 
   const url = `${SITE_URL}/blogs/${blog.slug}`;
   const articleSchema = {
@@ -153,7 +169,6 @@ const IndividualBlogPage = async ({ params }) => {
     }),
   };
 
-  const hasFaqs = Array.isArray(blog.faqs) && blog.faqs.length > 0;
   const faqSchema = hasFaqs
     ? {
         '@context': 'https://schema.org',
@@ -257,11 +272,11 @@ const IndividualBlogPage = async ({ params }) => {
       </Link>
 
       {/* Blog Header */}
-      <header className="mb-8">
+      <header className="mb-10">
         {/* Category Badge */}
         {blog.category && (
-          <div className="mb-4">
-            <span className="inline-block px-3 py-1 text-sm font-medium text-orange-700 bg-orange-200 rounded-full">
+          <div className="mb-5">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-orange-400 bg-orange-500/10 border border-orange-500/20 rounded-full">
               {blog.category}
             </span>
           </div>
@@ -269,7 +284,7 @@ const IndividualBlogPage = async ({ params }) => {
 
         {/* Title */}
         <h1
-          className="text-[7vw] text-center lg:text-left md:text-[4.25vw] font-extrabold leading-tight
+          className="text-4xl sm:text-5xl lg:text-6xl text-center lg:text-left font-extrabold leading-tight
             bg-gradient-to-r from-neutral-300 via-orange-500 to-orange-700
             bg-clip-text text-transparent
             "
@@ -279,16 +294,16 @@ const IndividualBlogPage = async ({ params }) => {
 
         {/* Subtitle */}
         {blog.excerpt && (
-          <p className="text-xl lg:text-2xl text-slate-600 font-medium  leading-relaxed mb-6">
+          <p className="text-xl lg:text-2xl text-slate-300 font-medium leading-relaxed mt-4 mb-6">
             {blog.excerpt}
           </p>
         )}
 
         {/* Meta Information */}
-        <div className="flex items-center gap-4 text-sm text-slate-300 mt-2 border-b border-slate-200 pb-6">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-3 text-sm text-slate-300 mt-2 border-b border-white/10 pb-6">
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
             <svg
-              className="w-4 h-4"
+              className="w-4 h-4 text-orange-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -300,13 +315,32 @@ const IndividualBlogPage = async ({ params }) => {
                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
               />
             </svg>
-            <span>Published {formatDate(blog.createdAt)}</span>
-          </div>
+            Published {formatDate(blog.createdAt)}
+          </span>
+
+          {blog.readingTime && (
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
+              <svg
+                className="w-4 h-4 text-orange-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              {blog.readingTime} min read
+            </span>
+          )}
 
           {blog.images && blog.images.length > 0 && (
-            <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
               <svg
-                className="w-4 h-4"
+                className="w-4 h-4 text-orange-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -318,10 +352,8 @@ const IndividualBlogPage = async ({ params }) => {
                   d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                 />
               </svg>
-              <span>
-                {blog.images.length} image{blog.images.length !== 1 ? 's' : ''}
-              </span>
-            </div>
+              {blog.images.length} image{blog.images.length !== 1 ? 's' : ''}
+            </span>
           )}
         </div>
       </header>
@@ -333,6 +365,9 @@ const IndividualBlogPage = async ({ params }) => {
         </section>
       )}
 
+      {/* Table of Contents */}
+      <BlogTOC headings={headings} />
+
       {/* Blog Content */}
       <section className="mb-12 text-neutral-300 reset-tw">
         <div className="prose prose-lg max-w-none">
@@ -343,13 +378,14 @@ const IndividualBlogPage = async ({ params }) => {
       {/* FAQ */}
       {hasFaqs && (
         <section className="mb-12" aria-labelledby="blog-faq-heading">
-          <h3
+          <h2
             id="blog-faq-heading"
-            className="text-2xl font-bold text-white mb-6"
+            className="flex items-center gap-3 text-2xl font-bold text-white mb-6"
           >
+            <span className="w-1 h-6 bg-orange-500 rounded-full" aria-hidden="true" />
             Frequently Asked Questions
-          </h3>
-          <BlogFAQ faqs={blog.faqs} />
+          </h2>
+          <BlogFAQ faqs={blog.faqs} faqSlugs={faqSlugs} />
         </section>
       )}
 
@@ -358,8 +394,9 @@ const IndividualBlogPage = async ({ params }) => {
         <section className="mb-12" aria-labelledby="related-services-heading">
           <h3
             id="related-services-heading"
-            className="text-2xl font-bold text-white mb-6"
+            className="flex items-center gap-3 text-2xl font-bold text-white mb-6"
           >
+            <span className="w-1 h-6 bg-orange-500 rounded-full" aria-hidden="true" />
             Related Services
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -386,8 +423,9 @@ const IndividualBlogPage = async ({ params }) => {
         <section className="mb-12" aria-labelledby="related-posts-heading">
           <h3
             id="related-posts-heading"
-            className="text-2xl font-bold text-white mb-6"
+            className="flex items-center gap-3 text-2xl font-bold text-white mb-6"
           >
+            <span className="w-1 h-6 bg-orange-500 rounded-full" aria-hidden="true" />
             You Might Also Like
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -412,9 +450,9 @@ const IndividualBlogPage = async ({ params }) => {
       )}
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 pt-8">
+      <footer className="border-t border-white/10 pt-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div className="text-sm text-slate-500">
+          <div className="text-sm text-slate-400">
             <p>Article published on {formatDate(blog.createdAt)}</p>
             {blog.category && (
               <p>
@@ -435,7 +473,7 @@ const IndividualBlogPage = async ({ params }) => {
 
           <Link
             href="/blogs"
-            className="self-start sm:self-auto px-6 py-2 bg-orange-100 hover:bg-orange-200 text-orange-700 cursor-pointer font-medium rounded-lg transition-colors w-fit"
+            className="self-start sm:self-auto px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white cursor-pointer font-semibold rounded-lg transition-colors w-fit"
           >
             ← More Articles
           </Link>
