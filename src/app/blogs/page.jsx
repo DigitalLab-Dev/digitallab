@@ -7,7 +7,7 @@ export const revalidate = 3600;
 
 const DEFAULT_PAGINATION = {
   page: 1,
-  limit: 6,
+  limit: 10,
   totalBlogs: 0,
   totalPages: 1,
   hasNext: false,
@@ -19,7 +19,7 @@ export default async function Blogs() {
   let initialPagination = DEFAULT_PAGINATION;
 
   try {
-    const response = await blogApi.getBlogs({ page: 1, limit: 6 });
+    const response = await blogApi.getBlogs({ page: 1, limit: 10 });
     initialBlogs = response.blogs.map(transformBlogData);
     initialPagination = response.pagination;
   } catch (error) {
