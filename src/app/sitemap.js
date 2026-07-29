@@ -1,5 +1,11 @@
 import { blogApi } from '@/utils/blogApi';
 
+// Without this, sitemap.js is generated once at build time and cached
+// indefinitely at the edge - new/edited posts never show up until the
+// next deploy. Matches the same revalidate window already used by the
+// blog post template and the llms-full.txt route.
+export const revalidate = 3600;
+
 export default async function sitemap() {
   const baseUrl = 'https://www.digitallabservices.com';
 
