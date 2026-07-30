@@ -30,6 +30,28 @@ const nextConfig = {
   // React strict mode for better performance insights
   reactStrictMode: true,
 
+  // Permanent redirects for blog slugs that dropped a year suffix, so
+  // existing external links/search index entries don't dead-end.
+  async redirects() {
+    return [
+      {
+        source: '/blogs/in-house-video-editor-vs-agency-what-actually-costs-more-in-2026',
+        destination: '/blogs/in-house-video-editor-vs-agency-what-actually-costs-more',
+        permanent: true,
+      },
+      {
+        source: '/blogs/navigating-business-evolution-in-2025-from-adaptation-to-leadership',
+        destination: '/blogs/navigating-business-evolution-from-adaptation-to-leadership',
+        permanent: true,
+      },
+      {
+        source: '/blogs/marketing-in-2025-how-brands-can-thrive-with-hyper-personalisation-and-ai-driven-strategy',
+        destination: '/blogs/marketing-how-brands-can-thrive-with-hyper-personalisation-and-ai-driven-strategy',
+        permanent: true,
+      },
+    ];
+  },
+
   // Reduce bundle size with modular imports
   modularizeImports: {
     'react-icons': {
