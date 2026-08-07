@@ -20,6 +20,28 @@ const sanitizeSchema = {
   },
 };
 
+// Internal links (/blogs/..., /services/...) navigate normally within the
+// site; external citation links open in a new tab, matching the
+// target="_blank" rel="noopener noreferrer" pattern used elsewhere on the
+// site (e.g. the Calendly link).
+function MarkdownLink({ href, children, node, ...props }) {
+  const isExternal = /^https?:\/\//.test(href || '');
+
+  if (!isExternal) {
+    return (
+      <a href={href} {...props}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+      {children}
+    </a>
+  );
+}
+
 const MarkdownRenderer = ({ content }) => {
   if (!content) return null;
 
@@ -28,6 +50,7 @@ const MarkdownRenderer = ({ content }) => {
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeSlug, [rehypeSanitize, sanitizeSchema]]}
+        components={{ a: MarkdownLink }}
       >
         {content}
       </ReactMarkdown>
