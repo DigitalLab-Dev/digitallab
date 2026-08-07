@@ -16,7 +16,9 @@ const DesignMattersComponent = () => {
         title: 'Brand Recognition',
         description: "Build visuals that stick in your customers' minds and make a lasting impact.",
         stat: '33%',
-        metric: 'revenue increase from consistent branding (Source: Lucidpress)',
+        metric: 'revenue increase from consistent branding',
+        source: 'Lucidpress',
+        sourceUrl: 'https://www.prnewswire.com/news-releases/study-finds-companies-with-consistent-branding-can-see-up-to-33-increase-in-revenue-300967219.html',
         gradient: 'from-orange-500 to-red-500',
       },
       {
@@ -24,7 +26,9 @@ const DesignMattersComponent = () => {
         title: 'Professional Identity',
         description: 'Look like the expert you are. Professional design builds the credibility you need to close deals.',
         stat: null,
-        metric: 'Consumers now trust brands more than they trust government, media, or NGOs (Source: Edelman 2025)',
+        metric: 'Consumers now trust brands more than they trust government, media, or NGOs',
+        source: 'Edelman 2025',
+        sourceUrl: 'https://www.edelman.com/uk/trust/2025/trust-barometer/special-report-brands',
         gradient: 'from-orange-500 to-yellow-500',
       },
       {
@@ -255,11 +259,39 @@ const DesignMattersComponent = () => {
                             </motion.div>
                             <div className="text-xs sm:text-sm text-gray-500 uppercase tracking-wider font-medium">
                               {benefit.metric}
+                              {benefit.source && (
+                                <>
+                                  {' '}(Source:{' '}
+                                  <a
+                                    href={benefit.sourceUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="underline hover:text-orange-400 transition-colors"
+                                  >
+                                    {benefit.source}
+                                  </a>
+                                  )
+                                </>
+                              )}
                             </div>
                           </>
                         ) : (
                           <div className="text-sm sm:text-base text-gray-400 leading-relaxed">
                             {benefit.metric}
+                            {benefit.source && (
+                              <>
+                                {' '}(Source:{' '}
+                                <a
+                                  href={benefit.sourceUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="underline hover:text-orange-400 transition-colors"
+                                >
+                                  {benefit.source}
+                                </a>
+                                )
+                              </>
+                            )}
                           </div>
                         )}
                       </motion.div>
