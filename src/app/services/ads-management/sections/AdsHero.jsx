@@ -182,8 +182,17 @@ const AdsHero = () => {
               <TrendingUp className="w-6 h-6 text-orange-400 flex-shrink-0 mt-1" />
               <p className="text-gray-300 text-base lg:text-lg leading-relaxed">
                 Google Ads conversion rates rose across 87% of industries in
-                2026, and we build every campaign to put you on the right
-                side of that trend.
+                2026 (Source:{' '}
+                <a
+                  href="https://www.wordstream.com/blog/2026-google-ads-benchmarks"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-orange-400 transition-colors"
+                >
+                  WordStream
+                </a>
+                ), and we build every campaign to put you on the right side of
+                that trend.
               </p>
             </div>
 
