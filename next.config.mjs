@@ -49,6 +49,11 @@ const nextConfig = {
         destination: '/blogs/marketing-how-brands-can-thrive-with-hyper-personalisation-and-ai-driven-strategy',
         permanent: true,
       },
+      {
+        source: '/blogs/how-ai-is-transforming-digital-marketing-in-2025-and-what-it-means-for-your-business',
+        destination: '/blogs/how-ai-is-transforming-marketing',
+        permanent: true,
+      },
     ];
   },
 
