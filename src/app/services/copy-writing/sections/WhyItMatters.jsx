@@ -1,20 +1,13 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { TrendingUp, Target, Zap, Users, DollarSign, MousePointer } from 'lucide-react';
+import { TrendingUp, Target, Zap, Users, Mail, MousePointer } from 'lucide-react';
 
 
 const WhyCopyMatters = () => {
   const [typedText, setTypedText] = useState('');
-  const [currentStat, setCurrentStat] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  
+
   const typewriterText = "The right words at the right time can change everything.";
-  const stats = [
-    { number: "113%", label: "Conversion Increase" },
-    { number: "200%", label: "Click-Through Rate Boost" },
-    { number: "89%", label: "Brand Recall Improvement" },
-    { number: "156%", label: "Email Open Rate Jump" }
-  ];
 
   // Typewriter effect
   useEffect(() => {
@@ -31,17 +24,6 @@ const WhyCopyMatters = () => {
     }, 80);
 
     return () => clearInterval(timer);
-  }, [isVisible]);
-
-  // Stat rotation
-  useEffect(() => {
-    if (!isVisible) return;
-    
-    const interval = setInterval(() => {
-      setCurrentStat((prev) => (prev + 1) % stats.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
   }, [isVisible]);
 
   // Intersection observer for animations
@@ -158,8 +140,8 @@ const WhyCopyMatters = () => {
   );
 
   const StatCard = ({ icon: Icon, stat, description, delay }) => (
-    <div 
-      className={`bg-zinc-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 transform transition-all duration-700 hover:scale-105 hover:bg-gray-800/50 ${
+    <div
+      className={`bg-zinc-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 min-h-[220px] transform transition-all duration-700 hover:scale-105 hover:bg-gray-800/50 ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
       }`}
       style={{ transitionDelay: `${delay}ms` }}
@@ -169,7 +151,7 @@ const WhyCopyMatters = () => {
           <Icon className="w-6 h-6 text-orange-500" />
         </div>
         <div>
-          <div className="text-3xl font-bold text-orange-400">{stat}</div>
+          <div className="text-xl font-bold text-orange-400">{stat}</div>
           <div className="text-sm text-gray-500">{description}</div>
         </div>
       </div>
@@ -329,33 +311,33 @@ const WhyCopyMatters = () => {
           <div className="mb-16">
             <h3 className="text-5xl font-bold text-center mb-12">
               <span className="text-white">
-                The Numbers Don't Lie
+                What Good Copy Actually Does
               </span>
             </h3>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <StatCard 
-                icon={TrendingUp} 
-                stat="113%" 
-                description="Conversion Increase" 
+              <StatCard
+                icon={TrendingUp}
+                stat="Higher Conversions"
+                description="Copy built around what your customer actually needs turns more visitors into buyers."
                 delay={0}
               />
-              <StatCard 
-                icon={MousePointer} 
-                stat="200%" 
-                description="Click-Through Rate" 
+              <StatCard
+                icon={MousePointer}
+                stat="Stronger Click-Through Rates"
+                description="Headlines and subject lines that create real curiosity get opened and clicked, not skipped."
                 delay={200}
               />
-              <StatCard 
-                icon={Users} 
-                stat="89%" 
-                description="Brand Recall" 
+              <StatCard
+                icon={Users}
+                stat="Better Brand Recall"
+                description="Consistent voice and messaging make your brand the one people remember and come back to."
                 delay={400}
               />
-              <StatCard 
-                icon={DollarSign} 
-                stat="156%" 
-                description="Revenue Growth" 
+              <StatCard
+                icon={Mail}
+                stat="Higher Email Engagement"
+                description="Subject lines and preview text written to earn a second look, not just fill a template."
                 delay={600}
               />
             </div>
@@ -372,7 +354,7 @@ const WhyCopyMatters = () => {
                     <Target className="w-12 h-12 text-orange-400 mx-auto" />
                     <h4 className="text-xl font-semibold text-white">Clicks</h4>
                     <p className="text-gray-300">
-                      Compelling headlines and meta descriptions drive 67% more organic clicks
+                      Compelling headlines and meta descriptions are what actually get a search result clicked, not just ranked.
                     </p>
                   </div>
                   
@@ -380,7 +362,7 @@ const WhyCopyMatters = () => {
                     <Zap className="w-12 h-12 text-orange-400 mx-auto" />
                     <h4 className="text-xl font-semibold text-white">Conversions</h4>
                     <p className="text-gray-300">
-                      Persuasive copy transforms visitors into customers at 3x higher rates
+                      Persuasive copy is what turns a visitor who's just browsing into someone ready to buy.
                     </p>
                   </div>
                   
@@ -388,7 +370,7 @@ const WhyCopyMatters = () => {
                     <Users className="w-12 h-12 text-orange-400 mx-auto" />
                     <h4 className="text-xl font-semibold text-white">Branding</h4>
                     <p className="text-gray-300">
-                      Consistent voice builds trust and increases brand recognition by 89%
+                      A consistent voice across every page and channel builds the kind of trust that makes a brand recognizable at a glance.
                     </p>
                   </div>
                 </div>
